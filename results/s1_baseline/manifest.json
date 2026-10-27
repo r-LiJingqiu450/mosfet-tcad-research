@@ -1,0 +1,13 @@
+{
+  "files": [
+    "logs",
+    "logs/run.log",
+    "manifest.json",
+    "report.md",
+    "results.csv",
+    "results.json",
+    "results.npz",
+    "surface_charge.png"
+  ],
+  "command": "MPLCONFIGDIR=/tmp/mplconfig .venv/bin/python experiments/run_s1_baseline.py"
+}

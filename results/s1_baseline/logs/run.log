@@ -1,0 +1,34 @@
+{
+  "experiment": "S1 intrinsic Poisson-Boltzmann MOS-capacitor baseline",
+  "generated_at_utc": "2026-10-27T09:39:16.541718+00:00",
+  "git_commit": "c64c463ba35fb3c2f177c9558217a20387046795",
+  "configuration": {
+    "temperature_K": 300.0,
+    "intrinsic_density_m-3": 1e+16,
+    "relative_permittivity": 11.7,
+    "domain_debye_lengths": 20.0,
+    "surface_potentials_V": [
+      -0.2,
+      -0.15000000000000002,
+      -0.1,
+      -0.04999999999999999,
+      0.0,
+      0.04999999999999999,
+      0.10000000000000003,
+      0.15000000000000002,
+      0.2
+    ],
+    "grid_points": [
+      101,
+      201,
+      401
+    ]
+  },
+  "rows": 27,
+  "all_converged": true,
+  "max_residual_inf": 1.6700300352577463e-12,
+  "surface_charge_odd_symmetry_check": 1.0058516248644817e-21,
+  "numpy": "2.3.5",
+  "matplotlib": "3.10.8"
+}
+exit_code=0
