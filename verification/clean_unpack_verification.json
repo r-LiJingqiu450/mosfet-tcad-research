@@ -1,0 +1,78 @@
+{
+  "verified": true,
+  "method": "extract candidate ZIP to a new directory; run reproduce_phase1.py --fresh to completion",
+  "candidate_archive_sha256": "3e3b6caeadbe0cc145d85655870ba8514780b1140870b07f95c2c815949dcb46",
+  "source_sha256": "8cf195205ac9c8477b40e69c25d976f6cc3433e22c6a83f6f3dffeef7a850a45",
+  "exit_code": 0,
+  "run_state": "completed",
+  "pytest": {
+    "collected": 95,
+    "passed": 91,
+    "skipped": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped_names": [
+      "test_golden_keys_stable[stage1]",
+      "test_golden_keys_stable[stage2]",
+      "test_golden_regression[stage1]",
+      "test_golden_regression[stage2]"
+    ]
+  },
+  "production_cache_hit": false,
+  "golden_sha256_before": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "golden_sha256_after": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "completed_at": "2026-10-26T21:33:21.057708+08:00",
+  "steps": [
+    {
+      "name": "1. Numerical study and attribution",
+      "state": "completed",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "semiconductor_sim.stage3_mosfet.phase1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 143.17060269099966,
+      "log": "study_log.txt"
+    },
+    {
+      "name": "2. Full pytest suite",
+      "state": "completed",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-m",
+        "pytest",
+        "semiconductor_sim",
+        "-vv",
+        "-rA",
+        "--junitxml=verification/pytest.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 23.221237456999916,
+      "log": "tests_phase1.txt"
+    },
+    {
+      "name": "3. Generate reports",
+      "state": "completed",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "scripts/write_phase1_reports.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.10727935100021568,
+      "log": "verification/report_generation.txt"
+    },
+    {
+      "name": "4. Verify all deliverables",
+      "state": "completed",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "scripts/verify_delivery.py",
+        "--allow-running"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.0964928619996499,
+      "log": "verification/artifact_check.txt"
+    }
+  ]
+}

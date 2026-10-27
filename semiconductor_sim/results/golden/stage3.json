@@ -1,0 +1,69 @@
+{
+  "version": "phase1-1.2",
+  "reason": "Unify production, freeze and regression at 400x220 log; independent-reference checks passed; clipping disabled",
+  "config": {
+    "table": {
+      "nps": 400,
+      "npn": 220,
+      "interpolation": "log",
+      "phi_s_min": -0.3,
+      "phi_s_max": 1.6,
+      "phi_n_max": 2.0,
+      "x_max": 1.2e-06,
+      "d0": 1.25e-10,
+      "hmax": 4e-09
+    },
+    "physics": {
+      "na_m3": 1e+22,
+      "ni_m3": 1e+16,
+      "temperature_K": 300.0,
+      "mu_m2_Vs": 0.135,
+      "tox_m": 2e-08,
+      "length_m": 1e-06,
+      "width_m": 1e-06,
+      "vfb_V": 0.0,
+      "empirical_clm": false,
+      "density_clipping": false
+    },
+    "transfer": {
+      "vg_min": 0.0,
+      "vg_max": 2.0,
+      "vg_nodes": 81,
+      "vd_linear": 0.05,
+      "vd_high": 1.5,
+      "ith_A": 1e-07
+    }
+  },
+  "numbers": {
+    "vt_cc": 1.0432740076419165,
+    "ss": 77.5268863415809,
+    "id_lin_2": 9.376501878232139e-06,
+    "id_sat_2": 7.490754681567399e-05,
+    "ns_source_2": 8974962263078219.0,
+    "id_subthreshold_0p5": 9.967240335509505e-15,
+    "id_transition_1p25": 3.0616969244082755e-06
+  },
+  "numerical_verification_before_freeze": [
+    {
+      "vg": 0.5,
+      "vd": 0.05,
+      "relative_error": -0.00010288148181569756
+    },
+    {
+      "vg": 1,
+      "vd": 0.05,
+      "relative_error": -0.0010516072136863563
+    },
+    {
+      "vg": 1.25,
+      "vd": 0.2,
+      "relative_error": -0.001909883507213217
+    },
+    {
+      "vg": 2,
+      "vd": 1.5,
+      "relative_error": 0.0002468107100421779
+    }
+  ],
+  "evidence_type": "new_revision_regression_not_original_baseline"
+}

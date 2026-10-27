@@ -1,0 +1,2649 @@
+--- a/semiconductor_sim/__init__.py
++++ b/semiconductor_sim/__init__.py
+@@ -27,4 +27,4 @@
+ if _ROOT not in _sys.path:
+     _sys.path.insert(0, _ROOT)
+ 
+-__version__ = "1.0.0"
++__version__ = "1.2.0-phase1"
+--- a/semiconductor_sim/common/jsonio.py
++++ b/semiconductor_sim/common/jsonio.py
+@@ -0,0 +1,25 @@
++"""Strict JSON for files and console: one encoder, numpy support, no NaN/Infinity."""
++import json
++import os
++from pathlib import Path
++import numpy as np
++
++
++def json_default(value):
++    if isinstance(value,np.generic):return value.item()
++    if isinstance(value,np.ndarray):return value.tolist()
++    if isinstance(value,Path):return str(value)
++    raise TypeError(f'Unsupported JSON type: {type(value).__name__}')
++
++
++def dumps(value, **kwargs):
++    return json.dumps(value,default=json_default,allow_nan=False,ensure_ascii=False,**kwargs)
++
++
++def write_json(path,value):
++    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
++    text=dumps(value,indent=2)+'\n'
++    temp=path.with_name(path.name+'.tmp')
++    with temp.open('w',encoding='utf-8') as f:
++        f.write(text);f.flush();os.fsync(f.fileno())
++    temp.replace(path)
+--- a/semiconductor_sim/scripts/make_golden.py
++++ b/semiconductor_sim/scripts/make_golden.py
+@@ -1,57 +1,5 @@
+-# -*- coding: utf-8 -*-
+-"""
+-scripts/make_golden.py —— 生成 golden 基准（results/golden/stage{1,2,3}.json）。
+-
+-用法（仓库根目录 /workspace）：
+-    python semiconductor_sim/scripts/make_golden.py            # 三个阶段
+-    python semiconductor_sim/scripts/make_golden.py stage1      # 单个阶段
+-
+-设计（docs/spec/reproduce_spec.md 第 3 节）：
+-    - 提取逻辑全部在 tests/golden_helpers.py（与测试共用同一降配配置）；
+-    - 本脚本只负责"运行 + 落盘"，不重复任何数值逻辑；
+-    - 基准文件随源码提交：tests/test_golden.py 以 rtol=1e-6 逐键比对，
+-      任何改变数值的重构/环境迁移都会被发现；
+-    - 重新生成基准意味着接受新数值：应先确认变化来自预期的代码修改
+-      （如缺陷修复），并在 CHANGELOG 记录，再运行本脚本。
+-"""
+-
+-import os
+-import sys
+-import time
+-
+-# 允许从任意目录调用：把仓库父目录插入 sys.path，统一走包导入
+-# （与 conftest.py 同一路径，保证 scripts 与 pytest 导入的是同一份模块）
+-_PARENT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+-if _PARENT not in sys.path:
+-    sys.path.insert(0, _PARENT)
+-
+-from semiconductor_sim.common.io import save_json, GOLDEN        # noqa: E402
+-from semiconductor_sim.tests.golden_helpers import STAGE_NUMBERS  # noqa: E402
+-
+-
+-def main(argv):
+-    stages = argv[1:] or ["stage1", "stage2", "stage3"]
+-    unknown = [s for s in stages if s not in STAGE_NUMBERS]
+-    if unknown:
+-        print(f"未知阶段: {unknown}；可选: {list(STAGE_NUMBERS)}")
+-        return 2
+-    os.makedirs(GOLDEN, exist_ok=True)
+-    print(f"golden 目录: {GOLDEN}")
+-    print(f"比对容差: rtol=1e-6（tests/test_golden.py）\n")
+-    rc = 0
+-    for name in stages:
+-        t0 = time.time()
+-        print(f"[{name}] 降配运行中 ...")
+-        numbers = STAGE_NUMBERS[name]()
+-        path = save_json(name, numbers)
+-        dt = time.time() - t0
+-        print(f"[{name}] {len(numbers)} 个标量 -> {path}  ({dt:.1f} s)")
+-        for k, v in numbers.items():
+-            print(f"    {k:14s} = {v!r}")
+-        print()
+-    print("完成。运行 pytest semiconductor_sim -q 应全绿。")
+-    return rc
+-
+-
+-if __name__ == "__main__":
+-    sys.exit(main(sys.argv))
++"""Compatibility entry: explicit new S3 production freeze only."""
++from pathlib import Path
++import runpy
++if __name__=='__main__':
++    runpy.run_path(str(Path(__file__).resolve().parents[2]/'scripts/freeze_phase1.py'),run_name='__main__')
+--- a/semiconductor_sim/stage3_mosfet/attribution.py
++++ b/semiconductor_sim/stage3_mosfet/attribution.py
+@@ -0,0 +1,102 @@
++"""Paired numerical attribution. Signed contributions add to total error.
++
++Direct finite-difference gate solves remove table interpolation. Reference-based
++surrogate tables separate phi_s/VG inversion interpolation from phi_n interpolation.
++These are conditional numerical ablations, not unique physical decompositions.
++"""
++from functools import lru_cache
++import numpy as np
++from scipy.integrate import quad
++from scipy.optimize import brentq
++from common import constants as C
++from common.grid import make_surface_grid
++from common.jsonio import write_json
++from .solver import solve_poisson_slice,surface_charge,electron_sheet_density
++from .reference import reference_slice,reference_current
++from .gca import gca_solve,_areas
++
++
++class DirectSlices:
++    def __init__(self,d0=.125e-9,hmax=4e-9,clip=None):
++        self.x=make_surface_grid(1.2e-6,d0=d0,h_max=hmax)
++        self.clip=clip
++        self.minimum=float('inf');self.maximum=float('-inf');self.clip_evaluations=0
++
++    @lru_cache(maxsize=8192)
++    def sheet(self,vg,pn):
++        def state(ps):
++            r=solve_poisson_slice(ps,pn,self.x,density_clip_limit=self.clip)
++            if not r['converged']:raise RuntimeError(r['status'])
++            self.minimum=min(self.minimum,r['potential_min'])
++            self.maximum=max(self.maximum,r['potential_max'])
++            self.clip_evaluations+=r['clip_evaluations']
++            return r
++        def gate(ps):
++            q,_=surface_charge(state(ps),self.x)
++            return C.VFB+ps-q/C.COX-vg
++        ps=brentq(gate,0.,min(.9+pn,2.05),xtol=2e-13)
++        return electron_sheet_density(state(ps),self.x)
++
++    def current(self,vg,vd,epsrel=2e-7):
++        val,err=quad(lambda pn:self.sheet(float(vg),float(pn)),0,vd,
++                     epsabs=1e-4,epsrel=epsrel,limit=200)
++        pref=C.Q_E*C.W_CH*C.MU_N/C.L_CH
++        return float(pref*val),float(pref*err)
++
++
++def run_attribution(study,table,out):
++    worst=max(study['current_reference'],key=lambda r:abs(r['relative_error']))
++    vg,vd=worst['vg'],worst['vd'];ref=reference_current(vg,vd)
++    direct=DirectSlices();idir,quaderr=direct.current(vg,vd)
++    # Same grid and algorithm, historical clamp on/off, cached separately.
++    clipped=DirectSlices(clip=3.);iclip,_=clipped.current(vg,vd)
++    iref=ref['ID'];iprod=gca_solve(vg,vd,table)['ID']
++    # Exact interpolation of the independent continuum Ns at production phi_n knots.
++    # This estimates phi_n-only interpolation on the continuum reference.
++    pn=np.r_[0.,table.phi_n_grid[(table.phi_n_grid>0)&(table.phi_n_grid<vd)],vd]
++    ns=np.array([reference_slice(vg,float(v))['ns'] for v in pn])
++    ipn=C.Q_E*C.W_CH*C.MU_N/C.L_CH*float(np.sum(_areas(pn,ns,'log')))
++    grid=(idir-iref)/iref
++    interp=(iprod-idir)/iref
++    clip=(iclip-idir)/iref
++    # Production is unclipped. The clamp contribution is a paired sensitivity,
++    # not added into the production decomposition a second time.
++    attribution=dict(point=dict(vg=vg,vd=vd),reference_A=iref,
++        production_A=iprod,direct_same_grid_A=idir,clipped_direct_A=iclip,
++        total_relative=(iprod-iref)/iref,grid_and_boundary_relative=grid,
++        table_interpolation_relative=interp,
++        telescoping_closure_relative=(iprod-iref)/iref-grid-interp,
++        clamp_paired_relative=clip,clamp_activated_values=clipped.clip_evaluations,
++        potential_min_V=direct.minimum,potential_max_V=direct.maximum,
++        phi_n_only_interpolation_relative=(ipn-iref)/iref,
++        direct_quad_estimate_relative=quaderr/iref,
++        evidence_type='conditional_numerical_ablation')
++    # Refinement checks whether the grid+boundary component behaves as discretization.
++    levels=[]
++    for nm in [.25,.125,.0625]:
++        obj=direct if nm==.125 else DirectSlices(d0=nm*1e-9,hmax=nm*32e-9)
++        cur,err=obj.current(vg,vd)
++        levels.append(dict(d0_nm=nm,hmax_nm=32*nm,current_A=cur,
++                           relative_to_reference=cur/iref-1,quad_estimate_A=err))
++    backgrounds=[]
++    for gate in [.05,.1,.25,.5,.75,1.]:
++        for drain in [.025,.05,1.5]:
++            r=reference_current(gate,drain)
++            backgrounds.append(dict(vg=gate,vd=drain,total_A=r['ID'],
++                 excess_A=r['ID_excess'],neutral_background_A=r['ID_background'],
++                 neutral_background_fraction=r['background_fraction']))
++    report=dict(worst_point=attribution,direct_grid_refinement=levels,
++                neutral_background=backgrounds,
++                table_trial_potential_range=study['table_build_stats'],
++                interpretation='background is a bookkeeping component in the reduced model; not experimental current validation')
++    write_json(out/'error_attribution.json',report)
++    import csv
++    with (out/'neutral_background.csv').open('w',newline='',encoding='utf-8-sig') as f:
++        w=csv.DictWriter(f,fieldnames=list(backgrounds[0]));w.writeheader();w.writerows(backgrounds)
++    with (out/'error_attribution.csv').open('w',newline='',encoding='utf-8-sig') as f:
++        w=csv.DictWriter(f,fieldnames=['component','relative_contribution'])
++        w.writeheader()
++        for key in ['total_relative','grid_and_boundary_relative','table_interpolation_relative',
++                    'clamp_paired_relative','phi_n_only_interpolation_relative','direct_quad_estimate_relative']:
++            w.writerow(dict(component=key,relative_contribution=attribution[key]))
++    return report
+--- a/semiconductor_sim/stage3_mosfet/config.py
++++ b/semiconductor_sim/stage3_mosfet/config.py
+@@ -0,0 +1,29 @@
++"""Single production configuration shared by study, freeze and regression tests."""
++from dataclasses import asdict, dataclass
++from common import constants as C
++
++@dataclass(frozen=True)
++class TableConfig:
++    nps: int = 400
++    npn: int = 220
++    interpolation: str = 'log'
++    phi_s_min: float = -.3
++    phi_s_max: float = 1.6
++    phi_n_max: float = 2.
++    x_max: float = 1.2e-6
++    d0: float = .125e-9
++    hmax: float = 4e-9
++
++    def to_dict(self):
++        return asdict(self)
++
++PRODUCTION = TableConfig()
++
++
++def production_metadata():
++    return dict(table=PRODUCTION.to_dict(), physics=dict(
++        na_m3=C.NA, ni_m3=C.NI, temperature_K=C.TEMP,
++        mu_m2_Vs=C.MU_N, tox_m=C.EPS_OX/C.COX, length_m=C.L_CH,
++        width_m=C.W_CH, vfb_V=C.VFB, empirical_clm=False,
++        density_clipping=False), transfer=dict(vg_min=0.,vg_max=2.,vg_nodes=81,
++        vd_linear=.05,vd_high=1.5,ith_A=1e-7))
+--- a/semiconductor_sim/stage3_mosfet/gca.py
++++ b/semiconductor_sim/stage3_mosfet/gca.py
+@@ -1,200 +1,121 @@
+-# -*- coding: utf-8 -*-
++"""Classical GCA full quasi-Fermi integral (drift and diffusion combined).
++
++The default excludes empirical CLM. At fixed VG, SliceTable's Ns is piecewise
++linear in phi_n; integrate that interpolant exactly and invert its cumulative
++integral without an intermediate y grid. Both representations are integrated analytically. Exactness for an interpolant does
++not imply accuracy for the continuum device. clm=True opts into legacy CLM.
+ """
+-渐变沟道近似（GCA）求解器与偏压扫描 —— 沿沟道积分电流。
+-
+-系列化说明：本模块由原 gca_solver.py 与 sweep.py 合并（扫描函数
+-是 gca_solve 的直接包装，无独立实现）；物理常数取自
+-common.constants。
+-
+-核心公式（精确 GCA，漂移+扩散合并后的准平衡形式）：
+-
+-    沟道电子电流密度 J_n = -q mu_n n d(phi_n)/dy
+-    面电流  I_D = q W mu_n N_s(y) d(phi_n)/dy   （与 y 无关）
+-
+-分离变量并从源(y=0, phi_n=0)积分到漏(y=L, phi_n=V_D)：
+-
+-    I_D = (q W mu_n / L) * ∫_0^{V_D} N_s(phi_n) d(phi_n)
+-
+-N_s(phi_n) 由 gate_boundary.GateTable 在固定 V_G 下双线性插值得到。
+-该积分形式：
+-    1) 线性区自动还原 Square-law（N_s ≈ C_ox(V_G-V_T-phi_n)/q 线性衰减）；
+-    2) 饱和平台自然涌现（phi_n > V_G-V_T 后 N_s 指数拖尾，积分收敛）；
+-    3) 亚阈值斜率自动含衬偏效应因子（N_s ∝ exp((phi_s-phi_n)/V_T)）。
+-
+-饱和区沟道长度调制（CLM，一阶）：
+-    夹断区长度 Delta_L = sqrt(2 eps_si (V_D - V_Dsat)/(q N_a))，
+-    I_D = I_Dsat / (1 - Delta_L/L)，夹断点 y_p = L - Delta_L 随 V_D 增大
+-    向源端移动。
+-
+-    CLM 仅当源端处于强反型（N_s(0) >= N_MIN_STRONG）时施加。弱反型/
+-    深亚阈区不存在"沟道夹断"：N_s(phi_n) 的指数拖尾使积分
+-    ∫_0^{V_D} N_s dphi_n 在 V_D > 若干 V_T 后自然收敛，给出平滑的
+-    亚阈饱和平台；此时若仍套用耗尽近似的 CLM，会在 I_D-V_G 曲线上
+-    产生虚假的"饱和"扭结（开发期实测：V_G≈0.9、V_D=0.05 时局部
+-    SS 被压低到 50 mV/dec，低于 ln10·V_T 物理下限）。
+-"""
+-
+ import numpy as np
+-
+ from common import constants as C
+ 
+-N_MIN_STRONG = 1.0e15   # 强反型起始面密度 (m^-2) = 1e11 cm^-2；
+-# 只有源端 N_s 超过该值才认为存在可被夹断的强反型沟道，CLM 才适用
++
++def _areas(knots, values, mode):
++    h=np.diff(knots); nl=values[:-1]; nr=values[1:]
++    if mode=='linear':
++        return .5*(nl+nr)*h
++    k=np.log(nr/nl)
++    factor=np.ones_like(k)
++    np.divide(np.expm1(k),k,out=factor,where=np.abs(k)>1e-12)
++    return nl*h*factor
+ 
+ 
+-def _cumtrapz(y, x):
+-    out = np.zeros_like(x)
+-    if len(x) > 1:
+-        dx = np.diff(x)
+-        out[1:] = np.cumsum(0.5 * (y[:-1] + y[1:]) * dx)
+-    return out
++def _evaluate(x, knots, values, mode):
++    return (np.exp(np.interp(x,knots,np.log(values)))
++            if mode=='log' else np.interp(x,knots,values))
+ 
+ 
+-def _clm_length(vd, vdsat, na=C.NA):
+-    if vd <= vdsat:
+-        return 0.0
+-    return float(np.sqrt(2.0 * C.EPS_SI * (vd - vdsat) / (C.Q_E * na)))
++def _integral_between(a, b, knots, values, mode):
++    xx=np.r_[a,knots[(knots>a)&(knots<b)],b]
++    return float(np.sum(_areas(xx,_evaluate(xx,knots,values,mode),mode)))
+ 
+ 
+-def gca_solve(vg, vd, table, y=None, nphi=401, nmin=1e12, clm=True):
++def gca_solve(vg, vd, table, y=None, nphi=0, nmin=1e12, clm=False):
++    """Solve the classical reduced channel model, not a full 2D DD device.
++
++    id_local is independently finite-differenced and has truncation error.
++    id_edges is an integral consistency diagnostic, not independent validation.
++    Only nonnegative VD within the table's phi_n domain is supported.
+     """
+-    固定 (V_G, V_D) 解 GCA，返回电流与沿沟道剖面。
+-
+-    table : gate_boundary.GateTable（已 build）
+-
+-    返回 dict：
+-        ID, vdsat, saturated, y_p, y, phi_n, ns, phi_s, id_local
+-    """
+-    if y is None:
+-        y = np.linspace(0.0, C.L_CH, 81)
+-    y = np.asarray(y, dtype=float)
+-    L = C.L_CH
+-
+-    vdsat_cross = table.pinch_off_potential(vg, nmin=nmin)
+-
+-    # 源端反型强度决定饱和/CLM 的处理方式：
+-    #   强反型（N_s(0) >= N_MIN_STRONG）：存在可夹断的沟道，积分上限
+-    #       取 vdsat（N_s 跌破 nmin 处），V_D > vdsat 后施加一阶 CLM；
+-    #   弱反型/深亚阈：不存在沟道夹断，N_s(phi_n) 指数拖尾对 V_D 的
+-    #       全积分自然收敛（V_D > 若干 V_T 后即平台），严禁截断与 CLM
+-    #       （开发期实测：截断会丢掉拖尾承载的大部分电流，V_G≈0.87 处
+-    #        I_D 出现 2.4 倍伪跌落；CLM 则制造伪饱和扭结）。
+-    ns0 = float(table.solve_vg(vg, 0.0)[1])
+-    strong = ns0 >= N_MIN_STRONG
+-    if ns0 < nmin:
+-        # 深亚阈：N_s(0) 已低于 nmin，纯扩散尾电流
+-        v_eff = vd
+-        saturated = False
+-        vdsat = vd
+-    elif strong:
+-        v_eff = min(vd, vdsat_cross)
+-        vdsat = vdsat_cross
+-        saturated = bool(vd > v_eff)
++    vd = float(vd)
++    if not np.isfinite(vd) or vd < 0 or vd > table.phi_n_grid[-1]:
++        raise ValueError('VD outside supported nonnegative table domain')
++    y = np.linspace(0., C.L_CH, 161) if y is None else np.asarray(y, float)
++    if (y.ndim != 1 or len(y) < 3 or not np.all(np.isfinite(y))
++            or np.any(np.diff(y) <= 0) or y[0] < 0 or y[-1] > C.L_CH):
++        raise ValueError('y must increase strictly within [0,L]')
++    if clm:
++        from .legacy_gca import gca_solve as legacy
++        r = legacy(vg, vd, table, y=y, nphi=max(int(nphi), 401),
++                   nmin=nmin, clm=True)
++        r.update(model_mode='legacy_empirical_clm', profile_is_dd_solution=False)
++        return r
++    knots = np.r_[0., table.phi_n_grid[(table.phi_n_grid > 0)
++                                      & (table.phi_n_grid < vd)], vd]
++    if int(nphi) > 1:
++        knots = np.r_[knots, np.linspace(0., vd, int(nphi))]
++    knots = np.unique(knots)
++    ns_nodes = table.ns_vs_phi_n(vg, knots)
++    if np.any(~np.isfinite(ns_nodes)) or np.any(ns_nodes <= 0):
++        raise ValueError('Nonpositive or invalid sheet density')
++    mode = getattr(table,"sheet_interpolation","linear")
++    if vd == 0:
++        phi_n = np.zeros_like(y)
++        current = 0.
+     else:
+-        v_eff = vd
+-        vdsat = vd            # 语义：弱反型无夹断点
+-        saturated = False
+-
+-    # ---- N_s(phi_n) 曲线（表格插值）并积分 ----
+-    phi_n_fine = np.linspace(0.0, v_eff, nphi)
+-    ns_fine = table.ns_vs_phi_n(vg, phi_n_fine)
+-    ns_fine = np.maximum(ns_fine, 0.0)
+-    integ = float(np.trapezoid(ns_fine, phi_n_fine))
+-    IDsat = (C.Q_E * C.W_CH * C.MU_N / L) * integ
+-
+-    if clm and saturated:
+-        dL = min(_clm_length(vd, vdsat), 0.95 * L)
+-        ID = IDsat / (1.0 - dL / L)
+-        y_p = L - dL
+-    else:
+-        dL = 0.0
+-        ID = IDsat
+-        y_p = L
+-
+-    # ---- 沟道剖面 y(phi_n) = (q W mu/ID) ∫_0^{phi_n} N_s dphi_n ----
+-    if ID > 0:
+-        yy = (C.Q_E * C.W_CH * C.MU_N / ID) * _cumtrapz(ns_fine, phi_n_fine)
+-    else:
+-        yy = np.zeros_like(phi_n_fine)
+-
+-    y_chan = np.linspace(0.0, y_p, 201)
+-    phi_n_chan = np.interp(y_chan, yy, phi_n_fine)
+-    ns_chan = np.interp(y_chan, yy, ns_fine)
+-
+-    if saturated:
+-        y_pinch = np.linspace(y_p, L, 51)
+-        phi_n_pinch = vdsat + (vd - vdsat) * (y_pinch - y_p) / (L - y_p)
+-        ns_pinch = np.full_like(y_pinch, nmin)
+-        y_prof = np.concatenate([y_chan, y_pinch[1:]])
+-        phi_n_prof = np.concatenate([phi_n_chan, phi_n_pinch[1:]])
+-        ns_prof = np.concatenate([ns_chan, ns_pinch[1:]])
+-    else:
+-        y_prof = y_chan
+-        phi_n_prof = phi_n_chan
+-        ns_prof = ns_chan
+-
+-    phi_s_prof = np.array([table.solve_vg(vg, pn)[0] for pn in phi_n_prof])
+-
+-    # ---- 重采样到用户 y 网格 ----
+-    phi_n_on_y = np.interp(y, y_prof, phi_n_prof)
+-    ns_on_y = np.interp(y, y_prof, ns_prof)
+-    phi_s_on_y = np.interp(y, y_prof, phi_s_prof)
+-
+-    # ---- 局部电流（连续性校验，沟道区）----
+-    dphi_dy = np.gradient(phi_n_on_y, y)
+-    id_local = C.Q_E * C.W_CH * C.MU_N * ns_on_y * dphi_dy
+-
+-    return dict(ID=float(ID), vdsat=vdsat, saturated=saturated, y_p=y_p,
+-                y=y, phi_n=phi_n_on_y, ns=ns_on_y, phi_s=phi_s_on_y,
+-                id_local=id_local)
++        areas = _areas(knots, ns_nodes, mode)
++        primitive = np.r_[0., np.cumsum(areas)]
++        total = primitive[-1]
++        current = C.Q_E*C.W_CH*C.MU_N/C.L_CH*total
++        target = total*y/C.L_CH
++        idx = np.clip(np.searchsorted(primitive, target, side='right')-1,
++                      0, len(knots)-2)
++        a = (target-primitive[idx])/np.diff(knots)[idx]
++        nl = ns_nodes[idx]
++        if mode=='log':
++            k=np.log(ns_nodes[idx+1]/nl)
++            t=np.zeros_like(a)
++            small=np.abs(k)<1e-12
++            t[small]=a[small]/nl[small]
++            z=k[~small]*a[~small]/nl[~small]
++            t[~small]=np.log1p(np.maximum(z,-1+np.finfo(float).eps))/k[~small]
++            t=np.clip(t,0.,1.)
++        else:
++            dn=ns_nodes[idx+1]-nl
++            disc=np.maximum(nl*nl+2*dn*a,0.)
++            t=np.clip(2*a/(nl+np.sqrt(disc)),0.,1.)
++        phi_n = knots[idx]+t*np.diff(knots)[idx]
++        phi_n[y == 0.] = 0.
++        phi_n[y == C.L_CH] = vd
++    ns = _evaluate(phi_n, knots, ns_nodes, mode)
++    ps = np.array([table.solve_vg(vg, pn)[0] for pn in phi_n])
++    fd = C.Q_E*C.W_CH*C.MU_N*ns*np.gradient(phi_n, y, edge_order=2)
++    edges = np.array([C.Q_E*C.W_CH*C.MU_N
++                      *_integral_between(a,b,knots,ns_nodes,mode)/dy
++                      for a,b,dy in zip(phi_n[:-1],phi_n[1:],np.diff(y))])
++    return dict(ID=float(current), vdsat=float('nan'), saturated=False,
++                y_p=C.L_CH, y=y, phi_n=phi_n, ns=ns, phi_s=ps,
++                id_local=fd, id_edges=edges,
++                model_mode='classical_full_integral',
++                profile_is_dd_solution=False, integral_knots=len(knots))
+ 
+ 
+-# ==============================================================================
+-# 偏压扫描（原 sweep.py，并入本模块）
+-# ==============================================================================
+-
+-# -*- coding: utf-8 -*-
+-"""
+-偏压扫描（I_D-V_G、I_D-V_D）与器件工作点求解（并入 gca 模块）。
+-
+-复用 table.SliceTable（一次构建）与本模块 gca_solve，避免逐点重复求解。
+-"""
+-
+ def id_vg(table, vg_list, vd, **kw):
+-    """固定 V_D，扫描 V_G，返回 I_D 数组。"""
+-    return np.array([gca_solve(vg, vd, table, **kw)["ID"] for vg in vg_list])
++    return np.array([gca_solve(vg,vd,table,**kw)['ID'] for vg in vg_list])
+ 
+ 
+ def id_vd(table, vg, vd_list, **kw):
+-    """固定 V_G，扫描 V_D，返回 (I_D, vdsat, y_p) 数组。"""
+-    ids, vdsats, yps = [], [], []
+-    for vd in vd_list:
+-        r = gca_solve(vg, vd, table, **kw)
+-        ids.append(r["ID"])
+-        vdsats.append(r["vdsat"])
+-        yps.append(r["y_p"])
+-    return np.array(ids), np.array(vdsats), np.array(yps)
++    rows = [gca_solve(vg,vd,table,**kw) for vd in vd_list]
++    return tuple(np.array([r[k] for r in rows]) for k in ['ID','vdsat','y_p'])
+ 
+ 
+-def transfer_characteristics(table, vg_list, vd_lin=0.05, vd_sat=1.5, **kw):
+-    """
+-    转移特性：线性区（小 V_D）与饱和区（大 V_D）的 I_D-V_G。
+-    返回 dict(vg, id_lin, id_sat)。
+-    """
+-    return dict(vg=np.asarray(vg_list, dtype=float),
+-                id_lin=id_vg(table, vg_list, vd_lin, **kw),
+-                id_sat=id_vg(table, vg_list, vd_sat, **kw))
++def transfer_characteristics(table, vg_list, vd_lin=.05, vd_sat=1.5, **kw):
++    return dict(vg=np.asarray(vg_list,float),
++                id_lin=id_vg(table,vg_list,vd_lin,**kw),
++                id_sat=id_vg(table,vg_list,vd_sat,**kw))
+ 
+ 
+ def output_characteristics(table, vg_list, vd_list, **kw):
+-    """
+-    输出特性：多个 V_G 的 I_D-V_D 曲线族。
+-    返回 dict(vd, ids, vdsats, yps)，ids 形状 (len(vg_list), len(vd_list))。
+-    """
+-    vd = np.asarray(vd_list, dtype=float)
+-    ids = np.empty((len(vg_list), len(vd)))
+-    vdsats = np.empty_like(ids)
+-    yps = np.empty_like(ids)
+-    for i, vg in enumerate(vg_list):
+-        ids[i], vdsats[i], yps[i] = id_vd(table, vg, vd, **kw)
+-    return dict(vd=vd, vg=vg_list, ids=ids, vdsats=vdsats, yps=yps)
++    rows = [id_vd(table,vg,vd_list,**kw) for vg in vg_list]
++    return dict(vg=np.asarray(vg_list),vd=np.asarray(vd_list),
++                **{k:np.array([r[i] for r in rows])
++                   for i,k in enumerate(['ids','vdsats','yps'])})
+--- a/semiconductor_sim/stage3_mosfet/golden.py
++++ b/semiconductor_sim/stage3_mosfet/golden.py
+@@ -0,0 +1,39 @@
++"""Production regression baseline. Metadata, freeze and tests use the same config."""
++from pathlib import Path
++import json
++import numpy as np
++from .config import production_metadata
++from .phase1 import production_table
++from .gca import gca_solve,id_vg
++from .postprocess import extract_vt,extract_ss
++
++GOLDEN_PATH=Path(__file__).resolve().parents[1]/'results/golden/stage3.json'
++
++
++def production_numbers(table=None):
++    if table is None:table,_=production_table()
++    vg=np.linspace(0,2,81);lin=id_vg(table,vg,.05)
++    return dict(vt_cc=extract_vt(vg,lin)[0],ss=extract_ss(vg,lin),
++        id_lin_2=gca_solve(2,.05,table)['ID'],id_sat_2=gca_solve(2,1.5,table)['ID'],
++        ns_source_2=table.solve_vg(2,0)[1],
++        id_subthreshold_0p5=gca_solve(.5,.05,table)['ID'],
++        id_transition_1p25=gca_solve(1.25,.2,table)['ID'])
++
++
++def read_golden(path=GOLDEN_PATH):
++    if not Path(path).is_file():
++        raise FileNotFoundError('Production S3 golden missing; normal reproduction cannot regenerate it')
++    return json.loads(Path(path).read_text(encoding='utf-8'))
++
++
++def compare_production(current,baseline):
++    if baseline['config']!=production_metadata():
++        raise AssertionError('Golden/production configuration mismatch')
++    ref=baseline['numbers']
++    if set(current)!=set(ref):raise AssertionError('Golden key set mismatch')
++    for key,value in current.items():
++        if not np.isfinite(value) or not np.isfinite(ref[key]):
++            raise AssertionError(f'Nonfinite golden metric: {key}')
++        if not np.isclose(value,ref[key],rtol=1e-6,atol=0):
++            raise AssertionError(f'Golden regression failure: {key}: {value} vs {ref[key]}')
++    return True
+--- a/semiconductor_sim/stage3_mosfet/legacy_gca.py
++++ b/semiconductor_sim/stage3_mosfet/legacy_gca.py
+@@ -0,0 +1,200 @@
++# -*- coding: utf-8 -*-
++"""
++渐变沟道近似（GCA）求解器与偏压扫描 —— 沿沟道积分电流。
++
++系列化说明：本模块由原 gca_solver.py 与 sweep.py 合并（扫描函数
++是 gca_solve 的直接包装，无独立实现）；物理常数取自
++common.constants。
++
++核心公式（精确 GCA，漂移+扩散合并后的准平衡形式）：
++
++    沟道电子电流密度 J_n = -q mu_n n d(phi_n)/dy
++    面电流  I_D = q W mu_n N_s(y) d(phi_n)/dy   （与 y 无关）
++
++分离变量并从源(y=0, phi_n=0)积分到漏(y=L, phi_n=V_D)：
++
++    I_D = (q W mu_n / L) * ∫_0^{V_D} N_s(phi_n) d(phi_n)
++
++N_s(phi_n) 由 gate_boundary.GateTable 在固定 V_G 下双线性插值得到。
++该积分形式：
++    1) 线性区自动还原 Square-law（N_s ≈ C_ox(V_G-V_T-phi_n)/q 线性衰减）；
++    2) 饱和平台自然涌现（phi_n > V_G-V_T 后 N_s 指数拖尾，积分收敛）；
++    3) 亚阈值斜率自动含衬偏效应因子（N_s ∝ exp((phi_s-phi_n)/V_T)）。
++
++饱和区沟道长度调制（CLM，一阶）：
++    夹断区长度 Delta_L = sqrt(2 eps_si (V_D - V_Dsat)/(q N_a))，
++    I_D = I_Dsat / (1 - Delta_L/L)，夹断点 y_p = L - Delta_L 随 V_D 增大
++    向源端移动。
++
++    CLM 仅当源端处于强反型（N_s(0) >= N_MIN_STRONG）时施加。弱反型/
++    深亚阈区不存在"沟道夹断"：N_s(phi_n) 的指数拖尾使积分
++    ∫_0^{V_D} N_s dphi_n 在 V_D > 若干 V_T 后自然收敛，给出平滑的
++    亚阈饱和平台；此时若仍套用耗尽近似的 CLM，会在 I_D-V_G 曲线上
++    产生虚假的"饱和"扭结（开发期实测：V_G≈0.9、V_D=0.05 时局部
++    SS 被压低到 50 mV/dec，低于 ln10·V_T 物理下限）。
++"""
++
++import numpy as np
++
++from common import constants as C
++
++N_MIN_STRONG = 1.0e15   # 强反型起始面密度 (m^-2) = 1e11 cm^-2；
++# 只有源端 N_s 超过该值才认为存在可被夹断的强反型沟道，CLM 才适用
++
++
++def _cumtrapz(y, x):
++    out = np.zeros_like(x)
++    if len(x) > 1:
++        dx = np.diff(x)
++        out[1:] = np.cumsum(0.5 * (y[:-1] + y[1:]) * dx)
++    return out
++
++
++def _clm_length(vd, vdsat, na=C.NA):
++    if vd <= vdsat:
++        return 0.0
++    return float(np.sqrt(2.0 * C.EPS_SI * (vd - vdsat) / (C.Q_E * na)))
++
++
++def gca_solve(vg, vd, table, y=None, nphi=401, nmin=1e12, clm=True):
++    """
++    固定 (V_G, V_D) 解 GCA，返回电流与沿沟道剖面。
++
++    table : gate_boundary.GateTable（已 build）
++
++    返回 dict：
++        ID, vdsat, saturated, y_p, y, phi_n, ns, phi_s, id_local
++    """
++    if y is None:
++        y = np.linspace(0.0, C.L_CH, 81)
++    y = np.asarray(y, dtype=float)
++    L = C.L_CH
++
++    vdsat_cross = table.pinch_off_potential(vg, nmin=nmin)
++
++    # 源端反型强度决定饱和/CLM 的处理方式：
++    #   强反型（N_s(0) >= N_MIN_STRONG）：存在可夹断的沟道，积分上限
++    #       取 vdsat（N_s 跌破 nmin 处），V_D > vdsat 后施加一阶 CLM；
++    #   弱反型/深亚阈：不存在沟道夹断，N_s(phi_n) 指数拖尾对 V_D 的
++    #       全积分自然收敛（V_D > 若干 V_T 后即平台），严禁截断与 CLM
++    #       （开发期实测：截断会丢掉拖尾承载的大部分电流，V_G≈0.87 处
++    #        I_D 出现 2.4 倍伪跌落；CLM 则制造伪饱和扭结）。
++    ns0 = float(table.solve_vg(vg, 0.0)[1])
++    strong = ns0 >= N_MIN_STRONG
++    if ns0 < nmin:
++        # 深亚阈：N_s(0) 已低于 nmin，纯扩散尾电流
++        v_eff = vd
++        saturated = False
++        vdsat = vd
++    elif strong:
++        v_eff = min(vd, vdsat_cross)
++        vdsat = vdsat_cross
++        saturated = bool(vd > v_eff)
++    else:
++        v_eff = vd
++        vdsat = vd            # 语义：弱反型无夹断点
++        saturated = False
++
++    # ---- N_s(phi_n) 曲线（表格插值）并积分 ----
++    phi_n_fine = np.linspace(0.0, v_eff, nphi)
++    ns_fine = table.ns_vs_phi_n(vg, phi_n_fine)
++    ns_fine = np.maximum(ns_fine, 0.0)
++    integ = float(np.trapezoid(ns_fine, phi_n_fine))
++    IDsat = (C.Q_E * C.W_CH * C.MU_N / L) * integ
++
++    if clm and saturated:
++        dL = min(_clm_length(vd, vdsat), 0.95 * L)
++        ID = IDsat / (1.0 - dL / L)
++        y_p = L - dL
++    else:
++        dL = 0.0
++        ID = IDsat
++        y_p = L
++
++    # ---- 沟道剖面 y(phi_n) = (q W mu/ID) ∫_0^{phi_n} N_s dphi_n ----
++    if ID > 0:
++        yy = (C.Q_E * C.W_CH * C.MU_N / ID) * _cumtrapz(ns_fine, phi_n_fine)
++    else:
++        yy = np.zeros_like(phi_n_fine)
++
++    y_chan = np.linspace(0.0, y_p, 201)
++    phi_n_chan = np.interp(y_chan, yy, phi_n_fine)
++    ns_chan = np.interp(y_chan, yy, ns_fine)
++
++    if saturated and dL > 0.0:
++        y_pinch = np.linspace(y_p, L, 51)
++        phi_n_pinch = vdsat + (vd - vdsat) * (y_pinch - y_p) / (L - y_p)
++        ns_pinch = np.full_like(y_pinch, nmin)
++        y_prof = np.concatenate([y_chan, y_pinch[1:]])
++        phi_n_prof = np.concatenate([phi_n_chan, phi_n_pinch[1:]])
++        ns_prof = np.concatenate([ns_chan, ns_pinch[1:]])
++    else:
++        y_prof = y_chan
++        phi_n_prof = phi_n_chan
++        ns_prof = ns_chan
++
++    phi_s_prof = np.array([table.solve_vg(vg, pn)[0] for pn in phi_n_prof])
++
++    # ---- 重采样到用户 y 网格 ----
++    phi_n_on_y = np.interp(y, y_prof, phi_n_prof)
++    ns_on_y = np.interp(y, y_prof, ns_prof)
++    phi_s_on_y = np.interp(y, y_prof, phi_s_prof)
++
++    # ---- 局部电流（连续性校验，沟道区）----
++    dphi_dy = np.gradient(phi_n_on_y, y)
++    id_local = C.Q_E * C.W_CH * C.MU_N * ns_on_y * dphi_dy
++
++    return dict(ID=float(ID), vdsat=vdsat, saturated=saturated, y_p=y_p,
++                y=y, phi_n=phi_n_on_y, ns=ns_on_y, phi_s=phi_s_on_y,
++                id_local=id_local)
++
++
++# ==============================================================================
++# 偏压扫描（原 sweep.py，并入本模块）
++# ==============================================================================
++
++# -*- coding: utf-8 -*-
++"""
++偏压扫描（I_D-V_G、I_D-V_D）与器件工作点求解（并入 gca 模块）。
++
++复用 table.SliceTable（一次构建）与本模块 gca_solve，避免逐点重复求解。
++"""
++
++def id_vg(table, vg_list, vd, **kw):
++    """固定 V_D，扫描 V_G，返回 I_D 数组。"""
++    return np.array([gca_solve(vg, vd, table, **kw)["ID"] for vg in vg_list])
++
++
++def id_vd(table, vg, vd_list, **kw):
++    """固定 V_G，扫描 V_D，返回 (I_D, vdsat, y_p) 数组。"""
++    ids, vdsats, yps = [], [], []
++    for vd in vd_list:
++        r = gca_solve(vg, vd, table, **kw)
++        ids.append(r["ID"])
++        vdsats.append(r["vdsat"])
++        yps.append(r["y_p"])
++    return np.array(ids), np.array(vdsats), np.array(yps)
++
++
++def transfer_characteristics(table, vg_list, vd_lin=0.05, vd_sat=1.5, **kw):
++    """
++    转移特性：线性区（小 V_D）与饱和区（大 V_D）的 I_D-V_G。
++    返回 dict(vg, id_lin, id_sat)。
++    """
++    return dict(vg=np.asarray(vg_list, dtype=float),
++                id_lin=id_vg(table, vg_list, vd_lin, **kw),
++                id_sat=id_vg(table, vg_list, vd_sat, **kw))
++
++
++def output_characteristics(table, vg_list, vd_list, **kw):
++    """
++    输出特性：多个 V_G 的 I_D-V_D 曲线族。
++    返回 dict(vd, ids, vdsats, yps)，ids 形状 (len(vg_list), len(vd_list))。
++    """
++    vd = np.asarray(vd_list, dtype=float)
++    ids = np.empty((len(vg_list), len(vd)))
++    vdsats = np.empty_like(ids)
++    yps = np.empty_like(ids)
++    for i, vg in enumerate(vg_list):
++        ids[i], vdsats[i], yps[i] = id_vd(table, vg, vd, **kw)
++    return dict(vd=vd, vg=vg_list, ids=ids, vdsats=vdsats, yps=yps)
+--- a/semiconductor_sim/stage3_mosfet/make_figures.py
++++ b/semiconductor_sim/stage3_mosfet/make_figures.py
+@@ -1,411 +1,13 @@
+-# -*- coding: utf-8 -*-
++"""Generate revised scientific figures and their supporting numerical data.
++
++The original v1 figure generator is retained in baseline/recovered_v1_source.zip.
++This entry point cannot produce old hard-coded artifact labels for new data.
+ """
+-第三阶段 MOSFET 论文插图生成（输出到 results_mosfet/）。
+-
+-图清单（按论文出现顺序编号）：
+-    fig1_slice_profiles   单截面电势/载流子/电场（线性区与饱和区）
+-    fig2_channel_profile  沟道 phi_n(y) 与 N_s(y)（含夹断）
+-    fig3_id_vg            I_D-V_G（线性 + 对数亚阈值 + 局部 SS 理论对照）
+-    fig4_id_vd            I_D-V_D 曲线族
+-    fig5_gm_ro            g_m-V_G 与 r_o-V_D（伪峰标注）
+-    fig6_square_law       与 Square-law 对照（最大偏差标注）
+-    fig7_grid_conv        纵向网格收敛
+-    fig8_table_conv       表格（phi_s, phi_n）插值分辨率收敛
+-    fig9_continuity       电流连续性校验（线性区达标/饱和区已知边界）
+-    fig10_cv_loop         与第一阶段 MOS C-V 闭环对照
+-"""
+-
+-import os
+-import warnings
+-
+-import numpy as np
+-import matplotlib
+-matplotlib.use("Agg")
+-import matplotlib.pyplot as plt
+-
+-from common import constants as C
+-from common.io import ensure_results_dir
+-from .table import SliceTable
+-from .solver import solve_slice, surface_charge, electron_sheet_density
+-from .gca import (gca_solve, id_vg, transfer_characteristics,
+-                  output_characteristics)
+-from . import postprocess as pp
+-from .run import default_table, default_x_grid, square_law_id_vt
+-
+-plt.rcParams.update({
+-    "font.size": 9, "axes.titlesize": 10, "axes.labelsize": 9,
+-    "figure.dpi": 110, "savefig.dpi": 130,
+-})
++from .phase1 import run_study
+ 
+ 
+-def _register_cjk_font():
+-    """注册 Noto Sans CJK SC 供图内中文使用（fig7/fig8 的 legend 含
+-    "粗/基准/细"、"加密"等中文；matplotlib 默认 DejaVu Sans 不含 CJK
+-    字形，会渲染成方框）。
+-
+-    系统 ttc（NotoSansCJK-Regular.ttc）是多 face 集合，addfont 只注册
+-    首个 face（JP），故用 fontTools 抽取 SC face 到缓存目录再注册；
+-    fontTools 为 weasyprint 的既有依赖。找不到字体时静默跳过（图仍可
+-    生成，仅中文退化为方框），不影响任何数值。
+-    """
+-    have = {f.name for f in matplotlib.font_manager.fontManager.ttflist}
+-    if "Noto Sans CJK SC" in have:
+-        return True
+-    import glob
+-    import tempfile
+-    for path in sorted(glob.glob(
+-            "/usr/share/fonts/**/NotoSansCJK-Regular.ttc", recursive=True)
+-            + glob.glob("/usr/share/fonts/**/NotoSansCJK*.ttc",
+-                        recursive=True)):
+-        try:
+-            from fontTools.ttLib import TTCollection
+-            coll = TTCollection(path, lazy=False)
+-            for face in coll.fonts:
+-                if face["name"].getDebugName(4) != "Noto Sans CJK SC":
+-                    continue
+-                cache = os.path.join(tempfile.gettempdir(),
+-                                     "NotoSansCJKsc-Regular.otf")
+-                face.save(cache)
+-                matplotlib.font_manager.fontManager.addfont(cache)
+-                plt.rcParams["font.sans-serif"] = [
+-                    "Noto Sans CJK SC", "DejaVu Sans"]
+-                plt.rcParams["axes.unicode_minus"] = False
+-                return True
+-        except Exception:
+-            continue
+-    return False
++def main():
++    run_study()
+ 
+ 
+-_CJK_OK = _register_cjk_font()
+-
+-
+-def _outdir(outdir):
+-    """outdir 缺省解析为 results/stage3/（系列统一结果目录）；显式传入时
+-    确保目录存在。"""
+-    if outdir is None:
+-        return ensure_results_dir("stage3")
+-    os.makedirs(outdir, exist_ok=True)
+-    return outdir
+-
+-
+-def fig_slice_profiles(table, x, outdir=None):
+-    """图 1：单截面纵向剖面（线性区 V_G=2.0, phi_n=0 与饱和区 phi_n=1.0）。
+-
+-    电场峰值在正文中引用：线性区源端 ~1.8e5 V/cm，饱和区 ~6.9e4 V/cm
+-    （深反型角点 phi_s=1.45 的直接解 E 达 3e7 V/cm，无物理意义，这正是
+-    建表跳过该角点的原因）。
+-    """
+-    outdir = _outdir(outdir)
+-    fig, axes = plt.subplots(1, 3, figsize=(9.5, 2.9))
+-    for phi_n, lab, c in [(0.0, "linear ($\\phi_n$=0)", "tab:blue"),
+-                          (1.0, "saturation ($\\phi_n$=1)", "tab:red")]:
+-        ps, _, _ = table.solve_vg(2.0, phi_n)
+-        res = solve_slice(ps, phi_n, x)
+-        xnm = x * 1e9
+-        e = -np.gradient(res["phi"], x) * 1e-2   # V/cm
+-        axes[0].plot(xnm, res["phi"], color=c, label=lab)
+-        axes[1].plot(xnm, res["n"] * 1e-6, color=c, label=lab)   # cm^-3
+-        axes[2].plot(xnm, e, color=c, label=f"{lab}, E$_{{max}}$={e.max():.1e}")
+-    axes[0].set_xlabel("x (nm)"); axes[0].set_ylabel("$\\phi$ (V)"); axes[0].set_title("potential")
+-    axes[1].set_xlabel("x (nm)"); axes[1].set_ylabel("n (cm$^{-3}$)"); axes[1].set_title("electron density")
+-    axes[2].set_xlabel("x (nm)"); axes[2].set_ylabel("E (V/cm)"); axes[2].set_title("electric field")
+-    axes[1].set_yscale("log")
+-    for a in axes:
+-        a.set_xlim(0, 400); a.legend(fontsize=6.5); a.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig1_slice_profiles.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_channel_profile(table, outdir=None):
+-    """图 2：沟道 phi_n(y) 与 N_s(y)（线性区 + 饱和区含夹断）。"""
+-    outdir = _outdir(outdir)
+-    y = np.linspace(0, C.L_CH, 161)
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    for vg, vd, lab in [(2.0, 0.05, "linear"), (2.0, 1.5, "saturation")]:
+-        r = gca_solve(vg, vd, table, y=y)
+-        ynm = r["y"] * 1e9
+-        axes[0].plot(ynm, r["phi_n"], label=f"{lab} (V_D={vd})")
+-        axes[1].plot(ynm, r["ns"] * 1e-4, label=f"{lab} (V_D={vd})")  # cm^-2
+-        if r["saturated"]:
+-            axes[0].axvline(r["y_p"] * 1e9, color="gray", ls="--", lw=1)
+-            axes[1].axvline(r["y_p"] * 1e9, color="gray", ls="--", lw=1,
+-                            label=f"pinch-off y_p={r['y_p']*1e9:.0f} nm")
+-    axes[0].set_xlabel("y (nm)"); axes[0].set_ylabel("phi_n (V)")
+-    axes[1].set_xlabel("y (nm)"); axes[1].set_ylabel("N_s (cm$^{-2}$)")
+-    for a in axes:
+-        a.legend(fontsize=7); a.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig2_channel_profile.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_id_vg(tr, vt_cc, table=None, outdir=None):
+-    """图 3：I_D-V_G 线性/对数坐标 + 局部 SS 与衬偏效应理论对照。"""
+-    outdir = _outdir(outdir)
+-    vg = tr["vg"]
+-    fig, axes = plt.subplots(1, 3, figsize=(10.2, 2.8))
+-    axes[0].plot(vg, tr["id_lin"] * 1e6, label="V_D=0.05 V")
+-    axes[0].plot(vg, tr["id_sat"] * 1e6, label="V_D=1.5 V")
+-    axes[0].axvline(vt_cc, color="gray", ls="--", lw=1, label=f"V_T={vt_cc:.3f} V")
+-    axes[0].set_xlabel("V_G (V)"); axes[0].set_ylabel("I_D (μA)")
+-    axes[0].legend(fontsize=7); axes[0].grid(alpha=0.3)
+-    axes[1].semilogy(vg, tr["id_lin"], label="V_D=0.05 V")
+-    axes[1].semilogy(vg, tr["id_sat"], label="V_D=1.5 V")
+-    axes[1].axvline(vt_cc, color="gray", ls="--", lw=1)
+-    axes[1].set_xlabel("V_G (V)"); axes[1].set_ylabel("I_D (A)")
+-    axes[1].legend(fontsize=7); axes[1].grid(alpha=0.3)
+-    # 局部 SS vs 衬偏效应理论
+-    if table is not None:
+-        ss_loc = pp.local_ss(vg, tr["id_lin"])
+-        ps_arr = np.array([table.solve_vg(v, 0.0)[0] for v in vg])
+-        ss_th = pp.ss_theory(ps_arr)
+-        m = (vg > 0.4) & (vg < 1.25)
+-        axes[2].plot(vg[m], ss_loc[m], ".", ms=4, label="local SS (model)")
+-        axes[2].plot(vg[m], ss_th[m], "-", lw=1.2,
+-                     label="$\\ln10\\,V_T(1+C_{dep}/C_{ox})$")
+-        axes[2].set_xlabel("V_G (V)")
+-        axes[2].set_ylabel("SS (mV/dec)")
+-        axes[2].set_ylim(55, 130)
+-        axes[2].legend(fontsize=7); axes[2].grid(alpha=0.3)
+-        axes[2].set_title("subthreshold swing", fontsize=9)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig3_id_vg.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_id_vd(out, vt_cc, outdir=None):
+-    """图 4：I_D-V_D 曲线族。"""
+-    outdir = _outdir(outdir)
+-    fig, ax = plt.subplots(figsize=(5.2, 3.2))
+-    for i, vg in enumerate(out["vg"]):
+-        ax.plot(out["vd"], out["ids"][i] * 1e6, label=f"V_G={vg:.1f} V")
+-        # 夹断电压（V_Dsat = vdsat）
+-        vdsat = out["vdsats"][i][-1]
+-        ax.axvline(vdsat, color=f"C{i}", ls=":", lw=0.8, alpha=0.6)
+-    ax.set_xlabel("V_D (V)"); ax.set_ylabel("I_D (μA)")
+-    ax.legend(fontsize=7); ax.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig4_id_vd.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_gm_ro(vg, id_sat, vd, ids, outdir=None):
+-    """图 5：g_m-V_G 与 r_o-V_D。r_o 伪峰为一阶 CLM 开关 artifact，标注。"""
+-    outdir = _outdir(outdir)
+-    gm, _ = pp.extract_gm(vg, id_sat)
+-    ro = pp.extract_ro(vd, ids[-1])   # 最高 V_G 的输出电阻
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    axes[0].plot(vg, gm * 1e6)
+-    axes[0].set_xlabel("V_G (V)"); axes[0].set_ylabel("g_m (μS)")
+-    axes[0].grid(alpha=0.3)
+-    axes[1].plot(vd, ro * 1e-6)
+-    axes[1].set_xlabel("V_D (V)"); axes[1].set_ylabel("r_o (MΩ)")
+-    axes[1].grid(alpha=0.3)
+-    # 伪峰标注：指数拖尾收敛 -> CLM 开关处的导数不连续
+-    i_pk = int(np.nanargmax(np.where(np.isfinite(ro), ro, -np.inf)))
+-    if np.isfinite(ro[i_pk]) and ro[i_pk] > 1e5:
+-        axes[1].annotate("artifact: CLM switch\n(not Early effect)",
+-                         xy=(vd[i_pk], ro[i_pk] * 1e-6),
+-                         xytext=(vd[i_pk] + 0.35, ro[i_pk] * 0.45 * 1e-6),
+-                         fontsize=7, color="tab:red",
+-                         arrowprops=dict(arrowstyle="->", color="tab:red",
+-                                         lw=0.8))
+-        axes[1].set_yscale("log")
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig5_gm_ro.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_square_law(vg, id_lin, id_sat, vt_cc, outdir=None):
+-    """图 6：与 Square-law 对照（用提取 V_T），标注最大偏差点与数值。"""
+-    outdir = _outdir(outdir)
+-    sq_lin = square_law_id_vt(vg, 0.05, vt_cc)
+-    sq_sat = square_law_id_vt(vg, 1.5, vt_cc)
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    for ax, idd, sq, ttl in [
+-            (axes[0], id_lin, sq_lin, "linear (V_D=0.05 V)"),
+-            (axes[1], id_sat, sq_sat, "saturation (V_D=1.5 V)")]:
+-        ax.plot(vg, idd * 1e6, label="GCA")
+-        ax.plot(vg, sq * 1e6, "--", label="Square-law")
+-        m = vg > vt_cc + 0.2
+-        dev = (idd[m] - sq[m]) / sq[m] * 100
+-        i = int(np.argmax(np.abs(dev)))
+-        vg_m = vg[m][i]
+-        ax.plot(vg_m, idd[m][i] * 1e6, "o", ms=5, color="tab:red", zorder=5)
+-        ax.annotate(f"max |dev| = {abs(dev[i]):.1f}%\n@ V_G={vg_m:.2f} V",
+-                    xy=(vg_m, idd[m][i] * 1e6),
+-                    xytext=(vg_m - 0.62, idd[m][i] * 1e6 * 0.45),
+-                    fontsize=7, color="tab:red",
+-                    arrowprops=dict(arrowstyle="->", color="tab:red", lw=0.8))
+-        ax.set_xlabel("V_G (V)"); ax.set_ylabel("I_D (μA)")
+-        ax.set_title(ttl, fontsize=9)
+-        ax.legend(fontsize=7); ax.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig6_square_law.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_grid_conv(records, outdir=None):
+-    """图 7：网格收敛（I_D-V_G 三级网格）。"""
+-    outdir = _outdir(outdir)
+-    fig, ax = plt.subplots(figsize=(5.2, 3.2))
+-    for r in records:
+-        ax.plot(np.linspace(0, 2.0, 61), r["id_sat"] * 1e6,
+-                label=f"{r['name']} (N={r['N']})")
+-    ax.set_xlabel("V_G (V)"); ax.set_ylabel("I_D (μA)")
+-    ax.legend(fontsize=7); ax.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig7_grid_conv.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_continuity(table, outdir=None):
+-    """图 9：电流连续性 I_D(y) 沿沟道（线性区达标；饱和区为已知模型边界）。"""
+-    outdir = _outdir(outdir)
+-    y = np.linspace(0, C.L_CH, 161)
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    for vg, vd in [(2.0, 0.05), (1.5, 0.05)]:
+-        r = gca_solve(vg, vd, table, y=y)
+-        rel, _, _ = pp.continuity_check(r)
+-        axes[0].plot(r["y"] * 1e9, r["id_local"] * 1e6,
+-                     label=f"V_G={vg}, V_D={vd} (fluct. {rel:.1e})")
+-    axes[0].set_xlabel("y (nm)"); axes[0].set_ylabel("I_D(y) (μA)")
+-    axes[0].set_title("linear region (pass < 1e-3)", fontsize=9)
+-    axes[0].legend(fontsize=7); axes[0].grid(alpha=0.3)
+-    r = gca_solve(2.0, 1.5, table, y=y)
+-    rel, _, _ = pp.continuity_check(r)
+-    axes[1].plot(r["y"] * 1e9, r["id_local"] * 1e6)
+-    axes[1].axvline(r["y_p"] * 1e9, color="gray", ls="--", lw=1)
+-    axes[1].set_xlabel("y (nm)"); axes[1].set_ylabel("I_D(y) (μA)")
+-    axes[1].set_title(f"saturation: fluct. {rel:.1e} "
+-                      "(known boundary, not a pass)", fontsize=9)
+-    axes[1].grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig9_continuity.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_table_conv(trecords, vg_max=2.0, outdir=None):
+-    """图 8：表格（phi_s, phi_n）插值分辨率收敛。"""
+-    outdir = _outdir(outdir)
+-    vg = np.linspace(0.0, vg_max, 61)
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    for r in trecords:
+-        axes[0].plot(vg, r["id_sat"] * 1e6, label=r["name"])
+-        axes[1].plot(vg, r["id_lin"] * 1e6, label=r["name"])
+-    axes[0].set_title("saturation (V_D=1.5)")
+-    axes[1].set_title("linear (V_D=0.05)")
+-    for a in axes:
+-        a.set_xlabel("V_G (V)"); a.set_ylabel("I_D (μA)")
+-        a.legend(fontsize=6); a.grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig8_table_conv.png"), bbox_inches="tight")
+-    plt.close(fig)
+-
+-
+-def fig_cv_loop(table, x, outdir=None):
+-    """图 10：与第一阶段 MOS C-V 闭环对照（phi_n=0 列 vs 第一阶段求解器）。
+-
+-    只取物理重叠区 phi_s ∈ [-0.15, 1.6]（V_G ≈ [-1, 2.6] V）：深积累
+-    角区（phi_s << 0）的积累层厚度低于网格分辨率、Q_s 被 mesh 主导，
+-    两阶段均不具物理意义，不予比较。右图为等效栅压误差 |ΔQ_s|/C_ox。
+-    """
+-    outdir = _outdir(outdir)
+-    from stage1_mos.solver import solve_poisson
+-    from stage1_mos.postprocess import postprocess as s1_postprocess
+-    phi_s_arr = np.linspace(-0.15, 1.6, 120)
+-    # 第三阶段：表格 phi_n=0 列
+-    ipn0 = int(np.argmin(np.abs(table.phi_n_grid - 0.0)))
+-    vg3 = table.vg[:, ipn0]
+-    qs3 = table.qs[:, ipn0]
+-    m3 = np.isfinite(vg3) & (vg3 > -1.2) & (vg3 < 2.8)
+-    # 第一阶段：同一 x 网格上直接解 Poisson，按 phi_s 参数延续（与其
+-    # run() 的策略一致）。注：细网格上单点冷启动会因 tol=1e-11 过紧
+-    # 加 Armijo 步长减半而停顿（dmove 卡在 2.4e-10），延续可全范围收敛。
+-    qs1, vg1 = [], []
+-    prev = None
+-    for ps in phi_s_arr:
+-        phi, _, conv = solve_poisson(ps, x, C.NA, phi_init=prev)
+-        prev = phi
+-        qs, _ = s1_postprocess(phi, x)
+-        qs1.append(qs)
+-        vg1.append(C.VFB + ps - qs / C.COX)
+-    qs1 = np.array(qs1); vg1 = np.array(vg1)
+-    # 对齐到共同 V_G 网格比较（仅重叠区）
+-    vg_common = np.linspace(-1.0, 2.5, 240)
+-    qs3_i = np.interp(vg_common, vg3[m3], qs3[m3])
+-    qs1_i = np.interp(vg_common, vg1, qs1)
+-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.8))
+-    axes[0].plot(vg3[m3], qs3[m3] * 1e3, ".", ms=3,
+-                 label="stage-3 table ($\\phi_n$=0)")
+-    axes[0].plot(vg1, qs1 * 1e3, "-", lw=1, label="stage-1 solver")
+-    axes[0].set_xlabel("V_G (V)"); axes[0].set_ylabel("Q_s (mC/m$^2$)")
+-    axes[0].set_xlim(-1.2, 2.8)
+-    axes[0].legend(fontsize=7); axes[0].grid(alpha=0.3)
+-    dvg = np.abs(qs3_i - qs1_i) / C.COX * 1e3      # mV
+-    axes[1].semilogy(vg_common, np.maximum(dvg, 1e-4))
+-    axes[1].set_xlabel("V_G (V)")
+-    axes[1].set_ylabel("|ΔQ_s|/C_ox (mV)")
+-    axes[1].set_ylim(1e-3, 1e2)
+-    axes[1].grid(alpha=0.3)
+-    fig.tight_layout()
+-    fig.savefig(os.path.join(outdir, "fig10_cv_loop.png"), bbox_inches="tight")
+-    plt.close(fig)
+-    # 数值摘要（论文引用）
+-    i0 = np.argmin(np.abs(vg_common - 0.0))
+-    i1 = np.argmin(np.abs(vg_common - 1.0))
+-    i2 = np.argmin(np.abs(vg_common - 2.0))
+-    for iv, nm in [(i0, "V_G=0"), (i1, "V_G=1"), (i2, "V_G=2")]:
+-        print(f"  [C-V 闭环] {nm}: 第三阶段 Q_s={qs3_i[iv]*1e3:.4f} mC/m^2, "
+-              f"第一阶段 Q_s={qs1_i[iv]*1e3:.4f} mC/m^2, "
+-              f"等效差 {dvg[iv]:.3f} mV")
+-
+-
+-def make_figures(table=None, x=None, tr=None, out=None, records=None,
+-                 vt_cc=None, trecords=None, outdir=None):
+-    """生成全部插图（fig1-fig10）。若未传表格则现场构建。"""
+-    outdir = _outdir(outdir)
+-    warnings.filterwarnings("ignore")
+-    if x is None:
+-        x = default_x_grid()
+-    if table is None:
+-        table = default_table(x)
+-        table.build()
+-    if vt_cc is None:
+-        vg_tmp = np.linspace(0, 2.0, 81)
+-        id_tmp = id_vg(table, vg_tmp, 0.05)
+-        vt_cc, _ = pp.extract_vt(vg_tmp, id_tmp)
+-    if tr is None:
+-        tr = transfer_characteristics(table, np.linspace(0, 2.0, 81),
+-                                      vd_lin=0.05, vd_sat=1.5)
+-    if out is None:
+-        out = output_characteristics(table, [1.2, 1.5, 2.0],
+-                                     np.linspace(0, 2.0, 61))
+-    fig_slice_profiles(table, x, outdir)
+-    fig_channel_profile(table, outdir)
+-    fig_id_vg(tr, vt_cc, table, outdir)
+-    fig_id_vd(out, vt_cc, outdir)
+-    fig_gm_ro(tr["vg"], tr["id_sat"], out["vd"], out["ids"], outdir)
+-    fig_square_law(tr["vg"], tr["id_lin"], tr["id_sat"], vt_cc, outdir)
+-    if records is not None:
+-        fig_grid_conv(records, outdir)
+-    if trecords is not None:
+-        fig_table_conv(trecords, outdir=outdir)
+-    fig_continuity(table, outdir)
+-    fig_cv_loop(table, x, outdir)
+-    print(f"插图已输出到 {outdir}/")
+-    return outdir
+-
+-
+-if __name__ == "__main__":
+-    from .run import grid_convergence, table_convergence
+-    x = default_x_grid()
+-    tab = default_table(x)
+-    tab.build()
+-    tr = transfer_characteristics(tab, np.linspace(0, 2.0, 81),
+-                                  vd_lin=0.05, vd_sat=1.5)
+-    out = output_characteristics(tab, [1.2, 1.5, 2.0], np.linspace(0, 2.0, 61))
+-    records = grid_convergence(verbose=False)
+-    trecords = table_convergence(x=x, verbose=False)
+-    make_figures(tab, x, tr, out, records, trecords=trecords)
++if __name__=='__main__':main()
+--- a/semiconductor_sim/stage3_mosfet/phase1.py
++++ b/semiconductor_sim/stage3_mosfet/phase1.py
+@@ -0,0 +1,135 @@
++"""Canonical reproducible phase-1 experiment (numerical, not experimental validation)."""
++import hashlib,json,platform,subprocess,sys,time,csv
++from pathlib import Path
++import numpy as np
++import scipy
++from scipy.optimize import brentq
++from common import constants as C
++from common.jsonio import dumps,write_json
++from .config import PRODUCTION,TableConfig,production_metadata
++from common.grid import make_surface_grid
++from .table import SliceTable
++from .gca import gca_solve,id_vg
++from .postprocess import extract_vt,continuity_check,edge_continuity_check,extract_ss
++from .reference import reference_slice,reference_current,square_law_constant_current,charge_budget
++PKG=Path(__file__).resolve().parents[1]
++ROOT=PKG.parent
++OUT=PKG/'results'/'phase1'
++CACHE=ROOT/'.cache'
++
++
++def cached_table(nps,npn,mode,config=None):
++    config=config or TableConfig(nps=nps,npn=npn,interpolation=mode)
++    if (nps,npn,mode)!=(config.nps,config.npn,config.interpolation):
++        raise ValueError('Contradictory table configuration')
++    files=[Path(__file__).with_name(n) for n in ['solver.py','table.py','config.py']]
++    files += [PKG/'common'/n for n in ['constants.py','grid.py','thomas.py']]
++    key=b''.join(f.read_bytes() for f in files)+dumps(config.to_dict(),sort_keys=True).encode()
++    key+=f'{np.__version__}/{scipy.__version__}'.encode()
++    token=hashlib.sha256(key).hexdigest()[:16]
++    CACHE.mkdir(exist_ok=True)
++    path=CACHE/f'table_{nps}_{npn}_{mode}_{token}.npz'
++    x=make_surface_grid(config.x_max,d0=config.d0,h_max=config.hmax)
++    t=SliceTable(np.linspace(config.phi_s_min,config.phi_s_max,nps),
++                 np.linspace(0,config.phi_n_max,npn),x,sheet_interpolation=mode)
++    if path.exists():
++        with np.load(path,allow_pickle=False) as d:
++            if json.loads(str(d['config_json']))!=config.to_dict():
++                raise ValueError('Cache configuration mismatch')
++            t.vg=d['vg'];t.ns=d['ns'];t.qs=d['qs']
++            t.build_stats=json.loads(str(d['build_stats_json']))
++        return t,dict(cache_hit=True,cache_key=token)
++    start=time.perf_counter();t.build()
++    np.savez_compressed(path,vg=t.vg,ns=t.ns,qs=t.qs,
++        config_json=dumps(config.to_dict()),build_stats_json=dumps(t.build_stats))
++    return t,dict(cache_hit=False,cache_key=token,build_seconds=time.perf_counter()-start)
++
++
++def production_table():
++    return cached_table(PRODUCTION.nps,PRODUCTION.npn,PRODUCTION.interpolation,config=PRODUCTION)
++
++
++def write_csv(name,rows):
++    with (OUT/name).open('w',newline='',encoding='utf-8-sig') as f:
++        w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
++
++
++def run_study(verbose=True,vg_max=2.,vd_max=2.):
++    if vg_max!=2 or vd_max!=2:raise ValueError('Frozen phase-1 matrix has max biases 2 V')
++    OUT.mkdir(parents=True,exist_ok=True);start=time.perf_counter()
++    def say(s):
++        if verbose:print(s,flush=True)
++    say('Building/reusing production 400x220 log table')
++    t,perf=production_table()
++    say('Building/reusing comparison 240x110 linear table')
++    coarse,cp=cached_table(240,110,'linear')
++    bp=OUT/'baseline_recomputed.json'
++    say('Recomputing unmodified recovered v1 in isolated interpreter')
++    r=subprocess.run([sys.executable,str(ROOT/'scripts/baseline_study.py')],capture_output=True,text=True,check=True)
++    write_json(bp,json.loads(r.stdout))
++    baseline=json.loads(bp.read_text())
++    vg=np.linspace(0,2,81);ilin=id_vg(t,vg,.05);isat=id_vg(t,vg,1.5)
++    vt,ith=extract_vt(vg,ilin);inv=square_law_constant_current(.05,ith)
++    threshold=dict(vt_cc=vt,vt_long=C.VT_LONG,square_law_cc=inv['vg'],branch=inv['branch'],
++                   criterion_offset_mV=1000*inv['offset'],remaining_offset_mV=1000*(vt-inv['vg']),
++                   total_offset_mV=1000*(vt-C.VT_LONG))
++    say('Independent first-integral reference: 42 bias points')
++    refs=[]
++    for v in [.5,.75,1,1.25,1.5,1.75,2]:
++        for d in [.025,.05,.2,.75,1.5,2]:
++            ref=reference_current(v,d);cur=gca_solve(v,d,t)['ID'];ci=gca_solve(v,d,coarse)['ID']
++            refs.append(dict(vg=v,vd=d,reference_A=ref['ID'],revised_A=cur,
++               relative_error=cur/ref['ID']-1,coarse_linear_relative_error=ci/ref['ID']-1,
++               reference_quad_estimate_A=ref['quadrature_abs_estimate']))
++    continuity=[]
++    for n in [81,161,321,641,1281]:
++        r=gca_solve(2,1.5,t,y=np.linspace(0,C.L_CH,n))
++        continuity.append(dict(ny=n,finite_difference=continuity_check(r)[0],edge_consistency=edge_continuity_check(r)))
++    src=t.solve_vg(2,0);rs=reference_slice(2,0)
++    budgets=dict(table=charge_budget(2,*src),independent_reference=charge_budget(2,rs['phi_s'],rs['ns'],rs['qs']))
++    from .legacy_gca import gca_solve as old_gca
++    ablation=[]
++    for v,d in [(2,.05),(2,1.5),(1.175,2),(1.2,2)]:
++        old=old_gca(v,d,coarse,clm=True);off=old_gca(v,d,coarse,clm=False)
++        beta=C.MU_N*C.COX*C.W_CH/C.L_CH;ov=max(v-baseline['vt_cc'],0.)
++        square=beta*(ov*d-.5*d*d) if d<ov else .5*beta*ov*ov
++        ablation.append(dict(vg=v,vd=d,square_A=square,legacy_clm_A=old['ID'],legacy_no_clm_A=off['ID'],
++            full_integral_same_table_A=gca_solve(v,d,coarse)['ID'],revised_production_A=gca_solve(v,d,t)['ID'],
++            delta_L_fraction=1-old['y_p']/C.L_CH))
++    say('Spatial refinement without table interpolation')
++    grid=[]
++    from .solver import solve_slice,surface_charge,electron_sheet_density
++    for h in [.5,.25,.125,.0625]:
++        xx=make_surface_grid(1.2e-6,d0=h*1e-9,h_max=h*32e-9)
++        def direct(ps):
++            rr=solve_slice(ps,0,xx)
++            if not rr['converged']:raise RuntimeError(rr['status'])
++            q,_=surface_charge(rr,xx);return ps-q/C.COX-2
++        ps=brentq(direct,.8,.9,xtol=1e-13);rr=solve_slice(ps,0,xx);ns=electron_sheet_density(rr,xx)
++        grid.append(dict(d0_nm=h,hmax_nm=h*32,nodes=len(xx),phi_s=ps,
++                    source_ns_relative_error=ns/rs['ns']-1,correction_inf=rr['correction_inf'],backward_error=rr['backward_error']))
++    s=dict(version='phase1-1.2',environment=dict(python=platform.python_version(),numpy=np.__version__,scipy=scipy.__version__,platform=platform.platform()),
++        assumptions='classical Boltzmann, constant mobility, ideal reservoirs, no default CLM; not 2D DD',
++        table_config=PRODUCTION.to_dict(),production_metadata=production_metadata(),table_build_stats=t.build_stats,
++        threshold=threshold,ss_mVdec=extract_ss(vg,ilin),charge_budget=budgets,current_reference=refs,
++        continuity=continuity,ablation=ablation,spatial_refinement=grid,
++        maximum_reference_relative_error=max(abs(r['relative_error']) for r in refs),
++        maximum_coarse_linear_relative_error=max(abs(r['coarse_linear_relative_error']) for r in refs),
++        performance=perf,comparison_table_performance=cp,baseline=baseline,elapsed_seconds=time.perf_counter()-start)
++    s['acceptance']=dict(independent_current_42_points_below_0p5pct=s['maximum_reference_relative_error']<.005,
++        saturation_fd_641_below_1e_minus_3=continuity[3]['finite_difference']<1e-3,
++        edge_internal_consistency_below_1e_minus_9=max(r['edge_consistency'] for r in continuity)<1e-9,
++        threshold_correct_branch=inv['branch']=='saturation')
++    from .attribution import run_attribution
++    s['attribution']=run_attribution(s,t,OUT)
++    write_json(OUT/'phase1_results.json',s)
++    for name,rows in [('independent_reference',refs),('continuity',continuity),('clm_ablation',ablation),('spatial_refinement',grid)]:write_csv(name+'.csv',rows)
++    np.savez_compressed(OUT/'transfer_curves.npz',vg=vg,id_lin=ilin,id_sat=isat)
++    from .phase1_plots import make_plots
++    make_plots(s,t,OUT)
++    say(dumps({k:s[k] for k in ['threshold','maximum_reference_relative_error','acceptance']},indent=2))
++    if not all(s['acceptance'].values()):raise RuntimeError('Phase-1 acceptance failed: inspect results JSON')
++    return s
++
++
++if __name__=='__main__':run_study()
+--- a/semiconductor_sim/stage3_mosfet/phase1_plots.py
++++ b/semiconductor_sim/stage3_mosfet/phase1_plots.py
+@@ -0,0 +1,54 @@
++"""Deterministic scientific plots; SVG and PNG outputs, English labels."""
++import numpy as np
++from .gca import id_vg
++
++
++def make_plots(s,t,out):
++    import matplotlib
++    matplotlib.use('Agg')
++    import matplotlib.pyplot as plt
++    plt.rcParams.update({'font.size':10,'axes.grid':True,'grid.alpha':.25})
++    def save(f,name):
++        f.tight_layout();f.savefig(out/(name+'.png'),dpi=180);f.savefig(out/(name+'.svg'));plt.close(f)
++    old=s['baseline']['continuity'];new=s['continuity'];f,ax=plt.subplots(figsize=(7,4.5))
++    ax.loglog([r['ny'] for r in old],[r['finite_difference'] for r in old],'o-',label='Recovered v1 + CLM')
++    ax.loglog([r['ny'] for r in new],[r['finite_difference'] for r in new],'s-',label='Revised full integral (FD check)')
++    ax.axhline(1e-3,color='black',ls='--',label='Original acceptance target')
++    ax.set(xlabel='Output y nodes',ylabel='Relative point-current fluctuation');ax.legend();save(f,'fig1_continuity')
++    rows=s['current_reference'];vs=sorted({r['vg'] for r in rows});ds=sorted({r['vd'] for r in rows})
++    f,axes=plt.subplots(1,2,figsize=(10,4))
++    for ax,key,title in zip(axes,['coarse_linear_relative_error','relative_error'],['240x110 linear table','400x220 log table']):
++        vals=np.array([[next(r[key] for r in rows if r['vg']==v and r['vd']==d)*100 for d in ds] for v in vs])
++        im=ax.imshow(vals,origin='lower',aspect='auto',vmin=-.5,vmax=5,cmap='coolwarm')
++        ax.set(xticks=range(len(ds)),xticklabels=ds,yticks=range(len(vs)),yticklabels=vs,xlabel='VD (V)',ylabel='VG (V)',title=title)
++        ax.grid(False);f.colorbar(im,ax=ax,label='Current error (%)')
++    save(f,'fig2_independent_reference')
++    b=s['ablation'][1];f,ax=plt.subplots(figsize=(7,4.5))
++    vals=[b['square_A'],b['legacy_no_clm_A'],b['legacy_clm_A'],b['revised_production_A']]
++    ax.bar(['Square law','Legacy no CLM','Legacy + CLM','Revised no CLM'],np.array(vals)*1e6)
++    ax.set(ylabel='ID (uA)',title='VG=2 V, VD=1.5 V: CLM ablation');save(f,'fig3_clm_ablation')
++    data=np.load(out/'transfer_curves.npz');f,axes=plt.subplots(1,2,figsize=(10,4));base=s['baseline']
++    axes[0].semilogy(base['vg'],base['transfer_legacy'],label='Recovered v1 + CLM')
++    axes[0].semilogy(data['vg'],data['id_sat'],label='Revised classical, no CLM')
++    axes[0].set(xlabel='VG (V)',ylabel='ID (A)',ylim=(1e-16,2e-4));axes[0].legend()
++    v=np.linspace(1.1,1.3,201);axes[1].plot(v,id_vg(t,v,2)*1e6)
++    axes[1].set(xlabel='VG (V)',ylabel='ID (uA)',title='No hard CLM switch near VG=1.2 V');save(f,'fig4_transfer')
++    gr=s['spatial_refinement'];f,ax=plt.subplots(figsize=(7,4.5))
++    ax.loglog([r['d0_nm'] for r in gr],[abs(r['source_ns_relative_error']) for r in gr],'o-')
++    ax.set(xlabel='Surface spacing (nm); hmax=32 h0',ylabel='Source Ns error vs independent reference',title='Spatial refinement only, VG=2 V');save(f,'fig5_spatial_refinement')
++
++    # These two figures expose the physical bookkeeping and signed numerical ablations.
++    bg=[r for r in s['attribution']['neutral_background'] if r['vd']==.05]
++    f,ax=plt.subplots(figsize=(7,4.5))
++    ax.semilogy([r['vg'] for r in bg],[100*r['neutral_background_fraction'] for r in bg],'o-')
++    ax.set(xlabel='VG (V)',ylabel='Neutral-background fraction (%)',
++           title='Reduced-model background contribution, VD=0.05 V')
++    save(f,'fig6_background')
++    a=s['attribution']['worst_point'];f,ax=plt.subplots(figsize=(8,4.5))
++    labels=['Grid + boundary','Table interpolation','Total error','Clamp sensitivity']
++    vals=[a[k]*100 for k in ['grid_and_boundary_relative','table_interpolation_relative','total_relative','clamp_paired_relative']]
++    bars=ax.bar(labels,vals);ax.axhline(0,color='black',lw=.8)
++    ax.bar_label(bars,fmt='%.4f',padding=3)
++    ax.set(ylabel='Signed relative contribution (%)',
++           title=f"Worst point: VG={a['point']['vg']} V, VD={a['point']['vd']} V")
++    save(f,'fig7_error_attribution')
+--- a/semiconductor_sim/stage3_mosfet/postprocess.py
++++ b/semiconductor_sim/stage3_mosfet/postprocess.py
+@@ -107,7 +107,7 @@
+     """
+     沟道电流连续性校验：I_D(y) = q W mu N_s dphi_n/dy 沿沟道的相对波动。
+     只统计强沟道区（N_s > 20% N_s,max）并剔除两端各 5% 的边界伪影；
+-    夹断区（N_s≈0）由 GCA 的漂移近似未建模，排除在外。
++    此掩码用于限制独立差分求导截断误差；不意味着准费米电流遗漏扩散。
+     返回 (rel_fluctuation, mean_id, mask)。
+     """
+     id_local = np.asarray(res["id_local"], dtype=float)
+@@ -125,3 +125,11 @@
+     mean_id = float(np.mean(id_chan))
+     rel = float(np.max(np.abs(id_chan - mean_id)) / max(abs(mean_id), 1e-30))
+     return rel, mean_id, mask
++
++
++def edge_continuity_check(res):
++    """Internal integral consistency, not independent physical validation."""
++    if 'id_edges' not in res:
++        raise ValueError('No conservative edges in empirical legacy mode')
++    ids=np.asarray(res['id_edges'])
++    return float(np.max(np.abs(ids-res['ID']))/max(abs(res['ID']),1e-300))
+--- a/semiconductor_sim/stage3_mosfet/reference.py
++++ b/semiconductor_sim/stage3_mosfet/reference.py
+@@ -0,0 +1,83 @@
++"""Independent classical uniform-substrate Poisson first-integral reference.
++
++Uses neither the finite-difference Poisson solver nor SliceTable. A semi-infinite
++neutral bulk is used; finite-domain Ns includes neutral bulk background over
++x_max. Its body potential differs from imposed zero by <= ni^2/NA^2 * UT for
++nonzero phi_n (about 3e-14 V at default doping). This approximation and finite
++bulk treatment are recorded in the report; this is code verification, not
++experimental validation. Only positive surface band bending is supported.
++"""
++import numpy as np
++from scipy.integrate import quad
++from scipy.optimize import brentq
++from common import constants as C
++
++
++def _em1mx(z):
++    if abs(z) < 1e-3:
++        return z*z*(.5+z*(1/6+z*(1/24+z*(1/120+z/720))))
++    return np.expm1(z)-z
++
++
++def reference_slice(vg, phi_n, na=C.NA, x_max=1.2e-6):
++    if vg < .05 or phi_n < 0:
++        raise ValueError('Reference supports positive inversion/depletion gate bias')
++    p0=.5*(na+np.sqrt(na*na+4*C.NI**2)); n0=C.NI**2/p0
++    product=C.NI**2*np.exp(-phi_n/C.VT)
++    pb=.5*(na+np.sqrt(na*na+4*product)); nb=product/pb
++    bulk=-C.VT*np.log(pb/p0)
++    def energy(u):
++        return C.VT*(pb*_em1mx(-u)+nb*_em1mx(u))
++    def charge(ps):
++        u=(ps-bulk)/C.VT
++        return -np.sqrt(max(0.,2*C.EPS_SI*C.Q_E*energy(u)))
++    ps=brentq(lambda v:C.VFB+v-charge(v)/C.COX-vg,
++              bulk+1e-14,max(2.5,phi_n+1),xtol=2e-14)
++    us=(ps-bulk)/C.VT
++    def sheet_integrand(u):
++        if abs(u)<1e-8:
++            return nb*np.sqrt(C.EPS_SI*C.VT/(C.Q_E*(pb+nb)))
++        return nb*np.expm1(u)*C.VT/np.sqrt(2*C.Q_E/C.EPS_SI*energy(u))
++    excess,error=quad(sheet_integrand,0,us,epsabs=1e-6,epsrel=2e-10,limit=200)
++    return dict(phi_s=ps,qs=charge(ps),ns=excess+nb*x_max,ns_excess=excess,
++                ns_background=nb*x_max,nb=nb,
++                quadrature_abs_estimate=error,bulk_shift=bulk)
++
++
++def reference_current(vg, vd, x_max=1.2e-6, epsrel=2e-8):
++    excess,error=quad(lambda pn:reference_slice(vg,pn,x_max=x_max)['ns_excess'],0,vd,
++                      epsabs=1e-4,epsrel=epsrel,limit=160)
++    # Integrate the neutral background independently so its contribution is visible.
++    background,bg_error=quad(lambda pn:reference_slice(vg,pn,x_max=x_max)['ns_background'],
++                            0,vd,epsabs=1e-6,epsrel=epsrel,limit=160)
++    pref=C.Q_E*C.W_CH*C.MU_N/C.L_CH
++    return dict(ID=pref*(excess+background),ID_excess=pref*excess,
++                ID_background=pref*background,background_fraction=background/(excess+background),
++                quadrature_abs_estimate=pref*(error+bg_error))
++
++
++def square_law_constant_current(vd, ith=1e-7, vt=C.VT_LONG):
++    """Exact inverse of the same piecewise square law used by constants.py."""
++    if vd <= 0 or ith <= 0:
++        raise ValueError('VD and threshold current must be positive')
++    beta=C.MU_N*C.COX*C.W_CH/C.L_CH
++    if ith <= .5*beta*vd*vd:
++        ov=np.sqrt(2*ith/beta);branch='saturation'
++    else:
++        ov=vd/2+ith/(beta*vd);branch='linear'
++    return dict(vg=vt+ov,offset=ov,branch=branch,beta=beta)
++
++
++def charge_budget(vg, phi_s, ns, qs):
++    """Algebraic comparison to a specified square-law reference, not validation.
++
++    Since Qb is defined from Qs and Ns, closure follows from the gate equation;
++    its small roundoff error is not evidence of physical accuracy.
++    """
++    qb_abs=-(qs+C.Q_E*ns)
++    qbth=C.COX*(C.VT_LONG-C.VFB-C.TWICE_PSI_F)
++    surface=phi_s-C.TWICE_PSI_F
++    body=(qb_abs-qbth)/C.COX
++    total=vg-C.VT_LONG-C.Q_E*ns/C.COX
++    return dict(evidence_type="algebraic_reference_comparison",surface_term_V=surface,body_term_V=body,total_deficit_V=total,
++                closure_V=total-surface-body,qb_abs=qb_abs)
+--- a/semiconductor_sim/stage3_mosfet/run.py
++++ b/semiconductor_sim/stage3_mosfet/run.py
+@@ -1,11 +1,9 @@
+ # -*- coding: utf-8 -*-
+-"""
+-第三阶段 MOSFET 直流仿真主驱动：构建表格 → 扫描 → 参数提取 → 验证清单。
++"""Phase-1 driver and parameter helpers.
+ 
+-    系列化说明：run() 返回 dict 含四标准键（params/results/validation/
+-    defects，见 docs/spec/code_spec.md）；其余键为历史平铺结果。
+-
+-用法：cd mosfet && python run.py
++The unmodified v1 driver and figure code are archived in baseline/. The phase-1
++entry point computes independent-reference, CLM-ablation, charge-budget and
++convergence evidence without reusing old hard-coded verification claims.
+ """
+ 
+ import time
+@@ -40,241 +38,27 @@
+     return make_surface_grid(x_max, d0=d0, h_max=h_max)
+ 
+ 
+-def default_table(x=None, phi_s_n=240, phi_n_n=110):
+-    if x is None:
+-        x = default_x_grid()
+-    phi_s_grid = np.linspace(-0.3, 1.6, phi_s_n)
+-    phi_n_grid = np.linspace(0.0, 2.0, phi_n_n)
+-    return SliceTable(phi_s_grid, phi_n_grid, x)
++def default_table(x=None, phi_s_n=None, phi_n_n=None):
++    from .config import PRODUCTION
++    if x is None:x=default_x_grid()
++    return SliceTable(np.linspace(PRODUCTION.phi_s_min,PRODUCTION.phi_s_max,
++                                  phi_s_n or PRODUCTION.nps),
++                      np.linspace(0,PRODUCTION.phi_n_max,phi_n_n or PRODUCTION.npn),
++                      x,sheet_interpolation=PRODUCTION.interpolation)
+ 
+ 
+ # ================================================================================
+ # 主流程
+ # ================================================================================
+ 
+-def run(verbose=True, vg_max=2.0, vd_max=2.0):
+-    t_start = time.time()
+-    x = default_x_grid()
+-    if verbose:
+-        print("=" * 72)
+-        print("第三阶段：1D 纵向 Poisson + 准二维 GCA 的 MOSFET 直流仿真")
+-        print("=" * 72)
+-        print(f"[器件] Na={C.NA_CM3:.0e} cm^-3, tox={C.TOX_NM:.0f} nm, "
+-              f"L={C.L_CH * 1e6:.1f} um, W={C.W_CH * 1e6:.1f} um, "
+-              f"VFB={C.VFB:.2f} V")
+-        print(f"[网格] {grid_stats(x)}")
+-        print(f"[解析] psi_F={C.PSI_F:.4f} V, 2*psi_F={C.TWICE_PSI_F:.4f} V, "
+-              f"VT_long={C.VT_LONG:.4f} V, gamma={C.GAMMA:.4f} V^0.5")
++def run(verbose=True, vg_max=2., vd_max=2.):
++    """Phase-1 canonical driver. Frozen v1 driver is in baseline source snapshot.
+ 
+-    # ---- 1. 构建表格 ----
+-    t0 = time.time()
+-    tab = default_table(x)
+-    tab.build()
+-    t_table = time.time() - t0
+-    if verbose:
+-        print(f"[表格] ({tab.nps} x {tab.npn}) 构建耗时 {t_table:.1f} s")
+-
+-    # ---- 2. 转移特性 I_D-V_G ----
+-    vg_list = np.linspace(0.0, vg_max, 81)
+-    tr = transfer_characteristics(tab, vg_list, vd_lin=0.05, vd_sat=1.5)
+-    id_lin, id_sat = tr["id_lin"], tr["id_sat"]
+-
+-    # ---- 3. 参数提取 ----
+-    vt_cc, i_th = pp.extract_vt(vg_list, id_lin)
+-    ss_lin = pp.extract_ss(vg_list, id_lin)
+-    ss_sat = pp.extract_ss(vg_list, id_sat)
+-    gm, gm_max = pp.extract_gm(vg_list, id_sat)
+-    ss_loc = pp.local_ss(vg_list, id_lin)
+-    sub = (vg_list > 0.5) & (vg_list < vt_cc)
+-    ss_min = float(np.nanmin(ss_loc[sub]))
+-    ss_th_min = float(np.log(10) * C.VT * (
+-        1 + C.EPS_SI / (np.sqrt(2 * C.EPS_SI * C.TWICE_PSI_F /
+-                                (C.Q_E * C.NA)) * C.COX)) * 1000)
+-
+-    if verbose:
+-        print("\n[参数提取]")
+-        print(f"  V_T(恒定电流 {i_th * 1e6:.2f} uA) = {vt_cc:.4f} V "
+-              f"(解析 {C.VT_LONG:.4f} V)")
+-        print(f"  SS(线性区 V_D=0.05, 固定窗口) = {ss_lin:.1f} mV/dec")
+-        print(f"  SS(饱和区 V_D=1.5, 固定窗口)  = {ss_sat:.1f} mV/dec")
+-        print(f"  SS 局部最小值(近阈值) = {ss_min:.1f} mV/dec, "
+-              f"衬偏效应理论 = {ss_th_min:.1f} mV/dec")
+-        print(f"  g_m,max = {gm_max:.4e} S")
+-
+-    # ---- 4. Square-law 对照（仅强反型段 V_G > V_T + 0.2，避开亚阈值区）----
+-    def rel_dev(a, b, vg_arr, vt):
+-        a = np.asarray(a, dtype=float); b = np.asarray(b, dtype=float)
+-        vg_arr = np.asarray(vg_arr, dtype=float)
+-        mask = (vg_arr > vt + 0.2) & np.isfinite(a) & np.isfinite(b) & (b > 0)
+-        if mask.sum() == 0:
+-            return float("nan"), float("nan")
+-        dev = (a[mask] - b[mask]) / b[mask] * 100
+-        i = int(np.argmax(np.abs(dev)))
+-        return float(dev[i]), float(vg_arr[mask][i])
+-
+-    sq_lin_analytic = C.square_law_id(vg_list, 0.05)
+-    sq_lin_fit = square_law_id_vt(vg_list, 0.05, vt_cc)
+-    sq_sat_fit = square_law_id_vt(vg_list, 1.5, vt_cc)
+-
+-    dev_lin_analytic = rel_dev(id_lin, sq_lin_analytic, vg_list, C.VT_LONG)[0]
+-    dev_lin_fit, vg_dev_lin = rel_dev(id_lin, sq_lin_fit, vg_list, vt_cc)
+-    dev_sat_fit, vg_dev_sat = rel_dev(id_sat, sq_sat_fit, vg_list, vt_cc)
+-
+-    if verbose:
+-        print("\n[Square-law 对照]")
+-        print(f"  线性区 (V_D=0.05, 强反型段) 对解析 V_T 最大偏差 = "
+-              f"{dev_lin_analytic:.1f} %")
+-        print(f"  线性区 对提取 V_T({vt_cc:.3f}) 最大偏差 = {dev_lin_fit:.1f} % "
+-              f"@ V_G={vg_dev_lin:.2f} V")
+-        print(f"  线性区 V_G=2.0 处偏差 = "
+-              f"{(id_lin[-1]-sq_lin_fit[-1])/sq_lin_fit[-1]*100:.1f} %")
+-        print(f"  饱和区 (V_D=1.5) 对提取 V_T 最大偏差 = {dev_sat_fit:.1f} % "
+-              f"@ V_G={vg_dev_sat:.2f} V")
+-
+-    # ---- 5. 输出特性 I_D-V_D ----
+-    vd_list = np.linspace(0.0, vd_max, 61)
+-    vg_curves = [1.2, 1.5, 2.0]
+-    out = output_characteristics(tab, vg_curves, vd_list)
+-    # 夹断点移动（V_G=2.0）
+-    _, _, yps = id_vd(tab, 2.0, vd_list)
+-    if verbose:
+-        print("\n[输出特性与夹断]")
+-        for i, vg in enumerate(vg_curves):
+-            print(f"  V_G={vg:.1f} V: 饱和电流 I_D(V_D={vd_max:.1f}) = "
+-                  f"{out['ids'][i, -1]:.4e} A")
+-        print(f"  V_G=2.0 夹断点 y_p: V_D=1.0 -> {yps[np.argmin(abs(vd_list-1.0))]*1e9:.0f} nm, "
+-              f"V_D=2.0 -> {yps[-1]*1e9:.0f} nm（向源端移动）")
+-
+-    # ---- 6. 电流连续性校验 ----
+-    conts = []
+-    for vg, vd in [(1.5, 0.05), (2.0, 0.05), (2.0, 1.5)]:
+-        r = gca_solve(vg, vd, tab)
+-        rel, mean_id, _ = pp.continuity_check(r)
+-        conts.append((vg, vd, rel))
+-    if verbose:
+-        print("\n[电流连续性 I_D(y) 沿沟道波动]")
+-        for vg, vd, rel in conts:
+-            print(f"  (V_G={vg:.1f}, V_D={vd:.2f}): 相对波动 = {rel:.2e}")
+-
+-    # ---- 7. 网格收敛 ----
+-    conv = grid_convergence(vg_max=vg_max, vd_max=vd_max, verbose=verbose)
+-
+-    # ---- 8. 表格（插值）分辨率收敛 ----
+-    tconv = table_convergence(x=x, vg_max=vg_max, verbose=verbose)
+-
+-    result = dict(
+-        x=x, table=tab, tr=tr, vg=vg_list, id_lin=id_lin, id_sat=id_sat,
+-        vt_cc=vt_cc, i_th=i_th, ss_lin=ss_lin, ss_sat=ss_sat,
+-        ss_loc=ss_loc, ss_min=ss_min, ss_th_min=ss_th_min,
+-        gm=gm, gm_max=gm_max, out=out, vd=vd_list,
+-        dev_lin_analytic=dev_lin_analytic, dev_lin_fit=dev_lin_fit,
+-        vg_dev_lin=vg_dev_lin, dev_sat_fit=dev_sat_fit,
+-        vg_dev_sat=vg_dev_sat,
+-        conts=conts, conv=conv, tconv=tconv,
+-        t_table=t_table, t_total=time.time() - t_start,
+-    )
+-
+-    # ---- 验证清单（docs/spec/validation_spec.md 四分类）----
+-    cl = Checklist("stage3")
+-    # V_T：独立解析参照（长沟道阈值公式）
+-    d_vt = abs(vt_cc - C.VT_LONG) / C.VT_LONG * 100
+-    cl.add(metric="阈值电压 V_T（恒定电流判据）", kind=VALIDATION,
+-           reference="V_T = V_FB + 2psi_F + gamma*sqrt(2psi_F)（体电荷模型）",
+-           criterion="< 6%",
+-           measured=f"{vt_cc:.4f} V vs 解析 {C.VT_LONG:.4f} V（{d_vt:.2f}%）",
+-           passed=d_vt < 6.0,
+-           note="恒定电流判据（0.1 μA, W/L=1 μm）系统性高于体电荷模型"
+-                "解析阈值，属判据定义差异而非求解误差")
+-    # SS 局部最小值 vs 衬偏效应理论下限
+-    ss_gap = (ss_min - ss_th_min) / ss_th_min * 100
+-    cl.add(metric="近阈值局部 SS 最小值", kind=VALIDATION,
+-           reference="SS >= ln10 V_T (1+eps_si/(W_max C_ox))（衬偏效应下限）",
+-           criterion="不低于理论下限（容差 8%）",
+-           measured=f"{ss_min:.1f} vs 理论 {ss_th_min:.1f} mV/dec"
+-                    f"（高 {ss_gap:.1f}%）",
+-           passed=ss_min >= ss_th_min * 0.92,
+-           note="残差来自表面网格与表格插值，随加密收敛")
+-    # 线性区 Square-law 对照（强反型段；V_G=2.0 端点判据，近阈值段记录）
+-    dev_end = (id_lin[-1] - sq_lin_fit[-1]) / sq_lin_fit[-1] * 100
+-    cl.add(metric="线性区 I_D vs Square-law（强反型段）", kind=VALIDATION,
+-           reference="I_D = mu C_ox (W/L)[(V_G-V_T)V_D - V_D^2/2]（提取 V_T）",
+-           criterion="V_G=2.0 处偏差 < 15%",
+-           measured=f"V_G=2.0 处 {dev_end:.1f}%；强反型段最大 "
+-                    f"{dev_lin_fit:.1f}% @ V_G={vg_dev_lin:.2f} V",
+-           passed=abs(dev_end) < 15.0,
+-           note="方形律假设 N_s 随 phi_n 严格线性；近阈值段"
+-                "（V_G≈1.25 V）电荷片指数拖尾使其最快失效，"
+-                "最大偏差已如实记录")
+-    # 电流连续性（自洽）
+-    lin_rel = [r for vg_, vd_, r in conts if vd_ == 0.05]
+-    sat_rel = [r for vg_, vd_, r in conts if vd_ == 1.5]
+-    cl.add(metric="沟道电流连续性 I_D(y)（线性区）", kind=SELF_CHECK,
+-           reference="I_D(y) = q W mu N_s dphi_n/dy 沿沟道应为常数",
+-           criterion="相对波动 < 1e-3",
+-           measured="；".join(f"V_G={vg_}: {r:.1e}"
+-                             for vg_, vd_, r in conts if vd_ == 0.05),
+-           passed=bool(np.all(np.isfinite(lin_rel)) and
+-                       max(lin_rel) < 1e-3))
+-    cl.add(metric="沟道电流连续性 I_D(y)（饱和区）", kind=SELF_CHECK,
+-           reference="同上",
+-           criterion="已知模型边界（夹断区漂移近似失效），记录不包装",
+-           measured="；".join(f"V_G={vg_}: {r:.1e}"
+-                             for vg_, vd_, r in conts if vd_ == 1.5),
+-           passed=None,
+-           note="GCA 漂移近似在夹断区（N_s->0）失效，属已知模型边界")
+-    # 网格收敛（自洽）：与 grid_convergence() 打印口径一致（强反型段）
+-    conv_ref = conv[-1]
+-    vg_conv = np.linspace(0.0, vg_max, 61)
+-    mask_conv = vg_conv > conv_ref["vt"] + 0.3
+-    d_vt_conv = max(abs(r["vt"] - conv_ref["vt"]) * 1000 for r in conv[:-1])
+-    d_id_conv = max(np.max(np.abs(r["id_sat"][mask_conv] -
+-                                  conv_ref["id_sat"][mask_conv]) /
+-                           np.maximum(conv_ref["id_sat"][mask_conv], 1e-30))
+-                    * 100 for r in conv[:-1])
+-    cl.add(metric="纵向网格收敛（V_T 与 I_D）", kind=SELF_CHECK,
+-           reference="三级网格 0.5/0.125/0.0625 nm，最细为参考",
+-           criterion="ΔV_T < 5 mV 且 ΔI_D < 3%",
+-           measured=f"最大 ΔV_T = {d_vt_conv:.2f} mV；"
+-                    f"最大 ΔI_D = {d_id_conv:.2f} %",
+-           passed=bool(d_vt_conv < 5.0 and d_id_conv < 3.0),
+-           note="粗网格 h0=0.5 nm 的二阶截断；基准/细网格已收敛")
+-    # 表格分辨率收敛（自洽）：与 table_convergence() 打印口径一致（V_G>1.3）
+-    tref = tconv[-1]
+-    vg_tab = np.linspace(0.0, vg_max, 61)
+-    mask_tab = vg_tab > 1.3
+-    d_tab_lin = max(np.max(np.abs(r["id_lin"][mask_tab] -
+-                                  tref["id_lin"][mask_tab]) /
+-                           tref["id_lin"][mask_tab]) * 100
+-                    for r in tconv[:-1])
+-    d_tab_sat = max(np.max(np.abs(r["id_sat"][mask_tab] -
+-                                  tref["id_sat"][mask_tab]) /
+-                           tref["id_sat"][mask_tab]) * 100
+-                    for r in tconv[:-1])
+-    cl.add(metric="表格（phi_s, phi_n）插值分辨率收敛", kind=SELF_CHECK,
+-           reference="四档采样，双加密 (400x110) 为参考",
+-           criterion="线性/饱和区最大偏差 < 2%",
+-           measured=f"线性 {d_tab_lin:.3f} %，饱和 {d_tab_sat:.3f} %",
+-           passed=bool(d_tab_lin < 2.0 and d_tab_sat < 2.0))
+-    # artifact 记录
+-    cl.add(metric="r_o 伪峰（CLM 开关）", kind=ARTIFACT,
+-           reference="一阶 CLM 开关处导数不连续",
+-           criterion="无（artifact 不设判据）",
+-           measured="见 fig5 标注", artifact="ART-S3-01",
+-           note="非 Early 效应，已标注（DEF-S3-01）")
+-
+-    # ---- 系列统一返回结构（docs/spec/code_spec.md：四标准键）----
+-    result["params"] = dict(NA_CM3=C.NA_CM3, TOX_NM=C.TOX_NM,
+-                            L_UM=C.L_CH * 1e6, W_UM=C.W_CH * 1e6,
+-                            VFB=C.VFB, vg_max=vg_max, vd_max=vd_max,
+-                            table_phi_s=240, table_phi_n=110,
+-                            grid=dict(d0=0.125e-9, h_max=4.0e-9,
+-                                      x_max=1.2e-6),
+-                            i_th_uA=i_th * 1e6, tol=1e-9)
+-    result["validation"] = cl
+-    result["defects"] = list(STAGE3_DEFECTS)
+-    if verbose:
+-        print(f"\n总耗时 {result['t_total']:.1f} s")
+-    return result
++    No legacy all_passed logic or old physical labels are reused. Detailed
++    results are generated by the phase1 module, also used by make_figures.
++    """
++    from .phase1 import run_study
++    return run_study(verbose=verbose,vg_max=vg_max,vd_max=vd_max)
+ 
+ 
+ def square_law_id_vt(vg, vd, vt):
+@@ -292,96 +76,6 @@
+ # 网格收敛研究
+ # ================================================================================
+ 
+-def grid_convergence(vg_max=2.0, vd_max=2.0, verbose=True):
+-    """
+-    三级纵向网格（粗/基准/细）收敛研究：I_D、V_T、SS 的偏差。
+-
+-    三个 x 网格配同一套表格配置（phi_s=240, phi_n=55），使对比
+-    只反映空间离散误差（表格插值误差为共模，在差值中抵消）。
+-    表面步长序列 0.5/0.125/0.0625 nm，收敛阶 ~2（误差 ~ h^2）。
+-    """
+-    grids = [
+-        ("粗", make_surface_grid(1.2e-6, d0=0.5e-9, h_max=4.0e-9)),
+-        ("基准", default_x_grid()),
+-        ("细", make_surface_grid(1.2e-6, d0=0.0625e-9, h_max=4.0e-9)),
+-    ]
+-    vg_list = np.linspace(0.0, vg_max, 61)
+-    records = []
+-    for name, x in grids:
+-        # 收敛研究固定表格配置，隔离 x 网格离散误差
+-        phi_s_grid = np.linspace(-0.3, 1.6, 240)
+-        phi_n_grid = np.linspace(0.0, 2.0, 55)
+-        tab = SliceTable(phi_s_grid, phi_n_grid, x)
+-        tab.build()
+-        tr = transfer_characteristics(tab, vg_list, vd_lin=0.05, vd_sat=1.5)
+-        vt_cc, _ = pp.extract_vt(vg_list, tr["id_lin"])
+-        ss = pp.extract_ss(vg_list, tr["id_lin"])
+-        records.append(dict(name=name, N=len(x), x=x, id_lin=tr["id_lin"],
+-                            id_sat=tr["id_sat"], vt=vt_cc, ss=ss, table=tab))
+-        if verbose:
+-            print(f"  [{name}] N={len(x):4d}: V_T={vt_cc:.4f} V, "
+-                  f"SS={ss:.1f} mV/dec")
+-
+-    ref = records[-1]  # 细网格为参考
+-    if verbose:
+-        print("  相对最细网格的偏差（I_D 取强反型段 V_G > V_T + 0.3）：")
+-    for r in records[:-1]:
+-        # 强反型段相对偏差
+-        mask = vg_list > ref["vt"] + 0.3
+-        d_id = np.max(np.abs(r["id_sat"][mask] - ref["id_sat"][mask]) /
+-                      np.maximum(ref["id_sat"][mask], 1e-30)) * 100
+-        d_vt = abs(r["vt"] - ref["vt"]) * 1000   # mV
+-        d_ss = abs(r["ss"] - ref["ss"])
+-        if verbose:
+-            print(f"    {r['name']}: ΔI_D={d_id:.2f} %, ΔV_T={d_vt:.2f} mV, "
+-                  f"ΔSS={d_ss:.2f} mV/dec")
+-    return records
+-
+-
+-def table_convergence(x=None, vg_max=2.0, verbose=True):
+-    """
+-    表格（phi_s, phi_n）插值分辨率收敛：固定基准 x 网格，逐步加密
+-    phi_s / phi_n 采样，记录线性区与饱和区 I_D 的变化。
+-
+-    物理背景：强反型区 N_s 对 phi_s 极敏感（近似指数），phi_n 在
+-    夹断附近陡降，故两个方向都需要足够采样；本项给出各自残差。
+-    """
+-    if x is None:
+-        x = default_x_grid()
+-    cases = [
+-        ("基准 (240x55)", 240, 55),
+-        ("phi_s 加密 (400x55)", 400, 55),
+-        ("phi_n 加密 (240x110)", 240, 110),
+-        ("双加密 (400x110)", 400, 110),
+-    ]
+-    vg_list = np.linspace(0.0, vg_max, 61)
+-    records = []
+-    for name, nps, npn in cases:
+-        tab = SliceTable(np.linspace(-0.3, 1.6, nps),
+-                         np.linspace(0.0, 2.0, npn), x)
+-        tab.build()
+-        id_lin = id_vg(tab, vg_list, 0.05)
+-        id_sat = id_vg(tab, vg_list, 1.5)
+-        records.append(dict(name=name, nps=nps, npn=npn, id_lin=id_lin,
+-                            id_sat=id_sat))
+-        if verbose:
+-            print(f"  [{name}] I_D(V_G=2, 线性)={id_lin[-1]:.6e} A, "
+-                  f"I_D(V_G=2, 饱和)={id_sat[-1]:.6e} A")
+-    ref = records[-1]
+-    if verbose:
+-        print("  相对双加密参考的偏差（强反型段最大相对偏差）：")
+-    for r in records[:-1]:
+-        mask = vg_list > 1.3
+-        d_lin = np.max(np.abs(r["id_lin"][mask] - ref["id_lin"][mask]) /
+-                       ref["id_lin"][mask]) * 100
+-        d_sat = np.max(np.abs(r["id_sat"][mask] - ref["id_sat"][mask]) /
+-                       ref["id_sat"][mask]) * 100
+-        if verbose:
+-            print(f"    {r['name']}: ΔI_D(线性)={d_lin:.3f} %, "
+-                  f"ΔI_D(饱和)={d_sat:.3f} %")
+-    return records
+-
+-
+ def main():
+     """CLI 入口：完整流程（终端输出双写留存 results/stage3/terminal.txt）。"""
+     from common.io import TerminalLog
+--- a/semiconductor_sim/stage3_mosfet/solver.py
++++ b/semiconductor_sim/stage3_mosfet/solver.py
+@@ -20,12 +20,9 @@
+     边界：phi(0)=phi_s（栅界面），phi(x_max)=0（衬底体内参考）。
+     栅压由栅极混合边界反算：V_G = V_FB + phi_s - Q_s/C_ox。
+ 
+-为什么用准平衡 Poisson 而非全 DD：
+-    均匀 p 衬底 + 反型层边界的"最小结构"没有 n+ 电子源，耗尽区
+-    n ~ 0 处处，电子连续性方程退化（0=0），全 DD 的 Newton 在该区
+-    奇异。准平衡 Poisson 在亚阈值→强反型全范围内稳健，且 V_D=0
+-    时严格退化为第一阶段 MOS 电容求解器（phi_n=0 时 n=n0 exp(phi/V_T)）。
+-    全 DD（复用第二阶段 SG/QFP/块 Thomas）将在加入 n+ 源漏时启用。
++约化模型的范围：
++    源漏以理想电子库边界给出，不显式求解源漏结。GCA 是计算模型的
++    选择；低电子浓度不意味着完整 DD 方程必然无解。phi_n=0 时退化为 S1。
+ 
+ 约定（与第一阶段 mos_capacitor.py 一致）：
+     phi 相对衬底体内（phi_bulk = 0），x 指向衬底。
+@@ -43,139 +40,117 @@
+ # Poisson 残差与 Newton
+ # ================================================================================
+ 
+-def _residual(phi, phi_n, p0, n0, Na_arr, aa, bb0, cc):
++def _carriers(phi, phi_n, p0, n0, density_clip_limit=None):
++    """Optional historical clipping is for paired diagnostics only, off in production."""
++    effective = (phi if density_clip_limit is None
++                 else np.clip(phi, -density_clip_limit, density_clip_limit))
++    with np.errstate(over='raise', invalid='raise'):
++        try:
++            return (p0*np.exp(-effective/C.VT),
++                    n0*np.exp((effective-phi_n)/C.VT))
++        except FloatingPointError as exc:
++            raise ValueError('Carrier exponent outside floating-point range') from exc
++
++
++def _residual(phi, phi_n, p0, n0, Na_arr, aa, bb0, cc, density_clip_limit=None):
+     """
+     泊松残差 F_i（内部节点）：
+-        F = lap - (q/eps)(p - n - Na) * (节点控制体积权重)
++        F = lap + (q/eps)(p - n - Na)  (strong-form residual)
+     采用第一阶段相同的非均匀二阶中心差分 + 电荷权重。
+ 
+     p = p0 exp(-phi/V_T),  n = n0 exp(phi/V_T) exp(-phi_n/V_T)。
+     """
+-    phi_c = np.clip(phi, -3.0, 3.0)
+-    p = p0 * np.exp(-phi_c / C.VT)
+-    n = n0 * np.exp(phi_c / C.VT) * np.exp(-phi_n / C.VT)
++    p, n = _carriers(phi, phi_n, p0, n0, density_clip_limit)
+     lap = aa * phi[:-2] + bb0 * phi[1:-1] + cc * phi[2:]
+     return lap + (C.Q_E / C.EPS_SI) * (p[1:-1] - n[1:-1] - Na_arr[1:-1])
+ 
+ 
+ def solve_poisson_slice(phi_s, phi_n_ch, x, Na=C.NA, phi_init=None,
+                         tol=1e-9, max_iter=200, clamp=0.3, warn=True,
+-                        damped=True, max_backtrack=12):
+-    """
+-    解单截面的准平衡 Poisson 方程（推广第一阶段 solve_poisson 至 phi_n≠0）。
+-
+-    参数
+-    ----
+-    phi_s    : 表面势 (V)，相对衬底体内
+-    phi_n_ch : 沟道电子准费米势 (V)，本截面内取常数
+-    x        : 纵向网格 (m)，x[0]=栅界面，x[-1]=衬底接触
+-    phi_init : 初值（None 用耗尽近似抛物线/德拜尾猜测）
+-    tol      : 收敛判据 max|Delta phi| (V)。默认 1e-9：实测 dmove<1e-11
+-               的解残差已处双精度底噪（|F| ~ 1e3 V/m^2，相对电荷项
+-               1e13 为 1e-10），且 N_s 对 phi 的敏感度为 1/V_T，
+-               phi 误差 1e-9 V 仅引起 N_s 相对误差 4e-8，可忽略；
+-               1e-11 反而使热启动在真解附近因舍入噪声无法收敛。
+-
+-    返回 dict：phi, n, p, iters, converged
+-    """
+-    N = len(x)
+-    hs = np.diff(x)
+-    hL = hs[:-1]
+-    hR = hs[1:]
+-    sumLR = hL + hR
+-    aa = 2.0 / (hL * sumLR)
+-    bb0 = -2.0 / (hL * hR)
+-    cc = 2.0 / (hR * sumLR)
+-
+-    p0 = 0.5 * (Na + np.sqrt(Na ** 2 + 4.0 * C.NI ** 2))
+-    n0 = C.NI ** 2 / p0
+-    Na_arr = np.full_like(x, Na, dtype=float)
+-    phi_n = np.full_like(x, phi_n_ch, dtype=float)   # 截面内常数
+-
++                        damped=True, max_backtrack=12, density_clip_limit=None):
++    """Poisson Newton with joint un-damped correction and scaled residual tests.
++
++    A small accepted damped step alone is never considered convergence.
++    The line search cannot silently accept a failed Armijo trial. Diagnostics
++    report a componentwise backward error, not a physical model error bound.
++    Cross-grid initial guesses require explicit coordinate interpolation by caller.
++    """
++    x = np.asarray(x, float)
++    if (x.ndim != 1 or len(x) < 3 or np.any(np.diff(x) <= 0)
++            or not np.all(np.isfinite(x)) or Na <= 0 or tol <= 0
++            or max_iter < 1 or clamp <= 0 or max_backtrack < 1
++            or not np.isfinite(phi_s+phi_n_ch)):
++        raise ValueError('Invalid Poisson inputs')
++    hL, hR = np.diff(x)[:-1], np.diff(x)[1:]
++    aa = 2/(hL*(hL+hR)); bb0 = -2/(hL*hR); cc = 2/(hR*(hL+hR))
++    p0 = .5*(Na+np.sqrt(Na**2+4*C.NI**2)); n0 = C.NI**2/p0
++    Na_arr = np.full_like(x, Na); phi_n = np.full_like(x, phi_n_ch)
+     if phi_init is None:
+-        # 冷启动初值：耗尽近似抛物线 / 积累德拜尾（比线性猜测更接近真解）
+-        L_D = np.sqrt(C.EPS_SI * C.VT / (C.Q_E * Na))
+-        if phi_s > 0.0:
+-            W = min(np.sqrt(2.0 * C.EPS_SI * phi_s / (C.Q_E * Na)), x[-1])
+-            phi = np.where(x < W, phi_s * (1.0 - x / W) ** 2, 0.0)
+-        elif phi_s < 0.0:
+-            phi = phi_s * np.exp(-x / L_D)
++        ld = np.sqrt(C.EPS_SI*C.VT/(C.Q_E*Na))
++        if phi_s > 0:
++            w = min(np.sqrt(2*C.EPS_SI*phi_s/(C.Q_E*Na)),x[-1])
++            phi = np.where(x<w,phi_s*(1-x/w)**2,0.)
+         else:
+-            phi = np.zeros_like(x)
+-        phi = phi.astype(float)
+-    elif len(phi_init) == len(x):
+-        # 同一网格的热启动：直接使用（切勿按均匀辅助网格重采样——
+-        # x 非均匀时会把表层剖面打乱，导致 Newton 从错误初值缓慢爬行）
+-        phi = np.asarray(phi_init, dtype=float).copy()
++            phi = phi_s*np.exp(-x/ld)
+     else:
+-        # 跨网格延续：按均匀辅助网格插值（仅用于网格不同的场合）
+-        phi = np.interp(x, np.linspace(0, x[-1], len(phi_init)), phi_init)
+-        phi = phi.astype(float)
+-    phi[0] = phi_s
+-    phi[-1] = 0.0
+-
+-    converged = False
+-    niter = max_iter
+-    F = _residual(phi, phi_n, p0, n0, Na_arr, aa, bb0, cc)
+-    normF = np.linalg.norm(F)
+-    # 残差舍入底噪：差分系数 2/h^2 最大 ~1e20（d0=0.125nm 时），phi 的
+-    # 双精度噪底乘以该系数即 |F| 的不可再降下限。线搜索在该底噪附近做
+-    # 充分下降检查必然失败（纯舍入抖动），故直接接受全步、由 dmove
+-    # 判据终止，避免每步 12 次无效回溯。
+-    src_scale = (C.Q_E / C.EPS_SI) * Na * np.sqrt(max(N - 2, 1))
+-    noise_floor = 1e-10 * src_scale
+-
+-    for niter in range(1, max_iter + 1):
+-        phi_c = np.clip(phi, -3.0, 3.0)
+-        p = p0 * np.exp(-phi_c / C.VT)
+-        n = n0 * np.exp(phi_c / C.VT) * np.exp(-phi_n / C.VT)
+-
+-        b_diag = bb0 - (C.Q_E ** 2 / (C.EPS_SI * C.K_B * C.TEMP)) * \
+-            (p[1:-1] + n[1:-1])
+-        a_low = aa.copy()
+-        a_low[0] = 0.0
+-        c_up = cc.copy()
+-        c_up[-1] = 0.0
+-
+-        delta = thomas_solve_banded(a_low, b_diag, c_up, -F)
+-        delta = np.clip(delta, -clamp, clamp)
+-
+-        alpha = 1.0
+-        if damped and normF > noise_floor:
+-            for _ in range(max(1, int(max_backtrack))):
+-                phi_try = phi.copy()
+-                phi_try[1:-1] += alpha * delta
+-                F_try = _residual(phi_try, phi_n, p0, n0, Na_arr, aa, bb0, cc)
+-                normF_try = np.linalg.norm(F_try)
+-                if normF_try <= (1.0 - 2e-4 * alpha) * normF:
+-                    break
+-                alpha *= 0.5
+-            phi, F, normF = phi_try, F_try, normF_try
+-            dmove = alpha * np.max(np.abs(delta))
+-        else:
+-            phi[1:-1] += delta
+-            F = _residual(phi, phi_n, p0, n0, Na_arr, aa, bb0, cc)
+-            normF = np.linalg.norm(F)
+-            dmove = np.max(np.abs(delta))
+-
+-        phi[0] = phi_s
+-        phi[-1] = 0.0
+-
+-        if dmove < tol:
+-            converged = True
+-            break
+-
++        phi = np.asarray(phi_init,float).copy()
++        if phi.shape != x.shape or not np.all(np.isfinite(phi)):
++            raise ValueError('Initial potential must be on the supplied x grid')
++    phi[0], phi[-1] = phi_s, 0.
++    row_scale = np.abs(bb0)*C.VT + C.Q_E*Na/C.EPS_SI
++    potential_min=float(np.min(phi)); potential_max=float(np.max(phi))
++    clip_evaluations=0
++    def diagnostics(v):
++        nonlocal potential_min,potential_max,clip_evaluations
++        potential_min=min(potential_min,float(np.min(v)))
++        potential_max=max(potential_max,float(np.max(v)))
++        if density_clip_limit is not None:
++            clip_evaluations+=int(np.count_nonzero(np.abs(v)>density_clip_limit))
++        p,n = _carriers(v,phi_n,p0,n0,density_clip_limit)
++        f = _residual(v,phi_n,p0,n0,Na_arr,aa,bb0,cc,density_clip_limit)
++        diag = bb0-C.Q_E/C.EPS_SI/C.VT*(p[1:-1]+n[1:-1])
++        mag = (np.abs(aa*v[:-2])+np.abs(bb0*v[1:-1])+np.abs(cc*v[2:])
++               +C.Q_E/C.EPS_SI*(p[1:-1]+n[1:-1]+Na))
++        merit = float(np.linalg.norm(f/row_scale))
++        floor = float(64*np.finfo(float).eps*np.linalg.norm(mag/row_scale))
++        residual_v = float(np.max(np.abs(f)/np.abs(diag)))
++        berr = float(np.max(np.abs(f)/np.maximum(mag,1.)))
++        return f,diag,merit,floor,residual_v,berr
++    converged=False; reason='max_iterations'; backtracks=0; correction=float('inf')
++    for niter in range(1,max_iter+1):
++        F,diag,merit,floor,residual_v,berr=diagnostics(phi)
++        low=aa.copy(); low[0]=0.; up=cc.copy(); up[-1]=0.
++        delta=thomas_solve_banded(low,diag,up,-F)
++        correction=float(np.max(np.abs(delta)))
++        if correction <= tol and residual_v <= tol:
++            converged=True; reason='correction_and_residual'; break
++        delta *= min(1.,clamp/max(correction,np.finfo(float).tiny))
++        accepted=False
++        for k in range(max_backtrack if damped else 1):
++            alpha=2.**(-k)
++            trial=phi.copy(); trial[1:-1]+=alpha*delta
++            trial_diag=diagnostics(trial)
++            if (not damped or trial_diag[2] <= (1-2e-4*alpha)*merit
++                    or (merit <= floor and trial_diag[2] <= 2*max(floor,1e-30))):
++                phi=trial; accepted=True; backtracks+=k; break
++        if not accepted:
++            reason='line_search_failed'; break
++    F,diag,merit,floor,residual_v,berr=diagnostics(phi)
++    if not converged:
++        low=aa.copy(); low[0]=0.; up=cc.copy(); up[-1]=0.
++        correction=float(np.max(np.abs(thomas_solve_banded(low,diag,up,-F))))
++        if correction <= tol and residual_v <= tol:
++            converged=True; reason='correction_and_residual'
+     if not converged and warn:
+-        warnings.warn(
+-            f"solve_poisson_slice: 未在 {max_iter} 步内收敛 "
+-            f"(phi_s={phi_s:.4f} V, phi_n={phi_n_ch:.4f} V)。",
+-            RuntimeWarning, stacklevel=2)
+-
+-    # 还原载流子
+-    phi_c = np.clip(phi, -3.0, 3.0)
+-    p = p0 * np.exp(-phi_c / C.VT)
+-    n = n0 * np.exp(phi_c / C.VT) * np.exp(-phi_n / C.VT)
+-    return dict(phi=phi, n=n, p=p, iters=niter, converged=converged)
++        warnings.warn(f'Poisson failed: {reason}, phi_s={phi_s}, phi_n={phi_n_ch}',
++                      RuntimeWarning,stacklevel=2)
++    p,n=_carriers(phi,phi_n,p0,n0,density_clip_limit)
++    return dict(phi=phi,n=n,p=p,iters=niter,converged=converged,
++                status=reason,correction_inf=correction,residual_volts=residual_v,
++                backward_error=berr,scaled_residual=merit,roundoff_floor=floor,
++                backtracks=backtracks,potential_min=potential_min,
++                potential_max=potential_max,clip_evaluations=clip_evaluations,
++                density_clip_limit=density_clip_limit)
+ 
+ 
+ # ================================================================================
+--- a/semiconductor_sim/stage3_mosfet/table.py
++++ b/semiconductor_sim/stage3_mosfet/table.py
+@@ -62,10 +62,19 @@
+     x          : 纵向网格
+     """
+ 
+-    def __init__(self, phi_s_grid, phi_n_grid, x, na=C.NA):
++    def __init__(self, phi_s_grid, phi_n_grid, x, na=C.NA, sheet_interpolation="log"):
++        if (len(phi_s_grid) < 2 or len(phi_n_grid) < 1
++                or np.any(np.diff(phi_s_grid) <= 0)
++                or np.any(np.diff(phi_n_grid) <= 0)
++                or not np.all(np.isfinite(phi_s_grid))
++                or not np.all(np.isfinite(phi_n_grid))):
++            raise ValueError('Table axes must be finite and strictly increasing')
+         self.phi_s_grid = np.asarray(phi_s_grid, dtype=float)
+         self.phi_n_grid = np.asarray(phi_n_grid, dtype=float)
+         self.x = x
++        if sheet_interpolation not in ('linear','log'):
++            raise ValueError('sheet_interpolation must be linear or log')
++        self.sheet_interpolation = sheet_interpolation
+         self.na = na
+         self.nps = len(self.phi_s_grid)
+         self.npn = len(self.phi_n_grid)
+@@ -87,6 +96,14 @@
+ 
+         hot=False 时全部冷启动（用于校验热启动等价性）。
+         """
++        self.build_stats=dict(potential_min=float('inf'),potential_max=float('-inf'),
++                              clip_evaluations=0,solved_slices=0,skipped_slices=0,attempted_solves=0,failed_hot_attempts=0)
++        def record_attempt(result):
++            self.build_stats['attempted_solves']+=1
++            for key in ['potential_min','potential_max']:
++                op=min if key=='potential_min' else max
++                self.build_stats[key]=op(self.build_stats[key],result.get(key,0.))
++            self.build_stats['clip_evaluations']+=result.get('clip_evaluations',0)
+         order = np.argsort(np.abs(self.phi_s_grid))       # 平带点起步
+         n_fail = 0
+         n_skip = 0
+@@ -100,19 +117,27 @@
+                 # 深反型角点：跳过（不在工作范围、反型层低于网格分辨率）
+                 if phi_s - phi_n > SKIP_OV:
+                     n_skip += 1
++                    self.build_stats["skipped_slices"]+=1
+                     continue
+                 res = None
+                 if hot and prev_phi[ipn] is not None:
+                     res = solve_slice(phi_s, phi_n, self.x, Na=self.na,
+                                       state=(prev_phi[ipn], None, None),
+                                       tol=tol, warn=False)
++                    record_attempt(res)
+                     if res["converged"]:
+                         n_hot += 1
+                     else:
++                        self.build_stats["failed_hot_attempts"]+=1
+                         res = None
+                 if res is None:
+                     res = solve_slice(phi_s, phi_n, self.x, Na=self.na,
+                                       tol=tol, warn=False)
++                    record_attempt(res)
++                if not res['converged']:
++                    raise RuntimeError(f'Invalid slice at {phi_s=}, {phi_n=}: '
++                                       f"{res.get('status','not_converged')}")
++                self.build_stats['solved_slices']+=1
+                 prev_phi[ipn] = res["phi"]
+                 qs_val, _ = surface_charge(res, self.x)
+                 self.vg[ips, ipn] = gate_voltage(phi_s, qs_val, vfb=C.VFB)
+@@ -153,6 +178,9 @@
+         # phi_n 方向：定位括号区间 [ipn, ipn+1]，t2 ∈ [0,1] 为内插系数
+         # （早期版本用 searchsorted 的上节点作基准、t2 为负，等于向下
+         #  外推半个单元，会放大 phi_n 网格敏感性并引入网格依赖误差）
++        if (not np.isfinite(vg+phi_n) or phi_n < self.phi_n_grid[0]
++                or phi_n > self.phi_n_grid[-1] or self.npn < 2):
++            raise ValueError('Query outside supported table phi_n domain')
+         ipn = int(np.clip(np.searchsorted(self.phi_n_grid, phi_n) - 1, 0,
+                           self.npn - 2))
+         ipn_lo = ipn
+@@ -162,29 +190,35 @@
+             t2 = (phi_n - self.phi_n_grid[ipn_lo]) / \
+                  (self.phi_n_grid[ipn_hi] - self.phi_n_grid[ipn_lo])
+ 
+-        def invert_1d(vg_col_1d, data_col_1d):
++        def invert_1d(vg_col_1d, data_col_1d, logarithmic=False):
+             valid = np.isfinite(vg_col_1d)
+             if valid.sum() < 2:
+                 return np.nan, np.nan
+             g = self.phi_s_grid[valid]
+             vcol = vg_col_1d[valid]
+             dcol = data_col_1d[valid]
+-            if vg <= vcol[0]:
++            if np.any(np.diff(vcol) <= 0):
++                raise ValueError('Nonmonotone gate-voltage table column')
++            if vg < vcol[0] or vg > vcol[-1]:
++                raise ValueError('VG query outside valid table domain')
++            if vg == vcol[0]:
+                 return g[0], dcol[0]
+-            if vg >= vcol[-1]:
++            if vg == vcol[-1]:
+                 return g[-1], dcol[-1]
+             i = int(np.searchsorted(vcol, vg)) - 1
+             i = min(max(i, 0), len(vcol) - 2)
+             tt = (vg - vcol[i]) / (vcol[i + 1] - vcol[i])
+-            return (g[i] + tt * (g[i + 1] - g[i]),
+-                    dcol[i] + tt * (dcol[i + 1] - dcol[i]))
+-
+-        phi_s_lo, ns_lo = invert_1d(self.vg[:, ipn_lo], self.ns[:, ipn_lo])
+-        phi_s_hi, ns_hi = invert_1d(self.vg[:, ipn_hi], self.ns[:, ipn_hi])
++            value = (np.exp((1-tt)*np.log(dcol[i])+tt*np.log(dcol[i+1]))
++                     if logarithmic else dcol[i]+tt*(dcol[i+1]-dcol[i]))
++            return g[i]+tt*(g[i+1]-g[i]), value
++
++        phi_s_lo, ns_lo = invert_1d(self.vg[:, ipn_lo], self.ns[:, ipn_lo], self.sheet_interpolation=="log")
++        phi_s_hi, ns_hi = invert_1d(self.vg[:, ipn_hi], self.ns[:, ipn_hi], self.sheet_interpolation=="log")
+         qs_lo = invert_1d(self.vg[:, ipn_lo], self.qs[:, ipn_lo])[1]
+         qs_hi = invert_1d(self.vg[:, ipn_hi], self.qs[:, ipn_hi])[1]
+         phi_s = phi_s_lo + t2 * (phi_s_hi - phi_s_lo)
+-        ns = ns_lo + t2 * (ns_hi - ns_lo)
++        ns = (np.exp((1-t2)*np.log(ns_lo)+t2*np.log(ns_hi))
++              if self.sheet_interpolation=='log' else ns_lo+t2*(ns_hi-ns_lo))
+         qs = qs_lo + t2 * (qs_hi - qs_lo)
+         return float(phi_s), float(ns), float(qs)
+ 
+--- a/semiconductor_sim/stage3_mosfet/tests/test_stage3.py
++++ b/semiconductor_sim/stage3_mosfet/tests/test_stage3.py
+@@ -12,7 +12,7 @@
+     4. GCA 线性区还原 Square-law（分区间严格判据 + 符号判据）；
+     5. 亚阈值摆幅 SS（固定窗口法）+ 局部 SS 物理下限 + 衬偏效应理论对照；
+     6. 弱反型不施加 CLM（亚阈饱和由指数拖尾自然给出）；
+-    7. 电流连续性：线性区 < 1e-3（验收），饱和区为已知模型边界；
++    7. 电流连续性：线性区及饱和区独立差分检查 < 1e-3；
+     8. 深反型角点跳过不污染工作区（V_G<=2 全内插、无钳位）。
+ """
+ 
+@@ -30,17 +30,15 @@
+ from semiconductor_sim.stage3_mosfet import postprocess as pp
+ from semiconductor_sim.stage3_mosfet.run import square_law_id_vt
+ 
+-warnings.filterwarnings("ignore")
++
+ 
+ X = make_surface_grid(1.2e-6, d0=0.125e-9, h_max=4.0e-9)
+ 
+ 
+ @pytest.fixture(scope="module")
+ def table():
+-    # 与生产配置一致（240x110），使测试判据与论文发表数字对应
+-    tab = SliceTable(np.linspace(-0.3, 1.6, 240), np.linspace(0.0, 2.0, 110), X)
+-    tab.build()
+-    return tab
++    from semiconductor_sim.stage3_mosfet.phase1 import production_table
++    return production_table()[0]
+ 
+ 
+ @pytest.fixture(scope="module")
+@@ -129,23 +127,16 @@
+         assert rel < 1e-3
+ 
+ 
+-def test_continuity_saturation_known_boundary(table):
+-    """
+-    饱和区电流连续性：已知模型边界，不作为验收项。
+-
+-    夹断截断段由 GCA 构造性给出（phi_n 线性斜坡 + N_s=nmin 平台），
+-    局部 I_D(y) 在该人工剖面颈部存在固有波动，实测 8.9e-3 > 1e-3
+-    验收指标。本测试仅防止其进一步劣化（< 3e-2），论文表 5 中
+-    如实标注为"未达标（模型边界）"。
+-    """
+-    r = gca_solve(2.0, 1.5, table)
++def test_continuity_saturation_finite_difference(table):
++    """Independent point-gradient truncation error must pass the original 1e-3 target."""
++    r = gca_solve(2.0, 1.5, table, y=np.linspace(0,C.L_CH,641))
+     rel, _, _ = pp.continuity_check(r)
+-    assert rel < 3e-2
++    assert rel < 1e-3
+ 
+ 
+ def test_saturation_plateau(table):
+     """饱和区：V_D 增大时 I_D 变化缓慢（平台，含一阶 CLM）。"""
+-    ids, vdsats, _ = id_vd(table, 2.0, np.linspace(1.5, 2.0, 11))
++    ids, vdsats, _ = id_vd(table, 2.0, np.linspace(1.5, 2.0, 11), clm=True)
+     # 深饱和段（V_D > V_Dsat）内 I_D 相对变化 < 20%（一阶 CLM）
+     rel = (ids[-1] - ids[0]) / ids[0]
+     assert 0.0 < rel < 0.20
+@@ -153,7 +144,7 @@
+ 
+ def test_pinch_off_moves_to_source(table):
+     """夹断点随 V_D 增大向源端移动。"""
+-    _, _, yps = id_vd(table, 2.0, np.array([1.0, 1.5, 2.0]))
++    _, _, yps = id_vd(table, 2.0, np.array([1.0, 1.5, 2.0]), clm=True)
+     assert yps[-1] < yps[0]     # 向源端（y 减小）
+ 
+ 
+@@ -181,3 +172,100 @@
+     for ipn in range(table.npn):
+         colv = np.isfinite(table.vg[:, ipn])
+         assert table.vg[colv, ipn].max() > 2.0
++
++
++@pytest.mark.parametrize('vd,ith,branch',[(.05,1e-7,'saturation'),(.05,1e-5,'linear')])
++def test_threshold_inverse_correct_branch(vd,ith,branch):
++    from semiconductor_sim.stage3_mosfet.reference import square_law_constant_current
++    r=square_law_constant_current(vd,ith)
++    assert r['branch']==branch
++    assert np.isclose(square_law_id_vt(r['vg'],vd,C.VT_LONG),ith,rtol=1e-12)
++
++
++def test_clm_disabled_profile_finite_at_high_drain(table):
++    from semiconductor_sim.stage3_mosfet.legacy_gca import gca_solve as old
++    with np.errstate(all='raise'):
++        for solve in [gca_solve,old]:
++            r=solve(2,1.5,table,clm=False)
++            assert all(np.all(np.isfinite(r[k])) for k in ['phi_n','ns','phi_s','id_local'])
++            assert r['phi_n'][-1] <= 1.5
++
++
++@pytest.mark.parametrize('vg,vd',[(.5,.05),(1,.05),(1.5,1.5),(2,1.5)])
++def test_independent_continuum_reference(table,vg,vd):
++    from semiconductor_sim.stage3_mosfet.reference import reference_current
++    # The fixture uses the same production table as study and golden.
++    ref=reference_current(vg,vd)['ID']
++    assert abs(gca_solve(vg,vd,table)['ID']/ref-1)<.01
++
++
++def test_charge_budget_is_classical_identity(table):
++    from semiconductor_sim.stage3_mosfet.reference import charge_budget
++    ps,ns,qs=table.solve_vg(2,0)
++    r=charge_budget(2,ps,ns,qs)
++    assert abs(r['closure_V'])<1e-12
++    assert .14<r['surface_term_V']<.17
++
++
++def test_conservative_edges_and_independent_gradient_are_distinct(table):
++    from semiconductor_sim.stage3_mosfet.postprocess import edge_continuity_check
++    results=[]
++    for n in [161,321,641]:
++        r=gca_solve(2,1.5,table,y=np.linspace(0,C.L_CH,n))
++        assert edge_continuity_check(r)<1e-9
++        results.append(pp.continuity_check(r)[0])
++    assert results[-1]<results[0]/3
++    assert results[-1]<1e-3
++
++
++def test_output_grid_does_not_change_terminal_current(table):
++    currents=[gca_solve(2,1.5,table,y=np.linspace(0,C.L_CH,n))['ID']
++              for n in [81,161,641]]
++    assert max(currents)==min(currents)
++
++
++def test_fine_quadrature_knots_leave_exact_interpolant_integral_unchanged(table):
++    a=gca_solve(1.5,1.5,table)['ID']
++    b=gca_solve(1.5,1.5,table,nphi=1001)['ID']
++    assert abs(a/b-1)<1e-12
++
++
++@pytest.mark.parametrize('vg,pn',[(5.,0.),(1.,-.1),(1.,2.1)])
++def test_table_outside_domain_raises(table,vg,pn):
++    with pytest.raises(ValueError):table.solve_vg(vg,pn)
++
++
++def test_nonconvergence_is_not_a_valid_table_entry(monkeypatch):
++    import semiconductor_sim.stage3_mosfet.table as module
++    monkeypatch.setattr(module,'solve_slice',lambda *a,**kw:
++                        dict(phi=np.zeros_like(X),converged=False,status='injected_failure'))
++    with pytest.raises(RuntimeError,match='Invalid slice'):
++        module.SliceTable([0,.1],[0,.1],X).build()
++
++
++def test_small_iteration_budget_cannot_claim_convergence():
++    from semiconductor_sim.stage3_mosfet.solver import solve_poisson_slice
++    r=solve_poisson_slice(.85,0,X,max_iter=1,warn=False)
++    assert not r['converged']
++    assert r['correction_inf']>1e-9
++
++
++@pytest.mark.parametrize('mode',['linear','log'])
++def test_transport_against_closed_form_sheets(mode):
++    class AnalyticTable:
++        phi_n_grid=np.linspace(0,1,9)
++        sheet_interpolation=mode
++        def ns_vs_phi_n(self,vg,pn):
++            return (1e16*np.exp(-4*pn) if mode=='log' else 1e16*(2-pn))
++        def solve_vg(self,vg,pn):
++            return (vg,float(self.ns_vs_phi_n(vg,np.array([pn]))[0]),0.)
++    t=AnalyticTable();r=gca_solve(1,1,t,y=np.linspace(0,C.L_CH,641))
++    integral=1e16*((1-np.exp(-4))/4 if mode=='log' else 1.5)
++    expected=C.Q_E*C.W_CH*C.MU_N/C.L_CH*integral
++    assert abs(r['ID']/expected-1)<1e-13
++    yf=r['y']/C.L_CH
++    expected_pn=(-np.log1p(-yf*(1-np.exp(-4)))/4 if mode=='log'
++                 else 2-np.sqrt(4-3*yf))
++    assert np.max(abs(r['phi_n']-expected_pn))<1e-12
++
++
+--- a/semiconductor_sim/tests/golden_helpers.py
++++ b/semiconductor_sim/tests/golden_helpers.py
+@@ -16,7 +16,7 @@
+ 降配配置与生产配置对应：
+     stage1 : NGRID=201（生产 801，网格收敛性另由 analyze_grid_convergence 覆盖）
+     stage2 : L=2 um、正偏 1 点 + 反偏 1 点（生产 L=5 um、16+50 点）
+-    stage3 : 表格 120x11（生产 240x110）、V_G 扫描 81 点线性区 + 饱和端点
++    stage3 : 与生产共用400x220 log配置，81点栅压扫描
+ """
+ 
+ import numpy as np
+@@ -33,8 +33,8 @@
+ S1_CFG = dict(NGRID=201, verbose=False)              # 生产 NGRID=801
+ S2_CFG = dict(verbose=False, L=2.0e-6,               # 生产 L=5.0e-6
+               v_forward=[0.5], v_reverse=[-1.0])     # 生产 16 + 50 点
+-S3_TABLE_CFG = dict(phi_s_n=120, phi_n_n=11,         # 生产 240 x 110
+-                    x_max=1.2e-6, d0=0.125e-9, h_max=4.0e-9)
++from semiconductor_sim.stage3_mosfet.config import PRODUCTION
++S3_TABLE_CFG = PRODUCTION.to_dict()
+ S3_VG = np.linspace(0.0, 2.0, 81)                    # 与 test_stage3 同网格
+ S3_VD_LIN, S3_VD_SAT = 0.05, 1.5                     # 与生产 run() 一致
+ 
+@@ -110,44 +110,13 @@
+ # ============================================================================
+ 
+ def _s3_table():
+-    """降配表格 120x11（与 test_stage_closure 的 cv_closure 同配置）。"""
+-    cfg = S3_TABLE_CFG
+-    x = make_surface_grid(cfg["x_max"], d0=cfg["d0"], h_max=cfg["h_max"])
+-    phi_s_grid = np.linspace(-0.15, 1.6, cfg["phi_s_n"])
+-    phi_n_grid = np.linspace(0.0, 2.0, cfg["phi_n_n"])
+-    return SliceTable(phi_s_grid, phi_n_grid, x).build()
++    """Compatibility helper; production config is centrally defined."""
++    from semiconductor_sim.stage3_mosfet.phase1 import production_table
++    return production_table()[0]
+ 
+ 
+ def stage3_numbers():
+-    """
+-    S3 降配：120x11 表格 + 81 点 V_G 转移特性，提取：
++    from semiconductor_sim.stage3_mosfet.golden import production_numbers
++    return production_numbers()
+ 
+-        vt_cc      ：恒定电流判据 V_T（0.1 uA 对数插值，生产同判据）
+-        i_th_uA    ：判据电流（uA）
+-        ss_lin     ：线性区固定窗口 SS（mV/dec）
+-        id_lin_end ：V_G=2.0 线性区端电流（Square-law 判据点）
+-        id_sat_end ：V_G=2.0 饱和区端电流
+-        id_lin_mid / id_sat_mid ：V_G=1.0 中压点电流（曲线整体形状）
+-
+-    标量提取函数与生产 run() 完全一致（postprocess.extract_vt /
+-    extract_ss），只是表格更粗——数值不同，但锁住"重构不改数值"。
+-    """
+-    tab = _s3_table()
+-    id_lin = id_vg(tab, S3_VG, S3_VD_LIN)
+-    id_sat = id_vg(tab, S3_VG, S3_VD_SAT)
+-    vt, i_th = pp.extract_vt(S3_VG, id_lin)
+-    ss_lin = pp.extract_ss(S3_VG, id_lin)
+-    return dict(
+-        vt_cc=float(vt),
+-        i_th_uA=float(i_th * 1e6),
+-        ss_lin=float(ss_lin),
+-        id_lin_end=float(id_lin[-1]),
+-        id_sat_end=float(id_sat[-1]),
+-        id_lin_mid=float(id_lin[len(id_lin) // 2]),
+-        id_sat_mid=float(id_sat[len(id_sat) // 2]),
+-    )
+-
+-
+-STAGE_NUMBERS = dict(stage1=stage1_numbers,
+-                     stage2=stage2_numbers,
+-                     stage3=stage3_numbers)
++STAGE_NUMBERS=dict(stage1=stage1_numbers,stage2=stage2_numbers,stage3=stage3_numbers)
+--- a/semiconductor_sim/tests/test_golden.py
++++ b/semiconductor_sim/tests/test_golden.py
+@@ -1,55 +1,22 @@
+-# -*- coding: utf-8 -*-
+-"""
+-tests/test_golden.py —— golden 基准回归测试（reproduce_spec.md 第 3 节）。
++"""Production S3 baseline; unavailable original S1/S2 baselines explicitly skipped."""
++import pytest
++from semiconductor_sim.stage3_mosfet.golden import (production_numbers,read_golden,compare_production)
+ 
+-    每个阶段以其降配数字与 results/golden/stageX.json 逐键比对
+-    （rtol=1e-6，atol=0）。求解链确定性（同平台同库版本）下预期
+-    逐位一致；任何改变数值的重构、缺陷修复、环境迁移都会在本测试
+-    暴露——应先解释变化来源，再用 scripts/make_golden.py 重新生成
+-    基准并在 CHANGELOG 记录。
++@pytest.mark.parametrize('stage',['stage1','stage2','stage3'])
++def test_golden_regression(stage):
++    if stage!='stage3':pytest.skip('Original '+stage+' golden absent in uploaded source; not reconstructed')
++    assert compare_production(production_numbers(),read_golden())
+ 
+-    golden 文件缺失时跳过（新克隆尚未 make_golden 的场景），
+-    不视为失败：CI 工作流会在跑 pytest 前先生成基准。
+-"""
+-
+-import pytest
+-
+-from semiconductor_sim.common.io import compare_golden
+-from semiconductor_sim.tests.golden_helpers import STAGE_NUMBERS
+-
+-STAGES = ["stage1", "stage2", "stage3"]
++@pytest.mark.parametrize('stage',['stage1','stage2','stage3'])
++def test_golden_keys_stable(stage):
++    if stage!='stage3':pytest.skip('Original '+stage+' golden absent in uploaded source; not reconstructed')
++    assert set(production_numbers())==set(read_golden()['numbers'])
+ 
+ 
+-@pytest.mark.parametrize("stage", STAGES)
+-def test_golden_regression(stage):
+-    """降配数字 vs golden 基准：全部键 rtol=1e-6 内一致。"""
+-    current = STAGE_NUMBERS[stage]()
+-    report = compare_golden(stage, current, rtol=1e-6)
+-    if report is None:
+-        pytest.skip(f"results/golden/{stage}.json 缺失"
+-                    "（python semiconductor_sim/scripts/make_golden.py）")
+-    bad = {k: dev for k, (ok, dev) in report.items() if not ok}
+-    missing = sorted(set(current) - set(report))
+-    assert not missing, f"{stage}: golden 缺少键 {missing}"
+-    assert not bad, (f"{stage}: {len(bad)} 个标量偏离基准（rtol=1e-6）："
+-                     + ", ".join(f"{k}: rel={dev:.2e}" for k, dev in bad.items()))
+-
+-
+-@pytest.mark.parametrize("stage", STAGES)
+-def test_golden_keys_stable(stage):
+-    """
+-    提取键集合稳定（防止误删/误增标量而不更新基准）。
+-
+-    golden 存在时才校验；键集合变化必须显式重新生成基准。
+-    """
+-    from semiconductor_sim.common.io import load_json, GOLDEN
+-    import os
+-    path = os.path.join(GOLDEN, stage + ".json")
+-    if not os.path.exists(path):
+-        pytest.skip(f"results/golden/{stage}.json 缺失")
+-    ref_keys = set(load_json(stage))
+-    cur_keys = set(STAGE_NUMBERS[stage]())
+-    assert cur_keys == ref_keys, (
+-        f"{stage}: 提取键集合变化 新增={sorted(cur_keys - ref_keys)} "
+-        f"减少={sorted(ref_keys - cur_keys)}；"
+-        "请运行 scripts/make_golden.py 重新生成基准")
++def test_golden_checks_configuration_and_values():
++    import copy
++    baseline=read_golden();current=dict(baseline['numbers'])
++    wrong=copy.deepcopy(baseline);wrong['config']['table']['nps']=240
++    with pytest.raises(AssertionError,match='configuration'):compare_production(current,wrong)
++    current['id_lin_2']*=1.01
++    with pytest.raises(AssertionError,match='regression'):compare_production(current,baseline)
+--- a/semiconductor_sim/tests/test_revision_evidence.py
++++ b/semiconductor_sim/tests/test_revision_evidence.py
+@@ -0,0 +1,71 @@
++"""Release-blocking evidence regressions, independent from the new S3 golden."""
++import json
++from pathlib import Path
++import numpy as np
++import pytest
++from semiconductor_sim.common.jsonio import dumps,write_json
++
++
++def test_numpy_json_file_and_console_use_same_encoder(tmp_path):
++    value=dict(flag=np.bool_(True),integer=np.int64(7),array=np.array([.1,.2]))
++    path=tmp_path/'result.json';write_json(path,value)
++    assert json.loads(path.read_text())==json.loads(dumps(value))
++
++
++@pytest.mark.parametrize('bad',[float('nan'),float('inf'),np.float64('-inf')])
++def test_nonfinite_json_is_rejected_without_partial_output(tmp_path,bad):
++    path=tmp_path/'bad.json'
++    with pytest.raises(ValueError):write_json(path,dict(bad=bad))
++    assert not path.exists()
++
++
++def test_background_decomposition_does_not_dominate_reported_subthreshold_points():
++    from semiconductor_sim.stage3_mosfet.reference import reference_current
++    a=reference_current(.5,.05);b=reference_current(.75,.05)
++    for r in [a,b]:assert np.isclose(r['ID'],r['ID_background']+r['ID_excess'],rtol=1e-14)
++    assert a['background_fraction']<.001
++    assert b['background_fraction']<1e-6
++    # A real limitation remains very close to flatband.
++    assert reference_current(.05,.05)['background_fraction']>.9
++
++
++def test_background_is_explicitly_depth_dependent_but_excess_is_not():
++    from semiconductor_sim.stage3_mosfet.reference import reference_current
++    a=reference_current(.5,.05,x_max=1.2e-6);b=reference_current(.5,.05,x_max=2.4e-6)
++    assert np.isclose(b['ID_background'],2*a['ID_background'],rtol=1e-12)
++    assert np.isclose(b['ID_excess'],a['ID_excess'],rtol=1e-12)
++
++
++def test_clipping_sensitivity_is_zero_inside_physical_working_range():
++    from semiconductor_sim.common.grid import make_surface_grid
++    from semiconductor_sim.stage3_mosfet.solver import solve_poisson_slice
++    x=make_surface_grid(1.2e-6,d0=.125e-9,h_max=4e-9)
++    a=solve_poisson_slice(.85,0,x);b=solve_poisson_slice(.85,0,x,density_clip_limit=3.)
++    assert a['converged'] and b['converged']
++    assert b['clip_evaluations']==0
++    assert np.array_equal(a['phi'],b['phi'])
++
++
++def test_density_clipping_is_disabled_and_overflow_is_explicit():
++    from semiconductor_sim.stage3_mosfet.solver import _carriers
++    p,n=_carriers(np.array([3.1]),np.array([0.]),1e22,1e10)
++    pc,nc=_carriers(np.array([3.1]),np.array([0.]),1e22,1e10,3.)
++    assert n[0]>nc[0] and p[0]<pc[0]
++    with pytest.raises(ValueError,match='floating-point'):_carriers(np.array([100.]),0,1e22,1e10)
++
++
++def test_production_table_and_golden_metadata_share_one_configuration():
++    from semiconductor_sim.stage3_mosfet.config import PRODUCTION,production_metadata
++    from semiconductor_sim.stage3_mosfet.golden import read_golden
++    from semiconductor_sim.stage3_mosfet.phase1 import production_table
++    t,_=production_table()
++    assert (t.nps,t.npn,t.sheet_interpolation)==(PRODUCTION.nps,PRODUCTION.npn,PRODUCTION.interpolation)
++    assert read_golden()['config']==production_metadata()
++    assert t.build_stats['potential_min']>-3 and t.build_stats['potential_max']<3
++
++
++def test_charge_comparison_is_labelled_algebra_not_physics_validation():
++    from semiconductor_sim.stage3_mosfet.reference import charge_budget,reference_slice
++    r=reference_slice(2.,0.)
++    budget=charge_budget(2.,r['phi_s'],r['ns'],r['qs'])
++    assert budget['evidence_type']=='algebraic_reference_comparison'

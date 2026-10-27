@@ -1,0 +1,202 @@
+{
+  "worst_point": {
+    "point": {
+      "vg": 1.25,
+      "vd": 0.2
+    },
+    "reference_A": 3.0675555982528382e-06,
+    "production_A": 3.0616969244082755e-06,
+    "direct_same_grid_A": 3.06852045719928e-06,
+    "clipped_direct_A": 3.06852045719928e-06,
+    "total_relative": -0.0019098835072132313,
+    "grid_and_boundary_relative": 0.0003145367428683006,
+    "table_interpolation_relative": -0.002224420250081532,
+    "telescoping_closure_relative": 0.0,
+    "clamp_paired_relative": 0.0,
+    "clamp_activated_values": 0,
+    "potential_min_V": 0.0,
+    "potential_max_V": 1.099565716302581,
+    "phi_n_only_interpolation_relative": -0.0005663414161672256,
+    "direct_quad_estimate_relative": 3.3242449263895895e-12,
+    "evidence_type": "conditional_numerical_ablation"
+  },
+  "direct_grid_refinement": [
+    {
+      "d0_nm": 0.25,
+      "hmax_nm": 8.0,
+      "current_A": 3.0713455623685076e-06,
+      "relative_to_reference": 0.0012354997307393312,
+      "quad_estimate_A": 1.0156273381391326e-17
+    },
+    {
+      "d0_nm": 0.125,
+      "hmax_nm": 4.0,
+      "current_A": 3.06852045719928e-06,
+      "relative_to_reference": 0.0003145367428682988,
+      "quad_estimate_A": 1.0197306133909979e-17
+    },
+    {
+      "d0_nm": 0.0625,
+      "hmax_nm": 2.0,
+      "current_A": 3.067799106204043e-06,
+      "relative_to_reference": 7.938175638733114e-05,
+      "quad_estimate_A": 1.0179778564817152e-17
+    }
+  ],
+  "neutral_background": [
+    {
+      "vg": 0.05,
+      "vd": 0.025,
+      "total_A": 4.321005708965508e-18,
+      "excess_A": 1.6221356370724193e-19,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 0.962459303543462
+    },
+    {
+      "vg": 0.05,
+      "vd": 0.05,
+      "total_A": 5.963876183750521e-18,
+      "excess_A": 2.2388806551859404e-19,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 0.9624593035434553
+    },
+    {
+      "vg": 0.05,
+      "vd": 1.5,
+      "total_A": 6.971675701292358e-18,
+      "excess_A": 2.617215612957127e-19,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 0.9624593035434512
+    },
+    {
+      "vg": 0.1,
+      "vd": 0.025,
+      "total_A": 4.679964820150367e-18,
+      "excess_A": 5.211726748921003e-19,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 0.8886374802117946
+    },
+    {
+      "vg": 0.1,
+      "vd": 0.05,
+      "total_A": 6.459313551420475e-18,
+      "excess_A": 7.193254331885478e-19,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 0.888637480211754
+    },
+    {
+      "vg": 0.1,
+      "vd": 1.5,
+      "total_A": 7.550834045845009e-18,
+      "excess_A": 8.40879905848364e-19,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 0.8886374802117292
+    },
+    {
+      "vg": 0.25,
+      "vd": 0.025,
+      "total_A": 1.565903301508764e-17,
+      "excess_A": 1.1500240869829375e-17,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 0.2655842248529157
+    },
+    {
+      "vg": 0.25,
+      "vd": 0.05,
+      "total_A": 2.1612684719684078e-17,
+      "excess_A": 1.5872696601452153e-17,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 0.2655842248512581
+    },
+    {
+      "vg": 0.25,
+      "vd": 1.5,
+      "total_A": 2.5264882143434118e-17,
+      "excess_A": 1.8554928003437472e-17,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 0.265584224850241
+    },
+    {
+      "vg": 0.5,
+      "vd": 0.025,
+      "total_A": 7.222305122397021e-15,
+      "excess_A": 7.218146330251762e-15,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 0.0005758261489619812
+    },
+    {
+      "vg": 0.5,
+      "vd": 0.05,
+      "total_A": 9.968265885474935e-15,
+      "excess_A": 9.962525897356704e-15,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 0.000575826145106727
+    },
+    {
+      "vg": 0.5,
+      "vd": 1.5,
+      "total_A": 1.1652743149255976e-14,
+      "excess_A": 1.164603319511598e-14,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 0.0005758261427417693
+    },
+    {
+      "vg": 0.75,
+      "vd": 0.025,
+      "total_A": 1.1158134518656447e-11,
+      "excess_A": 1.1158130359864302e-11,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 3.727139279692989e-07
+    },
+    {
+      "vg": 0.75,
+      "vd": 0.05,
+      "total_A": 1.5400690941793706e-11,
+      "excess_A": 1.5400685201805588e-11,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 3.727097790564061e-07
+    },
+    {
+      "vg": 0.75,
+      "vd": 1.5,
+      "total_A": 1.8003283890216452e-11,
+      "excess_A": 1.800327718026231e-11,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 3.727072339087562e-07
+    },
+    {
+      "vg": 1.0,
+      "vd": 0.025,
+      "total_A": 2.2813172034343747e-08,
+      "excess_A": 2.2813172030184955e-08,
+      "neutral_background_A": 4.158792145258266e-18,
+      "neutral_background_fraction": 1.8229784700687285e-10
+    },
+    {
+      "vg": 1.0,
+      "vd": 0.05,
+      "total_A": 3.220837831482605e-08,
+      "excess_A": 3.220837830908606e-08,
+      "neutral_background_A": 5.739988118231926e-18,
+      "neutral_background_fraction": 1.782141299423857e-10
+    },
+    {
+      "vg": 1.0,
+      "vd": 1.5,
+      "total_A": 3.8209369950670846e-08,
+      "excess_A": 3.8209369943960896e-08,
+      "neutral_background_A": 6.7099541399966456e-18,
+      "neutral_background_fraction": 1.75610174903678e-10
+    }
+  ],
+  "table_trial_potential_range": {
+    "potential_min": -0.3,
+    "potential_max": 1.6,
+    "clip_evaluations": 0,
+    "solved_slices": 82252,
+    "skipped_slices": 5748,
+    "attempted_solves": 82252,
+    "failed_hot_attempts": 0
+  },
+  "interpretation": "background is a bookkeeping component in the reduced model; not experimental current validation"
+}

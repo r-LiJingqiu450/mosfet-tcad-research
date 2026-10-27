@@ -1,0 +1,562 @@
+{
+  "version": "phase1-1.2",
+  "candidate": false,
+  "source_sha256": "8cf195205ac9c8477b40e69c25d976f6cc3433e22c6a83f6f3dffeef7a850a45",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "size_bytes": 791,
+      "sha256": "3345dde6fa3aad927aad8f9d4a029c02b8b332c64895c0c0aa0fd52a516610b1"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1786,
+      "sha256": "d4ff70b2922f37109ba3a136f401e427496c957a28a73d18a037b43f92f3d475"
+    },
+    {
+      "path": "baseline/audit_results.json",
+      "size_bytes": 3300,
+      "sha256": "74bc27017a7c7209ddef3d0bc43605d8a746d7ed34b0eb463199a74e3303f7f8"
+    },
+    {
+      "path": "baseline/golden_audit.txt",
+      "size_bytes": 1557,
+      "sha256": "47ed340af72fe6c22874492ed98be49b471620b592ab879f3dd0f68e83d8b358"
+    },
+    {
+      "path": "baseline/pytest_audit.txt",
+      "size_bytes": 1593,
+      "sha256": "9bf124ba619aaaf1f8814b65f82dffb46fbb89bdc81be42e7025becf2834a88a"
+    },
+    {
+      "path": "baseline/recovered_v1_source.zip",
+      "size_bytes": 129427,
+      "sha256": "c31fdefcd4b605948746c6b824ca35fcb09c0716c22a526a292b86f29bfb24c1"
+    },
+    {
+      "path": "baseline/source_sha256.json",
+      "size_bytes": 4453,
+      "sha256": "cbb4937566fe4693b3855c4bb77290e3e2cfe3dc1fb9bf1b7ce1d2bc1243f160"
+    },
+    {
+      "path": "changes.patch",
+      "size_bytes": 123975,
+      "sha256": "94f47a4d2bcb78563968eaee4780dc07ad5413565819c7af959ea105f2908b4d"
+    },
+    {
+      "path": "environment_verified.txt",
+      "size_bytes": 60,
+      "sha256": "1a9816a17235bd898c0200852d4e4095bfdd7738a51f117b399baa8a22548e4e"
+    },
+    {
+      "path": "history/phase1_v11_original_delivery.zip",
+      "size_bytes": 637510,
+      "sha256": "553ce9486c10b35e3b604d3f34d804276fe63c54a6f1663d2023a86f70bce1ce"
+    },
+    {
+      "path": "history/v11_archive_audit.json",
+      "size_bytes": 1848,
+      "sha256": "43a963c3ce03dd5e88689177d3793d453455d6d51beb320383e27ca69cab3d5e"
+    },
+    {
+      "path": "pytest.ini",
+      "size_bytes": 61,
+      "sha256": "fb7dc9650debf4e6a9d85473c6de632fc55f02091d93c0339412c5a8e351950b"
+    },
+    {
+      "path": "reports/Phase1_Report.html",
+      "size_bytes": 9612,
+      "sha256": "82e79cdd72bb41afec44626acc3c8dd917e6e84cd0ce022e5c84e08319bdf7c3"
+    },
+    {
+      "path": "reports/Phase1_Report.md",
+      "size_bytes": 8177,
+      "sha256": "e81ea9934ee56a803dfd4a28b13100623086e48162b58ee49a9b9dbeb03dd8dc"
+    },
+    {
+      "path": "reports/S3_Replacement_Sections.md",
+      "size_bytes": 3312,
+      "sha256": "088182e9447bc52d7bdabde56584addf128bc5a5bb2b0b7008907f99a4dbc607"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 62,
+      "sha256": "354c13d49d0fe7ec45d6c4c654ae5fbbd5d0a4c899db26825a76c6a20a76d7eb"
+    },
+    {
+      "path": "scripts/baseline_study.py",
+      "size_bytes": 1556,
+      "sha256": "7bf365cc02fee52892b1a48b04cfc34c1a35867f9f53afc19b1fce2e8a3e26a0"
+    },
+    {
+      "path": "scripts/freeze_phase1.py",
+      "size_bytes": 1583,
+      "sha256": "120474b8f4798f71b02421d8bb1617b6fb70ad567febe00979a3539081bb505e"
+    },
+    {
+      "path": "scripts/package_release.py",
+      "size_bytes": 3214,
+      "sha256": "75fa9fc386b41191643596b8de4aacb48ae4f636da0d46441d3243d37316b177"
+    },
+    {
+      "path": "scripts/reproduce_phase1.py",
+      "size_bytes": 3632,
+      "sha256": "0936391247b2b4d8d55aae7f29454f3ce3988552455d78c7ed27432abb34edc4"
+    },
+    {
+      "path": "scripts/verify_delivery.py",
+      "size_bytes": 4840,
+      "sha256": "e33609945b3a1d06b29b3cce050db08cf82de052ae8de7d4fdbb9aa0a710b466"
+    },
+    {
+      "path": "scripts/write_phase1_reports.py",
+      "size_bytes": 18174,
+      "sha256": "dca3f53dbab79cbb1956cc8847477b30d93c4ca7ae81152526ef9a59d66cdc5c"
+    },
+    {
+      "path": "semiconductor_sim/__init__.py",
+      "size_bytes": 1339,
+      "sha256": "97c2c9b5bc5e01761c24bcb45ae8b23342e013b515a1209a44efd5a646b702b3"
+    },
+    {
+      "path": "semiconductor_sim/build_paper.py",
+      "size_bytes": 6862,
+      "sha256": "7e27860651f2ee02c340e91820bec37f2f8395fdc0b0b656b79067cb07ecf5e0"
+    },
+    {
+      "path": "semiconductor_sim/common/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/common/bernoulli.py",
+      "size_bytes": 1494,
+      "sha256": "56abb64b0166fe8b345812f252430fb4757b59cbf1d178d4956cadf8688d7bd1"
+    },
+    {
+      "path": "semiconductor_sim/common/constants.py",
+      "size_bytes": 6238,
+      "sha256": "1fefe5dae3a84b2b44006d5b3317d281261d72395d57808e4eef4ec674b93a91"
+    },
+    {
+      "path": "semiconductor_sim/common/grid.py",
+      "size_bytes": 7946,
+      "sha256": "23c301dbfc005c3ce073ff364d22db8a77df3b7eab6823ee3d100a2420d6aaa6"
+    },
+    {
+      "path": "semiconductor_sim/common/io.py",
+      "size_bytes": 3809,
+      "sha256": "d40cf26a1600155b16a6e7a3667c87775e9577f8f24721e46b2298180efd7eb5"
+    },
+    {
+      "path": "semiconductor_sim/common/jsonio.py",
+      "size_bytes": 832,
+      "sha256": "c9f2bc3f46b734c76532f9008a2931ffc8b44c517aabfe6763c893ed15b3d261"
+    },
+    {
+      "path": "semiconductor_sim/common/qfp.py",
+      "size_bytes": 1721,
+      "sha256": "16cb7e7de85ee09155b4d86bfcf63ca854bdc290996fe65e0873b41708b13023"
+    },
+    {
+      "path": "semiconductor_sim/common/thomas.py",
+      "size_bytes": 3669,
+      "sha256": "23da7032903e521e0db56f6307df2c88ff85c9a8ff7520d4a0827fa3a7b9f5ea"
+    },
+    {
+      "path": "semiconductor_sim/common/validation.py",
+      "size_bytes": 4225,
+      "sha256": "18cc9068653a624096953a46afa726b94dae723d459bf8176a24b48a8c4c02f2"
+    },
+    {
+      "path": "semiconductor_sim/conftest.py",
+      "size_bytes": 341,
+      "sha256": "b181ea754bb0e3e9ec51b092447fb31869ac777e207f514d7fec8603545743b0"
+    },
+    {
+      "path": "semiconductor_sim/reports/S3_MOSFET_GCA/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/reports/S3_MOSFET_GCA/make_appendix_code.py",
+      "size_bytes": 3633,
+      "sha256": "55d181f78285dc17f909295e2ce4f6e8a99b213eee47522c867757e8cb39a2e5"
+    },
+    {
+      "path": "semiconductor_sim/reports/Series_Overview/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/reports/Series_Overview/make_roadmap.py",
+      "size_bytes": 5530,
+      "sha256": "57ac32006d6ef9ba3351d16cbe7843b253b99169bfc2ba58da0bbe3df93203d7"
+    },
+    {
+      "path": "semiconductor_sim/reports/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/results/golden/stage3.json",
+      "size_bytes": 1621,
+      "sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/baseline_recomputed.json",
+      "size_bytes": 9754,
+      "sha256": "73489a59b23af7a4d275306851a22ab42061c64c38d09fa5f9b8700e05885b6b"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/clm_ablation.csv",
+      "size_bytes": 643,
+      "sha256": "5bd30ce020f5db95aa9e599e07c7ac399f8460acfc2d1129de76251acefe9251"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/continuity.csv",
+      "size_bytes": 289,
+      "sha256": "280f1fd2a807938b257eb890831fd72652b2a7948190fe2b9e211ed9dbd5d9e6"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/error_attribution.csv",
+      "size_bytes": 316,
+      "sha256": "9bd8d48c516498e12a44de9b9ee46fce1bf350af7e4008f3df71628540903b3e"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/error_attribution.json",
+      "size_bytes": 6144,
+      "sha256": "6da34e98fa3427c0133eeada9a5d1636218a6953cf562158f23c1060e6608e02"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig1_continuity.png",
+      "size_bytes": 74974,
+      "sha256": "cef51332a5373249fb32f83da7001f8329125d6c573e75ec97ca670135f4eb16"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig1_continuity.svg",
+      "size_bytes": 38316,
+      "sha256": "6656d261f1b0fa4c6a559a03143df7f2aa962d1104cc387b5c6d96933a4e306d"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig2_independent_reference.png",
+      "size_bytes": 45634,
+      "sha256": "1483c76a7a9a7352bf36ad0ed2eb474ca8eec2bbf38e9bb18d5db79ef9d209ad"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig2_independent_reference.svg",
+      "size_bytes": 47095,
+      "sha256": "4b94281b97238693794f64a10049ab9fade575ff66ad35913731abe47cf0e6df"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig3_clm_ablation.png",
+      "size_bytes": 33668,
+      "sha256": "f4eb57fe79e48aeb8e2d34aae6a650d5047e883026d90bf6781ad23f7531c3d7"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig3_clm_ablation.svg",
+      "size_bytes": 31938,
+      "sha256": "ddc5259b85024b918c08a23a50f125a3505e04ec753c7eb8bf6d3b356fe6a04b"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig4_transfer.png",
+      "size_bytes": 82855,
+      "sha256": "815da9a66721bf4411a10685cc44e8ed6daeaef639487138a203f4f6711b7408"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig4_transfer.svg",
+      "size_bytes": 58442,
+      "sha256": "b5c159696b0bf57a595dbf844b6bb2b71901b60ce078be929a73e923207a791e"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig5_spatial_refinement.png",
+      "size_bytes": 63475,
+      "sha256": "f43d1dba5ee64400efc868482f2628790943ca75a7afb8ba8126fe00d73e849a"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig5_spatial_refinement.svg",
+      "size_bytes": 36372,
+      "sha256": "43c02057180267fb865e4ead5b1359ed6e48fe5cd0fdadd74f989e960e774ae1"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig6_background.png",
+      "size_bytes": 63957,
+      "sha256": "088b4254c37cd7e3a25e87b92c6d33e8fd28b03dd6b340fdb9df638ed6de14d1"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig6_background.svg",
+      "size_bytes": 34073,
+      "sha256": "83a10992a7a387d8d74dcca0a2fde4fed47e9eda5bd20d7d869b3a77a05faa3b"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig7_error_attribution.png",
+      "size_bytes": 53579,
+      "sha256": "267d27dcf77464c73a9f6cd3ad3f69ebf4a891080f0fd52188f6432dca4a50c5"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/fig7_error_attribution.svg",
+      "size_bytes": 38559,
+      "sha256": "d6725aa37b4c43d3b36e461a00f0ff5fc77fb56dfb7f0f795158f68760645618"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/independent_reference.csv",
+      "size_bytes": 5171,
+      "sha256": "7ae7aace941e5b5fd0196d446d28fad1517ba78881c31b7407446bdd6254f56d"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/neutral_background.csv",
+      "size_bytes": 1840,
+      "sha256": "771ca8f9b38daeeba8babeed132b2cdc07eb0decac48d7b68e390c0fb6c2ba59"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/phase1_results.json",
+      "size_bytes": 35915,
+      "sha256": "216879f1c8534c4f3db72b1b2b2647c46e8d0584bacc764e6b9e4f559b0a528d"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/spatial_refinement.csv",
+      "size_bytes": 484,
+      "sha256": "63d30bc7d0a2758d5acd05e066b8c34c24f281dee74a8db2d3aecc95f35c6d44"
+    },
+    {
+      "path": "semiconductor_sim/results/phase1/transfer_curves.npz",
+      "size_bytes": 2147,
+      "sha256": "8b49b2efdd4c47dca9ae693aceeb38b35b913221c1a66cc0df5b223d8cccf998"
+    },
+    {
+      "path": "semiconductor_sim/scripts/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/scripts/make_golden.py",
+      "size_bytes": 238,
+      "sha256": "3ddb545f5f3e1e803cd0373984c2c89f94e5ba301e61db5026f2c612437769fd"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/make_figures.py",
+      "size_bytes": 19798,
+      "sha256": "ee4294bfebad70e4b66a329a924a68e915dabed89db26c5419ba6f57862b9510"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/postprocess.py",
+      "size_bytes": 1977,
+      "sha256": "6012647e86910b93aca964b71bdc69fd483e9686aa713f6ac011395152261d59"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/run.py",
+      "size_bytes": 14399,
+      "sha256": "576f65b41a5e53cda8c67157472018aa17f7e3d70ade0c6f0775a554ad12c731"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/solver.py",
+      "size_bytes": 6511,
+      "sha256": "c9dcf8752bdc30f7b69f7221908a549502b7ea7a20d826194466ba8d2e12760f"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/tests/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage1_mos/tests/test_stage1.py",
+      "size_bytes": 7489,
+      "sha256": "35d539c44b4cdf12b7c428051341f265b1c461a4d00a1cb1278f3835ec777ece"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/make_figures.py",
+      "size_bytes": 38920,
+      "sha256": "d84528d41812346448f9ad53ae6f1f970d5d326384a85c10d03677514d256cf2"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/postprocess.py",
+      "size_bytes": 3657,
+      "sha256": "90c1428f98187d862b28b4ae3de8bf01b628199edf6cbfebbbe27862ea81bf06"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/run.py",
+      "size_bytes": 17118,
+      "sha256": "219e7ee3ab1da356e7bfedf7061c060d01401b3e1bd7144fbe8ebda3fe00915d"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/solver.py",
+      "size_bytes": 38049,
+      "sha256": "a2cf57367f69b482cec0bb211c156b51a80607aab1f57f671d76d6f92483acf3"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/tests/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage2_pn/tests/test_stage2.py",
+      "size_bytes": 18194,
+      "sha256": "e2e849e259ebc5b52adc8156bc2091b27be0e056ae83650d2341f41310a5652a"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/attribution.py",
+      "size_bytes": 5387,
+      "sha256": "eabcaeb4113687dbf22977ef402c7a6a5d6cfa46bfd12a85f2e666d7b3d4993a"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/config.py",
+      "size_bytes": 896,
+      "sha256": "ce88fee04436467bec059806340f28d7e129d3638f3ed25359076b7f1b6c0775"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/gca.py",
+      "size_bytes": 5209,
+      "sha256": "38a5ae491ef90d8760e9071ff9b178a2dc57a6c77047c852eba47592cb5dc77c"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/golden.py",
+      "size_bytes": 1678,
+      "sha256": "6af0385e356f3af531c962ca9334ece5c1b47da64696bf4929401770f7596650"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/legacy_gca.py",
+      "size_bytes": 7560,
+      "sha256": "ff6ee3e0990228bd1ea49ae3a821ad332e23f2fd52bb947ce28006ac8677e79f"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/make_figures.py",
+      "size_bytes": 333,
+      "sha256": "ea396ff6039ba50fff5dd2b7171972eb34e4c06e73c942c4540842b076e8b89a"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/phase1.py",
+      "size_bytes": 7935,
+      "sha256": "e96e81afa6cb7ddb383dcdcd83ad71bbc0182136bc5a3eea7015ed2223303a94"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/phase1_plots.py",
+      "size_bytes": 3914,
+      "sha256": "44d04a61a8c849fb595cb99cc8a19c95f39fcf173b9d687e19b1266065256cc2"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/postprocess.py",
+      "size_bytes": 5099,
+      "sha256": "976e3d053d21f6166aab866b96ac1a2f1f87af602f448851e3c5ac58e507f7cf"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/reference.py",
+      "size_bytes": 3709,
+      "sha256": "d45eb74ea020b97520109bafb3105ab7a43fa87bf8e9a224c9129ea914bb55eb"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/run.py",
+      "size_bytes": 3424,
+      "sha256": "97ff9b553cb07b9b8663a0d193f0086e5a208d3ffdfab150e2ce3ceec2c0894c"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/solver.py",
+      "size_bytes": 10165,
+      "sha256": "36cfdfeeeee19f77d0fc16449f53036a2755ad80a780d28e7158547c97eafb2b"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/table.py",
+      "size_bytes": 11658,
+      "sha256": "713c7d07fe6f6a217cc411994ed93d61de86e8e41da1adc1d0bfaaefc383fbb2"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/tests/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/stage3_mosfet/tests/test_stage3.py",
+      "size_bytes": 10608,
+      "sha256": "0bdebecf58f48f49199da5517a9f0a277440a2a78c77817ed9c45434c112d440"
+    },
+    {
+      "path": "semiconductor_sim/tests/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "semiconductor_sim/tests/golden_helpers.py",
+      "size_bytes": 5203,
+      "sha256": "9b6162b9f592bf3a946c4ed9c4f4ad31e37c73e44793e5af93dd9fae8b7eab4d"
+    },
+    {
+      "path": "semiconductor_sim/tests/test_common.py",
+      "size_bytes": 18278,
+      "sha256": "7f9ff90ddb6c955e2eb6df1894d9a97626455aff54b6222e907edda641700ac7"
+    },
+    {
+      "path": "semiconductor_sim/tests/test_golden.py",
+      "size_bytes": 1175,
+      "sha256": "3f5013f424f8d65d9e5f954b5fe7373ce3d2959f5aa9a40a3587bc3cc38303c5"
+    },
+    {
+      "path": "semiconductor_sim/tests/test_revision_evidence.py",
+      "size_bytes": 3410,
+      "sha256": "4d2dc22ff925c2e59df80dfaeb423bbed5a5a80d95574e9117b534060cb08835"
+    },
+    {
+      "path": "semiconductor_sim/tests/test_stage_closure.py",
+      "size_bytes": 7393,
+      "sha256": "995b99c4cdb843400546f10365a4a014ea347ec38c907435c3deb24d17b38e69"
+    },
+    {
+      "path": "study_log.txt",
+      "size_bytes": 830,
+      "sha256": "854e40b6db4b88be0a27ef2e5b46cd39c8dd3e499c90e6fe1b093e0d55b22876"
+    },
+    {
+      "path": "tests_phase1.txt",
+      "size_bytes": 20675,
+      "sha256": "d257fdba32ae69837fe503e757c05a99436e03cbcbc1dc068344c0c03a828402"
+    },
+    {
+      "path": "verification/artifact_check.txt",
+      "size_bytes": 258,
+      "sha256": "c468effa041d9ead06c97f2b664989fce47937a98c4661178871dfa144b6ef98"
+    },
+    {
+      "path": "verification/artifact_manifest.json",
+      "size_bytes": 6848,
+      "sha256": "fa99c7b7fe4dcd9399155d689993f7a743952ccd04e7c4f49f7331acf751211a"
+    },
+    {
+      "path": "verification/clean_unpack_verification.json",
+      "size_bytes": 2465,
+      "sha256": "4716cf63afebf7daa66c46a61e7180f160e73615a4281d958f13b73f9a10a2b9"
+    },
+    {
+      "path": "verification/pytest.xml",
+      "size_bytes": 13320,
+      "sha256": "58e0aaf346fd97f94af8f80415fdcf6dc44bb181a0a2942dbdcf3256d2e66225"
+    },
+    {
+      "path": "verification/pytest_status.json",
+      "size_bytes": 265,
+      "sha256": "32c04a81b9d60864fddc78342dadcc01d39aba395f70349ce780f8d92bd5ad11"
+    },
+    {
+      "path": "verification/report_generation.txt",
+      "size_bytes": 271,
+      "sha256": "3aa6f2fcf84e21409f57f549636642bc7e78c9d6c68872b7ccb37b807af1704d"
+    },
+    {
+      "path": "verification/run_status.json",
+      "size_bytes": 2172,
+      "sha256": "6b824a3564ad9efa3d328e8c42d5319c42dc687876c54a16731ea4b4d4fefdb2"
+    }
+  ]
+}

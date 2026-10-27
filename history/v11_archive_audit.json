@@ -1,0 +1,28 @@
+{
+  "archive_sha256": "553ce9486c10b35e3b604d3f34d804276fe63c54a6f1663d2023a86f70bce1ce",
+  "actual_file_count": 91,
+  "actual_result_paths": [
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig4_transfer.png",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/independent_reference.csv",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig5_spatial_refinement.svg",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig5_spatial_refinement.png",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig1_continuity.png",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/clm_ablation.csv",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/continuity.csv",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/phase1_results.json",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig3_clm_ablation.svg",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/transfer_curves.npz",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig1_continuity.svg",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig2_independent_reference.png",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/spatial_refinement.csv",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig4_transfer.svg",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/baseline_recomputed.json",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig2_independent_reference.svg",
+    "MOSFET_Phase1/semiconductor_sim/results/phase1/fig3_clm_ablation.png"
+  ],
+  "original_tests_log_bytes": 6,
+  "original_tests_log_text": "......",
+  "actual_golden_reader": "stage3_mosfet/tests/test_stage3.py::test_frozen_phase1_golden",
+  "actual_golden_configuration": "240x110 log; differed from 400x220 production",
+  "corrected_interpretation": "outputs existed in inspected archive; full tests were incomplete; historical failure log was mixed with final artifacts"
+}

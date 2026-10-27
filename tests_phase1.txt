@@ -1,0 +1,220 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0 -- /workspace/mosfet-tcad-research/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/mosfet-tcad-research
+configfile: pytest.ini
+collecting ... collected 95 items
+
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_flatband PASSED  [  1%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_accumulation_charge_sign PASSED [  2%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_depletion_charge_sign PASSED [  3%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_surface_charge_consistency PASSED [  4%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_monotonicity PASSED [  5%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_boundary_conditions PASSED [  6%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_vt_numeric_vs_analytic PASSED [  7%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_wmax_numeric_vs_analytic PASSED [  8%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_grid_kind_consistency PASSED [  9%]
+semiconductor_sim/stage1_mos/tests/test_stage1.py::test_all_scan_points_converge PASSED [ 10%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_analytic_jacobian_vs_fd PASSED [ 11%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_qfp_columns_chain_rule PASSED [ 12%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_row_scaling_transparent PASSED [ 13%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_condition_number_reduced PASSED [ 14%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_newton_step_reduces_residual PASSED [ 15%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_equilibrium_matches_analytic PASSED [ 16%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_forward_current_equals_recombination PASSED [ 17%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_reverse_bias_generation_current PASSED [ 18%]
+semiconductor_sim/stage2_pn/tests/test_stage2.py::test_transformed_jacobian_vs_fd PASSED [ 20%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_flatband_equilibrium PASSED [ 21%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_surface_charge_consistency PASSED [ 22%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_phi_s_monotonic PASSED [ 23%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_gca_linear_square_law PASSED [ 24%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_subthreshold_slope PASSED [ 25%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_clm_not_in_weak_inversion PASSED [ 26%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_continuity_linear PASSED [ 27%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_continuity_saturation_finite_difference PASSED [ 28%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_saturation_plateau PASSED [ 29%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_pinch_off_moves_to_source PASSED [ 30%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_column_vs_direct_solve PASSED [ 31%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_skip_corner_does_not_clamp_workspace PASSED [ 32%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_threshold_inverse_correct_branch[0.05-1e-07-saturation] PASSED [ 33%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_threshold_inverse_correct_branch[0.05-1e-05-linear] PASSED [ 34%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_clm_disabled_profile_finite_at_high_drain PASSED [ 35%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[0.5-0.05] PASSED [ 36%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[1-0.05] PASSED [ 37%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[1.5-1.5] PASSED [ 38%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[2-1.5] PASSED [ 40%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_charge_budget_is_classical_identity PASSED [ 41%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_conservative_edges_and_independent_gradient_are_distinct PASSED [ 42%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_output_grid_does_not_change_terminal_current PASSED [ 43%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_fine_quadrature_knots_leave_exact_interpolant_integral_unchanged PASSED [ 44%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[5.0-0.0] PASSED [ 45%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[1.0--0.1] PASSED [ 46%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[1.0-2.1] PASSED [ 47%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_nonconvergence_is_not_a_valid_table_entry PASSED [ 48%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_small_iteration_budget_cannot_claim_convergence PASSED [ 49%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_transport_against_closed_form_sheets[linear] PASSED [ 50%]
+semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_transport_against_closed_form_sheets[log] PASSED [ 51%]
+semiconductor_sim/tests/test_common.py::test_thermal_voltage PASSED      [ 52%]
+semiconductor_sim/tests/test_common.py::test_fermi_potential PASSED      [ 53%]
+semiconductor_sim/tests/test_common.py::test_body_factor_and_vt_long PASSED [ 54%]
+semiconductor_sim/tests/test_common.py::test_square_law_limits PASSED    [ 55%]
+semiconductor_sim/tests/test_common.py::test_vbi_and_depletion_analytic PASSED [ 56%]
+semiconductor_sim/tests/test_common.py::test_equilibrium_carriers_mass_action PASSED [ 57%]
+semiconductor_sim/tests/test_common.py::test_surface_grid_structure PASSED [ 58%]
+semiconductor_sim/tests/test_common.py::test_surface_grid_rejects_bad_params PASSED [ 60%]
+semiconductor_sim/tests/test_common.py::test_junction_grid_symmetry PASSED [ 61%]
+semiconductor_sim/tests/test_common.py::test_channel_grid PASSED         [ 62%]
+semiconductor_sim/tests/test_common.py::test_make_grid_uniform_and_nonuniform PASSED [ 63%]
+semiconductor_sim/tests/test_common.py::test_grid_stats PASSED           [ 64%]
+semiconductor_sim/tests/test_common.py::test_thomas_vs_dense PASSED      [ 65%]
+semiconductor_sim/tests/test_common.py::test_thomas_banded_matches_scalar PASSED [ 66%]
+semiconductor_sim/tests/test_common.py::test_block_thomas_vs_dense PASSED [ 67%]
+semiconductor_sim/tests/test_common.py::test_bernoulli_values_and_limits PASSED [ 68%]
+semiconductor_sim/tests/test_common.py::test_bernoulli_small_taylor PASSED [ 69%]
+semiconductor_sim/tests/test_common.py::test_bernoulli_deriv_vs_fd PASSED [ 70%]
+semiconductor_sim/tests/test_common.py::test_qfp_columns_chain_rule PASSED [ 71%]
+semiconductor_sim/tests/test_common.py::test_checklist_records_and_rows PASSED [ 72%]
+semiconductor_sim/tests/test_common.py::test_checklist_numpy_bool_normalization PASSED [ 73%]
+semiconductor_sim/tests/test_common.py::test_validation_helpers PASSED   [ 74%]
+semiconductor_sim/tests/test_common.py::test_json_roundtrip_and_golden PASSED [ 75%]
+semiconductor_sim/tests/test_common.py::test_npz_roundtrip PASSED        [ 76%]
+semiconductor_sim/tests/test_common.py::test_terminal_log_dual_write PASSED [ 77%]
+semiconductor_sim/tests/test_common.py::test_ensure_results_dir PASSED   [ 78%]
+semiconductor_sim/tests/test_golden.py::test_golden_regression[stage1] SKIPPED [ 80%]
+semiconductor_sim/tests/test_golden.py::test_golden_regression[stage2] SKIPPED [ 81%]
+semiconductor_sim/tests/test_golden.py::test_golden_regression[stage3] PASSED [ 82%]
+semiconductor_sim/tests/test_golden.py::test_golden_keys_stable[stage1] SKIPPED [ 83%]
+semiconductor_sim/tests/test_golden.py::test_golden_keys_stable[stage2] SKIPPED [ 84%]
+semiconductor_sim/tests/test_golden.py::test_golden_keys_stable[stage3] PASSED [ 85%]
+semiconductor_sim/tests/test_golden.py::test_golden_checks_configuration_and_values PASSED [ 86%]
+semiconductor_sim/tests/test_revision_evidence.py::test_numpy_json_file_and_console_use_same_encoder PASSED [ 87%]
+semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[nan] PASSED [ 88%]
+semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[inf] PASSED [ 89%]
+semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[-inf] PASSED [ 90%]
+semiconductor_sim/tests/test_revision_evidence.py::test_background_decomposition_does_not_dominate_reported_subthreshold_points PASSED [ 91%]
+semiconductor_sim/tests/test_revision_evidence.py::test_background_is_explicitly_depth_dependent_but_excess_is_not PASSED [ 92%]
+semiconductor_sim/tests/test_revision_evidence.py::test_clipping_sensitivity_is_zero_inside_physical_working_range PASSED [ 93%]
+semiconductor_sim/tests/test_revision_evidence.py::test_density_clipping_is_disabled_and_overflow_is_explicit PASSED [ 94%]
+semiconductor_sim/tests/test_revision_evidence.py::test_production_table_and_golden_metadata_share_one_configuration PASSED [ 95%]
+semiconductor_sim/tests/test_revision_evidence.py::test_charge_comparison_is_labelled_algebra_not_physics_validation PASSED [ 96%]
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration PASSED [ 97%]
+semiconductor_sim/tests/test_stage_closure.py::test_s3_vd0_degenerates_to_s1 PASSED [ 98%]
+semiconductor_sim/tests/test_stage_closure.py::test_s3_vd0_production_interp_closure PASSED [100%]
+
+=============================== warnings summary ===============================
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/solver.py:863: RuntimeWarning: solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。
+    phi_s, n_newton, _ = solve_poisson_pn(
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/solver.py:863: RuntimeWarning: solve_poisson_pn: Newton 未在 100 次迭代内收敛，返回末次迭代解。
+    phi_s, n_newton, _ = solve_poisson_pn(
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/run.py:278: RuntimeWarning: gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=1.465e-02)。
+    g = gummel_solve(x, Na, Nd, 0.0, max_outer=30, omega=omega,
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/run.py:278: RuntimeWarning: gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=7.324e-03)。
+    g = gummel_solve(x, Na, Nd, 0.0, max_outer=30, omega=omega,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+- generated xml file: /workspace/mosfet-tcad-research/verification/pytest.xml --
+=========================== short test summary info ============================
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_flatband
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_accumulation_charge_sign
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_depletion_charge_sign
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_surface_charge_consistency
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_monotonicity
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_boundary_conditions
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_vt_numeric_vs_analytic
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_wmax_numeric_vs_analytic
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_grid_kind_consistency
+PASSED semiconductor_sim/stage1_mos/tests/test_stage1.py::test_all_scan_points_converge
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_analytic_jacobian_vs_fd
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_qfp_columns_chain_rule
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_row_scaling_transparent
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_condition_number_reduced
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_newton_step_reduces_residual
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_equilibrium_matches_analytic
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_forward_current_equals_recombination
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_reverse_bias_generation_current
+PASSED semiconductor_sim/stage2_pn/tests/test_stage2.py::test_transformed_jacobian_vs_fd
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_flatband_equilibrium
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_surface_charge_consistency
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_phi_s_monotonic
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_gca_linear_square_law
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_subthreshold_slope
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_clm_not_in_weak_inversion
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_continuity_linear
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_continuity_saturation_finite_difference
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_saturation_plateau
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_pinch_off_moves_to_source
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_column_vs_direct_solve
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_skip_corner_does_not_clamp_workspace
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_threshold_inverse_correct_branch[0.05-1e-07-saturation]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_threshold_inverse_correct_branch[0.05-1e-05-linear]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_clm_disabled_profile_finite_at_high_drain
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[0.5-0.05]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[1-0.05]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[1.5-1.5]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_independent_continuum_reference[2-1.5]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_charge_budget_is_classical_identity
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_conservative_edges_and_independent_gradient_are_distinct
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_output_grid_does_not_change_terminal_current
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_fine_quadrature_knots_leave_exact_interpolant_integral_unchanged
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[5.0-0.0]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[1.0--0.1]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_table_outside_domain_raises[1.0-2.1]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_nonconvergence_is_not_a_valid_table_entry
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_small_iteration_budget_cannot_claim_convergence
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_transport_against_closed_form_sheets[linear]
+PASSED semiconductor_sim/stage3_mosfet/tests/test_stage3.py::test_transport_against_closed_form_sheets[log]
+PASSED semiconductor_sim/tests/test_common.py::test_thermal_voltage
+PASSED semiconductor_sim/tests/test_common.py::test_fermi_potential
+PASSED semiconductor_sim/tests/test_common.py::test_body_factor_and_vt_long
+PASSED semiconductor_sim/tests/test_common.py::test_square_law_limits
+PASSED semiconductor_sim/tests/test_common.py::test_vbi_and_depletion_analytic
+PASSED semiconductor_sim/tests/test_common.py::test_equilibrium_carriers_mass_action
+PASSED semiconductor_sim/tests/test_common.py::test_surface_grid_structure
+PASSED semiconductor_sim/tests/test_common.py::test_surface_grid_rejects_bad_params
+PASSED semiconductor_sim/tests/test_common.py::test_junction_grid_symmetry
+PASSED semiconductor_sim/tests/test_common.py::test_channel_grid
+PASSED semiconductor_sim/tests/test_common.py::test_make_grid_uniform_and_nonuniform
+PASSED semiconductor_sim/tests/test_common.py::test_grid_stats
+PASSED semiconductor_sim/tests/test_common.py::test_thomas_vs_dense
+PASSED semiconductor_sim/tests/test_common.py::test_thomas_banded_matches_scalar
+PASSED semiconductor_sim/tests/test_common.py::test_block_thomas_vs_dense
+PASSED semiconductor_sim/tests/test_common.py::test_bernoulli_values_and_limits
+PASSED semiconductor_sim/tests/test_common.py::test_bernoulli_small_taylor
+PASSED semiconductor_sim/tests/test_common.py::test_bernoulli_deriv_vs_fd
+PASSED semiconductor_sim/tests/test_common.py::test_qfp_columns_chain_rule
+PASSED semiconductor_sim/tests/test_common.py::test_checklist_records_and_rows
+PASSED semiconductor_sim/tests/test_common.py::test_checklist_numpy_bool_normalization
+PASSED semiconductor_sim/tests/test_common.py::test_validation_helpers
+PASSED semiconductor_sim/tests/test_common.py::test_json_roundtrip_and_golden
+PASSED semiconductor_sim/tests/test_common.py::test_npz_roundtrip
+PASSED semiconductor_sim/tests/test_common.py::test_terminal_log_dual_write
+PASSED semiconductor_sim/tests/test_common.py::test_ensure_results_dir
+PASSED semiconductor_sim/tests/test_golden.py::test_golden_regression[stage3]
+PASSED semiconductor_sim/tests/test_golden.py::test_golden_keys_stable[stage3]
+PASSED semiconductor_sim/tests/test_golden.py::test_golden_checks_configuration_and_values
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_numpy_json_file_and_console_use_same_encoder
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[nan]
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[inf]
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_nonfinite_json_is_rejected_without_partial_output[-inf]
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_background_decomposition_does_not_dominate_reported_subthreshold_points
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_background_is_explicitly_depth_dependent_but_excess_is_not
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_clipping_sensitivity_is_zero_inside_physical_working_range
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_density_clipping_is_disabled_and_overflow_is_explicit
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_production_table_and_golden_metadata_share_one_configuration
+PASSED semiconductor_sim/tests/test_revision_evidence.py::test_charge_comparison_is_labelled_algebra_not_physics_validation
+PASSED semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+PASSED semiconductor_sim/tests/test_stage_closure.py::test_s3_vd0_degenerates_to_s1
+PASSED semiconductor_sim/tests/test_stage_closure.py::test_s3_vd0_production_interp_closure
+SKIPPED [1] semiconductor_sim/tests/test_golden.py:7: Original stage1 golden absent in uploaded source; not reconstructed
+SKIPPED [1] semiconductor_sim/tests/test_golden.py:7: Original stage2 golden absent in uploaded source; not reconstructed
+SKIPPED [1] semiconductor_sim/tests/test_golden.py:12: Original stage1 golden absent in uploaded source; not reconstructed
+SKIPPED [1] semiconductor_sim/tests/test_golden.py:12: Original stage2 golden absent in uploaded source; not reconstructed
+================== 91 passed, 4 skipped, 4 warnings in 21.15s ==================

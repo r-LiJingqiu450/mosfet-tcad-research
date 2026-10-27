@@ -1,0 +1,74 @@
+{
+  "state": "completed",
+  "started_at": "2026-10-27T18:12:25.762843+08:00",
+  "exit_code": 0,
+  "steps": [
+    {
+      "name": "1. Numerical study and attribution",
+      "state": "completed",
+      "command": [
+        "/workspace/mosfet-tcad-research/.venv/bin/python",
+        "-m",
+        "semiconductor_sim.stage3_mosfet.phase1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 144.96198301699997,
+      "log": "study_log.txt"
+    },
+    {
+      "name": "2. Full pytest suite",
+      "state": "completed",
+      "command": [
+        "/workspace/mosfet-tcad-research/.venv/bin/python",
+        "-m",
+        "pytest",
+        "semiconductor_sim",
+        "-vv",
+        "-rA",
+        "--junitxml=verification/pytest.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 21.42471816499983,
+      "log": "tests_phase1.txt"
+    },
+    {
+      "name": "3. Generate reports",
+      "state": "completed",
+      "command": [
+        "/workspace/mosfet-tcad-research/.venv/bin/python",
+        "scripts/write_phase1_reports.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.1057328210004016,
+      "log": "verification/report_generation.txt"
+    },
+    {
+      "name": "4. Verify all deliverables",
+      "state": "completed",
+      "command": [
+        "/workspace/mosfet-tcad-research/.venv/bin/python",
+        "scripts/verify_delivery.py",
+        "--allow-running"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.0869675100002496,
+      "log": "verification/artifact_check.txt"
+    }
+  ],
+  "golden_sha256_before": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "golden_sha256_after": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "pytest": {
+    "collected": 95,
+    "passed": 91,
+    "skipped": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped_names": [
+      "test_golden_keys_stable[stage1]",
+      "test_golden_keys_stable[stage2]",
+      "test_golden_regression[stage1]",
+      "test_golden_regression[stage2]"
+    ]
+  },
+  "completed_at": "2026-10-27T18:15:12.359245+08:00"
+}

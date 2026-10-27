@@ -1,0 +1,23 @@
+Building/reusing production 400x220 log table
+Building/reusing comparison 240x110 linear table
+Recomputing unmodified recovered v1 in isolated interpreter
+Independent first-integral reference: 42 bias points
+Spatial refinement without table interpolation
+{
+  "threshold": {
+    "vt_cc": 1.0432740076419165,
+    "vt_long": 0.9963499970604937,
+    "square_law_cc": 1.025642497354985,
+    "branch": "saturation",
+    "criterion_offset_mV": 29.292500294491226,
+    "remaining_offset_mV": 17.63151028693155,
+    "total_offset_mV": 46.92401058142281
+  },
+  "maximum_reference_relative_error": 0.001909883507213217,
+  "acceptance": {
+    "independent_current_42_points_below_0p5pct": true,
+    "saturation_fd_641_below_1e_minus_3": true,
+    "edge_internal_consistency_below_1e_minus_9": true,
+    "threshold_correct_branch": true
+  }
+}
