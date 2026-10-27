@@ -2,7 +2,7 @@
 
 This run solves the intrinsic one-dimensional Poisson–Boltzmann boundary-value problem with a damped Newton method. The surface potential is prescribed at the semiconductor interface and the far boundary is neutral. The reported surface charge uses a second-order one-sided derivative.
 
-- Commit: `c64c463ba35fb3c2f177c9558217a20387046795`
+- Commit: `0ef184275850aa25a803f9fe6e2cd8af1e02f909`
 - Grids: 101, 201, and 401 points over 20 Debye lengths
 - Surface-potential sweep: -0.20 V to +0.20 V in 0.05 V increments
 - Converged rows: 27/27
