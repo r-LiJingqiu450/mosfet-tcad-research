@@ -110,3 +110,12 @@ freeze-protected workflow. In parallel, the S2 equilibrium Newton/Gummel
 warnings should be isolated with iteration histories and residual thresholds.
 Only after those baselines are independently checked should S4 or any new
 physical model be considered.
+
+## Delivery
+
+The final restoration branch commit is the HEAD of
+`origin/restore/phase1-v1.2` after this report is committed. `main` was not
+pushed or modified. The manual
+comparison/PR URL is:
+
+https://github.com/r-LiJingqiu450/mosfet-tcad-research/compare/main...restore/phase1-v1.2
