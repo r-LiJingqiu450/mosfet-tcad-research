@@ -120,7 +120,7 @@ exit 0; iters=8, converged=True, warnings=[]
 
 * `scripts/diagnose_s2_convergence.py`：逐步镜像 Poisson/Gummel 更新并输出结构化证据；
 * `verification/s2_convergence_diagnostics.json`：每个 omega 的 30 步外层摘要和代表性内层记录；
-* `verification/s2_convergence_history.csv`：5,793 行（含表头）的逐步历史；
+* `verification/s2_convergence_history.csv`：5,794 行（含表头）的逐步历史；
 * `verification/s2_convergence_test.log`、`s2_targeted_tests.log`、`s2_kernel_closure_tests.log`、`s2_full_pytest.log`、`s2_reproduce_phase1.log`：真实命令输出和退出码；
 * `verification/s2_clamp_probe.log`、`s2_exact_poisson_probe.log`、`s2_production_newton.log`：根因与生产路径对照。
 
