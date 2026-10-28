@@ -1,0 +1,10 @@
+outer1 poisson 2 True dphi 0.12331273860943168
+outer2 initial norm 9.649102844680032e-05 delta max 1.6708041137440302 delta p99 [1.28975551 1.6363954  1.6704296  1.67080411]
+clamp 0.3 iters 100 ok False final residual 0.00010284941386771807 warnings ['solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。', 'solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。'] dphi 0.016845703125000555
+clamp 1 iters 15 ok True final residual 5.670100290714211e-16 warnings [] dphi 1.6708041137421714
+clamp 10 iters 2 ok True final residual 5.087909564253258e-16 warnings [] dphi 1.6708041137440042
+clamp 100 iters 2 ok True final residual 5.087909564253258e-16 warnings [] dphi 1.6708041137440042
+damped False iters 7 ok True final residual 5.802411478665453e-16 warnings []
+damped True iters 100 ok False final residual 0.00010284941386771807 warnings ['solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。', 'solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。']
+
+COMMAND_EXIT_CODE=0

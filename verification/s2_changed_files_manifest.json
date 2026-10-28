@@ -1,0 +1,86 @@
+{
+  "status": "PARTIAL",
+  "branch": "phase2a/s2-convergence-audit-2026-10-28",
+  "base_commit": "78b38b714aedfb38bbb4e43d762e4744ec3cae11",
+  "main_commit": "c64c463ba35fb3c2f177c9558217a20387046795",
+  "production_solver_modified": false,
+  "stage3_golden_sha256_before": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "stage3_golden_sha256_after": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "missing_goldens": [
+    "semiconductor_sim/results/golden/stage1.json",
+    "semiconductor_sim/results/golden/stage2.json"
+  ],
+  "files": [
+    {
+      "path": "reports/S2_Convergence_Audit_2026-10-28.md",
+      "bytes": 8884,
+      "sha256": "e1b1270e991996cc3fba96ad58d9b14ffb7702eda857c38f5afdcb7a876f4557"
+    },
+    {
+      "path": "scripts/diagnose_s2_convergence.py",
+      "bytes": 7175,
+      "sha256": "406d9c7493f0868f5a386f0d7b58ab31eb9ab120af7a36e4c5abf346373e3c66"
+    },
+    {
+      "path": "scripts/diagnose_s2_production_newton.py",
+      "bytes": 996,
+      "sha256": "1730c82a1b177c2ee81af5ad0733fdc9e006feadc839060330d26fba798de5cf"
+    },
+    {
+      "path": "verification/s2_convergence_diagnostics.json",
+      "bytes": 46803,
+      "sha256": "16bf71201d47bd2fad7a942c0972ceacb60a5ae33c432ad0f22d42026954460a"
+    },
+    {
+      "path": "verification/s2_convergence_history.csv",
+      "bytes": 913499,
+      "sha256": "76fce47b0603d4affa153015a78b2972817deba1fe026d42a010130b6934819f"
+    },
+    {
+      "path": "verification/s2_convergence_test.log",
+      "bytes": 1962,
+      "sha256": "ea3a0caffbb9a34be3fcba35070e78b9c1ee1cf937bd9f95223fbe567bdad7b8"
+    },
+    {
+      "path": "verification/s2_targeted_tests.log",
+      "bytes": 119,
+      "sha256": "a9e54e27c22dead0f0088aa074ad0461c88a248aa0a7e1d4288b238a7f76f92f"
+    },
+    {
+      "path": "verification/s2_kernel_closure_tests.log",
+      "bytes": 1589,
+      "sha256": "28107a3a4092888b811a41d9ce51ec55824fe6d4d60842de1ceae666fae4a9f2"
+    },
+    {
+      "path": "verification/s2_full_pytest.log",
+      "bytes": 1681,
+      "sha256": "037c1331deca500106b58b417ab1d0a71fb8ab1e9a272e50b0b2fb899995f2d4"
+    },
+    {
+      "path": "verification/s2_reproduce_phase1.log",
+      "bytes": 366,
+      "sha256": "f9a4e6da1530ebb41052619e87b4bff1d1b522e0c0db510a5d9d468375246d6f"
+    },
+    {
+      "path": "verification/s2_diagnostic_command.log",
+      "bytes": 8997,
+      "sha256": "8502232d2b7052628999909db16dfab46ac9b6bf72b67a964d34f75d664d47af"
+    },
+    {
+      "path": "verification/s2_clamp_probe.log",
+      "bytes": 1274,
+      "sha256": "f9f6e715e4d725dedf4decce1db78eda2443248fe7c2d39e1b7fdc73708c9eb6"
+    },
+    {
+      "path": "verification/s2_exact_poisson_probe.log",
+      "bytes": 7620,
+      "sha256": "a13ea677959453f5eb6dab8a5573d19d4c53f1a32e7aba6e9c0d7197908e38d0"
+    },
+    {
+      "path": "verification/s2_production_newton.log",
+      "bytes": 704,
+      "sha256": "645e8772153b79a31fb551709df82feb0b762e577c3a2989804d0fc28fd475a2"
+    }
+  ],
+  "manifest_note": "This manifest intentionally excludes itself from the hash list."
+}
