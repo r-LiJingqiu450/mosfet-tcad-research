@@ -1,0 +1,55 @@
+{
+  "candidate_status": "candidate-not-official-golden",
+  "candidate_version": "phase2b_v1.0",
+  "generated_at_utc": "2026-10-28T14:14:51.251192+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "repository_baseline": "fb7a311303f3b366b556d2a5385def0b9c256399",
+  "official_golden_directory": "semiconductor_sim/results/golden",
+  "official_s1_s2_status": "missing; not reconstructed",
+  "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "source_configuration": "semiconductor_sim/tests/golden_helpers.py",
+  "candidate_tolerance": {
+    "relative": 1e-06,
+    "absolute": 1e-12
+  },
+  "independent_evidence": {
+    "s1": "verification/phase2b_s1_verification.json",
+    "s2": "verification/phase2b_s2_verification.json"
+  },
+  "stage": "stage2",
+  "configuration": {
+    "L_m": 2e-06,
+    "v_forward": [
+      0.5
+    ],
+    "v_reverse": [
+      -1.0
+    ],
+    "verbose": false,
+    "source_function": "stage2_numbers"
+  },
+  "numbers": {
+    "V_bi_num": 0.7143171519879805,
+    "V_bi_exact": 0.7143171519879805,
+    "np_err": 2.938781819176902e-08,
+    "J_eq": 4.04187756048e-09,
+    "J_scale": 4.730043657886365,
+    "W_charge": 4.1247131926668706e-07,
+    "W_exact": 4.2982100354335465e-07,
+    "eq_iters": 8,
+    "Js_exact": 1.4929748575651526e-05,
+    "J_fwd": 12141.998323775642,
+    "W_fwd": 2.0472607753334405e-07,
+    "iters_fwd": 8,
+    "J_rev": -2.032253511521259,
+    "W_rev": 6.542479348725969e-07,
+    "iters_rev": 6
+  },
+  "warning_summary": [
+    "gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=1.465e-02)。",
+    "gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=7.324e-03)。",
+    "solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。",
+    "solve_poisson_pn: Newton 未在 100 次迭代内收敛，返回末次迭代解。"
+  ]
+}

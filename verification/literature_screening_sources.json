@@ -1,0 +1,25 @@
+{
+  "screen_date": "2026-10-28",
+  "network_note": "Crossref API query was blocked by the configured proxy (HTTP 403); DOI and publisher links are recorded for human verification.",
+  "sources": [
+    {"id":"L1","title":"A self-consistent iterative scheme for one-dimensional steady state transistor calculations","authors":"A. A. Gummel","year":1964,"venue":"IEEE Transactions on Electron Devices 11(10), 455-465","doi":"10.1109/T-ED.1964.1536099","url":"https://doi.org/10.1109/T-ED.1964.1536099","role":"Gummel iteration"},
+    {"id":"L2","title":"Large-signal analysis of a silicon Read diode oscillator","authors":"D. L. Scharfetter; H. K. Gummel","year":1969,"venue":"IEEE Transactions on Electron Devices 16(1), 64-77","doi":"10.1109/T-ED.1969.16754","url":"https://doi.org/10.1109/T-ED.1969.16754","role":"Scharfetter-Gummel discretization"},
+    {"id":"L3","title":"Effects of diffusion current on characteristics of metal-oxide-semiconductor transistors","authors":"H. C. Pao; C. T. Sah","year":1966,"venue":"Solid-State Electronics 9(10), 927-937","doi":"10.1016/0038-1101(66)90013-6","url":"https://doi.org/10.1016/0038-1101(66)90013-6","role":"MOSFET GCA/drift-diffusion baseline"},
+    {"id":"L4","title":"Operation and Modeling of the MOS Transistor","authors":"Y. Tsividis; C. McAndrew","year":2011,"venue":"Oxford University Press, 3rd ed., ISBN 978-0-19-517015-9","url":"https://global.oup.com/academic/product/operation-and-modeling-of-the-mos-transistor-9780195170159","role":"charge-sheet/GCA conventions"},
+    {"id":"L5","title":"Review of code and solution verification procedures for computational simulation","authors":"C. J. Roy","year":2005,"venue":"Journal of Computational Physics 205(1), 131-156","doi":"10.1016/j.jcp.2004.10.036","url":"https://doi.org/10.1016/j.jcp.2004.10.036","role":"verification methodology"},
+    {"id":"L6","title":"Verification and validation in computational fluid dynamics","authors":"W. L. Oberkampf; T. G. Trucano","year":2002,"venue":"Progress in Aerospace Sciences 38(3), 209-272","doi":"10.1016/S0376-0421(02)00005-2","url":"https://doi.org/10.1016/S0376-0421(02)00005-2","role":"V&V terminology"},
+    {"id":"L7","title":"Procedure for estimation and reporting of uncertainty due to discretization in CFD applications","authors":"I. B. Celik et al.","year":2008,"venue":"Journal of Fluids Engineering 130(7), 078001","doi":"10.1115/1.2960953","url":"https://doi.org/10.1115/1.2960953","role":"grid/discretization uncertainty"},
+    {"id":"L8","title":"Analysis and Simulation of Semiconductor Devices","authors":"S. Selberherr","year":1984,"venue":"Springer","doi":"10.1007/978-3-7091-8752-4","url":"https://doi.org/10.1007/978-3-7091-8752-4","role":"semiconductor device simulation"},
+    {"id":"L9","title":"Semiconductor Equations","authors":"P. A. Markowich; C. A. Ringhofer; C. Schmeiser","year":1990,"venue":"Springer","doi":"10.1007/978-3-7091-0650-2","url":"https://doi.org/10.1007/978-3-7091-0650-2","role":"drift-diffusion/Poisson analysis"},
+    {"id":"L10","title":"Standard for Verification and Validation in Computational Fluid Dynamics and Heat Transfer","authors":"ASME","year":2009,"venue":"ASME V&V 20-2009","url":"https://www.asme.org/codes-standards/find-codes-standards/v-v-20-standard-verification-validation-computational-fluid-dynamics-heat-transfer","role":"formal V&V framing"},
+    {"id":"L11","title":"BSIM4 model documentation and release material","authors":"Berkeley BSIM Group","year":null,"venue":"Berkeley model documentation","url":"https://bsim.berkeley.edu/models/bsim4/","role":"compact-model comparison target"},
+    {"id":"L12","title":"Sentaurus Device product and documentation portal","authors":"Synopsys","year":null,"venue":"Commercial TCAD documentation","url":"https://www.synopsys.com/silicon/tcad/device-simulation/sentaurus-device.html","role":"possible independent 2D TCAD route"}
+  ],
+  "research_questions": [
+    "GCA error decomposition across gate/drain bias and channel length",
+    "threshold and branch convention sensitivity",
+    "CLM attribution without cancellation of other errors",
+    "transferability from 1D to independently configured 2D drift-diffusion/TCAD",
+    "mesh, nonlinear residual, reference, and parameter uncertainty budget"
+  ]
+}

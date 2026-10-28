@@ -1,0 +1,23 @@
+........................................................................ [ 73%]
+...ss.ss..................                                               [100%]
+=============================== warnings summary ===============================
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/solver.py:863: RuntimeWarning: solve_poisson_pn: Armijo 线搜索折半 12 次仍未满足充分下降条件 (alpha=2.44e-04)，该步接受最小步长解。
+    phi_s, n_newton, _ = solve_poisson_pn(
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/solver.py:863: RuntimeWarning: solve_poisson_pn: Newton 未在 100 次迭代内收敛，返回末次迭代解。
+    phi_s, n_newton, _ = solve_poisson_pn(
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/run.py:278: RuntimeWarning: gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=1.465e-02)。
+    g = gummel_solve(x, Na, Nd, 0.0, max_outer=30, omega=omega,
+
+semiconductor_sim/tests/test_stage_closure.py::test_s2_equilibrium_degeneration
+  /workspace/mosfet-tcad-research/semiconductor_sim/stage2_pn/run.py:278: RuntimeWarning: gummel_solve: Gummel 迭代未在 30 次外层迭代内收敛 (V_a=0.000 V, dphi=7.324e-03)。
+    g = gummel_solve(x, Na, Nd, 0.0, max_outer=30, omega=omega,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+94 passed, 4 skipped, 4 warnings in 32.46s
+
+COMMAND_EXIT_CODE=0

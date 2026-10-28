@@ -1,0 +1,40 @@
+{
+  "candidate_status": "candidate-not-official-golden",
+  "candidate_version": "phase2b_v1.0",
+  "generated_at_utc": "2026-10-28T14:14:51.251192+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "repository_baseline": "fb7a311303f3b366b556d2a5385def0b9c256399",
+  "official_golden_directory": "semiconductor_sim/results/golden",
+  "official_s1_s2_status": "missing; not reconstructed",
+  "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "source_configuration": "semiconductor_sim/tests/golden_helpers.py",
+  "candidate_tolerance": {
+    "relative": 1e-06,
+    "absolute": 1e-12
+  },
+  "independent_evidence": {
+    "s1": "verification/phase2b_s1_verification.json",
+    "s2": "verification/phase2b_s2_verification.json"
+  },
+  "stage": "stage1",
+  "configuration": {
+    "NGRID": 201,
+    "verbose": false,
+    "source_function": "stage1_numbers"
+  },
+  "numbers": {
+    "vt_numeric": 0.9962624863325964,
+    "vt_analytic": 0.9963499970604937,
+    "w_num": 3.0309917835398983e-07,
+    "w_max_analytic": 3.039293463019131e-07,
+    "cfb_numeric": 0.5937141558708954,
+    "cfb_analytic": 0.5947392625350699,
+    "psi_F": 0.35715857599399026,
+    "L_D": 4.088454517741207e-08,
+    "Cox": 0.0017265666234960002,
+    "iter_mean": 4.051792828685259,
+    "iter_max": 17
+  },
+  "warning_summary": []
+}

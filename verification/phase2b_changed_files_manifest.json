@@ -1,0 +1,116 @@
+{
+  "status": "PARTIAL",
+  "branch": "phase2b/verification-candidates-2026-10-28",
+  "base_commit": "fb7a311303f3b366b556d2a5385def0b9c256399",
+  "main_commit": "c64c463ba35fb3c2f177c9558217a20387046795",
+  "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "official_s1_s2_missing": true,
+  "files": [
+    {
+      "path": "reports/Phase2B_Literature_Screening_2026-10-28.md",
+      "bytes": 8449,
+      "sha256": "5b8ce1271b6f716ea5e56398ec74412eba1a444bda498a985adaafe27febec93"
+    },
+    {
+      "path": "reports/Phase2B_Verification_Report_2026-10-28.md",
+      "bytes": 8127,
+      "sha256": "c620a946c6f63a3f66e15749ca8b5a3cc42af71044e743314db693fdddd5fbd5"
+    },
+    {
+      "path": "scripts/generate_phase2b_candidates.py",
+      "bytes": 3668,
+      "sha256": "0fdae9aba148fd0d3122e026c477172af28bdc9f3e263da2e7e555e5c1f86ce5"
+    },
+    {
+      "path": "scripts/phase2b_s1_audit.py",
+      "bytes": 7481,
+      "sha256": "aea2159812180b861a9f6af88ed8f06744e94173b48863b85567648125410cf3"
+    },
+    {
+      "path": "scripts/phase2b_s2_audit.py",
+      "bytes": 10794,
+      "sha256": "ede0df5327e133b351abe76980f1ba5bd7f1bc40198aa7ab99c3ecc99854e61a"
+    },
+    {
+      "path": "semiconductor_sim/tests/test_phase2b_candidate_regression.py",
+      "bytes": 2284,
+      "sha256": "0e24134847d6dfbb7e1f862e533c1dbc392585ffef1baf50c2d6c58e0e7ce6fb"
+    },
+    {
+      "path": "verification/literature_screening_sources.json",
+      "bytes": 4277,
+      "sha256": "bbf4bc8485d9deb02868b1b191d8e40ae6ee75df652356965f793641ebf720e2"
+    },
+    {
+      "path": "verification/phase2b_s1_metrics.csv",
+      "bytes": 2704,
+      "sha256": "25d25143eafa09d18432d3120e317712c2de84443d1e16a6b32d22eacbc6b130"
+    },
+    {
+      "path": "verification/phase2b_s1_verification.json",
+      "bytes": 95943,
+      "sha256": "454d3a10d3dc21618d364fefd659f69d8bb6ee4d7e9ebd1233919b6cc13f90aa"
+    },
+    {
+      "path": "verification/phase2b_s2_metrics.csv",
+      "bytes": 41448,
+      "sha256": "0028d58e078dac8349820b49636f5d30a96ed49e086947fad7b2b411c2c1e942"
+    },
+    {
+      "path": "verification/phase2b_s2_verification.json",
+      "bytes": 132167,
+      "sha256": "f66bc7da1519098e0e6442c02876d5cac3e6f823fc13a36a0b1da39062ca2387"
+    },
+    {
+      "path": "verification/phase2b_s2_convergence_history.csv",
+      "bytes": 64194,
+      "sha256": "5b7284768994a7a867a2b9bb4043de7fd33547b9d5ec91783d0ae94c1610ddb1"
+    },
+    {
+      "path": "verification/candidates/phase2b_v1_0/stage1.json",
+      "bytes": 1423,
+      "sha256": "93244365320f005eb61ae242f5416cbb4cf9a9af92b1e63917370e336adc0bd0"
+    },
+    {
+      "path": "verification/candidates/phase2b_v1_0/stage2.json",
+      "bytes": 2023,
+      "sha256": "7883dfdd80fe5fc3b768ed3e21088f6b212682dd74048c033a935dd1162afeac"
+    },
+    {
+      "path": "verification/candidates/phase2b_v1_0/manifest.json",
+      "bytes": 1471,
+      "sha256": "02719a7bc8c4b310e21ba29559d8814e099b90b1c6381801f9ffcbe7c9901cb4"
+    },
+    {
+      "path": "verification/phase2b_s1_command.log",
+      "bytes": 2197,
+      "sha256": "371c5bf3c6667c594130567b6b8b5948bd0f1faf78d2bb038f1b25f0c055b300"
+    },
+    {
+      "path": "verification/phase2b_s2_command.log",
+      "bytes": 89,
+      "sha256": "e0d5798c9adeceb9c19e17275319d7e48ea88c077c42c13618b8060a706f526b"
+    },
+    {
+      "path": "verification/phase2b_candidate_generation.log",
+      "bytes": 317,
+      "sha256": "5233fcfec1e338f4adb14705dcab73ad6fc2ac0c1606cb3faceb9d7430f50753"
+    },
+    {
+      "path": "verification/phase2b_candidate_tests.log",
+      "bytes": 120,
+      "sha256": "00acb962a75e466e2d7c29374274905a29d3ac70ff09a3c25f38f6696ed0ecb6"
+    },
+    {
+      "path": "verification/phase2b_s1_s2_tests.log",
+      "bytes": 120,
+      "sha256": "34da57529f2093d69d815ebd24cd86493843513e8b525404b0af4f79560acd4d"
+    },
+    {
+      "path": "verification/phase2b_full_pytest.log",
+      "bytes": 1681,
+      "sha256": "cad87858185e329a82635fe77346a453d234419697606cc85037630ee76d1f95"
+    }
+  ],
+  "note": "Manifest excludes itself; candidate hashes are separately recorded in verification/candidates/phase2b_v1_0/manifest.json."
+}

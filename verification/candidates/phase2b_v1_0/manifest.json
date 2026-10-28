@@ -1,0 +1,38 @@
+{
+  "candidate_status": "candidate-not-official-golden",
+  "candidate_version": "phase2b.v1.0",
+  "official_golden_untouched": true,
+  "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "missing_official_files": [
+    "stage1.json",
+    "stage2.json"
+  ],
+  "files": {
+    "stage1.json": "93244365320f005eb61ae242f5416cbb4cf9a9af92b1e63917370e336adc0bd0",
+    "stage2.json": "7883dfdd80fe5fc3b768ed3e21088f6b212682dd74048c033a935dd1162afeac"
+  },
+  "tolerance": {
+    "relative": 1e-06,
+    "absolute": 1e-12
+  },
+  "provenance": {
+    "candidate_status": "candidate-not-official-golden",
+    "candidate_version": "phase2b_v1.0",
+    "generated_at_utc": "2026-10-28T14:14:51.251192+00:00",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "repository_baseline": "fb7a311303f3b366b556d2a5385def0b9c256399",
+    "official_golden_directory": "semiconductor_sim/results/golden",
+    "official_s1_s2_status": "missing; not reconstructed",
+    "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+    "source_configuration": "semiconductor_sim/tests/golden_helpers.py",
+    "candidate_tolerance": {
+      "relative": 1e-06,
+      "absolute": 1e-12
+    },
+    "independent_evidence": {
+      "s1": "verification/phase2b_s1_verification.json",
+      "s2": "verification/phase2b_s2_verification.json"
+    }
+  }
+}
