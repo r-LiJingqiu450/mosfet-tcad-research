@@ -1,0 +1,92 @@
+{
+  "status": "PARTIAL",
+  "branch": "phase2c/conservation-postprocess-audit-2026-10-29",
+  "base_commit": "e1598b9597e99fecefcf3a057ca86a9258f969b4",
+  "main_commit": "c64c463ba35fb3c2f177c9558217a20387046795",
+  "official_stage3_sha256": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "official_s1_s2_missing": true,
+  "candidate_stage1_sha256": "93244365320f005eb61ae242f5416cbb4cf9a9af92b1e63917370e336adc0bd0",
+  "candidate_stage2_sha256": "7883dfdd80fe5fc3b768ed3e21088f6b212682dd74048c033a935dd1162afeac",
+  "files": [
+    {
+      "path": "reports/Phase2C_Conservation_Postprocess_Audit_2026-10-29.md",
+      "bytes": 9919,
+      "sha256": "9e07602fea6ce2982cdfa011f3d9252605022dfe27a727883e13742644a8c4ba"
+    },
+    {
+      "path": "scripts/phase2c_make_plots.py",
+      "bytes": 2212,
+      "sha256": "f0d91f6e2037702e60a1bec2129d642aa5b69ed6792bfc9e4bb19edcef331a0b"
+    },
+    {
+      "path": "scripts/phase2c_s1_postprocess_audit.py",
+      "bytes": 10361,
+      "sha256": "54b38cf383ab98c14252cad2498ced2e18821faa113ff26c8e5568725280ddbd"
+    },
+    {
+      "path": "scripts/phase2c_s2_conservation_audit.py",
+      "bytes": 10019,
+      "sha256": "a6cbb1cea0c1d2c843727ba3788e4672a1f3fc9b30b299911c6c8d6211a1e772"
+    },
+    {
+      "path": "verification/phase2c_s1_postprocess.csv",
+      "bytes": 332108,
+      "sha256": "9e2057e3f65ddb0b51de8766ba1b0e4d5b0d80574bcac9d9fffefb94bdad2e3c"
+    },
+    {
+      "path": "verification/phase2c_s1_postprocess.json",
+      "bytes": 972126,
+      "sha256": "16429eb85d4b901b3a4332b71bfb65793f76db3805bbdd3979f2c5af817a99a3"
+    },
+    {
+      "path": "verification/phase2c_s2_conservation.csv",
+      "bytes": 19442,
+      "sha256": "4080f03bda49da67733d50dddbe69e2d661ee3310b54b5821ee99bf54b863bcd"
+    },
+    {
+      "path": "verification/phase2c_s2_conservation.json",
+      "bytes": 26685,
+      "sha256": "d7e710d7939b2956bd1f4b1819e6f7a6edf9ce2d25a5b56732427c9cfead3062"
+    },
+    {
+      "path": "verification/plots/phase2c_s1_charge_methods.png",
+      "bytes": 81562,
+      "sha256": "897f809f18f93c8e1897f38cacfdb1be4566e64c043f775fc0b3a7880965380a"
+    },
+    {
+      "path": "verification/plots/phase2c_s1_threshold_methods.png",
+      "bytes": 61970,
+      "sha256": "76463abb6f9c7392c812ef0024c4dc6c295e965ea525b770cd23a0b0df572f8e"
+    },
+    {
+      "path": "verification/plots/phase2c_s2_conservation.png",
+      "bytes": 147488,
+      "sha256": "07ea3ddfa039badaacbfe329cf86c88de6196e98989c63f4a2d3a9f0bc561be3"
+    },
+    {
+      "path": "verification/plots/phase2c_s2_formula_error.png",
+      "bytes": 102506,
+      "sha256": "cba5a87e59e0ced0f67f573c0940b375852233393c866b8408810a9612fb6f2c"
+    },
+    {
+      "path": "verification/phase2c_s1_postprocess_command.log",
+      "bytes": 252,
+      "sha256": "3f09a3b858bc5e1f64c3dcc488c25bd4683483d207ae9e863ea29db60edbca8a"
+    },
+    {
+      "path": "verification/phase2c_s2_conservation_command.log",
+      "bytes": 74,
+      "sha256": "a4036ea7f6d214c5a1cf91014677d61612013d6ce3f26f9d55d3daa90201f825"
+    },
+    {
+      "path": "verification/phase2c_plots_command.log",
+      "bytes": 72,
+      "sha256": "a95bcc801b9f6473fd7371f599981cf220342d3b4452c7e448adc659f2ebc7fe"
+    },
+    {
+      "path": "verification/phase2c_full_pytest.log",
+      "bytes": 1681,
+      "sha256": "a540580bc2627ab60344ba38bccb9082ae2f915e13ca53a61598015f3c5fa375"
+    }
+  ]
+}
