@@ -1,0 +1,74 @@
+Searching DEVSIM_MATH_LIBS="/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 139 Lines.
+Physical group name body has 140 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 613 Lines.
+Physical group name drain has 614 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 141 Lines.
+Physical group name gate has 142 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 3948 Triangles.
+Physical group name ox has 6077 Lines.
+Physical group name ox has 2130 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 141 Lines.
+Physical group name ox_si has 142 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 172866 Triangles.
+Physical group name si has 260053 Lines.
+Physical group name si has 87188 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 613 Lines.
+Physical group name source has 614 Points.
+Device mos has 89176 coordinates with max index 89175
+Region ox has 2130 nodes.
+Region si has 87188 nodes.
+Contact body in region si with 140 nodes
+Contact drain in region si with 614 nodes
+Contact gate in region ox with 142 nodes
+Warning, contact "drain" shares a node with contact "oxc_d"
+Contact oxc_d in region ox with 1 nodes
+Contact oxc_s in region ox with 1 nodes
+Warning, contact "oxc_s" shares a node with contact "source"
+Contact source in region si with 614 nodes
+Warning, contact "oxc_d" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Adding interface ox_si with 142, 142 nodes
+creating solution dcop with 2 nodes
+number of equations 176508
+creating solution dcop_prev with 2 nodes
+Iteration: 0
+  Device: "mos"	RelError: 1.53554e-14	AbsError: 3.18788e-02
+    Region: "ox"	RelError: 9.03960e-17	AbsError: 3.03083e-17
+      Equation: "PotentialEquation"	RelError: 9.03960e-17	AbsError: 3.03083e-17
+    Region: "si"	RelError: 1.52650e-14	AbsError: 3.18788e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.67143e-15	AbsError: 3.18788e-02
+      Equation: "PotentialEquation"	RelError: 1.25936e-14	AbsError: 5.34163e-17
+  Circuit: 	RelError: 3.07249e-21	AbsError: 3.07249e-31
+number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 5.54564e-15	AbsError: 1.32788e-02
+    Region: "ox"	RelError: 9.30907e-17	AbsError: 2.82923e-17
+      Equation: "PotentialEquation"	RelError: 9.30907e-17	AbsError: 2.82923e-17
+    Region: "si"	RelError: 5.45255e-15	AbsError: 1.32788e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.57273e-15	AbsError: 1.32788e-02
+      Equation: "PotentialEquation"	RelError: 3.87982e-15	AbsError: 3.19369e-17
+  Circuit: 	RelError: 1.91027e-21	AbsError: 1.91027e-31
