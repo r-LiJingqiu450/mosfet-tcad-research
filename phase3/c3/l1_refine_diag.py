@@ -32,9 +32,17 @@ from phase3.c3.t1 import DELTA_L1, Geo, equilibrate, g_gca, newton_step_G
 
 
 def backward_error(A, x, b):
+    """Returns (normwise inf-norm backward error, componentwise Oettli-Prager backward error,
+    residual). The normwise value is dominated by the largest rows of this badly scaled
+    system (run1 showed ~1e-37) and is kept only for completeness; the componentwise value
+    max_i |r_i| / (|A||x| + |b|)_i is invariant under row scaling and is the one interpreted."""
     r = b - A @ x
     nA = abs(A).sum(axis=1).max()
-    return float(np.abs(r).max() / (nA * np.abs(x).max() + np.abs(b).max())), r
+    nw = float(np.abs(r).max() / (nA * np.abs(x).max() + np.abs(b).max()))
+    den = abs(A) @ np.abs(x) + np.abs(b)
+    m = den > 0
+    cw = float(np.max(np.abs(r[m]) / den[m])) if m.any() else 0.0
+    return nw, cw, r
 
 
 def main():
@@ -62,8 +70,9 @@ def main():
     lu = spla.splu(A)
     x = lu.solve(rhs); steps = []
     for k in range(4):
-        be, r = backward_error(A, x, rhs)
-        steps.append(dict(step=k, backward_error=be, G=-float(x[iV]) / DELTA_L1, r0=-float(x[iV]) / DELTA_L1 / G - 1))
+        nw, cw, r = backward_error(A, x, rhs)
+        steps.append(dict(step=k, backward_error_normwise=nw, backward_error_componentwise=cw,
+                          G=-float(x[iV]) / DELTA_L1, r0=-float(x[iV]) / DELTA_L1 / G - 1))
         x = x + lu.solve(r)
     out['superlu_refinement'] = steps
     # (3) equilibrated factorization: Dr A Dc, row then column max-scaling
@@ -73,8 +82,9 @@ def main():
     As = (As @ sp.diags(dc)).tocsc()
     lus = spla.splu(As)
     y = lus.solve(dr * rhs); xs = dc * y
-    be, _ = backward_error(A, xs, rhs)
-    out['superlu_equilibrated'] = dict(backward_error=be, G=-float(xs[iV]) / DELTA_L1, r0=-float(xs[iV]) / DELTA_L1 / G - 1)
+    nw, cw, _ = backward_error(A, xs, rhs)
+    out['superlu_equilibrated'] = dict(backward_error_normwise=nw, backward_error_componentwise=cw,
+                                       G=-float(xs[iV]) / DELTA_L1, r0=-float(xs[iV]) / DELTA_L1 / G - 1)
     gns = newton_step_G()
     out['G_NS_umfpack'] = dict(G=gns, r0=gns / G - 1)
     rec['result'] = out
