@@ -671,3 +671,14 @@ Iteration: 0
       Equation: "PotentialEquation"	RelError: 6.32944e-14	AbsError: 5.61900e-17
   Circuit: 	RelError: 3.03127e-09	AbsError: 3.03127e-19
 number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 5.66649e-12	AbsError: 1.15752e+06
+    Region: "ox"	RelError: 2.24262e-13	AbsError: 3.68428e-13
+      Equation: "PotentialEquation"	RelError: 2.24262e-13	AbsError: 3.68428e-13
+    Region: "si"	RelError: 5.44222e-12	AbsError: 1.15752e+06
+      Equation: "ElectronContinuityEquation"	RelError: 2.81780e-13	AbsError: 1.15752e+06
+      Equation: "PotentialEquation"	RelError: 5.16044e-12	AbsError: 7.29691e-15
+  Circuit: 	RelError: 1.58897e-09	AbsError: 1.58897e-19
+AC Iteration:
+number of equations 176508
+T1 10.0 3 b 2.0 {"L1": {"r0": -6.824242715364193e-08, "E_eq": 2.663996586660389e-07, "E_lin": 1.9048110518287667e-07, "E": 4.5688076384891554e-07, "verdict": "PASS"}, "L2": {"r0": 3.669526127403344e-08, "E_freq": 0.0, "E_eq": 1.7851083056186212e-08, "E_lin": 1.5452956749370632e-07, "E": 1.7238065054989253e-07, "verdict": "PASS"}}
