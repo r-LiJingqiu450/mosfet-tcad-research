@@ -18,6 +18,25 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import numpy as np
 
 
+def observed_order(d_fine, d_coarse, r_fine, r_coarse, it=200):
+    """Observed order from three solutions with NON-constant refinement ratios.
+    d_fine = f1 - f2, d_coarse = f2 - f3 (same sign, monotone), r_fine = h2/h1, r_coarse = h3/h2.
+    For f_k = c + a h_k^p:  d_coarse/d_fine = r_fine^p (r_coarse^p - 1)/(r_fine^p - 1), so
+      p = [ln(d_coarse/d_fine) + ln((r_fine^p - 1)/(r_coarse^p - 1))] / ln r_fine
+    (Celik et al., J. Fluids Eng. 130, 078001, 2008, monotone case), solved by fixed-point
+    iteration. With r_fine == r_coarse it reduces to ln(d_coarse/d_fine)/ln r.
+    v1 of this analysis (commit 896d9d9) used only the first term, which biases p by
+    ln((r_fine^p-1)/(r_coarse^p-1))/ln r_fine (about -0.008 for the D-1 depth ratios)."""
+    lr = math.log(d_coarse / d_fine)
+    p = lr / math.log(r_fine)
+    for _ in range(it):
+        pn = (lr + math.log((r_fine ** p - 1) / (r_coarse ** p - 1))) / math.log(r_fine)
+        if abs(pn - p) < 1e-14:
+            return pn
+        p = pn
+    return p
+
+
 def classify(f, h):
     """R04 7.4 with actual ratios. f, h: finest first (f1 finest)."""
     f1, f2, f3, f4 = f
@@ -30,7 +49,7 @@ def classify(f, h):
     R234 = d23 / d34 if d34 != 0 else math.inf
     out.update(R123=R123, R234=R234)
     if 0 < R123 < 1 and 0 < R234 < 1:
-        p123 = math.log(d23 / d12) / math.log(r12); p234 = math.log(d34 / d23) / math.log(r23)
+        p123 = observed_order(d12, d23, r12, r23); p234 = observed_order(d23, d34, r23, r34)
         out.update(p123=p123, p234=p234)
         if 0.5 <= p123 <= 3 and abs(p123 - p234) <= 0.25 * p123:
             out.update(cls='asymptotic', U=1.25 * abs(d12) / (r12 ** p123 - 1),
