@@ -56,3 +56,23 @@ All three C-1 scripts reproduced bit-for-bit from commit `f4ca0bf` on a clean tr
 - `git diff 7073f20 -- semiconductor_sim` is empty: no production solver, test or dataset was modified.
 - The test-suite scratch file `results/golden/_test_common_npz.npz` is untracked and excluded from all commits and archives (documented in `results/phase3/C1/regression/scratch_file_isolation.txt`).
 - No credentials, tokens, virtual environments or downloaded third-party sources are committed.
+
+
+---
+
+## Update 2026-10-30 (C-2 package) — commit reconciliation
+
+The table above was written inside commit `5b26809`, which cannot contain its own SHA. Full SHAs, verified with `git log` and `git bundle list-heads`:
+
+| Ref | Full SHA | Parent |
+|---|---|---|
+| Phase 2C baseline | `7073f208003ab32eb02bb3f75a75010e47338cc3` | — |
+| `phase3/B-rebuild-2026-10-30` | `43264ff86f71c4d382540b250ba4fa668046459c` | 7073f20 |
+| C-1 code | `f4ca0bfaed56b099448cad4d22b15636fceee30c` | 43264ff |
+| `phase3/C1-2026-10-30` (final HEAD; archived as `…_source_5b26809.zip` and in the first bundle) | `5b26809a2c02e53cb4fb23187b4876c0558595e3` | f4ca0bf |
+| C-2 code and results | `fe44d689597150da64c805183760fd5e696eeb99` | 5b26809 |
+| `phase3/C2-2026-10-30` final HEAD | given in `SHA256SUMS`/`bundle_verification.txt` of the C-2 archive (a commit cannot record its own SHA) | fe44d68 |
+
+C-2 reports: `phase3/reports/Corner_Interface_Defect_Report_2026-10-30.md`, `C1b_Numerical_Acceptance_Assessment_2026-10-30.md`, `C2_OneColumn_T0T2_Report_2026-10-30.md`.
+
+Independent re-execution: `results/phase3/C2/independent_verification_2026-10-30T14/VERIFICATION.md`. Remote preservation: **not pushed**; the archive is a verified bundle plus ZIP.
