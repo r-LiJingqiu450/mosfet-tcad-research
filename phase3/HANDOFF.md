@@ -76,3 +76,44 @@ The table above was written inside commit `5b26809`, which cannot contain its ow
 C-2 reports: `phase3/reports/Corner_Interface_Defect_Report_2026-10-30.md`, `C1b_Numerical_Acceptance_Assessment_2026-10-30.md`, `C2_OneColumn_T0T2_Report_2026-10-30.md`.
 
 Independent re-execution: `results/phase3/C2/independent_verification_2026-10-30T14/VERIFICATION.md`. Remote preservation: **not pushed**; the archive is a verified bundle plus ZIP.
+
+---
+
+## Update 2026-10-30 (C-3 package) — `REFERENCE_PARTIAL`, `NOVELTY_UNPROVEN`
+
+Branch `phase3/C3-2026-10-30` from `c909bf11a0c6b4a41dcef613be7a4bb0d4a29b61` (C-2 final HEAD, verified). The final HEAD is in the archive's `bundle_verification.txt`. **Not pushed** (no write access; not retried). `main` and the remote branches are untouched. Package E is not started.
+
+**Decision:** `phase3/reports/C3_Research_Decision_Report_2026-10-30.md`.
+
+**Key commits:**
+
+| Commit | Content |
+|---|---|
+| `9dc3307` | T1 driver with pre-registered E definitions (`phase3/c3/t1.py`); 1COL φ_n |
+| `dc3f069` | `body_corners` option (R-I(b) only; default off); `fb_preview`; T1 analysis |
+| `896d9d9` | T1 matrix complete (12 runs, 72 points); analysis v1 |
+| `b8ad92d`, `352daf7`, `f2f1c5f`, `87752c9` | Post-hoc L1 linear-solve diagnostic (runs 1–3) |
+| `9a88e17`, `318ca54` | Observed-order correction (non-constant ratios), unit tests, analysis v2, Research_08 Erratum E1 |
+| `34b0b59` | Final regression: 146 passed, 4 skipped, both environments; golden unchanged |
+
+**Reproduce (pinned venv, as above):**
+
+```bash
+export DEVSIM_MATH_LIBS=/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3
+venv312/bin/python phase3/c3/t1.py --L 1 --level 0 --modes a,b --vgs 0.8,1.25,2.0 --l3 1 --out <new dir>   # ~95 s
+bash phase3/c3/run_t1_matrix.sh <out_dir> "1 0 1" "1 1 0" "1 2 0" "1 3 0" "3 0 1" "3 1 0" "3 2 0" "3 3 0" "10 0 1" "10 1 0" "10 2 0" "10 3 0"   # full matrix, "L level l3"; ~45 min on 2 cores split in two streams; the script hard-codes PY=/home/claude/venv312/bin/python
+venv312/bin/python phase3/c3/t1_analysis.py --in results/phase3/C3/t1 --out <new dir>
+venv312/bin/python phase3/c3/rib_inspect.py --L 1 --level 0 --vg 2.0 --body-corners 0 --out <new dir>
+venv312/bin/python phase3/c3/l1_refine_diag.py --L 10 --level 3 --mode a --vg 2.0 --out <new dir>
+venv312/bin/python phase3/c3/fb_preview.py --L 1 --level 0 --out <new dir>
+```
+
+**Reports:**
+- `C3_T1_RIa_RIb_Report_2026-10-30.md`
+- `C1b_Final_Acceptance_Review_2026-10-30.md` (+ Addendum A)
+- `../specs/Research_08_Specification_Corrections_v2.2.md` (+ Erratum E1)
+- `Finite_Bias_Discrepancy_Experiment_Design_2026-10-30.md`
+- `Novelty_Challenge_Matrix_2026-10-30.md` (+ C-3 addendum)
+- `C3_Research_Decision_Report_2026-10-30.md`
+
+**User action needed for the literature gate:** download and attach the two Caltech PDFs, Ward, Odeh & Cohen 1990 (CaltechAUTHORS record 31400) and Ward 1988 PhD thesis (CaltechTHESIS 440). This environment's fetch proxy refused them.
