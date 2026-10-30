@@ -22,8 +22,10 @@ from scipy.linalg import solve_banded
 from phase3.c1 import deck as D
 
 
-def solve_1col(y_ox, y_si, vg, tol=1e-14, max_it=200, psi0=None):
-    """y_ox: oxide y-lines ascending ending at 0; y_si: Si y-lines from 0 ascending."""
+def solve_1col(y_ox, y_si, vg, tol=1e-14, max_it=200, psi0=None, phin=0.0):
+    """y_ox: oxide y-lines ascending ending at 0; y_si: Si y-lines from 0 ascending.
+    phin: spatially uniform electron quasi-Fermi potential (V); n = n_i exp((psi-phin)/V_T).
+    phin = 0 reproduces the original arithmetic exactly (psi - 0.0 == psi)."""
     y_ox = np.asarray(y_ox, float); y_si = np.asarray(y_si, float)
     assert abs(y_ox[-1]) < 1e-20 and abs(y_si[0]) < 1e-20
     y = np.concatenate([y_ox[:-1], y_si])          # shared interface node
@@ -39,7 +41,7 @@ def solve_1col(y_ox, y_si, vg, tol=1e-14, max_it=200, psi0=None):
     psi[0] = vg + D.PSI_B0; psi[-1] = D.PSI_B0
     hist = []
     for it in range(max_it):
-        n = ni * np.exp(psi / VT); p = ni * np.exp(-psi / VT)
+        n = ni * np.exp((psi - phin) / VT); p = ni * np.exp(-psi / VT)
         F = np.zeros(N); lo = np.zeros(N); di = np.zeros(N); up = np.zeros(N)
         g = eps / h                                       # conductances per segment
         # flux terms
@@ -67,4 +69,4 @@ def solve_1col(y_ox, y_si, vg, tol=1e-14, max_it=200, psi0=None):
             break
     return dict(y=y, psi=psi, k=k, converged=hist[-1] <= tol, iterations=len(hist),
                 last_update_V=hist[-1], history=hist[-6:],
-                n=ni * np.exp(psi / VT), w_si=w)
+                n=ni * np.exp((psi - phin) / VT), w_si=w, phin=phin)
