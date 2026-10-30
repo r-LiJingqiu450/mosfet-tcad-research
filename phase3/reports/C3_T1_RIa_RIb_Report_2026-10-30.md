@@ -230,7 +230,7 @@ Evidence: the exported Newton system at L = 1 µm, level 0, V_G = 2.0 V (`result
 | **Interface equations at the triple points** | Si node (0,0) and (L,0): the row has 2 nonzeros (ψ_Si − ψ_ox continuity). The Si bulk Poisson row is moved into the coincident oxide row, which has 7 nonzeros coupling oxide and Si neighbours, i.e. the summed displacement-flux balance | Interface continuity row **active** at both triple points (the Research_08 §5 requirement) |
 | **Continuity** | Potential jump at every coincident pair | 0.0 V (36/36) |
 | **Displacement flux** | No ψ equation on the lateral Si or oxide boundaries → zero normal D (natural condition). Discrete Gauss closure | ≤ 4.3e-14 (36/36) |
-| **Conservation** | V_D = 0: section-sum vs contact current inside E_lin. Finite bias (preview, V_D = 50 mV): δ_KCL ≤ 4.4e-15, δ_cont ≤ 7.4e-15 | At round-off where the linear solve is accurate |
+| **Conservation** | V_D = 0: section-sum vs contact current inside E_lin. Finite bias (preview, V_D = 50 mV, all 7 runs): δ_KCL ≤ 2.0e-14, δ_cont ≤ 2.9e-14 | At round-off where the linear solve is accurate |
 | **Refinement** | T1 on levels 0–3 at L = 1, 3, 10 µm | **36/36 PASS** for L1 and L2 |
 | **No artificial constraints** | Single-entry oxide rows | **0** |
 | **Lateral uniformity** | Max ψ spread vs level, L = 1 µm: 5.0, 3.4, 2.4, 1.7 (×1e-12 V); L = 10 µm: 17, 16, 14, 13 (×1e-12 V) | Located at the bottom corners; decreasing with refinement |

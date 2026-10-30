@@ -51,7 +51,7 @@
 3. **Open item R-I(b)-1:** bottom-corner ownership, a deviation from the stated bottom condition on two nodes. The estimated impact is negligible, but it is not yet removed.
 4. **R-I(c) is not implemented.** FB-1 requires three reservoir models, so that the reservoir dependence is not judged from two arbitrary choices.
 5. **T1 is a zero-bias identity.** At finite V_D, reference correctness rests on:
-   - conservation (δ_KCL, δ_cont ≤ 1e-14);
+   - conservation (δ_KCL ≤ 2.0e-14, δ_cont ≤ 2.9e-14 over all previews);
    - refinement previews on 2–3 levels;
    - no identity-level test.
    - This is inherent and is stated as a limitation, not a defect.
