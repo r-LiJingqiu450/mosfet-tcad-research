@@ -61,3 +61,18 @@
 - [Ren 2020 thesis — eScholarship](https://escholarship.org/uc/item/4j36q4hs)
 - [Habaš 1990 — TU Wien PDF](https://www.iue.tuwien.ac.at/pdf/ib_1990/JB1990_Habas_2.pdf)
 - [A non-GCA model for ground-plane MOSFETs (SSE)](https://www.sciencedirect.com/science/article/abs/pii/S0038110123001673) · [Non-GCA modeling of near-threshold I–V of DG MOSFETs (SSE)](https://www.sciencedirect.com/science/article/abs/pii/S0038110119306781) — abstracts not retrievable here (E3)
+
+---
+
+## Addendum — status at the close of C-3 (2026-10-30)
+
+The matrix above is unchanged. New evidence since it was written:
+- **K1:** T1 on 72 points: 71 PASS per path, 1 class I, 0 FAIL (`C3_T1_RIa_RIb_Report_2026-10-30.md`). Still verification infrastructure.
+- **K4:** the lateral-refinement runs it lists as "pending" are done (design §1.1).
+  - After level-wise extrapolation, the same-mesh and continuum metrics agree to 0.1 % (V_G = 1.25 V) and 1.2 % (2.0 V) at L = 1 µm.
+  - At 0.8 V they do not agree (unresolved).
+  - The gain from the same-mesh metric is therefore real where the signal is resolved, but it is not demonstrated in subthreshold.
+- **K3:** the reservoir-symmetric part σ is mostly numerical at levels 0–2. Its extrapolated limit is small: ≈ 2.8e-5 at L = 1 µm and ≈ 1.5e-7 at L = 10 µm (V_G = 1.25 V). The antisymmetric part α is mesh-converged and dominant. This strengthens the refutation path listed for K3; it does not decide it (R-I(c) and ≥ 4 levels are needed).
+- **Literature:** L-1 (Ward 1990 and thesis ch. 5–6), L-2, L-9 and L-10 are still open. No evidence level changed.
+
+**Status remains `NOVELTY_UNPROVEN`.**
