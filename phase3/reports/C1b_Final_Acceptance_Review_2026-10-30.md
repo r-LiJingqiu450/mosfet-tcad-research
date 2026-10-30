@@ -50,3 +50,31 @@ The question it was meant to answer, "is the export the Newton Jacobian?", is an
 ## 4. Status
 
 **C-1(b): ACCEPTED** for its stated purpose: the DEVSIM matrix/RHS export can be used as the Newton linear system for L1, with B1–B6 as above. The ≤ 1e-10 R05 figure is withdrawn and recorded as not met. The superseding wording is in `Research_08_Specification_Corrections_v2.2` §4.
+
+---
+
+## Addendum A — evaluation on the C-3 T1 matrix (2026-10-30, after all 72 T1 points)
+
+The text above is unchanged. This addendum records what the T1 runs showed for B3 and B5. Details are in `C3_T1_RIa_RIb_Report_2026-10-30.md` §3.1 and §5.2.
+
+**B5 (linear-solve part of E_lin ≤ 1e-8):**
+- **Met on 41/72 points, not met on 31/72.**
+- Met on every point only for L = 1 µm at levels 0–2 and L = 3 µm at level 0.
+- Not met on any point at L = 10 µm except one at level 1.
+- Largest value: 5.5e-6 (L = 10 µm, level 3, R-I(a), V_G = 2.0 V).
+
+**B3 (equilibrated normwise backward error ≤ 1e-13):**
+- The evidence above was obtained for the **Newton** right-hand side.
+- For the **T1** right-hand side b(δ) − b(0), the plain SuperLU solve of the unscaled exported matrix that L1 uses gives:
+  - 9.1e-4 at L = 1 µm, level 0;
+  - 9.4e-3 at L = 10 µm, level 3.
+  - These are post-hoc diagnostics on 2 points.
+- **B3 is not met for this use.**
+- Row+column max-equilibration *before* factorization gives 4.3e-16 and 2.9e-16 on the same two points.
+- Fixed-precision iterative refinement of the unscaled solve diverges at L = 10 µm, level 3.
+
+**Revised status:**
+- **C-1(b) remains ACCEPTED** for identification (B1, B2, B6) and for Newton-system solves (B3, B4).
+- For the L1 linear-response path of T1 it is **ACCEPTED WITH LIMITATION**: B3 and B5 are not met in the configurations listed.
+- The T1 verdicts are unaffected, because the L1 linear-solve error is part of E by pre-registration.
+- Any later use of L1 as a ≤ 1e-8 tool requires a versioned, pre-registered definition with equilibrated factorization, re-run on all points.
