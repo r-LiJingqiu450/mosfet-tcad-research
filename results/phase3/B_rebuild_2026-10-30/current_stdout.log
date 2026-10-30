@@ -1,0 +1,64 @@
+{
+ "acceptance": {
+  "B1": {
+   "criterion": "<=1e-9",
+   "pass_": true
+  },
+  "B2": {
+   "criterion": "<=1e-13",
+   "pass_": true
+  },
+  "B3": {
+   "criterion": "U_GCA,rel<=1e-6 (estimate)",
+   "pass_": true
+  },
+  "B5": {
+   "criterion": "<=1e-6 vs neutral_background.csv; spec values within rounding",
+   "pass_": true
+  }
+ },
+ "results": {
+  "B1": {
+   "n": 42,
+   "max_e_rep_prod": 0.0,
+   "max_e_rep_m0": 0.0
+  },
+  "B2": {
+   "max_rel": 0.0
+  },
+  "B3": {
+   "n": 42,
+   "max_U_GCA_rel": 1.7018025406157313e-08,
+   "max_tight_minus_default_rel": 1.345392669089728e-14,
+   "dominant": [
+    "quad_estimate"
+   ]
+  },
+  "B4": {
+   "ith_A_per_um": 1e-07,
+   "vt_cc_direct_V": 1.0428740039760447,
+   "status": "ok",
+   "vt_pchip_005_V": 1.0427598581999062,
+   "pchip_005_minus_direct_mV": -0.11414577613844124,
+   "vt_pchip_001_V": 1.0428751905922224,
+   "pchip_001_minus_direct_mV": 0.0011866161777618345,
+   "vt_phase1_table_V": 1.0432740076419165,
+   "m0_minus_phase1_mV": -0.40000366587178426,
+   "linearity_max_VD_le_1mV": 0.01909387726946654,
+   "linearity_ref_1mV_over_2VT": 0.019340863535916804,
+   "psi_b0_V": -0.3571585759940161
+  },
+  "B5": {
+   "n": 18,
+   "max_rel": 0.0,
+   "spec_values_rel_dev_6digit": {
+    "(0.05, 0.05)": 3.153832582697979e-07,
+    "(0.25, 0.05)": 8.466295338298553e-07,
+    "(0.5, 0.05)": 2.519975252618421e-07
+   },
+   "rii_window_min_VG_V": 0.5
+  }
+ },
+ "wall_s": 9.064414739608765,
+ "golden_unchanged": true
+}

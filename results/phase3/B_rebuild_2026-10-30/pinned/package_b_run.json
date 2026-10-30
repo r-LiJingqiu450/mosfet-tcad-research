@@ -1,0 +1,143 @@
+{
+  "start_utc": "2026-10-30T11:27:24.914+00:00",
+  "git_sha": "7073f208003ab32eb02bb3f75a75010e47338cc3",
+  "git_branch": "phase3/B-rebuild-2026-10-30",
+  "git_dirty": false,
+  "argv": [
+    "phase3/package_b.py",
+    "--out",
+    "results/phase3/B_rebuild_2026-10-30/pinned"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "not importable: RuntimeError",
+    "DEVSIM_MATH_LIBS": ""
+  },
+  "config": {
+    "params": {
+      "na": 1e+22,
+      "tox": 2e-08,
+      "x_max": 1.2e-06,
+      "L": 1e-06,
+      "W": 1e-06,
+      "mu_n": 0.135,
+      "vfb": 0.0,
+      "ni": 1e+16,
+      "vt": 0.025851999786435535,
+      "eps_si": 1.0359399740976e-10,
+      "eps_ox": 3.453133246992e-11,
+      "q": 1.602176634e-19,
+      "cox": 0.0017265666234960002,
+      "p0": 1.000000000001e+22,
+      "psi_b0": -0.3571585759940161
+    },
+    "tol": {
+      "brentq_xtol": 2e-14,
+      "slice_epsabs": 1e-06,
+      "slice_epsrel": 2e-10,
+      "slice_limit": 200,
+      "cur_excess_epsabs": 0.0001,
+      "cur_bg_epsabs": 1e-06,
+      "cur_epsrel": 2e-08,
+      "cur_limit": 160
+    },
+    "tight": {
+      "brentq_xtol": 2e-14,
+      "slice_epsabs": 1e-08,
+      "slice_epsrel": 2e-12,
+      "slice_limit": 800,
+      "cur_excess_epsabs": 1e-06,
+      "cur_bg_epsabs": 1e-08,
+      "cur_epsrel": 2e-10,
+      "cur_limit": 640
+    },
+    "prior_report": {
+      "B1_current": 0.0,
+      "B2": 0.0,
+      "B3_max_U_rel": 1.7e-08,
+      "B5": 0.0,
+      "vt_cc_direct": 1.042874,
+      "vt_pchip_minus_direct_mV": -0.114,
+      "vt_phase1": 1.043274,
+      "m0_minus_phase1_mV": -0.4,
+      "linearity_max": 0.0191,
+      "rii_window_vg": 0.5
+    }
+  },
+  "inputs": {
+    "/home/claude/mosfet-tcad-research/semiconductor_sim/results/phase1/independent_reference.csv": "7ae7aace941e5b5fd0196d446d28fad1517ba78881c31b7407446bdd6254f56d",
+    "/home/claude/mosfet-tcad-research/semiconductor_sim/results/phase1/neutral_background.csv": "771ca8f9b38daeeba8babeed132b2cdc07eb0decac48d7b68e390c0fb6c2ba59",
+    "/home/claude/mosfet-tcad-research/semiconductor_sim/results/phase1/phase1_results.json": "24291a3a3919f596271b7d8a9d3da64326c63e7c8aed19c5c15541c9cb160493",
+    "/home/claude/mosfet-tcad-research/semiconductor_sim/results/golden/stage3.json": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828"
+  },
+  "environment_class": "pinned",
+  "results": {
+    "B1": {
+      "n": 42,
+      "max_e_rep_prod": 0.0,
+      "max_e_rep_m0": 0.0
+    },
+    "B2": {
+      "max_rel": 0.0
+    },
+    "B3": {
+      "n": 42,
+      "max_U_GCA_rel": 1.7018025406157313e-08,
+      "max_tight_minus_default_rel": 1.345392669089728e-14,
+      "dominant": [
+        "quad_estimate"
+      ]
+    },
+    "B4": {
+      "ith_A_per_um": 1e-07,
+      "vt_cc_direct_V": 1.0428740039760447,
+      "status": "ok",
+      "vt_pchip_005_V": 1.0427598581999062,
+      "pchip_005_minus_direct_mV": -0.11414577613844124,
+      "vt_pchip_001_V": 1.0428751905922224,
+      "pchip_001_minus_direct_mV": 0.0011866161777618345,
+      "vt_phase1_table_V": 1.0432740076419165,
+      "m0_minus_phase1_mV": -0.40000366587178426,
+      "linearity_max_VD_le_1mV": 0.01909387726946654,
+      "linearity_ref_1mV_over_2VT": 0.019340863535916804,
+      "psi_b0_V": -0.3571585759940161
+    },
+    "B5": {
+      "n": 18,
+      "max_rel": 0.0,
+      "spec_values_rel_dev_6digit": {
+        "(0.05, 0.05)": 3.153832582697979e-07,
+        "(0.25, 0.05)": 8.466295338298553e-07,
+        "(0.5, 0.05)": 2.519975252618421e-07
+      },
+      "rii_window_min_VG_V": 0.5
+    }
+  },
+  "acceptance": {
+    "B1": {
+      "criterion": "<=1e-12",
+      "pass_": true
+    },
+    "B2": {
+      "criterion": "<=1e-13",
+      "pass_": true
+    },
+    "B3": {
+      "criterion": "U_GCA,rel<=1e-6 (estimate)",
+      "pass_": true
+    },
+    "B5": {
+      "criterion": "<=1e-6 vs neutral_background.csv; spec values within rounding",
+      "pass_": true
+    }
+  },
+  "end_utc": "2026-10-30T11:27:44.125+00:00",
+  "wall_s": 17.086148500442505,
+  "golden_sha_after": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+  "golden_unchanged": true
+}
