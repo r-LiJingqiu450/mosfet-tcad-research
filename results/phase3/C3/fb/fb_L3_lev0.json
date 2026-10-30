@@ -1,0 +1,205 @@
+{
+  "start_utc": "2026-10-30T14:52:54.418+00:00",
+  "git_sha": "dc3f069a85fdebaf67e99de87b0fe168899e561c",
+  "git_branch": "phase3/C3-2026-10-30",
+  "git_dirty": false,
+  "argv": [
+    "phase3/c3/fb_preview.py",
+    "--L",
+    "3",
+    "--level",
+    "0",
+    "--out",
+    "results/phase3/C3/fb"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "L_um": 3.0,
+    "level": 0,
+    "VD": 0.05,
+    "pm": {
+      "T_K": 300.0,
+      "V_T_V": 0.025851999786435535,
+      "n_i_cm3": 10000000000.0,
+      "eps_Si_rel": 11.7,
+      "eps_ox_rel": 3.9,
+      "statistics": "Boltzmann",
+      "mu_n_cm2_Vs": 1350.0,
+      "mobility": "constant",
+      "generation_recombination": "none",
+      "holes": "frozen p=n_i*exp(-psi/V_T)",
+      "interface_charge": "none",
+      "NA_cm3": 1e+16,
+      "psi_b0_V": -0.3571585759940161,
+      "gate": "psi_gate = V_G + psi_b0 (V_FB = 0)",
+      "units": "cm; I [A/cm]; I'[A/um]=I*1e-4"
+    },
+    "note": "diagnostic preview for experiment design; not Package E"
+  },
+  "mesh": {
+    "kind": "explicit",
+    "corner": "tie",
+    "L_cm": 0.00030000000000000003,
+    "nx": 51,
+    "n_ox_lines": 6,
+    "n_si_lines": 218,
+    "xmax_cm": 0.00012,
+    "tox_cm": 2e-06,
+    "h_si_first_cm": 2.5000000000000012e-08,
+    "body_corners": false
+  },
+  "points": {
+    "VG=0.8": {
+      "vg": 0.8,
+      "I_GCA_h": 2.360904908982452e-07,
+      "I_GCA_h_quad_est": 3.274311736729905e-20,
+      "I_M0": 2.3606238930358452e-07,
+      "a": {
+        "I_A_per_cm": 2.3609049091780056e-07,
+        "newton_iterations": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "final_update": {
+          "dpsi": 7.578372435333882e-17,
+          "dphin": 7.857368325946121e-17,
+          "dcirc": 2.4469655514569653e-23,
+          "extra": true
+        },
+        "delta_cont": 2.1302247730398598e-15,
+        "delta_KCL": 4.372566639397607e-15,
+        "eps_red_h": -8.28299651089992e-11,
+        "eps_red_M0": -0.00011902899649540721
+      },
+      "b": {
+        "I_A_per_cm": 2.3609049088064914e-07,
+        "newton_iterations": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "final_update": {
+          "dpsi": 6.264876564019896e-17,
+          "dphin": 7.003391028045636e-17,
+          "dcirc": 9.727387624612499e-23,
+          "extra": true
+        },
+        "delta_cont": 1.1211709333553016e-15,
+        "delta_KCL": 7.0633768801384e-15,
+        "eps_red_h": 7.453104799992616e-11,
+        "eps_red_M0": -0.00011902883915315687
+      },
+      "S_res_ab": 1.5736101310892536e-10
+    },
+    "VG=1.25": {
+      "vg": 1.25,
+      "I_GCA_h": 0.004865440232413561,
+      "I_GCA_h_quad_est": 0.0,
+      "I_M0": 0.004865045312526868,
+      "a": {
+        "I_A_per_cm": 0.004865835016090904,
+        "newton_iterations": [
+          4,
+          5,
+          5,
+          5,
+          5
+        ],
+        "final_update": {
+          "dpsi": 8.12289558579489e-17,
+          "dphin": 7.018890302816943e-17,
+          "dcirc": 1.726117530335791e-18,
+          "extra": true
+        },
+        "delta_cont": 4.99115333408615e-15,
+        "delta_KCL": 3.208598571912525e-15,
+        "eps_red_h": -8.11337984205629e-05,
+        "eps_red_M0": -0.0001622955898472611
+      },
+      "b": {
+        "I_A_per_cm": 0.004865193578265068,
+        "newton_iterations": [
+          4,
+          4,
+          4,
+          5,
+          5
+        ],
+        "final_update": {
+          "dpsi": 7.045613686732841e-17,
+          "dphin": 8.060667705624269e-17,
+          "dcirc": 3.888231723740491e-18,
+          "extra": true
+        },
+        "delta_cont": 9.983622757446638e-15,
+        "delta_KCL": 7.309438090273431e-15,
+        "eps_red_h": 5.069770493704162e-05,
+        "eps_red_M0": -3.0474787038770046e-05
+      },
+      "S_res_ab": 0.00013184220021633664
+    },
+    "VG=2.0": {
+      "vg": 2.0,
+      "I_GCA_h": 0.031220991496175146,
+      "I_GCA_h_quad_est": 0.0,
+      "I_M0": 0.031217570188342054,
+      "a": {
+        "I_A_per_cm": 0.031221236501779822,
+        "newton_iterations": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "final_update": {
+          "dpsi": 1.6401875608892595e-16,
+          "dphin": 7.214876122571283e-17,
+          "dcirc": 5.5026834218453834e-18,
+          "extra": true
+        },
+        "delta_cont": 1.63353140068012e-14,
+        "delta_KCL": 7.111973445137937e-15,
+        "eps_red_h": -7.847402349381305e-06,
+        "eps_red_M0": -0.0001174301164388325
+      },
+      "b": {
+        "I_A_per_cm": 0.03122101483900876,
+        "newton_iterations": [
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "final_update": {
+          "dpsi": 1.32743590569156e-16,
+          "dphin": 7.358161495039083e-17,
+          "dcirc": 3.019677763120951e-18,
+          "extra": true
+        },
+        "delta_cont": 1.8446812090961228e-14,
+        "delta_KCL": 4.333889587635469e-15,
+        "eps_red_h": -7.476641529224892e-07,
+        "eps_red_M0": -0.00011033115625702639
+      },
+      "S_res_ab": 7.099793911446994e-06
+    }
+  },
+  "wall_s": 73.10034441947937,
+  "end_utc": "2026-10-30T14:54:07.750+00:00"
+}

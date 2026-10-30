@@ -1,0 +1,611 @@
+Searching DEVSIM_MATH_LIBS="/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+/home/claude/venv312/lib/python3.12/site-packages/numpy/_core/getlimits.py:552: UserWarning: Signature b'\x00\xd0\xcc\xcc\xcc\xcc\xcc\xcc\xfb\xbf\x00\x00\x00\x00\x00\x00' for <class 'numpy.longdouble'> does not match any known type: falling back to type probe function.
+This warnings indicates broken support for the dtype!
+  machar = _get_machar(dtype)
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 69 Lines.
+Physical group name body has 70 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 307 Lines.
+Physical group name drain has 308 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 71 Lines.
+Physical group name gate has 72 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 994 Triangles.
+Physical group name ox has 1569 Lines.
+Physical group name ox has 576 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 71 Lines.
+Physical group name ox_si has 72 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 43594 Triangles.
+Physical group name si has 65769 Lines.
+Physical group name si has 22176 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 307 Lines.
+Physical group name source has 308 Points.
+Device mos has 22680 coordinates with max index 22679
+Region ox has 576 nodes.
+Region si has 22176 nodes.
+Contact body in region si with 70 nodes
+Contact drain in region si with 308 nodes
+Contact gate in region ox with 72 nodes
+Warning, contact "drain" shares a node with contact "oxc_d"
+Contact oxc_d in region ox with 1 nodes
+Contact oxc_s in region ox with 1 nodes
+Warning, contact "oxc_s" shares a node with contact "source"
+Contact source in region si with 308 nodes
+Warning, contact "oxc_d" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Adding interface ox_si with 72, 72 nodes
+creating solution dcop with 2 nodes
+number of equations 44930
+creating solution dcop_prev with 2 nodes
+Iteration: 0
+  Device: "mos"	RelError: 9.50432e-15	AbsError: 2.34375e-02
+    Region: "ox"	RelError: 1.24567e-16	AbsError: 3.35265e-17
+      Equation: "PotentialEquation"	RelError: 1.24567e-16	AbsError: 3.35265e-17
+    Region: "si"	RelError: 9.37976e-15	AbsError: 2.34375e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.18948e-15	AbsError: 2.34375e-02
+      Equation: "PotentialEquation"	RelError: 7.19028e-15	AbsError: 4.73079e-17
+  Circuit: 	RelError: 6.25966e-22	AbsError: 6.25966e-32
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.36966e-01	AbsError: 8.74169e+12
+    Region: "ox"	RelError: 1.86689e-05	AbsError: 3.72762e-06
+      Equation: "PotentialEquation"	RelError: 1.86689e-05	AbsError: 3.72762e-06
+    Region: "si"	RelError: 6.36947e-01	AbsError: 8.74169e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 8.74169e+12
+      Equation: "PotentialEquation"	RelError: 6.11218e-03	AbsError: 3.95066e-06
+  Circuit: 	RelError: 1.00000e+00	AbsError: 1.00003e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.80624e-02	AbsError: 1.49181e+12
+    Region: "ox"	RelError: 2.68304e-06	AbsError: 5.35720e-07
+      Equation: "PotentialEquation"	RelError: 2.68304e-06	AbsError: 5.35720e-07
+    Region: "si"	RelError: 9.80597e-02	AbsError: 1.49181e+12
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 1.49181e+12
+      Equation: "PotentialEquation"	RelError: 8.40955e-04	AbsError: 5.65442e-07
+  Circuit: 	RelError: 2.05688e-01	AbsError: 5.46406e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.77205e-06	AbsError: 2.71828e+07
+    Region: "ox"	RelError: 5.85471e-11	AbsError: 1.16900e-11
+      Equation: "PotentialEquation"	RelError: 5.85471e-11	AbsError: 1.16900e-11
+    Region: "si"	RelError: 1.77199e-06	AbsError: 2.71828e+07
+      Equation: "ElectronContinuityEquation"	RelError: 1.75369e-06	AbsError: 2.71828e+07
+      Equation: "PotentialEquation"	RelError: 1.83053e-08	AbsError: 1.23492e-11
+  Circuit: 	RelError: 2.59113e-06	AbsError: 6.88331e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.52833e-14	AbsError: 3.76257e-02
+    Region: "ox"	RelError: 2.58648e-16	AbsError: 5.43911e-17
+      Equation: "PotentialEquation"	RelError: 2.58648e-16	AbsError: 5.43911e-17
+    Region: "si"	RelError: 2.50247e-14	AbsError: 3.76257e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.22785e-15	AbsError: 3.76257e-02
+      Equation: "PotentialEquation"	RelError: 2.27968e-14	AbsError: 5.73396e-17
+  Circuit: 	RelError: 2.42595e-15	AbsError: 6.44453e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.21820e-14	AbsError: 2.25446e-02
+    Region: "ox"	RelError: 1.62150e-16	AbsError: 4.55233e-17
+      Equation: "PotentialEquation"	RelError: 1.62150e-16	AbsError: 4.55233e-17
+    Region: "si"	RelError: 2.20198e-14	AbsError: 2.25446e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.33447e-15	AbsError: 2.25446e-02
+      Equation: "PotentialEquation"	RelError: 2.06854e-14	AbsError: 3.66668e-17
+  Circuit: 	RelError: 4.37489e-16	AbsError: 1.16219e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.35016e-01	AbsError: 5.93896e+12
+    Region: "ox"	RelError: 1.26833e-05	AbsError: 2.53250e-06
+      Equation: "PotentialEquation"	RelError: 1.26833e-05	AbsError: 2.53250e-06
+    Region: "si"	RelError: 6.35003e-01	AbsError: 5.93896e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 5.93896e+12
+      Equation: "PotentialEquation"	RelError: 4.16776e-03	AbsError: 2.68403e-06
+  Circuit: 	RelError: 5.00000e-01	AbsError: 1.00002e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.77938e-02	AbsError: 1.01361e+12
+    Region: "ox"	RelError: 1.82312e-06	AbsError: 3.64025e-07
+      Equation: "PotentialEquation"	RelError: 1.82312e-06	AbsError: 3.64025e-07
+    Region: "si"	RelError: 9.77920e-02	AbsError: 1.01361e+12
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 1.01361e+12
+      Equation: "PotentialEquation"	RelError: 5.73256e-04	AbsError: 3.84221e-07
+  Circuit: 	RelError: 8.32255e-02	AbsError: 3.71215e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.11735e-06	AbsError: 1.25515e+07
+    Region: "ox"	RelError: 2.70333e-11	AbsError: 5.39777e-12
+      Equation: "PotentialEquation"	RelError: 2.70333e-11	AbsError: 5.39777e-12
+    Region: "si"	RelError: 1.11732e-06	AbsError: 1.25515e+07
+      Equation: "ElectronContinuityEquation"	RelError: 1.10884e-06	AbsError: 1.25515e+07
+      Equation: "PotentialEquation"	RelError: 8.47884e-09	AbsError: 5.70215e-12
+  Circuit: 	RelError: 7.12518e-07	AbsError: 3.17809e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.48479e-14	AbsError: 4.26945e-02
+    Region: "ox"	RelError: 2.24638e-16	AbsError: 5.95503e-17
+      Equation: "PotentialEquation"	RelError: 2.24638e-16	AbsError: 5.95503e-17
+    Region: "si"	RelError: 2.46233e-14	AbsError: 4.26945e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.98658e-15	AbsError: 4.26945e-02
+      Equation: "PotentialEquation"	RelError: 2.26367e-14	AbsError: 5.66489e-17
+  Circuit: 	RelError: 6.35202e-16	AbsError: 2.83323e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.68390e-14	AbsError: 2.07341e-02
+    Region: "ox"	RelError: 1.58422e-16	AbsError: 4.28785e-17
+      Equation: "PotentialEquation"	RelError: 1.58422e-16	AbsError: 4.28785e-17
+    Region: "si"	RelError: 1.66806e-14	AbsError: 2.07341e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.32377e-15	AbsError: 2.07341e-02
+      Equation: "PotentialEquation"	RelError: 1.53568e-14	AbsError: 3.27838e-17
+  Circuit: 	RelError: 8.81488e-16	AbsError: 3.93175e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.33682e-01	AbsError: 4.03451e+12
+    Region: "ox"	RelError: 8.61611e-06	AbsError: 1.72041e-06
+      Equation: "PotentialEquation"	RelError: 8.61611e-06	AbsError: 1.72041e-06
+    Region: "si"	RelError: 6.33674e-01	AbsError: 4.03451e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 4.03451e+12
+      Equation: "PotentialEquation"	RelError: 2.83836e-03	AbsError: 1.82335e-06
+  Circuit: 	RelError: 3.33333e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.76103e-02	AbsError: 6.88621e+11
+    Region: "ox"	RelError: 1.23864e-06	AbsError: 2.47323e-07
+      Equation: "PotentialEquation"	RelError: 1.23864e-06	AbsError: 2.47323e-07
+    Region: "si"	RelError: 9.76091e-02	AbsError: 6.88621e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 6.88621e+11
+      Equation: "PotentialEquation"	RelError: 3.90322e-04	AbsError: 2.61045e-07
+  Circuit: 	RelError: 4.43529e-02	AbsError: 2.52176e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.94462e-07	AbsError: 5.79395e+06
+    Region: "ox"	RelError: 1.24790e-11	AbsError: 2.49170e-12
+      Equation: "PotentialEquation"	RelError: 1.24790e-11	AbsError: 2.49170e-12
+    Region: "si"	RelError: 6.94450e-07	AbsError: 5.79395e+06
+      Equation: "ElectronContinuityEquation"	RelError: 6.90528e-07	AbsError: 5.79395e+06
+      Equation: "PotentialEquation"	RelError: 3.92228e-09	AbsError: 2.63221e-12
+  Circuit: 	RelError: 2.58008e-07	AbsError: 1.46695e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 3.29142e-14	AbsError: 2.82906e-02
+    Region: "ox"	RelError: 2.48337e-16	AbsError: 4.95849e-17
+      Equation: "PotentialEquation"	RelError: 2.48337e-16	AbsError: 4.95849e-17
+    Region: "si"	RelError: 3.26658e-14	AbsError: 2.82906e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.86576e-15	AbsError: 2.82906e-02
+      Equation: "PotentialEquation"	RelError: 3.08001e-14	AbsError: 5.60900e-17
+  Circuit: 	RelError: 1.18005e-15	AbsError: 6.70938e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.15472e-14	AbsError: 1.79265e-02
+    Region: "ox"	RelError: 1.80729e-16	AbsError: 4.86429e-17
+      Equation: "PotentialEquation"	RelError: 1.80729e-16	AbsError: 4.86429e-17
+    Region: "si"	RelError: 2.13665e-14	AbsError: 1.79265e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.31065e-15	AbsError: 1.79265e-02
+      Equation: "PotentialEquation"	RelError: 2.00559e-14	AbsError: 3.71461e-17
+  Circuit: 	RelError: 2.66099e-16	AbsError: 1.51295e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.32772e-01	AbsError: 2.74061e+12
+    Region: "ox"	RelError: 5.85285e-06	AbsError: 1.16866e-06
+      Equation: "PotentialEquation"	RelError: 5.85285e-06	AbsError: 1.16866e-06
+    Region: "si"	RelError: 6.32767e-01	AbsError: 2.74061e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 2.74061e+12
+      Equation: "PotentialEquation"	RelError: 1.93136e-03	AbsError: 1.23859e-06
+  Circuit: 	RelError: 2.50000e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.74852e-02	AbsError: 4.67797e+11
+    Region: "ox"	RelError: 8.41468e-07	AbsError: 1.68018e-07
+      Equation: "PotentialEquation"	RelError: 8.41468e-07	AbsError: 1.68018e-07
+    Region: "si"	RelError: 9.74843e-02	AbsError: 4.67797e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 4.67797e+11
+      Equation: "PotentialEquation"	RelError: 2.65557e-04	AbsError: 1.77340e-07
+  Circuit: 	RelError: 2.62813e-02	AbsError: 1.71300e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 4.24970e-07	AbsError: 2.67404e+06
+    Region: "ox"	RelError: 5.75920e-12	AbsError: 1.14996e-12
+      Equation: "PotentialEquation"	RelError: 5.75920e-12	AbsError: 1.14996e-12
+    Region: "si"	RelError: 4.24964e-07	AbsError: 2.67404e+06
+      Equation: "ElectronContinuityEquation"	RelError: 4.23151e-07	AbsError: 2.67404e+06
+      Equation: "PotentialEquation"	RelError: 1.81284e-09	AbsError: 1.21478e-12
+  Circuit: 	RelError: 1.03868e-07	AbsError: 6.77007e-14
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 3.42708e-14	AbsError: 3.01000e-02
+    Region: "ox"	RelError: 1.94377e-16	AbsError: 4.22008e-17
+      Equation: "PotentialEquation"	RelError: 1.94377e-16	AbsError: 4.22008e-17
+    Region: "si"	RelError: 3.40764e-14	AbsError: 3.01000e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.06653e-15	AbsError: 3.01000e-02
+      Equation: "PotentialEquation"	RelError: 3.20098e-14	AbsError: 5.37545e-17
+  Circuit: 	RelError: 2.55032e-16	AbsError: 1.66229e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.81267e-14	AbsError: 1.64308e-02
+    Region: "ox"	RelError: 1.60742e-16	AbsError: 5.44314e-17
+      Equation: "PotentialEquation"	RelError: 1.60742e-16	AbsError: 5.44314e-17
+    Region: "si"	RelError: 1.79660e-14	AbsError: 1.64308e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.25228e-15	AbsError: 1.64308e-02
+      Equation: "PotentialEquation"	RelError: 1.67137e-14	AbsError: 3.70845e-17
+  Circuit: 	RelError: 5.06863e-16	AbsError: 3.30371e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.32153e-01	AbsError: 1.86161e+12
+    Region: "ox"	RelError: 3.97565e-06	AbsError: 7.93837e-07
+      Equation: "PotentialEquation"	RelError: 3.97565e-06	AbsError: 7.93837e-07
+    Region: "si"	RelError: 6.32149e-01	AbsError: 1.86161e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 1.86161e+12
+      Equation: "PotentialEquation"	RelError: 1.31343e-03	AbsError: 8.41335e-07
+  Circuit: 	RelError: 2.00000e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.73999e-02	AbsError: 3.17769e+11
+    Region: "ox"	RelError: 5.71612e-07	AbsError: 1.14136e-07
+      Equation: "PotentialEquation"	RelError: 5.71612e-07	AbsError: 1.14136e-07
+    Region: "si"	RelError: 9.73993e-02	AbsError: 3.17769e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 3.17769e+11
+      Equation: "PotentialEquation"	RelError: 1.80575e-04	AbsError: 1.20468e-07
+  Circuit: 	RelError: 1.64272e-02	AbsError: 1.16358e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.55785e-07	AbsError: 1.23397e+06
+    Region: "ox"	RelError: 2.65763e-12	AbsError: 5.30658e-13
+      Equation: "PotentialEquation"	RelError: 2.65763e-12	AbsError: 5.30658e-13
+    Region: "si"	RelError: 2.55782e-07	AbsError: 1.23397e+06
+      Equation: "ElectronContinuityEquation"	RelError: 2.54945e-07	AbsError: 1.23397e+06
+      Equation: "PotentialEquation"	RelError: 8.37376e-10	AbsError: 5.60594e-13
+  Circuit: 	RelError: 4.41054e-08	AbsError: 3.12411e-14
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.91140e-14	AbsError: 4.32170e-02
+    Region: "ox"	RelError: 2.65064e-16	AbsError: 5.29246e-17
+      Equation: "PotentialEquation"	RelError: 2.65064e-16	AbsError: 5.29246e-17
+    Region: "si"	RelError: 2.88489e-14	AbsError: 4.32170e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.21807e-15	AbsError: 4.32170e-02
+      Equation: "PotentialEquation"	RelError: 2.66308e-14	AbsError: 6.27766e-17
+  Circuit: 	RelError: 9.70355e-16	AbsError: 6.87331e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.62690e-14	AbsError: 2.82096e-02
+    Region: "ox"	RelError: 1.78597e-16	AbsError: 4.27922e-17
+      Equation: "PotentialEquation"	RelError: 1.78597e-16	AbsError: 4.27922e-17
+    Region: "si"	RelError: 1.60904e-14	AbsError: 2.82096e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.45512e-15	AbsError: 2.82096e-02
+      Equation: "PotentialEquation"	RelError: 1.46352e-14	AbsError: 3.60957e-17
+  Circuit: 	RelError: 2.56531e-16	AbsError: 1.81708e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.36748e+00	AbsError: 1.30177e+13
+    Region: "ox"	RelError: 2.95113e-05	AbsError: 5.89257e-06
+      Equation: "PotentialEquation"	RelError: 2.95113e-05	AbsError: 5.89257e-06
+    Region: "si"	RelError: 1.36745e+00	AbsError: 1.30177e+13
+      Equation: "ElectronContinuityEquation"	RelError: 1.35771e+00	AbsError: 1.30177e+13
+      Equation: "PotentialEquation"	RelError: 9.73909e-03	AbsError: 6.24865e-06
+  Circuit: 	RelError: 5.00000e+08	AbsError: 5.00002e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 5.85534e-01	AbsError: 1.30177e+13
+    Region: "ox"	RelError: 2.95121e-05	AbsError: 5.89256e-06
+      Equation: "PotentialEquation"	RelError: 2.95121e-05	AbsError: 5.89256e-06
+    Region: "si"	RelError: 5.85505e-01	AbsError: 1.30177e+13
+      Equation: "ElectronContinuityEquation"	RelError: 5.75859e-01	AbsError: 1.30177e+13
+      Equation: "PotentialEquation"	RelError: 9.64514e-03	AbsError: 6.24864e-06
+  Circuit: 	RelError: 3.12472e+03	AbsError: 4.76784e-07
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 7.99594e-05	AbsError: 3.57076e+08
+    Region: "ox"	RelError: 7.55478e-10	AbsError: 1.50843e-10
+      Equation: "PotentialEquation"	RelError: 7.55478e-10	AbsError: 1.50843e-10
+    Region: "si"	RelError: 7.99586e-05	AbsError: 3.57076e+08
+      Equation: "ElectronContinuityEquation"	RelError: 7.97144e-05	AbsError: 3.57076e+08
+      Equation: "PotentialEquation"	RelError: 2.44267e-07	AbsError: 1.59606e-10
+  Circuit: 	RelError: 5.25848e-01	AbsError: 5.25848e-11
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.57457e-13	AbsError: 8.43834e-01
+    Region: "ox"	RelError: 1.76941e-16	AbsError: 3.70222e-17
+      Equation: "PotentialEquation"	RelError: 1.76941e-16	AbsError: 3.70222e-17
+    Region: "si"	RelError: 1.57280e-13	AbsError: 8.43834e-01
+      Equation: "ElectronContinuityEquation"	RelError: 1.19307e-13	AbsError: 8.43834e-01
+      Equation: "PotentialEquation"	RelError: 3.79724e-14	AbsError: 3.91906e-17
+  Circuit: 	RelError: 3.14822e-11	AbsError: 3.14822e-21
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.37374e-01	AbsError: 8.74128e+12
+    Region: "ox"	RelError: 1.98166e-05	AbsError: 3.95678e-06
+      Equation: "PotentialEquation"	RelError: 1.98166e-05	AbsError: 3.95678e-06
+    Region: "si"	RelError: 6.37354e-01	AbsError: 8.74128e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 8.74128e+12
+      Equation: "PotentialEquation"	RelError: 6.51881e-03	AbsError: 4.19588e-06
+  Circuit: 	RelError: 1.00000e+00	AbsError: 1.00003e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.83330e-02	AbsError: 1.49128e+12
+    Region: "ox"	RelError: 3.38069e-06	AbsError: 6.75019e-07
+      Equation: "PotentialEquation"	RelError: 3.38069e-06	AbsError: 6.75019e-07
+    Region: "si"	RelError: 9.83296e-02	AbsError: 1.49128e+12
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 1.49128e+12
+      Equation: "PotentialEquation"	RelError: 1.11086e-03	AbsError: 7.15809e-07
+  Circuit: 	RelError: 2.05681e-01	AbsError: 5.46393e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.44580e-06	AbsError: 4.68320e+06
+    Region: "ox"	RelError: 9.90804e-12	AbsError: 1.97831e-12
+      Equation: "PotentialEquation"	RelError: 9.90804e-12	AbsError: 1.97831e-12
+    Region: "si"	RelError: 1.44579e-06	AbsError: 4.68320e+06
+      Equation: "ElectronContinuityEquation"	RelError: 1.44258e-06	AbsError: 4.68320e+06
+      Equation: "PotentialEquation"	RelError: 3.21180e-09	AbsError: 2.09322e-12
+  Circuit: 	RelError: 2.59725e-06	AbsError: 6.89959e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 3.50929e-14	AbsError: 3.47993e-02
+    Region: "ox"	RelError: 2.86434e-16	AbsError: 5.71915e-17
+      Equation: "PotentialEquation"	RelError: 2.86434e-16	AbsError: 5.71915e-17
+    Region: "si"	RelError: 3.48064e-14	AbsError: 3.47993e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.26473e-15	AbsError: 3.47993e-02
+      Equation: "PotentialEquation"	RelError: 3.25417e-14	AbsError: 6.21412e-17
+  Circuit: 	RelError: 8.93137e-16	AbsError: 2.37261e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.37140e-14	AbsError: 3.28481e-02
+    Region: "ox"	RelError: 1.89668e-16	AbsError: 5.10484e-17
+      Equation: "PotentialEquation"	RelError: 1.89668e-16	AbsError: 5.10484e-17
+    Region: "si"	RelError: 2.35243e-14	AbsError: 3.28481e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.90166e-15	AbsError: 3.28481e-02
+      Equation: "PotentialEquation"	RelError: 2.16226e-14	AbsError: 4.58107e-17
+  Circuit: 	RelError: 2.12341e-15	AbsError: 5.64082e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.35292e-01	AbsError: 5.93872e+12
+    Region: "ox"	RelError: 1.34631e-05	AbsError: 2.68821e-06
+      Equation: "PotentialEquation"	RelError: 1.34631e-05	AbsError: 2.68821e-06
+    Region: "si"	RelError: 6.35279e-01	AbsError: 5.93872e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 5.93872e+12
+      Equation: "PotentialEquation"	RelError: 4.44357e-03	AbsError: 2.85065e-06
+  Circuit: 	RelError: 5.00000e-01	AbsError: 1.00002e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.79787e-02	AbsError: 1.01336e+12
+    Region: "ox"	RelError: 2.29726e-06	AbsError: 4.58698e-07
+      Equation: "PotentialEquation"	RelError: 2.29726e-06	AbsError: 4.58698e-07
+    Region: "si"	RelError: 9.79764e-02	AbsError: 1.01336e+12
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 1.01336e+12
+      Equation: "PotentialEquation"	RelError: 7.57647e-04	AbsError: 4.86416e-07
+  Circuit: 	RelError: 8.32247e-02	AbsError: 3.71212e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.05498e-07	AbsError: 2.16262e+06
+    Region: "ox"	RelError: 4.57532e-12	AbsError: 9.13548e-13
+      Equation: "PotentialEquation"	RelError: 4.57532e-12	AbsError: 9.13548e-13
+    Region: "si"	RelError: 9.05493e-07	AbsError: 2.16262e+06
+      Equation: "ElectronContinuityEquation"	RelError: 9.04007e-07	AbsError: 2.16262e+06
+      Equation: "PotentialEquation"	RelError: 1.48579e-09	AbsError: 9.66617e-13
+  Circuit: 	RelError: 7.14210e-07	AbsError: 3.18563e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 5.64919e-14	AbsError: 4.57825e-02
+    Region: "ox"	RelError: 2.66963e-16	AbsError: 6.34023e-17
+      Equation: "PotentialEquation"	RelError: 2.66963e-16	AbsError: 6.34023e-17
+    Region: "si"	RelError: 5.62249e-14	AbsError: 4.57825e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.63316e-15	AbsError: 4.57825e-02
+      Equation: "PotentialEquation"	RelError: 5.35917e-14	AbsError: 6.47765e-17
+  Circuit: 	RelError: 2.06490e-16	AbsError: 9.21021e-23
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.27682e-14	AbsError: 2.22499e-02
+    Region: "ox"	RelError: 1.76922e-16	AbsError: 4.32525e-17
+      Equation: "PotentialEquation"	RelError: 1.76922e-16	AbsError: 4.32525e-17
+    Region: "si"	RelError: 2.25913e-14	AbsError: 2.22499e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.80789e-15	AbsError: 2.22499e-02
+      Equation: "PotentialEquation"	RelError: 2.07834e-14	AbsError: 3.53263e-17
+  Circuit: 	RelError: 8.74471e-16	AbsError: 3.90046e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.33870e-01	AbsError: 4.03436e+12
+    Region: "ox"	RelError: 9.14593e-06	AbsError: 1.82620e-06
+      Equation: "PotentialEquation"	RelError: 9.14593e-06	AbsError: 1.82620e-06
+    Region: "si"	RelError: 6.33861e-01	AbsError: 4.03436e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 4.03436e+12
+      Equation: "PotentialEquation"	RelError: 3.02551e-03	AbsError: 1.93655e-06
+  Circuit: 	RelError: 3.33333e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.77364e-02	AbsError: 6.88499e+11
+    Region: "ox"	RelError: 1.56082e-06	AbsError: 3.11653e-07
+      Equation: "PotentialEquation"	RelError: 1.56082e-06	AbsError: 3.11653e-07
+    Region: "si"	RelError: 9.77348e-02	AbsError: 6.88499e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 6.88499e+11
+      Equation: "PotentialEquation"	RelError: 5.16059e-04	AbsError: 3.30486e-07
+  Circuit: 	RelError: 4.43530e-02	AbsError: 2.52177e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 5.57317e-07	AbsError: 9.98342e+05
+    Region: "ox"	RelError: 2.11212e-12	AbsError: 4.21726e-13
+      Equation: "PotentialEquation"	RelError: 2.11212e-12	AbsError: 4.21726e-13
+    Region: "si"	RelError: 5.57315e-07	AbsError: 9.98342e+05
+      Equation: "ElectronContinuityEquation"	RelError: 5.56628e-07	AbsError: 9.98342e+05
+      Equation: "PotentialEquation"	RelError: 6.86695e-10	AbsError: 4.46230e-13
+  Circuit: 	RelError: 2.58630e-07	AbsError: 1.47048e-13
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 7.12033e-14	AbsError: 3.18096e-02
+    Region: "ox"	RelError: 3.02790e-16	AbsError: 6.09948e-17
+      Equation: "PotentialEquation"	RelError: 3.02790e-16	AbsError: 6.09948e-17
+    Region: "si"	RelError: 7.09006e-14	AbsError: 3.18096e-02
+      Equation: "ElectronContinuityEquation"	RelError: 3.48971e-15	AbsError: 3.18096e-02
+      Equation: "PotentialEquation"	RelError: 6.74108e-14	AbsError: 7.78071e-17
+  Circuit: 	RelError: 1.75753e-16	AbsError: 9.99274e-23
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 7.99056e-14	AbsError: 5.38808e-02
+    Region: "ox"	RelError: 2.37853e-16	AbsError: 4.74913e-17
+      Equation: "PotentialEquation"	RelError: 2.37853e-16	AbsError: 4.74913e-17
+    Region: "si"	RelError: 7.96677e-14	AbsError: 5.38808e-02
+      Equation: "ElectronContinuityEquation"	RelError: 3.15405e-15	AbsError: 5.38808e-02
+      Equation: "PotentialEquation"	RelError: 7.65137e-14	AbsError: 6.39525e-17
+  Circuit: 	RelError: 2.56407e-16	AbsError: 1.45785e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.32900e-01	AbsError: 2.74052e+12
+    Region: "ox"	RelError: 6.21278e-06	AbsError: 1.24053e-06
+      Equation: "PotentialEquation"	RelError: 6.21278e-06	AbsError: 1.24053e-06
+    Region: "si"	RelError: 6.32894e-01	AbsError: 2.74052e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 2.74052e+12
+      Equation: "PotentialEquation"	RelError: 2.05839e-03	AbsError: 1.31550e-06
+  Circuit: 	RelError: 2.50000e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.75710e-02	AbsError: 4.67736e+11
+    Region: "ox"	RelError: 1.06035e-06	AbsError: 2.11725e-07
+      Equation: "PotentialEquation"	RelError: 1.06035e-06	AbsError: 2.11725e-07
+    Region: "si"	RelError: 9.75700e-02	AbsError: 4.67736e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 4.67736e+11
+      Equation: "PotentialEquation"	RelError: 3.51189e-04	AbsError: 2.24519e-07
+  Circuit: 	RelError: 2.62816e-02	AbsError: 1.71302e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 3.36581e-07	AbsError: 4.60777e+05
+    Region: "ox"	RelError: 9.74827e-13	AbsError: 1.94643e-13
+      Equation: "PotentialEquation"	RelError: 9.74827e-13	AbsError: 1.94643e-13
+    Region: "si"	RelError: 3.36580e-07	AbsError: 4.60777e+05
+      Equation: "ElectronContinuityEquation"	RelError: 3.36263e-07	AbsError: 4.60777e+05
+      Equation: "PotentialEquation"	RelError: 3.17216e-10	AbsError: 2.05945e-13
+  Circuit: 	RelError: 1.04119e-07	AbsError: 6.78642e-14
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.13215e-14	AbsError: 4.49376e-02
+    Region: "ox"	RelError: 3.04002e-16	AbsError: 6.07005e-17
+      Equation: "PotentialEquation"	RelError: 3.04002e-16	AbsError: 6.07005e-17
+    Region: "si"	RelError: 6.10175e-14	AbsError: 4.49376e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.62057e-15	AbsError: 4.49376e-02
+      Equation: "PotentialEquation"	RelError: 5.83969e-14	AbsError: 7.23219e-17
+  Circuit: 	RelError: 6.23705e-16	AbsError: 4.06528e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.35185e-14	AbsError: 2.16846e-02
+    Region: "ox"	RelError: 1.65293e-16	AbsError: 4.44879e-17
+      Equation: "PotentialEquation"	RelError: 1.65293e-16	AbsError: 4.44879e-17
+    Region: "si"	RelError: 2.33532e-14	AbsError: 2.16846e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.44254e-15	AbsError: 2.16846e-02
+      Equation: "PotentialEquation"	RelError: 2.19107e-14	AbsError: 3.69987e-17
+  Circuit: 	RelError: 5.12999e-16	AbsError: 3.34371e-22
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 6.32239e-01	AbsError: 1.86155e+12
+    Region: "ox"	RelError: 4.22015e-06	AbsError: 8.42657e-07
+      Equation: "PotentialEquation"	RelError: 4.22015e-06	AbsError: 8.42657e-07
+    Region: "si"	RelError: 6.32235e-01	AbsError: 1.86155e+12
+      Equation: "ElectronContinuityEquation"	RelError: 6.30835e-01	AbsError: 1.86155e+12
+      Equation: "PotentialEquation"	RelError: 1.39967e-03	AbsError: 8.93578e-07
+  Circuit: 	RelError: 2.00000e-01	AbsError: 1.00001e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 9.74583e-02	AbsError: 3.17739e+11
+    Region: "ox"	RelError: 7.20312e-07	AbsError: 1.43828e-07
+      Equation: "PotentialEquation"	RelError: 7.20312e-07	AbsError: 1.43828e-07
+    Region: "si"	RelError: 9.74576e-02	AbsError: 3.17739e+11
+      Equation: "ElectronContinuityEquation"	RelError: 9.72188e-02	AbsError: 3.17739e+11
+      Equation: "PotentialEquation"	RelError: 2.38844e-04	AbsError: 1.52519e-07
+  Circuit: 	RelError: 1.64274e-02	AbsError: 1.16360e-08
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.99157e-07	AbsError: 2.12639e+05
+    Region: "ox"	RelError: 4.49956e-13	AbsError: 8.98428e-14
+      Equation: "PotentialEquation"	RelError: 4.49956e-13	AbsError: 8.98428e-14
+    Region: "si"	RelError: 1.99157e-07	AbsError: 2.12639e+05
+      Equation: "ElectronContinuityEquation"	RelError: 1.99010e-07	AbsError: 2.12639e+05
+      Equation: "PotentialEquation"	RelError: 1.46484e-10	AbsError: 9.50689e-14
+  Circuit: 	RelError: 4.42107e-08	AbsError: 3.13157e-14
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 7.90047e-14	AbsError: 2.49942e-02
+    Region: "ox"	RelError: 2.51654e-16	AbsError: 5.78485e-17
+      Equation: "PotentialEquation"	RelError: 2.51654e-16	AbsError: 5.78485e-17
+    Region: "si"	RelError: 7.87531e-14	AbsError: 2.49942e-02
+      Equation: "ElectronContinuityEquation"	RelError: 3.23962e-15	AbsError: 2.49942e-02
+      Equation: "PotentialEquation"	RelError: 7.55134e-14	AbsError: 6.90119e-17
+  Circuit: 	RelError: 6.23260e-17	AbsError: 4.41473e-23
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 2.19370e-14	AbsError: 1.60152e-02
+    Region: "ox"	RelError: 1.41340e-16	AbsError: 4.39176e-17
+      Equation: "PotentialEquation"	RelError: 1.41340e-16	AbsError: 4.39176e-17
+    Region: "si"	RelError: 2.17956e-14	AbsError: 1.60152e-02
+      Equation: "ElectronContinuityEquation"	RelError: 2.55984e-15	AbsError: 1.60152e-02
+      Equation: "PotentialEquation"	RelError: 1.92358e-14	AbsError: 3.13317e-17
+  Circuit: 	RelError: 6.11725e-16	AbsError: 4.33303e-22
+FB 1.0 1 0.8 {"eps_a": -6.128951790529413e-10, "eps_b": 6.303164656884519e-10, "S": 1.2432117557636957e-09}
+Replacing Node Model source_psi in region si of material Si
+Replacing Node Model source_psi:Potential in region si of material Si
+Replacing Node Model drain_psi in region si of material Si
+Replacing Node Model drain_psi:Potential in region si of material Si
+Replacing Node Model drain_psi:drain_bias in region si of material Si
+Replacing Node Model oxc_s_psi in region ox of material Ox
+Replacing Node Model oxc_s_psi:Potential in region ox of material Ox
+Replacing Node Model oxc_d_psi in region ox of material Ox
+Replacing Node Model oxc_d_psi:Potential in region ox of material Ox
+Replacing Node Model oxc_d_psi:drain_bias in region ox of material Ox
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.04323e+02	AbsError: 2.16363e+17
+    Region: "ox"	RelError: 2.28931e-02	AbsError: 1.05645e-02
+      Equation: "PotentialEquation"	RelError: 2.28931e-02	AbsError: 1.05645e-02
+    Region: "si"	RelError: 1.04300e+02	AbsError: 2.16363e+17
+      Equation: "ElectronContinuityEquation"	RelError: 1.35771e+00	AbsError: 2.16363e+17
+      Equation: "PotentialEquation"	RelError: 1.02943e+02	AbsError: 1.08785e-02
+  Circuit: 	RelError: 5.00000e+08	AbsError: 5.51728e-02
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 3.52054e+02	AbsError: 2.16363e+17
+    Region: "ox"	RelError: 3.31420e-02	AbsError: 1.48034e-02
+      Equation: "PotentialEquation"	RelError: 3.31420e-02	AbsError: 1.48034e-02
+    Region: "si"	RelError: 3.52020e+02	AbsError: 2.16363e+17
+      Equation: "ElectronContinuityEquation"	RelError: 5.75859e-01	AbsError: 2.16363e+17
+      Equation: "PotentialEquation"	RelError: 3.51445e+02	AbsError: 1.52634e-02
+  Circuit: 	RelError: 3.91605e+00	AbsError: 6.94759e-03
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 1.49291e+00	AbsError: 3.04669e+16
+    Region: "ox"	RelError: 9.08170e-03	AbsError: 4.09353e-03
+      Equation: "PotentialEquation"	RelError: 9.08170e-03	AbsError: 4.09353e-03
+    Region: "si"	RelError: 1.48382e+00	AbsError: 3.04669e+16
+      Equation: "ElectronContinuityEquation"	RelError: 8.15116e-02	AbsError: 3.04669e+16
+      Equation: "PotentialEquation"	RelError: 1.40231e+00	AbsError: 4.22014e-03
+  Circuit: 	RelError: 3.26287e+01	AbsError: 1.72138e-03
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 5.37840e-02	AbsError: 8.86301e+14
+    Region: "ox"	RelError: 3.54940e-04	AbsError: 1.60044e-04
+      Equation: "PotentialEquation"	RelError: 3.54940e-04	AbsError: 1.60044e-04
+    Region: "si"	RelError: 5.34290e-02	AbsError: 8.86301e+14
+      Equation: "ElectronContinuityEquation"	RelError: 2.45209e-03	AbsError: 8.86301e+14
+      Equation: "PotentialEquation"	RelError: 5.09769e-02	AbsError: 1.65234e-04
+  Circuit: 	RelError: 1.15343e+03	AbsError: 5.27108e-05
+number of equations 44930
+Iteration: 0
+  Device: "mos"	RelError: 5.64428e-05	AbsError: 8.43504e+11
+    Region: "ox"	RelError: 3.85415e-07	AbsError: 1.73786e-07
+      Equation: "PotentialEquation"	RelError: 3.85415e-07	AbsError: 1.73786e-07
+    Region: "si"	RelError: 5.60574e-05	AbsError: 8.43504e+11
+      Equation: "ElectronContinuityEquation"	RelError: 2.60559e-06	AbsError: 8.43504e+11
+      Equation: "PotentialEquation"	RelError: 5.34518e-05	AbsError: 1.79199e-07
+  Circuit: 	RelError: 4.55863e+02	AbsError: 4.55991e-08
+number of equations 44930

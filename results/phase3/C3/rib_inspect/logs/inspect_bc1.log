@@ -1,0 +1,89 @@
+Searching DEVSIM_MATH_LIBS="/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+/home/claude/venv312/lib/python3.12/site-packages/numpy/_core/getlimits.py:552: UserWarning: Signature b'\x00\xd0\xcc\xcc\xcc\xcc\xcc\xcc\xfb\xbf\x00\x00\x00\x00\x00\x00' for <class 'numpy.longdouble'> does not match any known type: falling back to type probe function.
+This warnings indicates broken support for the dtype!
+  machar = _get_machar(dtype)
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 50 Lines.
+Physical group name body has 51 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 217 Lines.
+Physical group name drain has 218 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 50 Lines.
+Physical group name gate has 51 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 500 Triangles.
+Physical group name ox has 805 Lines.
+Physical group name ox has 306 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 50 Lines.
+Physical group name ox_si has 51 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 21700 Triangles.
+Physical group name si has 32817 Lines.
+Physical group name si has 11118 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 217 Lines.
+Physical group name source has 218 Points.
+Device mos has 11373 coordinates with max index 11372
+Region ox has 306 nodes.
+Region si has 11118 nodes.
+Contact body in region si with 51 nodes
+Warning, contact "body" shares a node with contact "drain"
+Contact drain in region si with 218 nodes
+Contact gate in region ox with 51 nodes
+Warning, contact "drain" shares a node with contact "oxc_d"
+Contact oxc_d in region ox with 1 nodes
+Contact oxc_s in region ox with 1 nodes
+Warning, contact "body" shares a node with contact "source"
+Warning, contact "oxc_s" shares a node with contact "source"
+Contact source in region si with 218 nodes
+Warning, contact "drain" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Adding interface ox_si with 51, 51 nodes
+creating solution dcop with 2 nodes
+number of equations 22544
+creating solution dcop_prev with 2 nodes
+Iteration: 0
+  Device: "mos"	RelError: 2.09116e-10	AbsError: 8.09495e+03
+    Region: "ox"	RelError: 1.10693e-16	AbsError: 1.09057e-16
+      Equation: "PotentialEquation"	RelError: 1.10693e-16	AbsError: 1.09057e-16
+    Region: "si"	RelError: 2.09116e-10	AbsError: 8.09495e+03
+      Equation: "ElectronContinuityEquation"	RelError: 1.95002e-10	AbsError: 8.09495e+03
+      Equation: "PotentialEquation"	RelError: 1.41147e-11	AbsError: 5.04118e-12
+  Circuit: 	RelError: 9.13532e-17	AbsError: 9.13532e-27
+number of equations 22544
+Iteration: 0
+  Device: "mos"	RelError: 4.81225e-15	AbsError: 1.94036e+03
+    Region: "ox"	RelError: 9.18508e-17	AbsError: 1.09373e-16
+      Equation: "PotentialEquation"	RelError: 9.18508e-17	AbsError: 1.09373e-16
+    Region: "si"	RelError: 4.72040e-15	AbsError: 1.94036e+03
+      Equation: "ElectronContinuityEquation"	RelError: 2.00040e-15	AbsError: 1.94036e+03
+      Equation: "PotentialEquation"	RelError: 2.72000e-15	AbsError: 4.90549e-17
+  Circuit: 	RelError: 1.35964e-09	AbsError: 1.35964e-19
+number of equations 22544
+Iteration: 0
+  Device: "mos"	RelError: 1.14398e-13	AbsError: 1.43605e+05
+    Region: "ox"	RelError: 1.73890e-15	AbsError: 8.91450e-16
+      Equation: "PotentialEquation"	RelError: 1.73890e-15	AbsError: 8.91450e-16
+    Region: "si"	RelError: 1.12659e-13	AbsError: 1.43605e+05
+      Equation: "ElectronContinuityEquation"	RelError: 5.94890e-14	AbsError: 1.43605e+05
+      Equation: "PotentialEquation"	RelError: 5.31696e-14	AbsError: 1.53008e-15
+  Circuit: 	RelError: 1.36291e-09	AbsError: 1.36291e-19
+INSPECT {"top": [{"x": 0.0001, "y": 0.00012, "dev_V": 5.041189687915448e-12}, {"x": 0.0001, "y": 0.00011807858692603824, "dev_V": 1.6175394357276218e-12}, {"x": 0.0001, "y": 0.00011615717385207649, "dev_V": 6.283862319378386e-13}, {"x": 9.8e-05, "y": 0.00011807858692603824, "dev_V": 4.922728891187944e-13}], "bottom": {"bottom_corner_src(0,xmax)": [0.0, 1, -1], "bottom_corner_drn(L,xmax)": [5.041189687915448e-12, 4, 11423], "bottom_nb(dx,xmax)": [0.0, 1, -1], "bottom_mid(L/2,xmax)": [0.0, 1, -1]}, "contacts": {"body": ["PotentialEquation"], "drain": ["ElectronContinuityEquation"], "gate": ["PotentialEquation"], "oxc_d": [], "oxc_s": [], "source": ["ElectronContinuityEquation"]}}

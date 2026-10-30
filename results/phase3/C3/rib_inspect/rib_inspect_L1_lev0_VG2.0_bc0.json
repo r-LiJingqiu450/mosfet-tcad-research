@@ -1,0 +1,313 @@
+{
+  "start_utc": "2026-10-30T14:50:23.088+00:00",
+  "git_sha": "dc3f069a85fdebaf67e99de87b0fe168899e561c",
+  "git_branch": "phase3/C3-2026-10-30",
+  "git_dirty": false,
+  "argv": [
+    "phase3/c3/rib_inspect.py",
+    "--body-corners",
+    "0",
+    "--out",
+    "results/phase3/C3/rib_inspect"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "L": 1.0,
+    "level": 0,
+    "vg": 2.0,
+    "body_corners": 0,
+    "out": "results/phase3/C3/rib_inspect"
+  },
+  "mesh": {
+    "kind": "explicit",
+    "corner": "tie",
+    "L_cm": 0.0001,
+    "nx": 51,
+    "n_ox_lines": 6,
+    "n_si_lines": 218,
+    "xmax_cm": 0.00012,
+    "tox_cm": 2e-06,
+    "h_si_first_cm": 2.5000000000000012e-08,
+    "body_corners": false
+  },
+  "equilibrium": {
+    "onecol_iterations": 72,
+    "onecol_last_update": 1.0424931177284464e-16,
+    "newton_iterations": 2,
+    "newton_history": [
+      {
+        "dpsi": 5.041183000455908e-12,
+        "dphin": 5.04118299947282e-12,
+        "dcirc": 9.134986709845594e-27
+      },
+      {
+        "dpsi": 1.0937284510728259e-16,
+        "dphin": 5.171433891391008e-17,
+        "dcirc": 1.3596375539612614e-19
+      }
+    ]
+  },
+  "largest_deviation_from_1col": [
+    {
+      "x": 0.0001,
+      "y": 0.00012,
+      "dev_V": 5.041189687915448e-12
+    },
+    {
+      "x": 0.0,
+      "y": 0.00012,
+      "dev_V": 5.041189687915448e-12
+    },
+    {
+      "x": 0.0,
+      "y": 0.00011807858692603824,
+      "dev_V": 1.6175394357276218e-12
+    },
+    {
+      "x": 0.0001,
+      "y": 0.00011807858692603824,
+      "dev_V": 1.6175394357276218e-12
+    },
+    {
+      "x": 0.0001,
+      "y": 0.00011615717385207649,
+      "dev_V": 6.283862319378386e-13
+    },
+    {
+      "x": 0.0,
+      "y": 0.00011615717385207649,
+      "dev_V": 6.283862319378386e-13
+    },
+    {
+      "x": 2.0000000000000003e-06,
+      "y": 0.00011807858692603824,
+      "dev_V": 4.922728891187944e-13
+    },
+    {
+      "x": 9.8e-05,
+      "y": 0.00011807858692603824,
+      "dev_V": 4.922728891187944e-13
+    }
+  ],
+  "nodes": {
+    "si_corner_src(0,0)": {
+      "x": 0.0,
+      "y": 0.0,
+      "psi_minus_1col": 0.0,
+      "psi_minus_psib0": 0.8698119287186908,
+      "Potential": {
+        "row": 306,
+        "nnz": 2,
+        "bulk_row_permuted_to": 255,
+        "cols": [
+          "ox:Potential#255",
+          "si:Potential#0"
+        ]
+      },
+      "Electrons": {
+        "row": 11424,
+        "nnz": 2,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#0",
+          "si:Electrons#0"
+        ]
+      }
+    },
+    "si_corner_drn(L,0)": {
+      "x": 0.0001,
+      "y": 0.0,
+      "psi_minus_1col": 0.0,
+      "psi_minus_psib0": 0.8698119287186908,
+      "Potential": {
+        "row": 356,
+        "nnz": 2,
+        "bulk_row_permuted_to": 305,
+        "cols": [
+          "ox:Potential#305",
+          "si:Potential#50"
+        ]
+      },
+      "Electrons": {
+        "row": 11474,
+        "nnz": 3,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#50",
+          "si:Electrons#50",
+          "circuit:drain_bias#0"
+        ]
+      }
+    },
+    "bottom_corner_src(0,xmax)": {
+      "x": 0.0,
+      "y": 0.00012,
+      "psi_minus_1col": 5.041189687915448e-12,
+      "psi_minus_psib0": 5.041189687915448e-12,
+      "Potential": {
+        "row": 11373,
+        "nnz": 4,
+        "bulk_row_permuted_to": 11373,
+        "cols": [
+          "si:Potential#11016",
+          "si:Potential#11067",
+          "si:Potential#11068",
+          "si:Electrons#11067"
+        ]
+      },
+      "Electrons": {
+        "row": 22491,
+        "nnz": 2,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#11067",
+          "si:Electrons#11067"
+        ]
+      }
+    },
+    "bottom_corner_drn(L,xmax)": {
+      "x": 0.0001,
+      "y": 0.00012,
+      "psi_minus_1col": 5.041189687915448e-12,
+      "psi_minus_psib0": 5.041189687915448e-12,
+      "Potential": {
+        "row": 11423,
+        "nnz": 4,
+        "bulk_row_permuted_to": 11423,
+        "cols": [
+          "si:Potential#11066",
+          "si:Potential#11116",
+          "si:Potential#11117",
+          "si:Electrons#11117"
+        ]
+      },
+      "Electrons": {
+        "row": 22541,
+        "nnz": 3,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#11117",
+          "si:Electrons#11117",
+          "circuit:drain_bias#0"
+        ]
+      }
+    },
+    "bottom_nb(dx,xmax)": {
+      "x": 2.0000000000000003e-06,
+      "y": 0.00012,
+      "psi_minus_1col": 0.0,
+      "psi_minus_psib0": 0.0,
+      "Potential": {
+        "row": 11374,
+        "nnz": 1,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#11068"
+        ]
+      },
+      "Electrons": {
+        "row": 22492,
+        "nnz": 8,
+        "bulk_row_permuted_to": 22492,
+        "cols": [
+          "si:Potential#11017",
+          "si:Potential#11067",
+          "si:Potential#11068",
+          "si:Potential#11069",
+          "si:Electrons#11017",
+          "si:Electrons#11067",
+          "si:Electrons#11068",
+          "si:Electrons#11069"
+        ]
+      }
+    },
+    "bottom_mid(L/2,xmax)": {
+      "x": 5e-05,
+      "y": 0.00012,
+      "psi_minus_1col": 0.0,
+      "psi_minus_psib0": 0.0,
+      "Potential": {
+        "row": 11398,
+        "nnz": 1,
+        "bulk_row_permuted_to": -1,
+        "cols": [
+          "si:Potential#11092"
+        ]
+      },
+      "Electrons": {
+        "row": 22516,
+        "nnz": 8,
+        "bulk_row_permuted_to": 22516,
+        "cols": [
+          "si:Potential#11041",
+          "si:Potential#11091",
+          "si:Potential#11092",
+          "si:Potential#11093",
+          "si:Electrons#11041",
+          "si:Electrons#11091",
+          "si:Electrons#11092",
+          "si:Electrons#11093"
+        ]
+      }
+    },
+    "ox_corner_src(0,0)": {
+      "psi_minus_1col": 0.0,
+      "Potential": {
+        "row": 255,
+        "nnz": 7,
+        "bulk_row_permuted_to": 255,
+        "cols": [
+          "ox:Potential#204",
+          "ox:Potential#255",
+          "ox:Potential#256",
+          "si:Potential#0",
+          "si:Potential#1",
+          "si:Potential#51",
+          "si:Electrons#0"
+        ]
+      }
+    },
+    "ox_corner_drn(L,0)": {
+      "psi_minus_1col": 0.0,
+      "Potential": {
+        "row": 305,
+        "nnz": 7,
+        "bulk_row_permuted_to": 305,
+        "cols": [
+          "ox:Potential#254",
+          "ox:Potential#304",
+          "ox:Potential#305",
+          "si:Potential#49",
+          "si:Potential#50",
+          "si:Potential#101",
+          "si:Electrons#50"
+        ]
+      }
+    }
+  },
+  "contacts": {
+    "body": [
+      "PotentialEquation"
+    ],
+    "drain": [
+      "ElectronContinuityEquation"
+    ],
+    "gate": [
+      "PotentialEquation"
+    ],
+    "oxc_d": [],
+    "oxc_s": [],
+    "source": [
+      "ElectronContinuityEquation"
+    ]
+  }
+}
