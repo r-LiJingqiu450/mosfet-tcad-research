@@ -62,9 +62,15 @@ FILLED_FROM_LEVEL_RUNS
 - Reservoir models: a, b, c (ℓ_res = 0.3·W_dep only).
 - Mesh: levels 0–3.
 
-That is 4 × 4 × 3 × 3 × 4 = **576 bias states** (about 2–3 solver calls each), on DEVSIM plus the 1COL slices. Estimated wall time **6–9 h** on 2 cores, from measured level-3 timings (~3 min per V_G per mode at L = 1 µm).
+That is 4 × 4 × 3 × 3 × 4 = **576 bias states** (about 2–3 solver calls each), on DEVSIM plus the 1COL slices.
 
-**Cheaper first stage (stop/go):** L ∈ {1, 10} µm, V_G = 1.25 V, V_D ∈ {8, 50} mV, models a, b, c, levels 0–3. That is **48 states, about 1 h**. It decides H-C. If σ is numerical or reservoir-dependent, the full FB-1 is **not** run and D1 is reframed (§6).
+**Cost estimate, from measured timings** (`fb_preview`, one finite-bias state including its 1COL quadrature):
+- 12 s at level 0 and 25 s at level 1 (measured);
+- ~60 s at level 2 and ~200 s at level 3, extrapolated from the T1 level-3 runs at 100–240 s per point.
+
+That is about 300 s per 4-level set, so **about 12 CPU-hours, about 6 h on 2 cores**, before R-I(c).
+
+**Cheaper first stage (stop/go):** L ∈ {1, 10} µm, V_G = 1.25 V, V_D ∈ {8, 50} mV, models a, b, c, levels 0–3. That is **48 states, about 1 CPU-hour**. It decides H-C. If σ is numerical or reservoir-dependent, the full FB-1 is **not** run and D1 is reframed (§6).
 
 ## 5. Inclusion, exclusion, failure, inconclusive
 
