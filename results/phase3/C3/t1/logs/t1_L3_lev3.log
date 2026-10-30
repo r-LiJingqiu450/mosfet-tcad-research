@@ -72,3 +72,54 @@ Iteration: 0
       Equation: "ElectronContinuityEquation"	RelError: 1.57273e-15	AbsError: 1.32788e-02
       Equation: "PotentialEquation"	RelError: 3.87982e-15	AbsError: 3.19369e-17
   Circuit: 	RelError: 1.91027e-21	AbsError: 1.91027e-31
+Warning: Replacing equation with equation of the same name.
+Region: ox, Equation: PotentialEquation, Variable: Potential
+Warning: Replacing equation with equation of the same name.
+Region: si, Equation: PotentialEquation, Variable: Potential
+Warning: Replacing equation with equation of the same name.
+Region: si, Equation: ElectronContinuityEquation, Variable: Electrons
+number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 4.09636e-02	AbsError: 8.74539e+11
+    Region: "ox"	RelError: 1.85674e-06	AbsError: 3.70733e-07
+      Equation: "PotentialEquation"	RelError: 1.85674e-06	AbsError: 3.70733e-07
+    Region: "si"	RelError: 4.09618e-02	AbsError: 8.74539e+11
+      Equation: "ElectronContinuityEquation"	RelError: 4.02382e-02	AbsError: 8.74539e+11
+      Equation: "PotentialEquation"	RelError: 7.23566e-04	AbsError: 3.93538e-07
+  Circuit: 	RelError: 1.00000e+00	AbsError: 1.00001e-03
+Warning: Replacing equation with equation of the same name.
+Region: ox, Equation: PotentialEquation, Variable: Potential
+Warning: Replacing equation with equation of the same name.
+Region: si, Equation: PotentialEquation, Variable: Potential
+Warning: Replacing equation with equation of the same name.
+Region: si, Equation: ElectronContinuityEquation, Variable: Electrons
+creating solution ssac_real with 2 nodes
+creating solution ssac_imag with 2 nodes
+Device: mos	Region: ox	Creating: Potential_Real
+Device: mos	Region: ox	Creating: Potential_Imag
+Device: mos	Region: si	Creating: Electrons_Real
+Device: mos	Region: si	Creating: Electrons_Imag
+Device: mos	Region: si	Creating: Potential_Real
+Device: mos	Region: si	Creating: Potential_Imag
+AC Iteration:
+number of equations 176508
+AC Iteration:
+number of equations 176508
+number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 5.54564e-15	AbsError: 1.32788e-02
+    Region: "ox"	RelError: 9.30907e-17	AbsError: 2.82923e-17
+      Equation: "PotentialEquation"	RelError: 9.30907e-17	AbsError: 2.82923e-17
+    Region: "si"	RelError: 5.45255e-15	AbsError: 1.32788e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.57273e-15	AbsError: 1.32788e-02
+      Equation: "PotentialEquation"	RelError: 3.87982e-15	AbsError: 3.19369e-17
+  Circuit: 	RelError: 1.30166e-21	AbsError: 1.30166e-31
+number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 5.31282e-15	AbsError: 1.41526e-02
+    Region: "ox"	RelError: 9.27289e-17	AbsError: 2.81789e-17
+      Equation: "PotentialEquation"	RelError: 9.27289e-17	AbsError: 2.81789e-17
+    Region: "si"	RelError: 5.22009e-15	AbsError: 1.41526e-02
+      Equation: "ElectronContinuityEquation"	RelError: 1.83281e-15	AbsError: 1.41526e-02
+      Equation: "PotentialEquation"	RelError: 3.38728e-15	AbsError: 2.95271e-17
+  Circuit: 	RelError: 1.13752e-21	AbsError: 1.13752e-31

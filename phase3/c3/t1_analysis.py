@@ -87,6 +87,13 @@ def main():
     summ['single_entry_rows_by_mode'] = {m: sorted({r['single_entry_oxide_rows'] for r in rows if r['mode'] == m}) for m in 'ab'}
     summ['max_lateral_psi_spread_V_by_mode'] = {m: max(r['lateral_psi_spread_V'] for r in rows if r['mode'] == m) for m in 'ab'}
     summ['decoupling_all_ok'] = all(r['decoupling_ok'] for r in rows if r['mode'] == 'a')
+    summ['decoupling_failures'] = [dict(L_um=r['L_um'], level=r['level'], VG_V=r['VG_V'],
+                                        rel_change=r['decoupling_rel'], E_L1=r['L1_E'],
+                                        ratio=abs(r['decoupling_rel']) / r['L1_E'])
+                                   for r in rows if r['mode'] == 'a' and not r['decoupling_ok']]
+    summ['non_pass_points'] = [dict(L_um=r['L_um'], level=r['level'], mode=r['mode'], VG_V=r['VG_V'],
+                                    L1=(r['L1_verdict'], r['L1_r0'], r['L1_E']), L2=(r['L2_verdict'], r['L2_r0'], r['L2_E']))
+                               for r in rows if r['L1_verdict'] != 'PASS' or r['L2_verdict'] != 'PASS']
     summ['max_decoupling_rel'] = max(abs(r['decoupling_rel']) for r in rows if r['mode'] == 'a')
     l3rows = [r for r in rows if r.get('L3_status')]
     summ['L3'] = dict(n=len(l3rows), statuses=sorted({r['L3_status'] for r in l3rows}),
