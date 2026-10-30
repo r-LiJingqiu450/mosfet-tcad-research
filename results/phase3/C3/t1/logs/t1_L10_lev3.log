@@ -657,3 +657,17 @@ Warning: Replacing equation with equation of the same name.
 Region: si, Equation: PotentialEquation, Variable: Potential
 Warning: Replacing equation with equation of the same name.
 Region: si, Equation: ElectronContinuityEquation, Variable: Electrons
+AC Iteration:
+number of equations 176508
+AC Iteration:
+number of equations 176508
+number of equations 176508
+Iteration: 0
+  Device: "mos"	RelError: 6.51870e-14	AbsError: 2.96023e+03
+    Region: "ox"	RelError: 1.01429e-16	AbsError: 1.09319e-16
+      Equation: "PotentialEquation"	RelError: 1.01429e-16	AbsError: 1.09319e-16
+    Region: "si"	RelError: 6.50856e-14	AbsError: 2.96023e+03
+      Equation: "ElectronContinuityEquation"	RelError: 1.79112e-15	AbsError: 2.96023e+03
+      Equation: "PotentialEquation"	RelError: 6.32944e-14	AbsError: 5.61900e-17
+  Circuit: 	RelError: 3.03127e-09	AbsError: 3.03127e-19
+number of equations 176508
