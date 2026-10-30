@@ -1,0 +1,17 @@
+Test-suite scratch-file behaviour (documented, NOT modified; production test infra out of scope):
+writer: semiconductor_sim/tests/test_common.py:430 save_npz('_test_common_npz', ...) -> semiconductor_sim/results/golden/_test_common_npz.npz
+430:    save_npz("_test_common_npz", x=x, phi=np.ones(5))
+431:    z = load_npz("_test_common_npz")
+status: untracked in git (never committed; excluded from git bundle and git-archive ZIP)
+?? semiconductor_sim/results/_test_stage/terminal.txt
+?? semiconductor_sim/results/golden/_test_common_npz.npz
+total 16
+drwxr-xr-x 2 root root 4096 Oct 30 03:59 .
+drwxr-xr-x 6 root root 4096 Oct 30 03:59 ..
+-rw-r--r-- 1 root root  622 Oct 30 05:50 _test_common_npz.npz
+-rw-r--r-- 1 root root 1621 Oct 30 03:57 stage3.json
+8628d9d80a4d1e6cfa67ee6c31d089576d4af5bc44b83646e72621f4ba3e2536  semiconductor_sim/results/golden/_test_common_npz.npz
+17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828  semiconductor_sim/results/golden/stage3.json
+protected file semiconductor_sim/results/golden/stage3.json SHA-256 before/after both test runs:
+17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828  semiconductor_sim/results/golden/stage3.json
+17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828  semiconductor_sim/results/golden/stage3.json

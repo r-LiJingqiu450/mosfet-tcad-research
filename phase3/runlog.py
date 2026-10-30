@@ -42,8 +42,23 @@ def header(config: dict):
                 argv=sys.argv, versions=versions(), config=config)
 
 
+def _clean(o):
+    if isinstance(o, dict):
+        return {(':'.join(map(str, k)) if isinstance(k, tuple) else k): _clean(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)):
+        return [_clean(v) for v in o]
+    return o
+
+
+def _default(o):
+    try:
+        return float(o)
+    except Exception:
+        return str(o)
+
+
 def write_json(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w', encoding='utf-8') as fh:
-        json.dump(obj, fh, indent=2, default=float)
+        json.dump(_clean(obj), fh, indent=2, default=_default)
         fh.write('\n')
