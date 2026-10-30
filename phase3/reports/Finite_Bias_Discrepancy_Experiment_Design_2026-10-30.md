@@ -20,7 +20,31 @@ All diagnostic numbers are previews without a full uncertainty analysis.
 
 ### 1.1 Is σ physical or numerical? (lateral/depth refinement, L = 1 and 10 µm)
 
-FILLED_FROM_LEVEL_RUNS
+Depth and lateral directions were refined together. V_D = 50 mV. These are previews: L = 1 µm has 3 levels and L = 10 µm has 2, short of R04 §7.4's 4-level classification.
+
+**L = 1 µm, levels 0–2:**
+
+| V_G | σ_h, levels 0 / 1 / 2 | Ratio of successive differences | σ extrapolated (2nd order) | α_h, level 2 (change 0→2) |
+|---|---|---|---|---|
+| 0.8 V | 6.5e-12 / 8.7e-12 / 9.9e-12 | 1.94 | ≈ 1.1e-11 | −6.215e-10 (0.04 %) |
+| 1.25 V | 1.10e-5 / 1.96e-5 / 2.40e-5 | 1.99 | **≈ +2.8e-5** | −5.417e-4 (0.15 %) |
+| 2.0 V | −3.3e-6 / −8.5e-7 / +3.7e-7 | 1.99 | **≈ +1.6e-6** | −3.039e-5 (1.4 %) |
+
+**L = 10 µm, levels 0–1:** σ halves per level (ratios 2.01–2.02). The two-level extrapolations are ≈ +1.5e-7 (1.25 V) and ≈ +3e-8 (2.0 V). α_h is unchanged to 0.1–3 %.
+
+**Cross-check of the two metrics** (L = 1 µm, R-I(a), extrapolated from each metric's own level sequence):
+
+| V_G | Same-mesh ε_h | Continuum-M0 ε | Agreement |
+|---|---|---|---|
+| 1.25 V | −5.132e-4 | −5.136e-4 | 0.1 % |
+| 2.0 V | −2.894e-5 | −2.928e-5 | 1.2 % |
+| 0.8 V | −6.1e-10 | −5.3e-7 | **Not reached.** Unresolved: plausibly residual higher-order discretization of the coarse levels 0–2 (C-2's 4-level T2 Richardson at 0.8 V was −6.7e-8); not demonstrated |
+
+**Reading (preview, not a result):**
+1. σ at level 0–2 is **mostly numerical**. It converges at second order, consistent with along-channel SG discretization at a fixed cell count.
+2. σ has a **nonzero physical limit** that decays with L: ≈ 2.8e-5 → ≈ 1.5e-7 at 1.25 V for L = 1 → 10 µm, roughly L^−2.3 from a two-level extrapolation.
+3. The **reservoir-antisymmetric part α is mesh-converged and about 20× larger than σ at L = 1 µm.**
+4. H-C is therefore **not falsified** by the preview, but the reservoir-independent signal is small, and resolving it needs ≥ 4 levels with lateral refinement. This is the central measurement of FB-1, and the reason the stop/go stage includes levels 0–3.
 
 ## 2. Definitions (pre-registered for FB-1)
 
