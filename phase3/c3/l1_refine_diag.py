@@ -66,12 +66,25 @@ def main():
     rhs = bd - b0
     A = A.tocsc()
     out = dict(n=int(A.shape[0]), nnz=int(A.nnz))
+    # B3-consistent metric (phase3/c1/c1b_jacobian.py): normwise backward error of the
+    # row+column max-equilibrated system. (Componentwise omega is degenerate = 1 on decoupled
+    # contact rows with b = 0; the raw normwise value is dominated by the largest rows.)
+    absA = abs(A)
+    Dr_ = 1.0 / np.asarray(absA.max(axis=1).todense()).ravel()
+    Ar_ = sp.diags(Dr_) @ A
+    Dc_ = 1.0 / np.asarray(abs(Ar_).max(axis=0).todense()).ravel()
+    Ae_ = (Ar_ @ sp.diags(Dc_)).tocsr(); be_ = Dr_ * rhs; nAe_ = float(abs(Ae_).sum(axis=1).max())
+
+    def eta(x):
+        xe = x / Dc_
+        return float(np.max(np.abs(Ae_ @ xe - be_)) / (nAe_ * np.max(np.abs(xe)) + np.max(np.abs(be_))))
     # (1)+(2) plain SuperLU as in t1.l1, then iterative refinement
     lu = spla.splu(A)
     x = lu.solve(rhs); steps = []
     for k in range(4):
         nw, cw, r = backward_error(A, x, rhs)
         steps.append(dict(step=k, backward_error_normwise=nw, backward_error_componentwise=cw,
+                          backward_error_equilibrated=eta(x),
                           G=-float(x[iV]) / DELTA_L1, r0=-float(x[iV]) / DELTA_L1 / G - 1))
         x = x + lu.solve(r)
     out['superlu_refinement'] = steps
@@ -84,6 +97,7 @@ def main():
     y = lus.solve(dr * rhs); xs = dc * y
     nw, cw, _ = backward_error(A, xs, rhs)
     out['superlu_equilibrated'] = dict(backward_error_normwise=nw, backward_error_componentwise=cw,
+                                       backward_error_equilibrated=eta(xs),
                                        G=-float(xs[iV]) / DELTA_L1, r0=-float(xs[iV]) / DELTA_L1 / G - 1)
     gns = newton_step_G()
     out['G_NS_umfpack'] = dict(G=gns, r0=gns / G - 1)
