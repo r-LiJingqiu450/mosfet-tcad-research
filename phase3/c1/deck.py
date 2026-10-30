@@ -234,7 +234,7 @@ def build_physics(update_psi='log_damp', update_n='positive'):
         ds.contact_equation(**kw)
 
 
-def build_mesh_explicit(xs, y_ox, y_si, corner='tie'):
+def build_mesh_explicit(xs, y_ox, y_si, corner='tie', body_corners=False):
     """Explicit tensor-product mesh via create_gmsh_mesh (node coordinates exact).
 
     xs: lateral node coordinates (cm, ascending, xs[0]=0, xs[-1]=L); y_ox: oxide lines
@@ -274,7 +274,12 @@ def build_mesh_explicit(xs, y_ox, y_si, corner='tie'):
     for j in range(j0, ny - 1):
         el += [1, P['source'], nid(0, j), nid(0, j + 1)]
         el += [1, P['drain'], nid(nx - 1, j), nid(nx - 1, j + 1)]
-    for i in range(1, nx - 2):                       # body: corners excluded
+    # body: by default the two bottom corners are excluded (in R-I(a) they are pinned by the
+    # lateral psi data). body_corners=True includes them; use ONLY for R-I(b)-only devices,
+    # where the lateral contacts solve no PotentialEquation, so the bottom corners would
+    # otherwise be left with a natural (Neumann) psi condition instead of psi = psi_b0.
+    ib0, ib1 = (0, nx - 1) if body_corners else (1, nx - 2)
+    for i in range(ib0, ib1):
         el += [1, P['body'], nid(i, ny - 1), nid(i + 1, ny - 1)]
     if corner == 'tie':
         el += [1, P['oxc_s'], nid(0, kif), nid(0, kif)]          # one-node contacts
@@ -295,7 +300,7 @@ def build_mesh_explicit(xs, y_ox, y_si, corner='tie'):
     CORNER['mode'] = 'tie' if corner == 'tie' else 'none'
     return dict(kind='explicit', corner=corner, L_cm=float(xs[-1]), nx=nx, n_ox_lines=len(y_ox),
                 n_si_lines=len(y_si), xmax_cm=float(y_si[-1]), tox_cm=float(-y_ox[0]),
-                h_si_first_cm=float(y_si[1] - y_si[0]))
+                h_si_first_cm=float(y_si[1] - y_si[0]), body_corners=body_corners)
 
 
 def redeclare_updates(update_psi='default', update_n='default'):

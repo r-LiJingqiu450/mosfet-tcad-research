@@ -314,13 +314,17 @@ def main():
     ap.add_argument('--L', type=float, required=True); ap.add_argument('--level', type=int, required=True)
     ap.add_argument('--modes', default='a,b'); ap.add_argument('--vgs', default='0.8,1.25,2.0')
     ap.add_argument('--l3', type=int, default=0); ap.add_argument('--out', required=True)
+    ap.add_argument('--body-corners', type=int, default=0,
+                    help='1: body contact includes the bottom corners (R-I(b)-only runs)')
     a = ap.parse_args(); out = os.path.abspath(a.out); os.makedirs(out, exist_ok=True)
+    if a.body_corners and 'a' in a.modes.split(','):
+        raise SystemExit('--body-corners is only valid for R-I(b)-only runs (--modes b)')
     geo = Geo(a.L, a.level)
     rec = runlog.header(dict(L_um=a.L, level=a.level, modes=a.modes, vgs=a.vgs, l3=a.l3,
-                             tau_eq=TAU_EQ, delta_L1=DELTA_L1, f1=F1, f2=F2, l3_deltas=L3_DELTAS,
+                             tau_eq=TAU_EQ, delta_L1=DELTA_L1, body_corners=a.body_corners, f1=F1, f2=F2, l3_deltas=L3_DELTAS,
                              pm=D.pm_checklist()))
     t0 = time.time()
-    rec['mesh'] = D.build_mesh_explicit(geo.xs, geo.y_ox, geo.y_si, corner='tie')
+    rec['mesh'] = D.build_mesh_explicit(geo.xs, geo.y_ox, geo.y_si, corner='tie', body_corners=bool(a.body_corners))
     rec['mesh_quality'] = geo.quality()
     D.build_physics()
     P = replace(m0.M0Params.f0(), L=a.L * 1e-6)
@@ -334,7 +338,8 @@ def main():
             rec['points'][f'{mode}:VG={vg}'] = r
             print('T1', a.L, a.level, mode, vg, json.dumps(dict(L1=r['L1'], L2=r['L2'])), flush=True)
     rec['wall_s'] = time.time() - t0; rec['end_utc'] = runlog.now()
-    runlog.write_json(os.path.join(out, f't1_L{a.L:g}_lev{a.level}.json'), rec)
+    tag = '_bodycorners' if a.body_corners else ''
+    runlog.write_json(os.path.join(out, f't1_L{a.L:g}_lev{a.level}{tag}.json'), rec)
     return 0
 
 
