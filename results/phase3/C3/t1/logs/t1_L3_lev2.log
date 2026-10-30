@@ -461,3 +461,42 @@ Iteration: 0
       Equation: "PotentialEquation"	RelError: 1.74173e-15	AbsError: 3.40556e-17
   Circuit: 	RelError: 6.79096e-10	AbsError: 6.79096e-20
 number of equations 88983
+Iteration: 0
+  Device: "mos"	RelError: 9.59041e-15	AbsError: 1.37613e+03
+    Region: "ox"	RelError: 5.69319e-16	AbsError: 5.08312e-16
+      Equation: "PotentialEquation"	RelError: 5.69319e-16	AbsError: 5.08312e-16
+    Region: "si"	RelError: 9.02109e-15	AbsError: 1.37613e+03
+      Equation: "ElectronContinuityEquation"	RelError: 4.07667e-15	AbsError: 1.37613e+03
+      Equation: "PotentialEquation"	RelError: 4.94443e-15	AbsError: 1.27490e-16
+  Circuit: 	RelError: 5.48277e-12	AbsError: 5.48277e-22
+AC Iteration:
+number of equations 88983
+T1 3.0 2 b 1.25 {"L1": {"r0": 1.216394318603875e-09, "E_eq": 9.39644140274254e-10, "E_lin": 5.37707137725185e-09, "E": 6.316715517526104e-09, "verdict": "PASS"}, "L2": {"r0": 4.60315963124458e-09, "E_freq": 0.0, "E_eq": 1.991195208717045e-09, "E_lin": 9.49959852740427e-09, "E": 1.1490793736121315e-08, "verdict": "PASS"}}
+Replacing Node Model source_psi in region si of material Si
+Replacing Node Model source_psi:Potential in region si of material Si
+Replacing Node Model drain_psi in region si of material Si
+Replacing Node Model drain_psi:Potential in region si of material Si
+Replacing Node Model drain_psi:drain_bias in region si of material Si
+Replacing Node Model oxc_s_psi in region ox of material Ox
+Replacing Node Model oxc_s_psi:Potential in region ox of material Ox
+Replacing Node Model oxc_d_psi in region ox of material Ox
+Replacing Node Model oxc_d_psi:Potential in region ox of material Ox
+Replacing Node Model oxc_d_psi:drain_bias in region ox of material Ox
+number of equations 88983
+Iteration: 0
+  Device: "mos"	RelError: 1.49566e-14	AbsError: 1.38240e+04
+    Region: "ox"	RelError: 9.00084e-17	AbsError: 9.73584e-17
+      Equation: "PotentialEquation"	RelError: 9.00084e-17	AbsError: 9.73584e-17
+    Region: "si"	RelError: 1.48666e-14	AbsError: 1.38240e+04
+      Equation: "ElectronContinuityEquation"	RelError: 3.75907e-15	AbsError: 1.38240e+04
+      Equation: "PotentialEquation"	RelError: 1.11076e-14	AbsError: 8.01164e-17
+  Circuit: 	RelError: 5.47774e-11	AbsError: 5.47774e-21
+number of equations 88983
+Iteration: 0
+  Device: "mos"	RelError: 9.91696e-13	AbsError: 2.02883e+06
+    Region: "ox"	RelError: 1.96149e-13	AbsError: 3.22241e-13
+      Equation: "PotentialEquation"	RelError: 1.96149e-13	AbsError: 3.22241e-13
+    Region: "si"	RelError: 7.95547e-13	AbsError: 2.02883e+06
+      Equation: "ElectronContinuityEquation"	RelError: 4.94118e-13	AbsError: 2.02883e+06
+      Equation: "PotentialEquation"	RelError: 3.01430e-13	AbsError: 1.27343e-14
+  Circuit: 	RelError: 3.48650e-15	AbsError: 3.48650e-25
