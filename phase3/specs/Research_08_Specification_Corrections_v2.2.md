@@ -106,3 +106,22 @@ It is not a statement about the 2-D problem at V_D ≠ 0. C-2 provides this demo
 ## 7. Reservoir sensitivity wording — *clarification*
 
 S_res(a,b) is reported as the sensitivity between **two specified reservoir models** (R04 §4.3, Research_07 Issue 3). It is never described as a bound on all admissible reservoir conditions. This applies to every C-4/E-2 output.
+
+---
+
+## Erratum E1 (2026-10-30, C-3) — observed order with non-constant refinement ratios
+
+§2 above states: "Checked on one point (ψ_s at V_G = 2.0 V, C-2 data): p₁₂₃ = 1.984 with nominal √2 and 1.991 with the actual ratios." That sentence is left unchanged as issued. **The value 1.991 is wrong.** It was computed as ln(d₂₃/d₁₂)/ln r₁₂ with the actual r₁₂. That formula is exact only when the refinement ratio is constant.
+
+**Corrected rule (added to §2):**
+- With actual ratios r₁₂ = h₂/h₁ and r₂₃ = h₃/h₂, the observed order solves p = [ln(d₂₃/d₁₂) + ln((r₁₂ᵖ − 1)/(r₂₃ᵖ − 1))]/ln r₁₂ (Celik et al., *J. Fluids Eng.* 130, 078001, 2008, monotone case).
+- It is solved by fixed-point iteration.
+- Implemented in `phase3/c3/t1_analysis.py::observed_order` (commit `9a88e17`) and unit-tested on exact power-law sequences (`phase3/tests/test_c3_analysis.py`).
+
+**Corrected check value:**
+
+| Point | Nominal √2 | v1 formula | Corrected |
+|---|---|---|---|
+| ψ_s, V_G = 2.0 V | 1.984 | 1.991 | **1.981** |
+
+The C-2 conclusions remain unaffected: asymptotic classification and T0/T2 pass. The C-3 G-convergence results with the corrected rule are in `C3_T1_RIa_RIb_Report_2026-10-30.md` §4.1.

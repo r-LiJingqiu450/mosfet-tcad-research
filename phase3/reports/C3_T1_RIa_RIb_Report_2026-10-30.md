@@ -83,7 +83,7 @@ Maximum over V_G of each quantity, as computed. E = E_eq + E_lin (L1) or E_freq 
 | 10 | 3 | a | **2.7e-6** | **9.3e-6** | 3.8e-6 / 5.6e-6 | 6.9e-8 | **2.7e-6** | 1.8e-13 / 2.5e-8 / 2.7e-6 |
 | 10 | 3 | b | 6.8e-8 | 4.6e-7 | 2.7e-7 / 1.9e-7 | 9.1e-8 | 2.1e-7 | 0 / 1.8e-8 / 2.0e-7 |
 
-Full per-point data: `results/phase3/C3/analysis/t1_table.csv`.
+Full per-point data: `results/phase3/C3/analysis_v2/t1_table.csv` (bitwise identical to v1).
 
 **Observations:**
 1. **Resolving power degrades with L and with level.** E grows by one to two orders of magnitude from L = 1 to 10 µm at fixed level, and by one to two orders from level 0 to 3 at fixed L. The lateral/first-cell aspect ratio scales with L (80 → 800) and the system size with level (22.5k → 176.5k unknowns). The linear-solve terms E_lin dominate, not E_freq or E_eq.
@@ -132,21 +132,28 @@ Full per-point data: `results/phase3/C3/analysis/t1_table.csv`.
 
 ### 4.1 M0 vs 1COL: convergence of G_GCA,h to the continuum M0 conductance
 
-R04 §7.4 with actual h_rep ratios (`results/phase3/C3/analysis/G_mesh_convergence.csv`).
+R04 §7.4 with actual h_rep ratios (`results/phase3/C3/analysis_v2/G_mesh_convergence.csv`).
 - G_GCA,h·L does not depend on L (same depth lines). The three lengths therefore give identical *relative* results; there are 3 distinct outcomes, not 9.
-- The same classification applied to the 2-D L2 conductances is also asymptotic with the same orders (p₁₂₃ = 1.991–1.997).
+- The same classification applied to the 2-D L2 conductances is also asymptotic with the same orders (p₁₂₃ = 1.981–1.987).
 
 | V_G | Classification | p₁₂₃ / p₂₃₄ | G_h,finest/G_M0 − 1 | U_disc (rel., estimate) | 2·U_disc test (T2 form) | Richardson − M0 (diagnostic) |
 |---|---|---|---|---|---|---|
-| 0.8 V | asymptotic | 1.997 / 2.022 | 1.49e-5 | 1.87e-5 | pass | −6.7e-8 |
-| 1.25 V | asymptotic | 1.997 / 2.020 | 9.83e-6 | 1.24e-5 | pass | −4.7e-8 |
-| 2.0 V | asymptotic | 1.991 / 2.009 | 1.39e-5 | 1.75e-5 | pass | −1.05e-7 |
+| 0.8 V | asymptotic | 1.987 / 2.013 | 1.49e-5 | 1.88e-5 | pass | −1.7e-7 |
+| 1.25 V | asymptotic | 1.986 / 2.012 | 9.83e-6 | 1.24e-5 | pass | −1.2e-7 |
+| 2.0 V | asymptotic | 1.981 / 2.000 | 1.39e-5 | 1.76e-5 | pass | −2.0e-7 |
+
+**Analysis correction (v1 → v2):**
+- The first analysis (`results/phase3/C3/analysis/`, commit `896d9d9`, kept unchanged) computed the observed order as ln(d₂₃/d₁₂)/ln r₁₂.
+- That formula is exact only for a constant refinement ratio. With the actual, slightly non-constant ratios (1.4124, 1.4137, 1.4147) it overestimated p by about 0.01. v1 gave p₁₂₃ = 1.991–1.997, U_disc 1.24–1.87e-5, Richardson −4.7e-8 to −1.05e-7.
+- v2 (`analysis_v2/`, commit `9a88e17`) solves the general three-level relation, including the q(p) term (Celik et al. 2008).
+- The error was found by a new unit test on an exact h² sequence (`phase3/tests/test_c3_analysis.py`).
+- Classifications and pass/fail outcomes are unchanged. The T1 verdict tables of v1 and v2 are bitwise identical.
 
 **Continuum identity vs its numerical verification:**
 - The continuum statement G = (qμ_n/L)∫n₀ dy for a laterally uniform V_D = 0 state is a mathematical consequence of the model equations.
 - T1 checks its discrete analogue on each mesh (§2).
 - This table checks that the discrete quantities converge, at second order, to the independently computed continuum value M0.
-- After Richardson extrapolation the difference is 4.7e-8 to 1.05e-7. That is about 100× below U_disc, but larger than M0's own estimated U_GCA,rel (1.7e-8, Package B B-3). The residual is therefore not explained by M0's tolerance. A plausible source is the higher-order terms neglected by the extrapolation (p₁₂₃ and p₂₃₄ differ by up to 0.025), but this is not demonstrated. It is a diagnostic and is not resolved further here.
+- After Richardson extrapolation the difference is −1.2e-7 to −2.0e-7. That is 60–110× below U_disc, but larger than M0's own estimated U_GCA,rel (1.7e-8, Package B B-3). The residual is therefore not explained by M0's tolerance. A plausible source is the higher-order terms neglected by the extrapolation (p₁₂₃ and p₂₃₄ differ by up to 0.026), but this is not demonstrated. It is a diagnostic and is not resolved further here.
 
 ### 4.2 1COL vs L1, 1COL vs L2, L1 vs L2
 
@@ -269,7 +276,7 @@ Per Research_08 §7, S_res is a sensitivity between **these two** models, not a 
 2. **R-I(b):**
    - 36/36 PASS. The boundary equations are verified from the exported matrix.
    - One documented two-node deviation at the bottom corners, with an estimated impact of ≤ 7.5e-12.
-3. **Mesh convergence of G to M0:** asymptotic second order for all V_G. Differences are within 2·U_disc. Richardson difference ~1e-7.
+3. **Mesh convergence of G to M0:** asymptotic second order (p = 1.98–2.01) for all V_G. Differences are within 2·U_disc (ratio difference/U_disc = 0.79). Richardson difference 1–2e-7. These are analysis v2 values, after the order-formula correction in §4.1.
 4. **Not met, or limits:**
    - B5 on 31/72 points.
    - B3 for the T1 right-hand side (2 points examined).
@@ -295,4 +302,9 @@ Per Research_08 §7, S_res is a sensitivity between **these two** models, not a 
   - `results/phase3/C3/rib_inspect/`
   - `results/phase3/C3/l1_diag/run1_normwise|run2|run3/`
   - `results/phase3/C3/fb/`
-- **Analysis:** `results/phase3/C3/analysis/` (`t1_table.csv`, `t1_summary.json`, `G_mesh_convergence.csv`, `T1_overview.png/.svg`, `RUN.txt`)
+- **Analysis:**
+  - `results/phase3/C3/analysis_v2/` (cited): `t1_table.csv`, `t1_summary.json`, `G_mesh_convergence.csv`, `T1_overview.png/.svg`, `RUN.txt`
+  - `results/phase3/C3/analysis/` (v1, kept; superseded for §4.1 only)
+- **Tests:**
+  - `phase3/tests/test_c3_analysis.py`
+  - `results/phase3/C3/regression_final/`
