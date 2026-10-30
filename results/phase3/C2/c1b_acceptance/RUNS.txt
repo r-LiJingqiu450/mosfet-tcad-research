@@ -1,0 +1,5 @@
+exit=0 start=2026-10-30T13:10:18.975Z end=2026-10-30T13:10:33.937Z
+run1: exit 0; Skeel estimates FAILED (onenormest needs a square operator); superseded by run2 (masked n x n operator, omega dominant-row record).
+run2 exit=0 start=2026-10-30T13:11:13.885Z end=2026-10-30T13:14:21.922Z cmd='python phase3/c1/c1b_acceptance.py --out results/phase3/C2/c1b_acceptance/run2'
+run2: exit 0; Skeel estimates FAILED again (onenormest passes (n,1) arrays; mask broadcast to n x n). Fixed with ravel; run3.
+run3 exit=0 start=2026-10-30T13:14:36.153Z end=2026-10-30T13:14:52.685Z cmd='python phase3/c1/c1b_acceptance.py --out results/phase3/C2/c1b_acceptance/run3'

@@ -1,0 +1,153 @@
+{
+  "start_utc": "2026-10-30T13:18:36.815+00:00",
+  "git_sha": "5b26809a2c02e53cb4fb23187b4876c0558595e3",
+  "git_branch": "phase3/C2-2026-10-30",
+  "git_dirty": true,
+  "argv": [
+    "phase3/c2/onecol_deck.py",
+    "--level",
+    "2",
+    "--form",
+    "P",
+    "--tau",
+    "1e-10",
+    "--points",
+    "[[0.9963499970604937,0.0]]",
+    "--tag",
+    "vtlong",
+    "--out",
+    "results/phase3/C2/onecol"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "level": 2,
+    "form": "P",
+    "tau": 1e-10,
+    "points": [
+      [
+        0.9963499970604937,
+        0.0
+      ]
+    ],
+    "tag": "vtlong"
+  },
+  "mesh": {
+    "level": 2,
+    "form": "P",
+    "n_si_lines": 435,
+    "n_ox_lines": 11,
+    "nx": 2,
+    "h_si_first_cm": 1.243196491074319e-08,
+    "h_si_max_cm": 9.994617125416618e-07,
+    "quality_depth": {
+      "axis": "si_depth",
+      "level": 2,
+      "n_nodes": 435,
+      "n_cells": 434,
+      "h_min": 1.243196491074319e-08,
+      "h_max": 9.994617125416618e-07,
+      "max_adjacent_ratio": 1.0403402850599708,
+      "monotone": true,
+      "segments": [
+        {
+          "a": 0.0,
+          "b": 9.117880389057356e-05,
+          "kind": "geometric",
+          "Q": 81.27444172833519,
+          "n": 404,
+          "h_first": 1.243196491074319e-08,
+          "h_last": 9.994617125416618e-07,
+          "max_adjacent_ratio": 1.0109451868221988,
+          "h_rep": 2.2569010864003358e-07,
+          "refinement_ratio_to_next": 1.4133663366336633
+        },
+        {
+          "a": 9.117880389057356e-05,
+          "b": 0.00012,
+          "kind": "uniform",
+          "Q": 1.0,
+          "n": 30,
+          "h_first": 9.60706536980876e-07,
+          "h_last": 9.607065369808895e-07,
+          "max_adjacent_ratio": 1.0000000000000142,
+          "h_rep": 9.607065369808815e-07,
+          "refinement_ratio_to_next": 1.4
+        }
+      ],
+      "breakpoint_joints": [
+        {
+          "at": 9.117880389057356e-05,
+          "ratio_right_over_left": 0.9612239517787727
+        }
+      ]
+    },
+    "quality_oxide": {
+      "axis": "oxide",
+      "level": 2,
+      "n_nodes": 11,
+      "n_cells": 10,
+      "h_min": 1.9999999999999978e-07,
+      "h_max": 2.000000000000002e-07,
+      "max_adjacent_ratio": 1.0000000000000022,
+      "monotone": true,
+      "segments": [
+        {
+          "a": -2e-06,
+          "b": 0.0,
+          "kind": "uniform",
+          "Q": 1.0,
+          "n": 10,
+          "h_first": 2e-07,
+          "h_last": 2e-07,
+          "max_adjacent_ratio": 1.0000000000000022,
+          "h_rep": 2e-07,
+          "refinement_ratio_to_next": 1.4
+        }
+      ],
+      "breakpoint_joints": []
+    }
+  },
+  "states": [
+    {
+      "VG_V": 0.9963499970604937,
+      "phin_V": 0.0,
+      "psi_s_V": 0.35715697736627294,
+      "phi_s_bulkref_V": 0.7143155533602891,
+      "Ns_FV_cm2": 5660883482.453052,
+      "Qs_FV_C_cm2": -4.869512571452567e-08,
+      "D_ox_C_cm2": 4.8695125716903504e-08,
+      "gauss_rel": 4.883103198294714e-11,
+      "gate_bc_err_V": 0.0,
+      "bottom_bc_err_V": 0.0,
+      "n_relation_max_rel": 1.9984014443252818e-15,
+      "p_relation_max_rel": 1.9984014443252818e-15,
+      "lateral_psi_spread_V": 0.0,
+      "sg_flux_max_abs_A_cm2": 4.931863372740173e-09,
+      "sg_flux_rel_to_term_scale": 1.875125940030381e-15,
+      "continuity_residual_rel": 1.4444985980605963e-15,
+      "psi_profile": null,
+      "newton": {
+        "converged": true,
+        "iterations": 1,
+        "final": [
+          4.370079143549091e-17,
+          0.0
+        ],
+        "first": [
+          4.371086894481167e-17,
+          0.0
+        ]
+      }
+    }
+  ],
+  "end_utc": "2026-10-30T13:18:37.432+00:00"
+}

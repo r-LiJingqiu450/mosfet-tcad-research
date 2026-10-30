@@ -1,0 +1,15 @@
+Searching DEVSIM_MATH_LIBS="/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Traceback (most recent call last):
+  File "/home/claude/mosfet-tcad-research/phase3/c1/corner_study.py", line 181, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/claude/mosfet-tcad-research/phase3/c1/corner_study.py", line 147, in main
+    rec['mesh'] = D.build_mesh_explicit(xs, y_ox, y_si,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/mosfet-tcad-research/phase3/c1/deck.py", line 283, in build_mesh_explicit
+    ds.create_gmsh_mesh(mesh=m, coordinates=coords, elements=el, physical_names=names)
+devsim_py3.error: ERROR: physical name "oxc_s" index 7 has no elements assigned
+

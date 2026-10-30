@@ -1,0 +1,15 @@
+A0 L0 exit=0 start=2026-10-30T13:01:23.933Z end=2026-10-30T13:01:40.772Z cmd='python phase3/c1/corner_study.py --config A0 --level 0 --out results/phase3/C2/corner_study'
+A0b L0 exit=0 start=2026-10-30T13:01:40.774Z end=2026-10-30T13:01:46.745Z cmd='python phase3/c1/corner_study.py --config A0b --level 0 --out results/phase3/C2/corner_study'
+A1 L0 exit=0 start=2026-10-30T13:01:46.747Z end=2026-10-30T13:01:51.887Z cmd='python phase3/c1/corner_study.py --config A1 --level 0 --out results/phase3/C2/corner_study'
+X0 L0 exit=1 start=2026-10-30T13:01:51.889Z end=2026-10-30T13:01:52.393Z cmd='python phase3/c1/corner_study.py --config X0 --level 0 --out results/phase3/C2/corner_study'
+X1 L0 exit=0 start=2026-10-30T13:01:52.395Z end=2026-10-30T13:01:56.376Z cmd='python phase3/c1/corner_study.py --config X1 --level 0 --out results/phase3/C2/corner_study'
+X1 L1 exit=0 start=2026-10-30T13:01:56.378Z end=2026-10-30T13:02:04.565Z cmd='python phase3/c1/corner_study.py --config X1 --level 1 --out results/phase3/C2/corner_study'
+X1 L2 exit=0 start=2026-10-30T13:02:04.568Z end=2026-10-30T13:02:27.625Z cmd='python phase3/c1/corner_study.py --config X1 --level 2 --out results/phase3/C2/corner_study'
+X2 L0 exit=1 start=2026-10-30T13:02:27.628Z end=2026-10-30T13:02:28.080Z cmd='python phase3/c1/corner_study.py --config X2 --level 0 --out results/phase3/C2/corner_study'
+X2 L1 exit=1 start=2026-10-30T13:02:28.082Z end=2026-10-30T13:02:28.510Z cmd='python phase3/c1/corner_study.py --config X2 --level 1 --out results/phase3/C2/corner_study'
+X2 L2 exit=1 start=2026-10-30T13:02:28.512Z end=2026-10-30T13:02:29.018Z cmd='python phase3/c1/corner_study.py --config X2 --level 2 --out results/phase3/C2/corner_study'
+X0/X2 attempt 1 FAILED (exit 1): mesh builder declared physical names oxc_s/oxc_d with no elements for corner modes none/exclude; DEVSIM error 'physical name has no elements assigned'. Fixed in deck.build_mesh_explicit; rerun below.
+X0 L0 exit=0 start=2026-10-30T13:02:40.660Z end=2026-10-30T13:02:46.009Z (rerun)
+X2 L0 exit=0 start=2026-10-30T13:02:46.012Z end=2026-10-30T13:02:49.624Z (rerun)
+X2 L1 exit=0 start=2026-10-30T13:02:49.626Z end=2026-10-30T13:02:57.742Z (rerun)
+X2 L2 exit=0 start=2026-10-30T13:02:57.745Z end=2026-10-30T13:03:19.990Z (rerun)

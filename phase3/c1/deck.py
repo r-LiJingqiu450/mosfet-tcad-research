@@ -51,7 +51,7 @@ P0 = .5 * (NA + math.sqrt(NA * NA + 4 * NI * NI))
 PSI_B0 = -VT * math.log(P0 / NI)
 
 DEV = 'mos'
-CORNER = {'on': False}
+CORNER = {'on': False, 'mode': 'legacy_pin'}
 SI = 'si'
 OX = 'ox'
 
@@ -122,6 +122,7 @@ def build_mesh(L_um=1.0, xmax_um=1.2, tox_nm=20.0, nx=21, y_ps0_nm=0.5, y_psmax_
         ds.add_2d_contact(mesh=m, name='oxc_s', material='metal', region=OX, xl=0, xh=0, yl=-d, yh=0, bloat=1e-10)
         ds.add_2d_contact(mesh=m, name='oxc_d', material='metal', region=OX, xl=L, xh=L, yl=-d, yh=0, bloat=1e-10)
     CORNER['on'] = corner_contacts
+    CORNER['mode'] = 'legacy_pin'
     ds.finalize_mesh(mesh=m)
     ds.create_device(mesh=m, device=DEV)
     return dict(L_cm=L, xmax_cm=xm, tox_cm=tox, nx=nx, y_ps0_nm=y_ps0_nm,
@@ -233,6 +234,70 @@ def build_physics(update_psi='log_damp', update_n='positive'):
         ds.contact_equation(**kw)
 
 
+def build_mesh_explicit(xs, y_ox, y_si, corner='tie'):
+    """Explicit tensor-product mesh via create_gmsh_mesh (node coordinates exact).
+
+    xs: lateral node coordinates (cm, ascending, xs[0]=0, xs[-1]=L); y_ox: oxide lines
+    ascending ending at 0; y_si: Si lines from 0 ascending. Each rectangle is split
+    into two right triangles (diagonal EdgeCouple = 0). Contacts / interface are
+    defined by explicit boundary edges, so a node may belong to a contact AND the
+    interface (DEVSIM Device.cc allows this with an INFO warning).
+
+    corner = 'tie'     : one-node oxide contacts oxc_s/oxc_d ON the triple points
+                         (revised construction; discrete continuity, see report)
+             'exclude' : Si lateral contacts start below the interface node; the Si
+                         corner stays an interface node (endpoint separation)
+             'none'    : no corner treatment (control: reproduces the original defect)
+    """
+    import numpy as np
+    xs = np.asarray(xs, float); y_ox = np.asarray(y_ox, float); y_si = np.asarray(y_si, float)
+    assert abs(y_ox[-1]) == 0.0 and y_si[0] == 0.0
+    ys = np.concatenate([y_ox, y_si[1:]]); kif = len(y_ox) - 1          # interface row
+    nx, ny = len(xs), len(ys)
+    nid = lambda i, j: j * nx + i
+    coords = []
+    for j in range(ny):
+        for i in range(nx):
+            coords += [float(xs[i]), float(ys[j]), 0.0]
+    names = [OX, SI, 'ox_si', 'gate', 'source', 'drain', 'body'] + (['oxc_s', 'oxc_d'] if corner == 'tie' else [])
+    P = {n: k for k, n in enumerate(names)}
+    el = []
+    for j in range(ny - 1):
+        reg = P[OX] if j < kif else P[SI]
+        for i in range(nx - 1):
+            a, b, c, d = nid(i, j), nid(i + 1, j), nid(i + 1, j + 1), nid(i, j + 1)
+            el += [2, reg, a, b, c, 2, reg, a, c, d]
+    for i in range(nx - 1):
+        el += [1, P['ox_si'], nid(i, kif), nid(i + 1, kif)]
+        el += [1, P['gate'], nid(i, 0), nid(i + 1, 0)]
+    j0 = kif + 1 if corner == 'exclude' else kif
+    for j in range(j0, ny - 1):
+        el += [1, P['source'], nid(0, j), nid(0, j + 1)]
+        el += [1, P['drain'], nid(nx - 1, j), nid(nx - 1, j + 1)]
+    for i in range(1, nx - 2):                       # body: corners excluded
+        el += [1, P['body'], nid(i, ny - 1), nid(i + 1, ny - 1)]
+    if corner == 'tie':
+        el += [1, P['oxc_s'], nid(0, kif), nid(0, kif)]          # one-node contacts
+        el += [1, P['oxc_d'], nid(nx - 1, kif), nid(nx - 1, kif)]
+    m = 'mx'
+    ds.create_gmsh_mesh(mesh=m, coordinates=coords, elements=el, physical_names=names)
+    ds.add_gmsh_region(gmsh_name=OX, mesh=m, region=OX, material='Ox')
+    ds.add_gmsh_region(gmsh_name=SI, mesh=m, region=SI, material='Si')
+    ds.add_gmsh_interface(gmsh_name='ox_si', mesh=m, name='ox_si', region0=OX, region1=SI)
+    contacts = [('gate', OX), ('source', SI), ('drain', SI), ('body', SI)]
+    if corner == 'tie':
+        contacts += [('oxc_s', OX), ('oxc_d', OX)]
+    for c, r in contacts:
+        ds.add_gmsh_contact(gmsh_name=c, mesh=m, name=c, region=r, material='metal')
+    ds.finalize_mesh(mesh=m)
+    ds.create_device(mesh=m, device=DEV)
+    CORNER['on'] = corner == 'tie'
+    CORNER['mode'] = 'tie' if corner == 'tie' else 'none'
+    return dict(kind='explicit', corner=corner, L_cm=float(xs[-1]), nx=nx, n_ox_lines=len(y_ox),
+                n_si_lines=len(y_si), xmax_cm=float(y_si[-1]), tox_cm=float(-y_ox[0]),
+                h_si_first_cm=float(y_si[1] - y_si[0]))
+
+
 def redeclare_updates(update_psi='default', update_n='default'):
     """Re-declare the bulk equations with a different variable_update (same models).
     'default' = undamped Newton update x <- x + dx (DEVSIM Equation.cc
@@ -268,10 +333,27 @@ def set_lateral_dirichlet(enable: bool):
                 pass
     if CORNER['on']:
         for c in ('oxc_s', 'oxc_d'):
-            if enable:
+            if enable and CORNER['mode'] == 'legacy_pin':
+                # C-1 attempt-3 construction (built-in mesher): pins the oxide node ADJACENT
+                # to the triple point; kept unchanged as regression evidence.
                 ds.contact_node_model(device=DEV, contact=c, name=f'{c}_psi', equation='Potential - PsiLat')
                 ds.contact_node_model(device=DEV, contact=c, name=f'{c}_psi:Potential', equation='1')
                 ds.contact_equation(device=DEV, contact=c, name='PotentialEquation', node_model=f'{c}_psi')
+            elif enable and CORNER['mode'] == 'tie':
+                # Revised construction (explicit mesh): the one-node oxide contact sits ON the
+                # triple point. Its value equals the Si corner Dirichlet value, i.e. it is the
+                # discrete potential-continuity condition at a node whose Si twin is Dirichlet.
+                # Its displacement flux is assigned to the same terminal (drain via circuit).
+                b = 'drain_bias' if c == 'oxc_d' else 'source_bias'
+                ds.contact_node_model(device=DEV, contact=c, name=f'{c}_psi',
+                                      equation=f'Potential - (PsiLat + s_couple*{b})')
+                ds.contact_node_model(device=DEV, contact=c, name=f'{c}_psi:Potential', equation='1')
+                kw = dict(device=DEV, contact=c, name='PotentialEquation', node_model=f'{c}_psi',
+                          edge_charge_model='contactcharge_edge')
+                if c == 'oxc_d':
+                    ds.contact_node_model(device=DEV, contact=c, name=f'{c}_psi:{b}', equation='-s_couple')
+                    kw['circuit_node'] = b
+                ds.contact_equation(**kw)
             else:
                 try:
                     ds.delete_contact_equation(device=DEV, contact=c, name='PotentialEquation')

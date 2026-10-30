@@ -1,0 +1,992 @@
+{
+  "start_utc": "2026-10-30T13:04:18.717+00:00",
+  "git_sha": "5b26809a2c02e53cb4fb23187b4876c0558595e3",
+  "git_branch": "phase3/C2-2026-10-30",
+  "git_dirty": true,
+  "argv": [
+    "phase3/c1/corner_study.py",
+    "--config",
+    "A0",
+    "--level",
+    "0",
+    "--out",
+    "results/phase3/C2/corner_study"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "config": "A0",
+    "level": 0,
+    "vgs": [
+      0.8,
+      1.25,
+      2.0
+    ],
+    "pm": {
+      "T_K": 300.0,
+      "V_T_V": 0.025851999786435535,
+      "n_i_cm3": 10000000000.0,
+      "eps_Si_rel": 11.7,
+      "eps_ox_rel": 3.9,
+      "statistics": "Boltzmann",
+      "mu_n_cm2_Vs": 1350.0,
+      "mobility": "constant",
+      "generation_recombination": "none",
+      "holes": "frozen p=n_i*exp(-psi/V_T)",
+      "interface_charge": "none",
+      "NA_cm3": 1e+16,
+      "psi_b0_V": -0.3571585759940161,
+      "gate": "psi_gate = V_G + psi_b0 (V_FB = 0)",
+      "units": "cm; I [A/cm]; I'[A/um]=I*1e-4"
+    }
+  },
+  "mesh": {
+    "L_cm": 0.0001,
+    "xmax_cm": 0.00012,
+    "tox_cm": 2e-06,
+    "nx": 21,
+    "y_ps0_nm": 0.5,
+    "y_psmax_nm": 20.0,
+    "ox_cells": 5,
+    "corner_contacts": false
+  },
+  "contacts": [
+    "body",
+    "drain",
+    "gate",
+    "source"
+  ],
+  "points": {
+    "VG=0.8": {
+      "equilibrium": {
+        "vg0": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 1.034079457572392e-17,
+              "dphin": 1.0340794575723823e-17,
+              "dcirc": 1.804967087147182e-41
+            }
+          ],
+          "final": {
+            "dpsi": 1.034079457572392e-17,
+            "dphin": 1.0340794575723823e-17,
+            "dcirc": 1.804967087147182e-41
+          }
+        },
+        "neumann_ramp": [
+          {
+            "vg": 0.05,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.446691680189655e-16,
+              "dphin": 1.089036290070719e-15,
+              "dcirc": 7.110372738946251e-31
+            }
+          },
+          {
+            "vg": 0.1,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.1684339903071437e-16,
+              "dphin": 9.857655829673571e-16,
+              "dcirc": 2.581014544608371e-30
+            }
+          },
+          {
+            "vg": 0.15000000000000002,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 9.559867677992983e-17,
+              "dphin": 1.5919016531453442e-15,
+              "dcirc": 1.2384295106714994e-31
+            }
+          },
+          {
+            "vg": 0.2,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.0526295851603385e-16,
+              "dphin": 9.821266683377442e-15,
+              "dcirc": 7.50256506343043e-31
+            }
+          },
+          {
+            "vg": 0.25,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 6.188215259790057e-17,
+              "dphin": 8.538216381921129e-15,
+              "dcirc": 3.178176063317615e-29
+            }
+          },
+          {
+            "vg": 0.3,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 6.485918120075163e-17,
+              "dphin": 4.236049328595088e-15,
+              "dcirc": 3.5794198290453845e-29
+            }
+          },
+          {
+            "vg": 0.35,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.0367476146590222e-16,
+              "dphin": 1.7264287256217791e-15,
+              "dcirc": 5.954363147316921e-28
+            }
+          },
+          {
+            "vg": 0.39999999999999997,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 5.841912003122053e-17,
+              "dphin": 5.798056519370417e-16,
+              "dcirc": 7.575412176600096e-28
+            }
+          },
+          {
+            "vg": 0.44999999999999996,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.0284864277535697e-16,
+              "dphin": 2.9909180626247915e-16,
+              "dcirc": 2.744461036254412e-28
+            }
+          },
+          {
+            "vg": 0.49999999999999994,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.308759981566172e-16,
+              "dphin": 2.4218373256350433e-16,
+              "dcirc": 2.1865869728101939e-26
+            }
+          },
+          {
+            "vg": 0.5499999999999999,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 6.807904749558492e-17,
+              "dphin": 1.207297685371579e-16,
+              "dcirc": 5.810257033939701e-26
+            }
+          },
+          {
+            "vg": 0.6,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 7.1780494429138e-17,
+              "dphin": 8.538205242067625e-17,
+              "dcirc": 1.2050388701230728e-24
+            }
+          },
+          {
+            "vg": 0.65,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.0437128487139399e-16,
+              "dphin": 1.3889828360425244e-16,
+              "dcirc": 5.6000423809715565e-25
+            }
+          },
+          {
+            "vg": 0.7000000000000001,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.385427741908299e-16,
+              "dphin": 1.3102799550171588e-16,
+              "dcirc": 8.715244713289595e-24
+            }
+          },
+          {
+            "vg": 0.7500000000000001,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.3014005213803987e-16,
+              "dphin": 1.2649890012514974e-16,
+              "dcirc": 1.57560701332902e-23
+            }
+          },
+          {
+            "vg": 0.8,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.1944541926638404e-16,
+              "dphin": 2.1815465051882946e-16,
+              "dcirc": 7.031786451652242e-23
+            }
+          }
+        ],
+        "neumann_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 3.9950056155580304e-17,
+              "dphin": 4.754350584032061e-17,
+              "dcirc": 1.0300074144222682e-22
+            },
+            {
+              "dpsi": 4.064976162051591e-17,
+              "dphin": 5.984025582908704e-17,
+              "dcirc": 9.9268540810772e-23,
+              "extra": true
+            },
+            {
+              "dpsi": 4.9748060645609193e-17,
+              "dphin": 6.61986724787172e-17,
+              "dcirc": 1.3767056725718913e-22,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 4.9748060645609193e-17,
+            "dphin": 6.61986724787172e-17,
+            "dcirc": 1.3767056725718913e-22,
+            "extra": true
+          }
+        },
+        "ria_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 3.886521981619143e-17,
+              "dphin": 1.0720359878983479e-16,
+              "dcirc": 4.0486251226430077e-22
+            },
+            {
+              "dpsi": 3.777422488015837e-17,
+              "dphin": 7.888793957686937e-17,
+              "dcirc": 3.0737791183234456e-22,
+              "extra": true
+            },
+            {
+              "dpsi": 3.8049073570239755e-17,
+              "dphin": 6.545812596715488e-17,
+              "dcirc": 1.070459430341707e-22,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 3.8049073570239755e-17,
+            "dphin": 6.545812596715488e-17,
+            "dcirc": 1.070459430341707e-22,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 3.1471416799868034e-05,
+      "G_L1": 3.232218535208494e-06,
+      "G_L2_0p1Hz": 3.2322185349723488e-06,
+      "r0_L1": -0.8972966944652442,
+      "r0_L2": -0.8972966944727476,
+      "L1_vs_L2": 7.30597804476929e-11,
+      "continuity": {
+        "max_abs_jump_V": 0.40003768894813785,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 0.41654537909274275,
+            "psi_si": 0.016507690144604917,
+            "psi_lat_1col": 0.016507690144604917,
+            "jump_V": 0.40003768894813785
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 0.41654537909274275,
+            "psi_si": 0.016507690144605066,
+            "psi_lat_1col": 0.016507690144605066,
+            "jump_V": 0.4000376889481377
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 0.18274155141166387,
+          "at_depth_cm": 0.0,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 0.9991487109402543,
+          "at_depth_cm": 0.0,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 24,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#22",
+            "ox:Potential#24",
+            "ox:Potential#25"
+          ],
+          "vals": [
+            -3.547006569554317e-11,
+            3.547090613162551e-11,
+            -8.404360823456121e-16
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 272,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#259",
+            "ox:Potential#271",
+            "ox:Potential#272"
+          ],
+          "vals": [
+            -8.4043608234561225e-16,
+            -3.547006569554316e-11,
+            3.5470906131625504e-11
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -9.299312681324422e-23,
+          "drain": -1.0069820566232516e-13,
+          "gate": 4.133456660599428e-12,
+          "source": -1.0069820566232521e-13
+        },
+        "sum_contact": 3.932060249181785e-12,
+        "space_charge_noncontact": 3.928248183576686e-12,
+        "space_charge_all": 4.1334566605064335e-12,
+        "n_si_contact_rows": 494,
+        "closure_plus": 1.9016307846369387,
+        "closure_minus": 0.000922246419428145
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 24,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 9851,
+      "decoupling_rel_change_L1": -1.8482992913959606e-12
+    },
+    "VG=1.25": {
+      "equilibrium": {
+        "neumann_ramp": [
+          {
+            "vg": 0.8500000000000001,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 8.002522861487821e-17,
+              "dphin": 1.1447810104749743e-14,
+              "dcirc": 4.3669839890441406e-21
+            }
+          },
+          {
+            "vg": 0.9000000000000001,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 9.051435970730328e-15,
+              "dphin": 1.0529737234926964e-12,
+              "dcirc": 1.3653373611395844e-20
+            }
+          },
+          {
+            "vg": 0.9500000000000002,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 2.9960273106597568e-12,
+              "dphin": 7.519387618375933e-11,
+              "dcirc": 2.880431952320816e-20
+            }
+          },
+          {
+            "vg": 1.0000000000000002,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 6,
+            "final": {
+              "dpsi": 1.863556366919835e-16,
+              "dphin": 1.940802060114444e-16,
+              "dcirc": 3.531835327301772e-20
+            }
+          },
+          {
+            "vg": 1.0500000000000003,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 6,
+            "final": {
+              "dpsi": 1.3523638176646247e-16,
+              "dphin": 1.4300911677850948e-16,
+              "dcirc": 8.572914843287879e-20
+            }
+          },
+          {
+            "vg": 1.1000000000000003,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 5.0501508420647105e-12,
+              "dphin": 4.607604901137027e-11,
+              "dcirc": 2.9091711523433025e-18
+            }
+          },
+          {
+            "vg": 1.1500000000000004,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 7.347978009143742e-13,
+              "dphin": 6.227209240288434e-12,
+              "dcirc": 3.7332505493659304e-18
+            }
+          },
+          {
+            "vg": 1.2000000000000004,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.838060329070752e-14,
+              "dphin": 1.0720089829958176e-13,
+              "dcirc": 3.1847219848656898e-18
+            }
+          },
+          {
+            "vg": 1.25,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 1.9348441600563433e-15,
+              "dphin": 8.756638167062137e-15,
+              "dcirc": 1.5661702335724896e-17
+            }
+          }
+        ],
+        "neumann_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 1.2293152429652903e-16,
+              "dphin": 8.900239141486805e-17,
+              "dcirc": 4.906527966081769e-18
+            },
+            {
+              "dpsi": 1.2319388534777897e-16,
+              "dphin": 1.125979604929546e-16,
+              "dcirc": 5.7182662084753485e-18,
+              "extra": true
+            },
+            {
+              "dpsi": 7.862709028979031e-17,
+              "dphin": 6.412358382239679e-17,
+              "dcirc": 1.4214458399534758e-18,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 7.862709028979031e-17,
+            "dphin": 6.412358382239679e-17,
+            "dcirc": 1.4214458399534758e-18,
+            "extra": true
+          }
+        },
+        "ria_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 1.1511280872324344e-16,
+              "dphin": 1.1071571364414978e-16,
+              "dcirc": 5.354561178513231e-18
+            },
+            {
+              "dpsi": 1.9448384274622832e-16,
+              "dphin": 1.7463735929939892e-16,
+              "dcirc": 9.872162150645782e-18,
+              "extra": true
+            },
+            {
+              "dpsi": 1.1197588638947258e-16,
+              "dphin": 1.0207396658848969e-16,
+              "dcirc": 4.36008113580839e-18,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 1.1197588638947258e-16,
+            "dphin": 1.0207396658848969e-16,
+            "dcirc": 4.36008113580839e-18,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 0.34702317223829043,
+      "G_L1": 0.027306738586898523,
+      "G_L2_0p1Hz": 0.02730673859230806,
+      "r0_L1": -0.9213114835796965,
+      "r0_L2": -0.9213114835641081,
+      "L1_vs_L2": -1.981026453989898e-10,
+      "continuity": {
+        "max_abs_jump_V": 0.604220365974684,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 0.850151668508154,
+            "psi_si": 0.2459313025334701,
+            "psi_lat_1col": 0.2459313025334701,
+            "jump_V": 0.604220365974684
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 0.850151668508154,
+            "psi_si": 0.2459313025334702,
+            "psi_lat_1col": 0.2459313025334702,
+            "jump_V": 0.6042203659746839
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 0.20490111671664638,
+          "at_depth_cm": 0.0,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 0.9996387459377243,
+          "at_depth_cm": 0.0,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 24,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#22",
+            "ox:Potential#24",
+            "ox:Potential#25"
+          ],
+          "vals": [
+            -3.547006569554317e-11,
+            3.547090613162551e-11,
+            -8.404360823456121e-16
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 272,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#259",
+            "ox:Potential#271",
+            "ox:Potential#272"
+          ],
+          "vals": [
+            -8.4043608234561225e-16,
+            -3.547006569554316e-11,
+            3.5470906131625504e-11
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -3.598349028866752e-22,
+          "drain": -1.2446507787793304e-13,
+          "gate": 7.311275727659086e-12,
+          "source": -1.2446507787793304e-13
+        },
+        "sum_contact": 7.062345571543385e-12,
+        "space_charge_noncontact": 6.9231091154853755e-12,
+        "space_charge_all": 7.311275727299253e-12,
+        "n_si_contact_rows": 494,
+        "closure_plus": 1.9128610666563663,
+        "closure_minus": 0.01904407127353542
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 24,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 9851,
+      "decoupling_rel_change_L1": -1.6479118070122922e-10
+    },
+    "VG=2.0": {
+      "equilibrium": {
+        "neumann_ramp": [
+          {
+            "vg": 1.3,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 3.4924895496853135e-16,
+              "dphin": 5.999891633497951e-16,
+              "dcirc": 1.3483115533361613e-17
+            }
+          },
+          {
+            "vg": 1.35,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 3.505240056582213e-16,
+              "dphin": 3.6792952769706375e-16,
+              "dcirc": 2.536244966355755e-17
+            }
+          },
+          {
+            "vg": 1.4000000000000001,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 3.6895800371455234e-16,
+              "dphin": 3.3054038222139693e-16,
+              "dcirc": 3.6819184459514525e-17
+            }
+          },
+          {
+            "vg": 1.4500000000000002,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 5,
+            "final": {
+              "dpsi": 3.983429118653177e-16,
+              "dphin": 3.510810895457408e-16,
+              "dcirc": 4.340960056826485e-17
+            }
+          },
+          {
+            "vg": 1.5000000000000002,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 1.8153280738930115e-11,
+              "dphin": 3.210720348538351e-11,
+              "dcirc": 8.362824208561323e-17
+            }
+          },
+          {
+            "vg": 1.5500000000000003,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 6.7144504285477015e-12,
+              "dphin": 1.0837132579791461e-11,
+              "dcirc": 7.260803010102595e-17
+            }
+          },
+          {
+            "vg": 1.6000000000000003,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 2.6946406368800757e-12,
+              "dphin": 3.992373499249054e-12,
+              "dcirc": 5.4230671365410065e-17
+            }
+          },
+          {
+            "vg": 1.6500000000000004,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 1.1607601839549815e-12,
+              "dphin": 1.5839195812155617e-12,
+              "dcirc": 2.4124712981645783e-17
+            }
+          },
+          {
+            "vg": 1.7000000000000004,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 5.314090562115878e-13,
+              "dphin": 6.689328590613105e-13,
+              "dcirc": 5.974026744880952e-17
+            }
+          },
+          {
+            "vg": 1.7500000000000004,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 2.5760157652440136e-13,
+              "dphin": 2.988874982116091e-13,
+              "dcirc": 1.0210869234519411e-16
+            }
+          },
+          {
+            "vg": 1.8000000000000005,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 1.2995853497311656e-13,
+              "dphin": 1.3904560204064468e-13,
+              "dcirc": 6.744245642152303e-17
+            }
+          },
+          {
+            "vg": 1.8500000000000005,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 6.964179931983258e-14,
+              "dphin": 6.839690783346098e-14,
+              "dcirc": 1.6610625620141951e-16
+            }
+          },
+          {
+            "vg": 1.9000000000000006,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 3.8571600350176115e-14,
+              "dphin": 3.473762656409932e-14,
+              "dcirc": 1.7553249110988515e-16
+            }
+          },
+          {
+            "vg": 1.9500000000000006,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 2.235915609058086e-14,
+              "dphin": 1.842539813361712e-14,
+              "dcirc": 2.1599867317846295e-16
+            }
+          },
+          {
+            "vg": 2.0,
+            "step": 0.05,
+            "converged": true,
+            "iterations": 4,
+            "final": {
+              "dpsi": 1.4029155121692078e-14,
+              "dphin": 1.0660231629252063e-14,
+              "dcirc": 3.539777641149945e-16
+            }
+          }
+        ],
+        "neumann_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 3.3638867498298266e-16,
+              "dphin": 3.250508510013391e-16,
+              "dcirc": 6.985082490081398e-17
+            },
+            {
+              "dpsi": 6.566979297914313e-16,
+              "dphin": 5.97800730893601e-16,
+              "dcirc": 1.4084501630234245e-16,
+              "extra": true
+            },
+            {
+              "dpsi": 6.646708198733315e-16,
+              "dphin": 6.127586533374921e-16,
+              "dcirc": 1.4395664112315165e-16,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 6.646708198733315e-16,
+            "dphin": 6.127586533374921e-16,
+            "dcirc": 1.4395664112315165e-16,
+            "extra": true
+          }
+        },
+        "ria_final": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 4.54350890721682e-16,
+              "dphin": 3.5930408989732723e-16,
+              "dcirc": 9.347480782958933e-17
+            },
+            {
+              "dpsi": 5.90761828457002e-16,
+              "dphin": 5.10368347562119e-16,
+              "dcirc": 1.266876657489074e-16,
+              "extra": true
+            },
+            {
+              "dpsi": 1.9208951585427007e-16,
+              "dphin": 1.4353107264780827e-16,
+              "dcirc": 3.173423612351644e-17,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 1.9208951585427007e-16,
+            "dphin": 1.4353107264780827e-16,
+            "dcirc": 3.173423612351644e-17,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 1.939623577010415,
+      "G_L1": 0.11606512098856824,
+      "G_L2_0p1Hz": 0.11606512104938632,
+      "r0_L1": -0.9401610073396499,
+      "r0_L2": -0.9401610073082943,
+      "L1_vs_L2": -5.239997324935075e-10,
+      "continuity": {
+        "max_abs_jump_V": 1.2540026470665735,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 1.5361165851699954,
+            "psi_si": 0.28211393810342195,
+            "psi_lat_1col": 0.28211393810342195,
+            "jump_V": 1.2540026470665735
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 1.5361165851699954,
+            "psi_si": 0.28211393810342206,
+            "psi_lat_1col": 0.28211393810342206,
+            "jump_V": 1.2540026470665733
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 0.23083795553599445,
+          "at_depth_cm": 0.0,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 0.9998675374764747,
+          "at_depth_cm": 0.0,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 24,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#22",
+            "ox:Potential#24",
+            "ox:Potential#25"
+          ],
+          "vals": [
+            -3.547006569554317e-11,
+            3.547090613162551e-11,
+            -8.404360823456121e-16
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 272,
+          "nnz": 3,
+          "cols": [
+            "ox:Potential#259",
+            "ox:Potential#271",
+            "ox:Potential#272"
+          ],
+          "vals": [
+            -8.4043608234561225e-16,
+            -3.547006569554316e-11,
+            3.5470906131625504e-11
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -4.177158859431802e-22,
+          "drain": -1.2749979029706284e-13,
+          "gate": 1.8633563947219292e-11,
+          "source": -1.2749979029706287e-13
+        },
+        "sum_contact": 1.837856436620745e-11,
+        "space_charge_noncontact": 1.6830068466019365e-11,
+        "space_charge_all": 1.8633563946801563e-11,
+        "n_si_contact_rows": 494,
+        "closure_plus": 1.889527571427421,
+        "closure_minus": 0.08310250817150674
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 24,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 9851,
+      "decoupling_rel_change_L1": 2.40666597761674e-10
+    }
+  },
+  "wall_s": 17.882411003112793,
+  "end_utc": "2026-10-30T13:04:36.705+00:00"
+}

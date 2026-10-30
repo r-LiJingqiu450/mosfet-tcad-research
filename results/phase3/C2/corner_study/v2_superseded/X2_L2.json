@@ -1,0 +1,516 @@
+{
+  "start_utc": "2026-10-30T13:05:42.507+00:00",
+  "git_sha": "5b26809a2c02e53cb4fb23187b4876c0558595e3",
+  "git_branch": "phase3/C2-2026-10-30",
+  "git_dirty": true,
+  "argv": [
+    "phase3/c1/corner_study.py",
+    "--config",
+    "X2",
+    "--level",
+    "2",
+    "--out",
+    "results/phase3/C2/corner_study"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "config": "X2",
+    "level": 2,
+    "vgs": [
+      0.8,
+      1.25,
+      2.0
+    ],
+    "pm": {
+      "T_K": 300.0,
+      "V_T_V": 0.025851999786435535,
+      "n_i_cm3": 10000000000.0,
+      "eps_Si_rel": 11.7,
+      "eps_ox_rel": 3.9,
+      "statistics": "Boltzmann",
+      "mu_n_cm2_Vs": 1350.0,
+      "mobility": "constant",
+      "generation_recombination": "none",
+      "holes": "frozen p=n_i*exp(-psi/V_T)",
+      "interface_charge": "none",
+      "NA_cm3": 1e+16,
+      "psi_b0_V": -0.3571585759940161,
+      "gate": "psi_gate = V_G + psi_b0 (V_FB = 0)",
+      "units": "cm; I [A/cm]; I'[A/um]=I*1e-4"
+    }
+  },
+  "mesh": {
+    "kind": "explicit",
+    "corner": "exclude",
+    "L_cm": 0.0001,
+    "nx": 41,
+    "n_ox_lines": 11,
+    "n_si_lines": 435,
+    "xmax_cm": 0.00012,
+    "tox_cm": 2e-06,
+    "h_si_first_cm": 1.243196491074319e-08
+  },
+  "contacts": [
+    "body",
+    "drain",
+    "gate",
+    "source"
+  ],
+  "points": {
+    "VG=0.8": {
+      "equilibrium": {
+        "onecol": {
+          "converged": true,
+          "iterations": 34,
+          "last_update_V": 2.7788341503732186e-17,
+          "n_si_lines": 435,
+          "n_ox_lines": 11,
+          "psi_s_V": 0.19966727175883625
+        },
+        "newton": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 4.6254683095190334e-17,
+              "dphin": 6.284479164690989e-17,
+              "dcirc": 1.3999635970076256e-32
+            },
+            {
+              "dpsi": 3.053333946586559e-17,
+              "dphin": 3.441113848182366e-17,
+              "dcirc": 4.3746080165593165e-29,
+              "extra": true
+            },
+            {
+              "dpsi": 3.0095994862975864e-17,
+              "dphin": 4.4125679959568047e-17,
+              "dcirc": 5.426978097874074e-29,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 3.0095994862975864e-17,
+            "dphin": 4.4125679959568047e-17,
+            "dcirc": 5.426978097874074e-29,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 3.201798498851926e-05,
+      "G_L1": 3.2017984614189445e-05,
+      "G_L2_0p1Hz": 3.20179846163286e-05,
+      "r0_L1": -1.1691235757282925e-08,
+      "r0_L2": -1.162442464508473e-08,
+      "L1_vs_L2": -6.681111219819513e-11,
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 0.19966727175883625,
+            "psi_si": 0.19966727175883625,
+            "psi_lat_1col": 0.19966727175883625,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 0.19966727175883625,
+            "psi_si": 0.19966727175883625,
+            "psi_lat_1col": 0.19966727175883625,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 5.551115123125783e-17,
+          "at_depth_cm": 1.651128961e-05,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 2.725917165379968e-15,
+          "at_depth_cm": 5.3016567296e-05,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 410,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#369",
+            "ox:Potential#410",
+            "ox:Potential#411",
+            "si:Potential#0",
+            "si:Potential#1",
+            "si:Potential#41",
+            "si:Electrons#0"
+          ],
+          "vals": [
+            -2.1582082793700006e-12,
+            2.1720208123579684e-12,
+            -1.3812532987968e-14,
+            1.0416350099128964e-10,
+            -2.5757538815235142e-15,
+            -1.0416092523740791e-10,
+            1.2448877309187898e-33
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 450,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#409",
+            "ox:Potential#449",
+            "ox:Potential#450",
+            "si:Potential#39",
+            "si:Potential#40",
+            "si:Potential#81",
+            "si:Electrons#40"
+          ],
+          "vals": [
+            -2.1582082793699945e-12,
+            -1.381253298796804e-14,
+            2.1720208123579628e-12,
+            -2.5757538815235217e-15,
+            1.0416350099128934e-10,
+            -1.0416092523740761e-10,
+            1.244887730918786e-33
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -9.55907961147384e-23,
+          "drain": -5.2469569849105466e-14,
+          "gate": 4.1985637496686e-12,
+          "source": -5.246956984910562e-14
+        },
+        "sum_contact": 4.093624609874798e-12,
+        "space_charge_noncontact": 4.092626448134732e-12,
+        "space_charge_all": 4.1985637495705596e-12,
+        "n_si_contact_rows": 948,
+        "closure_plus": 1.9497741480418598,
+        "closure_minus": 0.0002377388553752975
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 20,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 36123,
+      "decoupling_rel_change_L1": 7.169553839503351e-11
+    },
+    "VG=1.25": {
+      "equilibrium": {
+        "onecol": {
+          "converged": true,
+          "iterations": 51,
+          "last_update_V": 5.3405648069695873e-17,
+          "n_si_lines": 435,
+          "n_ox_lines": 11,
+          "psi_s_V": 0.4509090627738955
+        },
+        "newton": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 6.539968473413457e-17,
+              "dphin": 9.482502513983289e-17,
+              "dcirc": 1.1021193451127498e-26
+            },
+            {
+              "dpsi": 5.376739835341221e-17,
+              "dphin": 3.7248293675467134e-17,
+              "dcirc": 4.80363129918914e-25,
+              "extra": true
+            },
+            {
+              "dpsi": 5.3737845481047804e-17,
+              "dphin": 5.77632863804371e-17,
+              "dcirc": 4.539936629623895e-25,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 5.3737845481047804e-17,
+            "dphin": 5.77632863804371e-17,
+            "dcirc": 4.539936629623895e-25,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 0.3475058969383071,
+      "G_L1": 0.34750589044820024,
+      "G_L2_0p1Hz": 0.34750589052497916,
+      "r0_L1": -1.867624954687841e-08,
+      "r0_L2": -1.8455306727283016e-08,
+      "L1_vs_L2": -2.209428195953933e-10,
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 0.4509090627738955,
+            "psi_si": 0.4509090627738955,
+            "psi_lat_1col": 0.4509090627738955,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 0.4509090627738955,
+            "psi_si": 0.4509090627738955,
+            "psi_lat_1col": 0.4509090627738955,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 5.551115123125783e-17,
+          "at_depth_cm": 0.0,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 2.9396852616224675e-15,
+          "at_depth_cm": 4.04760592e-07,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 410,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#369",
+            "ox:Potential#410",
+            "ox:Potential#411",
+            "si:Potential#0",
+            "si:Potential#1",
+            "si:Potential#41",
+            "si:Electrons#0"
+          ],
+          "vals": [
+            -2.1582082793700006e-12,
+            2.1720208123579684e-12,
+            -1.3812532987968e-14,
+            1.0416350099128943e-10,
+            -2.5757538815235142e-15,
+            -1.0416092523740791e-10,
+            1.2448877309187898e-33
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 450,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#409",
+            "ox:Potential#449",
+            "ox:Potential#450",
+            "si:Potential#39",
+            "si:Potential#40",
+            "si:Potential#81",
+            "si:Electrons#40"
+          ],
+          "vals": [
+            -2.1582082793699945e-12,
+            -1.381253298796804e-14,
+            2.1720208123579628e-12,
+            -2.5757538815235217e-15,
+            1.0416350099128913e-10,
+            -1.0416092523740761e-10,
+            1.244887730918786e-33
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -3.5399934850330114e-22,
+          "drain": -9.489794970492506e-14,
+          "gate": 7.630256647461011e-12,
+          "source": -9.489794970491954e-14
+        },
+        "sum_contact": 7.440460747697166e-12,
+        "space_charge_noncontact": 7.402040076629968e-12,
+        "space_charge_all": 7.630256647097942e-12,
+        "n_si_contact_rows": 948,
+        "closure_plus": 1.945216459955645,
+        "closure_minus": 0.005035305212175632
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 20,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 36123,
+      "decoupling_rel_change_L1": 2.984528180149937e-10
+    },
+    "VG=2.0": {
+      "equilibrium": {
+        "onecol": {
+          "converged": true,
+          "iterations": 76,
+          "last_update_V": 1.9639481147119866e-16,
+          "n_si_lines": 435,
+          "n_ox_lines": 11,
+          "psi_s_V": 0.5127259210056487
+        },
+        "newton": {
+          "converged": true,
+          "iterations": 1,
+          "history": [
+            {
+              "dpsi": 9.359700065526284e-17,
+              "dphin": 9.717958200413e-17,
+              "dcirc": 4.186017095201562e-25
+            },
+            {
+              "dpsi": 9.357669170287478e-17,
+              "dphin": 6.272975401516292e-17,
+              "dcirc": 3.6992771287064054e-25,
+              "extra": true
+            },
+            {
+              "dpsi": 9.355377005641689e-17,
+              "dphin": 3.358248579581329e-17,
+              "dcirc": 8.128263808308656e-21,
+              "extra": true
+            }
+          ],
+          "final": {
+            "dpsi": 9.355377005641689e-17,
+            "dphin": 3.358248579581329e-17,
+            "dcirc": 8.128263808308656e-21,
+            "extra": true
+          }
+        }
+      },
+      "G_GCA_h": 1.939355874115325,
+      "G_L1": 1.9393557987647303,
+      "G_L2_0p1Hz": 1.9393558027920288,
+      "r0_L1": -3.885341293141664e-08,
+      "r0_L2": -3.677679638602882e-08,
+      "L1_vs_L2": -2.076616656410124e-09,
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": 0.0,
+            "psi_ox": 0.5127259210056487,
+            "psi_si": 0.5127259210056487,
+            "psi_lat_1col": 0.5127259210056487,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0001,
+            "psi_ox": 0.5127259210056487,
+            "psi_si": 0.5127259210056487,
+            "psi_lat_1col": 0.5127259210056487,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 1.1102230246251565e-16,
+          "at_depth_cm": 1.2431965e-08,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 3.750107307470321e-15,
+          "at_depth_cm": 4.21622737e-07,
+          "kind": "relative"
+        }
+      ],
+      "oxide_corner_rows": [
+        {
+          "x_cm": 0.0,
+          "row": 410,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#369",
+            "ox:Potential#410",
+            "ox:Potential#411",
+            "si:Potential#0",
+            "si:Potential#1",
+            "si:Potential#41",
+            "si:Electrons#0"
+          ],
+          "vals": [
+            -2.1582082793700006e-12,
+            2.1720208123579684e-12,
+            -1.3812532987968e-14,
+            1.0416350099128943e-10,
+            -2.5757538815235142e-15,
+            -1.0416092523740791e-10,
+            1.2448877309187898e-33
+          ]
+        },
+        {
+          "x_cm": 0.0001,
+          "row": 450,
+          "nnz": 7,
+          "cols": [
+            "ox:Potential#409",
+            "ox:Potential#449",
+            "ox:Potential#450",
+            "si:Potential#39",
+            "si:Potential#40",
+            "si:Potential#81",
+            "si:Electrons#40"
+          ],
+          "vals": [
+            -2.1582082793699945e-12,
+            -1.381253298796804e-14,
+            2.1720208123579628e-12,
+            -2.5757538815235217e-15,
+            1.0416350099128913e-10,
+            -1.0416092523740761e-10,
+            1.244887730918786e-33
+          ]
+        }
+      ],
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "body": -4.0640241085840454e-22,
+          "drain": -2.387785358997188e-13,
+          "gate": 1.951219708175784e-11,
+          "source": -2.387785358997195e-13
+        },
+        "sum_contact": 1.9034640009552e-11,
+        "space_charge_noncontact": 1.8624725799771786e-11,
+        "space_charge_all": 1.9512197081340903e-11,
+        "n_si_contact_rows": 948,
+        "closure_plus": 1.9300423038742227,
+        "closure_minus": 0.021008101141180506
+      },
+      "oxide_lateral": {
+        "n_lateral_oxide_nodes": 20,
+        "single_entry_rows": []
+      },
+      "n_unknowns": 36123,
+      "decoupling_rel_change_L1": 1.9362240699649647e-09
+    }
+  },
+  "wall_s": 22.97358775138855,
+  "end_utc": "2026-10-30T13:06:05.601+00:00"
+}

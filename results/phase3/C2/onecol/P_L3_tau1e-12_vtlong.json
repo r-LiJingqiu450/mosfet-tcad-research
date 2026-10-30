@@ -1,0 +1,153 @@
+{
+  "start_utc": "2026-10-30T13:18:38.491+00:00",
+  "git_sha": "5b26809a2c02e53cb4fb23187b4876c0558595e3",
+  "git_branch": "phase3/C2-2026-10-30",
+  "git_dirty": true,
+  "argv": [
+    "phase3/c2/onecol_deck.py",
+    "--level",
+    "3",
+    "--form",
+    "P",
+    "--tau",
+    "1e-12",
+    "--points",
+    "[[0.9963499970604937,0.0]]",
+    "--tag",
+    "vtlong",
+    "--out",
+    "results/phase3/C2/onecol"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "level": 3,
+    "form": "P",
+    "tau": 1e-12,
+    "points": [
+      [
+        0.9963499970604937,
+        0.0
+      ]
+    ],
+    "tag": "vtlong"
+  },
+  "mesh": {
+    "level": 3,
+    "form": "P",
+    "n_si_lines": 614,
+    "n_ox_lines": 15,
+    "nx": 2,
+    "h_si_first_cm": 8.781983591124412e-09,
+    "h_si_max_cm": 7.082746336628374e-07,
+    "quality_depth": {
+      "axis": "si_depth",
+      "level": 3,
+      "n_nodes": 614,
+      "n_cells": 613,
+      "h_min": 8.781983591124412e-09,
+      "h_max": 7.082746336628374e-07,
+      "max_adjacent_ratio": 1.032140876488806,
+      "monotone": true,
+      "segments": [
+        {
+          "a": 0.0,
+          "b": 9.117880389057356e-05,
+          "kind": "geometric",
+          "Q": 81.27444172833519,
+          "n": 571,
+          "h_first": 8.781983591124412e-09,
+          "h_last": 7.082746336628374e-07,
+          "max_adjacent_ratio": 1.007731718337799,
+          "h_rep": 1.596826688101113e-07,
+          "refinement_ratio_to_next": 1.415061295971979
+        },
+        {
+          "a": 9.117880389057356e-05,
+          "b": 0.00012,
+          "kind": "uniform",
+          "Q": 1.0,
+          "n": 42,
+          "h_first": 6.862189549863439e-07,
+          "h_last": 6.862189549863439e-07,
+          "max_adjacent_ratio": 1.0,
+          "h_rep": 6.862189549863439e-07,
+          "refinement_ratio_to_next": 1.4285714285714286
+        }
+      ],
+      "breakpoint_joints": [
+        {
+          "at": 9.117880389057356e-05,
+          "ratio_right_over_left": 0.9688599907038421
+        }
+      ]
+    },
+    "quality_oxide": {
+      "axis": "oxide",
+      "level": 3,
+      "n_nodes": 15,
+      "n_cells": 14,
+      "h_min": 1.4285714285714282e-07,
+      "h_max": 1.4285714285714303e-07,
+      "max_adjacent_ratio": 1.0000000000000016,
+      "monotone": true,
+      "segments": [
+        {
+          "a": -2e-06,
+          "b": 0.0,
+          "kind": "uniform",
+          "Q": 1.0,
+          "n": 14,
+          "h_first": 1.4285714285714282e-07,
+          "h_last": 1.4285714285714303e-07,
+          "max_adjacent_ratio": 1.0000000000000016,
+          "h_rep": 1.4285714285714285e-07,
+          "refinement_ratio_to_next": 1.4285714285714286
+        }
+      ],
+      "breakpoint_joints": []
+    }
+  },
+  "states": [
+    {
+      "VG_V": 0.9963499970604937,
+      "phin_V": 0.0,
+      "psi_s_V": 0.3571577757157996,
+      "phi_s_bulkref_V": 0.7143163517098157,
+      "Ns_FV_cm2": 5660788028.239257,
+      "Qs_FV_C_cm2": -4.869498787420484e-08,
+      "D_ox_C_cm2": 4.869498787653884e-08,
+      "gauss_rel": 4.793113224781223e-11,
+      "gate_bc_err_V": 0.0,
+      "bottom_bc_err_V": 0.0,
+      "n_relation_max_rel": 1.9984014443252818e-15,
+      "p_relation_max_rel": 1.9984014443252818e-15,
+      "lateral_psi_spread_V": 0.0,
+      "sg_flux_max_abs_A_cm2": 7.427185734474675e-09,
+      "sg_flux_rel_to_term_scale": 1.6495206454212268e-15,
+      "continuity_residual_rel": 1.4306847515288711e-15,
+      "psi_profile": null,
+      "newton": {
+        "converged": true,
+        "iterations": 1,
+        "final": [
+          5.4908593816437824e-17,
+          0.0
+        ],
+        "first": [
+          5.485239185508189e-17,
+          0.0
+        ]
+      }
+    }
+  ],
+  "end_utc": "2026-10-30T13:18:39.160+00:00"
+}

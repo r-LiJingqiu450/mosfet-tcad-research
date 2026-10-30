@@ -1,0 +1,17 @@
+Searching DEVSIM_MATH_LIBS="/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Traceback (most recent call last):
+  File "/home/claude/mosfet-tcad-research/phase3/c2/onecol_deck.py", line 326, in <module>
+    print('C2_POINTS_DONE', run_points(a.level, a.form, a.tau, json.loads(a.points), a.out, a.tag))
+                                                               ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 3 (char 2)
