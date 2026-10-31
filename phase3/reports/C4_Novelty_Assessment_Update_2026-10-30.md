@@ -18,7 +18,7 @@
 | Propositions 1–2 (P) | For mirror-symmetric ideal reservoirs the GCA current is exact through O(V_D²). ε ∝ V_D² follows from an elementary symmetry argument | **The δ² law is not a contribution**, whether or not Ward states it |
 | Proposition 3 (P, scaling argument) | The leading coefficient has reservoir-dependent and interior parts of the same order, L⁻² | No reservoir-independent reduction error at leading order |
 | TC-1 (registered verdict INCONCLUSIVE) | Mirror-asymmetric decks have a linear term c₁ = ±0.0336 V⁻¹ (L = 1 µm) and ±0.00374 V⁻¹ (L = 3 µm): ∝ L^−2.00, c₁(ab) = −c₁(ba) to 1e-6. Symmetric decks have \|c₁\| at 5–7×10⁻⁶ of that, but at 3.0–4.0σ of a cubic fit with large χ². The registered "≤ 3σ" criterion therefore fails | The mechanism of Prop. 2 is strongly indicated post hoc but **not** confirmed by the registered rule |
-| ℓ_res diagnostic (L = 1 µm, 1.25 V, 50 mV) | ε_h moves continuously from R-I(b) (+5.7e-4) through R-I(c) to near zero and changes sign, while R-I(a) is −5.2e-4 (numbers in the results report) | The discrepancy is a property of the reservoir specification, within one family of admissible ideal reservoirs |
+| ℓ_res diagnostic (L = 1 µm, 1.25 V, 50 mV) | ε moves monotonically from R-I(b) (+5.70e-4) through R-I(c) f = 0.1 (+2.42e-4) and f = 0.3 (+6.8e-5) to an unresolved value at f = 1 (\|ε\| < 7e-6), while R-I(a) is −5.13e-4 (C4_lres_and_TC1_Results) | The discrepancy is a property of the reservoir specification, within one family of admissible ideal reservoirs |
 
 ## 2. Claim matrix (C-4 status)
 
