@@ -1,28 +1,11 @@
 {
  "runner_pid": 3547,
- "job_index": 0,
- "n_jobs": 4,
- "job": {
-  "script": "phase3/c6/wprobe.py",
-  "args": [
-   "--L",
-   "2",
-   "--level",
-   "2",
-   "--vg",
-   "1.25",
-   "--hw",
-   "0.5",
-   "--no-devsim"
-  ],
-  "expect": "results/phase3/C6/w1/w1_L2_lev2_VG1.25_hw0.5.json"
- },
- "child_pid": 3552,
- "start": "2026-10-31T09:46:18.996+00:00",
+ "finished": true,
  "counts": {
-  "ok": 0,
+  "ok": 4,
   "failed": 0,
   "timeout": 0,
   "skipped": 0
- }
+ },
+ "end": "2026-10-31T10:35:12.196+00:00"
 }

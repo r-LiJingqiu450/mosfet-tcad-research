@@ -15,14 +15,14 @@ Literature levels E1/E2/E3 are as in the C-5 audit.
 
 1. **[P][V] The zero-bias GCA error is exactly an equilibrium-electrostatics problem.**
    - At V_D → 0 the Scharfetter–Gummel flux has ∂J/∂ψ = 0. The linear-response conductance therefore equals that of a resistor network whose edge conductances come from the equilibrium electron density (theory note, P4).
-   - An independent network assembly reproduces DEVSIM's full coupled-Jacobian linear response at all 31 states where both were computed. The relative difference is ≤ 8e-7, always within DEVSIM's adjoint error estimate (1e-8 to 6e-6).
+   - An independent network assembly reproduces DEVSIM's full coupled-Jacobian linear response at all 28 states where both were computed. The relative difference is ≤ 4.8e-6, always within DEVSIM's own adjoint error estimate for that state (2e-9 to 5.8e-6).
    - Hence Ward's §6.4 problem splits cleanly into two parts: (i) the equilibrium charge, and (ii) how current flows through it.
 
 2. **[P][V] Two-sided rigorous bounds bracket the 2-D result:** G_rows ≤ G_2D ≤ G_slice, by Rayleigh monotonicity.
    - G_slice is Ward's quasi-1-D current hypothesis (6.33) evaluated with the **exact** 2-D charge.
    - The bounds hold at every state.
 
-3. **[V] Affine length law.** 1/G(L) = (L − 2ΔL)/σ_∞ to within 1e-5 of ΔL for L ≥ 2 µm.
+3. **[V] Affine length law.** 1/G(L) = (L − 2ΔL)/σ_∞ to within 1e-5 of ΔL for L ≥ 2 µm, comparing lengths at a fixed mesh level.
 
    | V_G (V) | ΔL per end (nm), L = 2 / 4 / 8 µm | Change from L = 1 → 2 µm |
    |---|---|---|
@@ -91,10 +91,10 @@ Literature levels E1/E2/E3 are as in the C-5 audit.
 
    | Test | Effect on ΔL |
    |---|---|
-   | Resolved abrupt n⁺ wells (R-II) vs Ward's equipotential-well boundary, same mesh family, L = 2 µm | +0.10 % (370.23 vs 369.86 nm, V_G = 1.0) / −0.17 % (1.25 V) / −1.9 % (2.0 V) |
+   | Resolved abrupt n⁺ wells (R-II) vs Ward's equipotential-well boundary, same mesh family, L = 2 µm | +0.10 % (370.23 vs 369.86 nm, V_G = 1.0) and −0.17 % (1.25 V), both within mesh uncertainty (§5a); −1.9 % (2.0 V), resolved |
    | Doubling the well's lateral extent (0.3 → 0.6 µm) | −0.01 nm |
    | Doubling the well depth (0.5 → 1.0 µm) | +1.5–1.8 % |
-   | Mesh level 0 → 1 | ≤ 0.03 nm (≤ 5e-4 relative) |
+   | Mesh levels 0 → 1 → 2 | ≤ 0.17 nm (≤ 5e-4 relative). Not asymptotic (§5a) |
 
    The well-depth sensitivity is the one Ward could only estimate in the section affected by the missing p. 142.
 
@@ -110,8 +110,8 @@ Literature levels E1/E2/E3 are as in the C-5 audit.
 | D1: GCA error against idealized reservoirs | Rejected (C-5) | Physically subleading; reference-dependent |
 | H-R / H-S / FB-1 | Not pursued | Same reason |
 | C-W as registered (E-W1, finite matrix with R-II) | **Reformulated before running** | P4 showed only zero bias is needed and the network gives G cheaply, so a smaller design suffices: Ward's truncation first, then resolved wells as an ablation |
-| Ward-truncation probe W1 (49 states requested, 39 complete) | **Done** | Findings 1–6, 9 |
-| Resolved-well probe R1 (4 states) | **Done** | Finding 8 |
+| Ward-truncation probe W1 (25 completed states + 1 development state) | **Done** | Findings 1–6, 9 |
+| Resolved-well probe R1 (4 states + 1 development state) | **Done** | Finding 8 |
 | Ward-hybrid and slice decomposition (analysis only) | **Done** | Finding 6. This is what turned "Ward is ~15 % off in strong inversion" into "Ward is right for partly wrong reasons" |
 | P7 threshold-shift equivalence | **Tested, rejected** | Finding 9 |
 | Local-ψ_s "fringe vs field" split | Reported only as a diagnostic | Ill-conditioned: an exponential sensitivity to the far-field reference made it L-dependent until it was referenced to the 2-D channel centre |
@@ -199,13 +199,24 @@ The error-budget identity (finding 6) is exact by construction. Its terms are de
 |---|---|
 | Equilibrium | Newton updates ≤ 1e-16 V at τ = 1e-12 V |
 | Network linear solves | Residual ≤ 1e-15 |
-| Network vs DEVSIM | ≤ 8e-7, within the DEVSIM adjoint estimate at every state |
-| Mesh level 0 → 1 | ΔL changes by ≤ 0.03 nm (≤ 5e-4 relative) |
-| Level 2 | §5a |
+| Network vs DEVSIM | ≤ 4.8e-6, within the DEVSIM adjoint estimate at every state (28 states) |
+| Mesh levels 0 → 1 → 2 | ΔL changes by ≤ 0.17 nm. Not asymptotic; working U ≈ 0.5 nm (§5a) |
 
 ### 5a. Level-2 convergence
 
-`MESH_LEVEL2_PLACEHOLDER`
+| V_G (V) | ΔL_2D, levels 0 / 1 / 2 (nm) | Successive changes (nm) | Snapped well depth h_w, levels 0 / 1 / 2 (nm) |
+|---|---|---|---|
+| 1.0 | 369.864 / 369.827 / 369.656 | −0.037, −0.171 | 501.5 / 503.3 / 501.5 |
+| 1.25 | 153.686 / 153.669 / 153.590 | −0.017, −0.079 | same |
+| 2.0 | 53.385 / 53.358 / 53.320 | −0.027, −0.037 | same |
+
+L = 2 µm. Level 2 was run with `--no-devsim`.
+
+**The sequence is not in the asymptotic range.** The level 1 → 2 change exceeds the level 0 → 1 change. One identified confounder: the well depth is snapped to the nearest depth line, and that line differs at level 1 (+1.8 nm, against an observed sensitivity of +5.4 nm/µm). No observed order and no extrapolation are claimed.
+
+**Conservative working uncertainty: U ≈ 0.5 nm per end** (≤ 0.2 % of ΔL). This is about 3× the largest observed change, an estimate, not a bound. The cause should be removed in the next probe by making h_w a fixed depth breakpoint.
+
+Every conclusion in §1 involves differences ≥ 1 % except two: the resolved-well vs truncation differences at 1.0 V and 1.25 V (0.36 nm and 0.26 nm). Those two are **within U and therefore unresolved**; only the 2.0 V difference (1.0 nm, 1.9 %) is resolved. The affine-law statement (finding 3) compares lengths at a fixed mesh level and is a same-discretization result.
 
 ## 6. Unresolved scientific uncertainties
 
