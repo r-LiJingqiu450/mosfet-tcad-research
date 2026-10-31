@@ -1,0 +1,46 @@
+{
+ "argv": [
+  "--deck",
+  "W",
+  "--L",
+  "1",
+  "--level",
+  "0",
+  "--vg",
+  "1.263633",
+  "--tox",
+  "6",
+  "--na",
+  "1e+18",
+  "--hw",
+  "0.5",
+  "--psibi-shift",
+  "0.000000",
+  "--out",
+  "results/phase3/C10/netcheck"
+ ],
+ "networks": [
+  "const_mu",
+  "lombardi_mu"
+ ],
+ "diag": [
+  {
+   "G_drain_side_forward": 2.2730551097544297e-08,
+   "G_source_side_forward": 2.1849785200330632e-08,
+   "G_near_zero_side_swapped": 2.1849785200330023e-08,
+   "rel_src_vs_swapped": 2.7755575615628914e-14,
+   "rel_drainside_error": 0.04031004832030738,
+   "res": 4.854573804181852e-16,
+   "res_swapped": 9.709147608367822e-16
+  },
+  {
+   "G_drain_side_forward": 1.0398151150973356e-08,
+   "G_source_side_forward": 9.792228626686954e-09,
+   "G_near_zero_side_swapped": 9.792228626687172e-09,
+   "rel_src_vs_swapped": -2.2315482794965646e-14,
+   "rel_drainside_error": 0.06187789801343779,
+   "res": 6.472948636467948e-16,
+   "res_swapped": 4.854711477353021e-16
+  }
+ ]
+}

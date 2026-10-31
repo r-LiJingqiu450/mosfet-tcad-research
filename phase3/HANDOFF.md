@@ -265,3 +265,41 @@ The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C
 - Figure: `venv312/bin/python phase3/c9/e9_figures.py` writes `results/phase3/C9/analysis/e9_figure.png/.pdf`.
 - Pre-registered verdicts are unchanged: H9-1 supported, H9-2 equivalent, H9-3 rejected, H9-4 supported with the magnitude corrected.
 - Corrected strong-halo max-g_m ΔV_T: +51.6 / +35.6 / +22.5 mV at L = 0.5 / 1 / 2 µm (v1: +80.5 / +63.7 / +45.9).
+
+## C-10 (subthreshold end correction vs Fjeldly–Shur 1993; similarity; oxide scaling; E10-1), 2026-10-31
+
+**Branch:** `phase3/C10-subthreshold-theory-2026-10-31`, from `c41b5bf`.
+
+**Documents:**
+- Report: `phase3/reports/C10_Research_Phase_Report_2026-10-31.md`.
+- Theory note: `phase3/reports/C10_Theory_Subthreshold_EndCorrection_2026-10-31.md`.
+- Pre-registration: `phase3/specs/C10_Preregistration_2026-10-31.md`, commit `76b708b`.
+
+**Code** (`phase3/c10/`):
+
+| File | Purpose |
+|---|---|
+| `c10_design.py` | Design numbers and job lists |
+| `tail_analysis.py` | Far-field tail fits |
+| `c10_analysis.py` | P10-1 to P10-6 |
+| `c10_figures.py` | C-10 figure |
+| `probe10.py` | Cancellation-free network conductance (E10-1) |
+| `probe10ni.py` | Exact similarity image (n_i scaled; a mathematical test only) |
+
+**Commands** (venv312, DEVSIM_MATH_LIBS exported):
+- Re-run all states:
+  `python phase3/c4/jobrunner.py --jobs results/phase3/C10/jobs_{sim,sweep,tox,mesh}.json --out <dir>`
+- Evaluate (reads `results/phase3/C10/runs` and `results/phase3/C8/subth`):
+  `python phase3/c10/c10_analysis.py`, then `python phase3/c10/c10_figures.py`.
+
+**Verdicts:**
+
+| Test | Verdict |
+|---|---|
+| P10-1 (similarity image) | REJECTED; post-hoc exact image within 0.8 % |
+| P10-3 | H-l0 supported, H-Wd rejected |
+| P10-4 | H-max (device 2); inconclusive (device 1) |
+| P10-5 | Rejected at 5 % (with r); post hoc without r within ±3 % |
+| P10-6 (FS93 eq. 9) | Rejected, ΔL/x_s = 1.33–3.41 |
+
+**E10-1:** use the source-side network current. The drain-side value `dL_net_nm` in endprobe output is invalid in deep subthreshold. In C-7 to C-9 its effect is ≤ 3e-4 relative.

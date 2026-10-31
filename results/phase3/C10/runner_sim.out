@@ -1,0 +1,9 @@
+JOB job=0 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.783500 --tox 2 --na 1e+18 --hw 0.5 --psibi-shift 0.000000' result=OK start=2026-10-31T16:52:25.136+00:00 end=2026-10-31T16:52:40.223+00:00
+JOB job=1 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.783500 --tox 2 --na 1e+18 --hw 0.5 --psibi-shift -0.119053' result=OK start=2026-10-31T16:52:40.223+00:00 end=2026-10-31T16:52:53.329+00:00
+JOB job=2 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.783500 --tox 2 --na 1e+18 --hw 0.04727 --psibi-shift 0.000000' result=OK start=2026-10-31T16:52:53.329+00:00 end=2026-10-31T16:53:08.914+00:00
+JOB job=3 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.783500 --tox 2 --na 1e+18 --hw 0.04727 --psibi-shift -0.119053' result=OK start=2026-10-31T16:53:08.914+00:00 end=2026-10-31T16:53:22.505+00:00
+JOB job=4 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.621433 --tox 2 --na 1e+18 --hw 0.5 --psibi-shift 0.000000' result=OK start=2026-10-31T16:53:22.505+00:00 end=2026-10-31T16:53:37.159+00:00
+JOB job=5 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 0.621433 --tox 2 --na 1e+18 --hw 0.04727 --psibi-shift -0.119053' result=OK start=2026-10-31T16:53:37.159+00:00 end=2026-10-31T16:53:51.259+00:00
+JOB job=6 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 0.783500 --tox 20 --na 1e+16 --hw 0.46905 --psibi-shift 0.000000' result=OK start=2026-10-31T16:53:51.259+00:00 end=2026-10-31T16:55:32.087+00:00
+JOB job=7 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 0.621433 --tox 20 --na 1e+16 --hw 0.46905 --psibi-shift 0.000000' result=OK start=2026-10-31T16:55:32.087+00:00 end=2026-10-31T16:57:11.857+00:00
+RUNNER_END jobs=jobs_sim.json ok=8 failed=0 timeout=0 skipped=0 at=2026-10-31T16:57:11.857+00:00
