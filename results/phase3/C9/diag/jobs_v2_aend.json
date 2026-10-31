@@ -1,0 +1,24 @@
+[
+ {
+  "script": "phase3/c9/diag9_mesh.py",
+  "args": [
+   "--a-end",
+   "0.175",
+   "--deck",
+   "R",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "1.32",
+   "--tox",
+   "2",
+   "--na",
+   "1e18",
+   "--halo-n",
+   "2e+18"
+  ],
+  "expect": "results/phase3/C9/diag/aend0.175_v2/e9_R_L1_lev0_VG1.32_tox2_NA1e+18_ov0_sg0_halo2e+18.json"
+ }
+]

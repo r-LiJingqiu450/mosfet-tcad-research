@@ -249,3 +249,19 @@ The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C
 **Batches:** `phase3/c4/jobrunner.py --jobs results/phase3/C9/jobs_A.json` (and `jobs_B.json`).
 
 **Analysis:** `venv312/bin/python phase3/c9/e9_analysis.py`
+
+**Revision 2026-10-31b (erratum E9-1, addendum A9):**
+- probe9 v2 (`probe9-2026-10-31b`) fixes the Lombardi impurity term for halo devices.
+  - The term is now N_A + N_D + N_halo. v1 passed N_A + N_D − N_halo, which was clipped at 1 cm⁻³.
+  - Constant-mobility and no-halo results are bit-identical between v1 and v2.
+- Halo states re-run with v2: `results/phase3/C9/runs_v2/`. Job list: `jobs_v2_halo.json`.
+- Corrected analysis:
+  `venv312/bin/python phase3/c9/e9_analysis.py --halo-runs results/phase3/C9/runs_v2 --tag v2`
+  writes `e9_result_v2.json`. Running it without options reproduces the original `e9_result.json`.
+- Post-hoc diagnostics:
+  - `phase3/c9/diag9_mesh.py` (forced end-mesh);
+  - `phase3/c9/e9_posthoc.py`, which writes `e9_posthoc.json`;
+  - data in `results/phase3/C9/diag/` (see its README).
+- Figure: `venv312/bin/python phase3/c9/e9_figures.py` writes `results/phase3/C9/analysis/e9_figure.png/.pdf`.
+- Pre-registered verdicts are unchanged: H9-1 supported, H9-2 equivalent, H9-3 rejected, H9-4 supported with the magnitude corrected.
+- Corrected strong-halo max-g_m ΔV_T: +51.6 / +35.6 / +22.5 mV at L = 0.5 / 1 / 2 µm (v1: +80.5 / +63.7 / +45.9).

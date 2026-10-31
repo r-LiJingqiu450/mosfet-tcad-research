@@ -1,0 +1,7 @@
+D1_R_L1_aend0.175_lev0_h2e18_VG1.32 exit=127 start=2026-10-31T14:21:34Z end=2026-10-31T14:21:34Z maxRSS_kB= :: /home/claude/venv312/bin/python phase3/c9/diag9_mesh.py --a-end 0.175 --deck R --L 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/aend0.175
+D2_R_L0.5_lev1_h2e18_VG1.32 exit=127 start=2026-10-31T14:21:34Z end=2026-10-31T14:21:34Z maxRSS_kB= :: /home/claude/venv312/bin/python phase3/c9/probe9.py --deck R --L 0.5 --level 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/level1
+D3_R_L1_lev1_h2e18_VG1.32 exit=127 start=2026-10-31T14:21:34Z end=2026-10-31T14:21:34Z maxRSS_kB= :: /home/claude/venv312/bin/python phase3/c9/probe9.py --deck R --L 1 --level 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/level1
+# note: the three exit=127 lines above are a tooling error (/usr/bin/time not installed); no simulation started. Re-run below without it.
+D1_R_L1_aend0.175_lev0_h2e18_VG1.32 exit=0 start=2026-10-31T14:21:44Z wall_s=9 :: /home/claude/venv312/bin/python phase3/c9/diag9_mesh.py --a-end 0.175 --deck R --L 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/aend0.175
+D2_R_L0.5_lev1_h2e18_VG1.32 exit=0 start=2026-10-31T14:21:53Z wall_s=20 :: /home/claude/venv312/bin/python phase3/c9/probe9.py --deck R --L 0.5 --level 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/level1
+D3_R_L1_lev1_h2e18_VG1.32 exit=0 start=2026-10-31T14:22:13Z wall_s=32 :: /home/claude/venv312/bin/python phase3/c9/probe9.py --deck R --L 1 --level 1 --vg 1.32 --halo-n 2e18 --out results/phase3/C9/diag/level1

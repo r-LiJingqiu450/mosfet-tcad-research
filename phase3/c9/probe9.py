@@ -1,8 +1,11 @@
 """C-9 probe: phase3/c7/endprobe.py (unchanged physics and analysis) plus
   (i)  an optional Gaussian halo/pocket acceptor implant next to each metallurgical junction (deck R):
        N_halo(x, y) = N_h exp(-(x - x_h)^2 / 2 s_x^2) exp(-(y - y_h)^2 / 2 s_y^2), mirrored at the drain end,
-       added to the channel acceptors (net doping = N_D - N_A - N_halo). Lombardi impurity term uses
-       N_A + N_D - N_halo (approximation, documented: it under-counts total ionised impurities in the halo);
+       added to the channel acceptors (net doping = N_D - N_A - N_halo).
+       Lombardi impurity term (v2, C-9 erratum E9-1): total ionised impurity N_A + N_D + N_halo.  In v1
+       (probe9-2026-10-31) the term received N_A + N_D - N_halo, and endprobe.lombardi clips it at 1 cm^-3, so
+       wherever N_halo > N_A + N_D the C N^lambda term collapsed (by a factor of ~180-200 at N_A = 1e18): v1 Lombardi results
+       of halo devices are invalid (constant-mobility and no-halo results are unaffected);
   (ii) terminal-charge outputs for a split-C-V audit: equilibrium contact (displacement) charges of all contacts
        (DEVSIM get_contact_charge, PotentialEquation) and the total electron and hole charge in the silicon
        (sum of node density x NodeVolume). The gate-to-channel charge seen by tied source+drain terminals is
@@ -57,6 +60,12 @@ def donor9(geo, xs, ys):
     return _DONOR0(geo, xs, ys) - halo(geo, xs, ys)
 
 
+def donor_total9(geo, xs, ys):
+    """Ionised-impurity complement for the Lombardi term: endprobe.analyse uses N_A + donor(), so this gives
+    N_A + N_D + N_halo (erratum E9-1).  Used only after the equilibrium solve; never for the net doping."""
+    return _DONOR0(geo, xs, ys) + halo(geo, xs, ys)
+
+
 def terminal_charges():
     out = {}
     for c in ds.get_contact_list(device=D.DEV):
@@ -93,7 +102,8 @@ def main():
     name = (f"e9_{a.deck}_L{a.L:g}_lev{a.level}_VG{a.vg:g}_tox{a.tox:g}_NA{a.na:.0e}_ov{a.ov:g}_sg{a.sigma:g}"
             f"_halo{a.halo_n:.0e}.json")
     path = os.path.join(a.out, name)
-    rec = dict(version='probe9-2026-10-31', start_utc=E7.now(), args=vars(a), halo=dict(HALO), N_D=E7.ND, lombardi=E7.LOMB)
+    rec = dict(version='probe9-2026-10-31b', start_utc=E7.now(), args=vars(a), halo=dict(HALO), N_D=E7.ND, lombardi=E7.LOMB,
+               lombardi_impurity='N_A + N_D + N_halo (total ionised; erratum E9-1)')
     t0 = time.time()
     E7.set_bulk(a.na)
     geo = E7.Geo(a)
@@ -102,7 +112,9 @@ def main():
     D.build_physics()
     sol0, rec['equilibrium'] = E7.equilibrium(geo, a)
     rec['terminal_charges'] = terminal_charges()
+    E7.donor = donor_total9          # Lombardi impurity term only (analyse uses donor() solely for N_A + N_D)
     rec['result'] = E7.analyse(geo, sol0)
+    E7.donor = donor9
     rec['wall_s'] = time.time() - t0
     rec['end_utc'] = E7.now()
     json.dump(rec, open(path, 'w'), indent=1)

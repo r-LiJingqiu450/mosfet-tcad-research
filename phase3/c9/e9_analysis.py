@@ -1,6 +1,10 @@
 """C-9 analysis of direct 2-D solves (no affine extrapolation): H9-1..H9-4 (pre-registered), Terada-Muta on
 direct data, split-C-V from terminal charges vs the C-8 electron proxy, two-length differential mobility.
-Output: results/phase3/C9/analysis/{e9_result.json, e9_figure.png}."""
+Output: results/phase3/C9/analysis/e9_result.json (the figure is made by e9_figures.py).
+
+Post-hoc option (C-9 erratum E9-1): --halo-runs DIR replaces the halo states (halo_n > 0) by those in DIR (probe9 v2,
+corrected Lombardi impurity term) and --tag TAG writes e9_result_TAG.json; without options the original analysis
+(e9_result.json) is reproduced unchanged."""
 from __future__ import annotations
 
 import glob
@@ -17,9 +21,12 @@ Q, MU = 1.602176634e-19, 1350.0
 OUT = 'results/phase3/C9/analysis'
 
 
-def load():
+def load(halo_dir=None):
     D = {}
-    for p in glob.glob('results/phase3/C9/runs/e9_*.json'):
+    paths = glob.glob('results/phase3/C9/runs/e9_*.json')
+    if halo_dir:
+        paths = [p for p in paths if json.load(open(p))['args']['halo_n'] == 0] + glob.glob(os.path.join(halo_dir, 'e9_*.json'))
+    for p in paths:
         r = json.load(open(p))
         if 'end_utc' not in r:
             continue
@@ -43,8 +50,12 @@ def max_gm_vt(v, G, vmax):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--halo-runs', default=None); ap.add_argument('--tag', default=None)
+    args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
-    D = load(); res = {}
+    D = load(args.halo_runs); res = {}
     # H9-1 affine law (direct)
     h1 = {}
     for deck in ('W', 'R'):
@@ -121,7 +132,9 @@ def main():
                 out.append(dict(V1=v1, V2=v2, dL_TM_nm=Lx / 2 * 1e7, Rsd_TM_ohm_um=Rx * 1e4))
             tm[f'{deck}_halo{hn:.0e}_{f}'] = dict(pairs=out, max_line_nonlinearity={str(k): v[1] for k, v in lines.items()})
     res['terada_muta_direct'] = tm
-    json.dump(res, open(os.path.join(OUT, 'e9_result.json'), 'w'), indent=1)
+    if args.halo_runs:
+        res['source'] = dict(no_halo='results/phase3/C9/runs', halo=args.halo_runs, note='post-hoc erratum E9-1 (Lombardi impurity term)')
+    json.dump(res, open(os.path.join(OUT, f"e9_result{'_' + args.tag if args.tag else ''}.json"), 'w'), indent=1)
     print('H9-1', h1['verdict'], {d: round(h1[d]['max_abs_diff_05_2'], 3) for d in ('W', 'R')})
     print('H9-2', h2['verdict'], {d: tuple(round(x, 4) for x in t) for d, t in ev.items()})
     print('H9-3', h3['verdict_5e17'], {k2: [round(x, 1) for x in v2['dL'][:4]] for k2, v2 in h3.items() if k2.startswith(('5e', '2e'))})
