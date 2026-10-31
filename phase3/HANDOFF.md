@@ -117,3 +117,38 @@ venv312/bin/python phase3/c3/fb_preview.py --L 1 --level 0 --out <new dir>
 - `C3_Research_Decision_Report_2026-10-30.md`
 
 **User action needed for the literature gate:** download and attach the two Caltech PDFs, Ward, Odeh & Cohen 1990 (CaltechAUTHORS record 31400) and Ward 1988 PhD thesis (CaltechTHESIS 440). This environment's fetch proxy refused them.
+
+---
+
+## Update 2026-10-31 (C-4 package) — `REFERENCE_READY` (scoped), `NOVELTY_UNPROVEN`
+
+Branch `phase3/C4-2026-10-30` from `e4e4528` (C-3 head, verified). The final HEAD is in the archive's `bundle_verification.txt`. **Not pushed** (no write access; not retried). `main`, golden files and production S1–S3 are untouched.
+
+**Decision:** `phase3/reports/C4_Research_Decision_Report_2026-10-30.md`.
+- The registered 48-state FB-1 stop/go is **not** recommended in its current form.
+- Package E is not started.
+
+**Key commits:**
+
+| Commit | Content |
+|---|---|
+| `409e521` | **Pre-registration** of T1 v2, corrected R-I(b) and R-I(c) (`phase3/specs/C4_T1v2_Preregistration_2026-10-30.md`); `phase3/c4/{deck4,t1v2}.py` |
+| `eb8309b` | Perturbation analysis (Props 1–3) and registered TC-1 rules |
+| `3a18f37`, `d7846e1`, `bfcca33`, `1ede271` | T1 v2 sets B, C, D, D′ (64 runs, 192 points) and TC-1 (6 runs) |
+| `daa183e` | `phase3/c4/jobrunner.py` (checkpointing, bounded runner; replaced the open-ended wait chains) |
+| `b6cee5a`, `11068c7` | Analyses (T1 v2; ℓ_res and TC-1) |
+
+**Reproduce (pinned venv):**
+
+```bash
+export DEVSIM_MATH_LIBS=/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3
+venv312/bin/python phase3/c4/t1v2.py --model b --L 1 --level 0 --out <dir>             # ~5 s
+venv312/bin/python phase3/c4/t1v2.py --model c --lres 0.3 --L 1 --level 0 --out <dir>
+venv312/bin/python phase3/c4/fb4.py --model c --lres 1 --L 1 --level 0 --out <dir>
+venv312/bin/python phase3/c4/tc1.py --L 1 --level 0 --out <dir>                        # ~40 s
+venv312/bin/python phase3/c4/jobrunner.py --jobs results/phase3/C4/jobs_fb4_c.json --out <dir> --limit-s 2400
+venv312/bin/python phase3/c4/t1v2_analysis.py --in results/phase3/C4/t1v2_B results/phase3/C4/t1v2_C results/phase3/C4/t1v2_D results/phase3/C4/t1v2_Dprime --v1 results/phase3/C3/t1 --out <dir>
+venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --tc1 results/phase3/C4/tc1 --out <dir>
+```
+
+**User action needed:** attach the two Ward PDFs, Ward–Odeh–Cohen 1990 (CaltechAUTHORS 31400) and the Ward 1988 thesis (CaltechTHESIS 440). The Task E audit is blocked without them.
