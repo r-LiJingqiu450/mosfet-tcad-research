@@ -155,4 +155,25 @@ The ℓ_res dependence of the finite-bias discrepancy is reported separately (`C
 
 ## 6. Regression
 
-See the archive verification and `results/phase3/C4/regression_final/`.
+Results are in `results/phase3/C4/regression_final/`.
+
+**New tests:** `phase3/tests/test_c4_numerics.py` covers:
+- equilibrated-solver backward stability;
+- conditioning-aware forward error;
+- adjoint residual;
+- the DWR identity within the rounding term;
+- the runner checkpoint.
+
+**`pytest semiconductor_sim phase3/tests`:**
+
+| Environment | Result |
+|---|---|
+| Pinned (3.12.3 / NumPy 2.3.5 / SciPy 1.17.0 / DEVSIM 2.11.2) | **148 passed, 4 skipped**, exit 0 |
+| Current (3.13.18 / NumPy 2.5.3 / SciPy 1.18.1) | **147 passed, 5 skipped**, exit 0. The extra skip is the DEVSIM-dependent solver test; DEVSIM is not installed in that environment |
+
+**Protected items:**
+- Golden `stage3.json` SHA-256 `17ca3274…7828` is unchanged.
+- The production diff vs `7073f20` is 0 lines.
+- `main` = `c64c463`.
+
+An earlier run before the new tests were added (146 passed, 4 skipped, both environments) is kept in `run1_at_89e311c/`.
