@@ -1,0 +1,972 @@
+{
+  "start_utc": "2026-10-31T04:35:17.759+00:00",
+  "git_sha": "3a18f37d33a03200c5bd88882d7f18e1b1197cea",
+  "git_branch": "phase3/C4-2026-10-30",
+  "git_dirty": false,
+  "argv": [
+    "phase3/c4/t1v2.py",
+    "--model",
+    "c",
+    "--L",
+    "10",
+    "--level",
+    "0",
+    "--lres",
+    "0.1",
+    "--out",
+    "results/phase3/C4/t1v2_Dprime"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "version": "t1v2-2026-10-30",
+    "model": "c",
+    "L_um": 10.0,
+    "level": 0,
+    "lres": 0.1,
+    "vgs": "0.8,1.25,2.0",
+    "compare_unscaled": 0,
+    "tau_eq": 1e-12,
+    "delta": 0.001,
+    "f1": 1.0,
+    "f2": 0.1,
+    "E_req": 1e-06,
+    "pm": {
+      "T_K": 300.0,
+      "V_T_V": 0.025851999786435535,
+      "n_i_cm3": 10000000000.0,
+      "eps_Si_rel": 11.7,
+      "eps_ox_rel": 3.9,
+      "statistics": "Boltzmann",
+      "mu_n_cm2_Vs": 1350.0,
+      "mobility": "constant",
+      "generation_recombination": "none",
+      "holes": "frozen p=n_i*exp(-psi/V_T)",
+      "interface_charge": "none",
+      "NA_cm3": 1e+16,
+      "psi_b0_V": -0.3571585759940161,
+      "gate": "psi_gate = V_G + psi_b0 (V_FB = 0)",
+      "units": "cm; I [A/cm]; I'[A/um]=I*1e-4"
+    }
+  },
+  "mesh": {
+    "kind": "explicit_c4",
+    "nx": 71,
+    "ny": 223,
+    "kif": 5,
+    "ic0": 10,
+    "ic1": 60,
+    "lateral_contact_rows": [
+      5,
+      221
+    ],
+    "dual_bottom_contacts": true,
+    "model": "c",
+    "L_um": 10.0,
+    "level": 0,
+    "l_res_factor": 0.1,
+    "l_res_cm": 3.0392934630191188e-06,
+    "W_dep_cm": 3.0392934630191186e-05,
+    "n_res_cells": 10,
+    "n_lateral_nodes": 71,
+    "n_channel_cells": 50,
+    "x_min_cm": -3.0392934630191188e-06,
+    "x_max_cm": 0.0010030392934630191,
+    "strip_h_cm": 3.039293463019119e-07,
+    "channel_h_cm": 2e-05
+  },
+  "points": {
+    "c:VG=0.8": {
+      "vg": 0.8,
+      "model": "c",
+      "mode": "b",
+      "equilibrium": {
+        "onecol_iterations": 33,
+        "onecol_last_update": 3.242228913839803e-17,
+        "newton_iterations": 1,
+        "newton_history": [
+          {
+            "dpsi": 5.865898022011512e-17,
+            "dphin": 7.219245364252145e-17,
+            "dcirc": 1.0243115145818825e-30
+          }
+        ]
+      },
+      "G_GCA_h_S_per_cm": 3.2020843066495974e-06,
+      "Ns_FV_cm2": 14804324.6349199,
+      "G_2D_midcolumn_S_per_cm": 3.202084306649599e-06,
+      "eval": {
+        "n_unknowns": 31384,
+        "rhs_nnz": 1,
+        "adjoint": {
+          "res_lam_E": 2.6200279128868985e-15,
+          "res_lam_M": 1.3322676295501878e-15,
+          "lam_rel_diff": 0.000611900685402705
+        },
+        "E": {
+          "G": 3.202084295165157e-06,
+          "r0": -3.5865515002342363e-09,
+          "eta": 3.319837386167025e-16,
+          "dwr_rel": -1.0145139643782262e-08,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 1.0145139643782262e-08,
+          "kappa_G": 1100012021.7412255,
+          "E_cond": 1.2212586739015768e-07,
+          "E_round": 4.54585207186773e-09,
+          "G_sections": [
+            3.202084312134349e-06,
+            3.20208430491239e-06,
+            3.202084305391282e-06
+          ],
+          "E_sec": 5.299420642420853e-09,
+          "max_abs_residual": 2.842170943040401e-14,
+          "dwr_with_lam_M_rel": -1.0145139617698895e-08
+        },
+        "M": {
+          "G": 3.2020843344714966e-06,
+          "r0": 8.688684216551223e-09,
+          "eta": 1.5762677658862056e-16,
+          "dwr_rel": 3.5115741921091534e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 3.5115741921091534e-09,
+          "kappa_G": 1100012002.725404,
+          "E_cond": 1.221258652789774e-07,
+          "E_round": 4.5458519995468496e-09,
+          "G_sections": [
+            3.2020842985684385e-06,
+            3.2020843028102982e-06,
+            3.2020843139549208e-06
+          ],
+          "E_sec": 1.1212402491168488e-08,
+          "max_abs_residual": 2.842170943040401e-14
+        },
+        "NS": {
+          "G": 3.202084334471515e-06,
+          "r0": 8.688689767666347e-09,
+          "eta": 1.801411016885678e-14,
+          "dwr_rel": 1.7919770737756936e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 1.7919770737756936e-09,
+          "kappa_G": 1100012002.7253938,
+          "E_cond": 1.2212586527897626e-07,
+          "E_round": 4.545851999546798e-09,
+          "G_sections": [
+            3.2020842985687502e-06,
+            3.202084302810488e-06,
+            3.202084313955124e-06
+          ],
+          "E_sec": 1.121231083308328e-08,
+          "max_abs_residual": 4.547473508864641e-12
+        },
+        "AC_f1": {
+          "G": 3.2020843344714966e-06,
+          "r0": 8.688684216551223e-09,
+          "eta": 1.5762677658862056e-16,
+          "dwr_rel": 3.570170413219829e-09,
+          "dwr_imag_rel": -1.9783006547137438e-17,
+          "E_dwr": 3.570170413219829e-09,
+          "kappa_G": 1100012002.7254038,
+          "E_cond": 1.2212586527897737e-07,
+          "E_round": 4.5458519995468496e-09,
+          "G_sections": [
+            3.2020842985684453e-06,
+            3.202084302810339e-06,
+            3.20208431395488e-06
+          ],
+          "E_sec": 1.12124003749645e-08,
+          "max_abs_residual": 2.842170943040401e-14,
+          "ImY_rel": 5.81971439772414e-08
+        },
+        "AC_f2": {
+          "G": 3.2020843344714966e-06,
+          "r0": 8.688684216551223e-09,
+          "eta": 1.5762677658862056e-16,
+          "dwr_rel": 3.511574192109148e-09,
+          "dwr_imag_rel": -4.744506004828526e-19,
+          "E_dwr": 3.511574192109148e-09,
+          "kappa_G": 1100012002.725404,
+          "E_cond": 1.221258652789774e-07,
+          "E_round": 4.5458519995468496e-09,
+          "G_sections": [
+            3.2020842985684385e-06,
+            3.2020843028103253e-06,
+            3.2020843139549072e-06
+          ],
+          "E_sec": 1.1212402491168488e-08,
+          "max_abs_residual": 2.842170943040401e-14,
+          "ImY_rel": 5.819714397724133e-09
+        }
+      },
+      "tight": {
+        "newton_iterations": 1,
+        "G_GCA_h": 3.2020843066495974e-06,
+        "r0_E": 2.8373678961912674e-09,
+        "r0_AC_f2": 8.594635225733782e-09
+      },
+      "L1v2": {
+        "r0": -3.5865515002342363e-09,
+        "E_eq": 6.423919396425504e-09,
+        "E_sec": 5.299420642420853e-09,
+        "E_dwr": 1.0145139643782262e-08,
+        "E_round": 4.54585207186773e-09,
+        "E_cond": 1.2212586739015768e-07,
+        "E": 2.641433175449635e-08,
+        "E_wc": 1.439943470727863e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "L2v2": {
+        "r0": 8.688684216551223e-09,
+        "E_freq": 0.0,
+        "E_eq": 9.404899081744134e-11,
+        "E_sec": 1.1212402491168488e-08,
+        "E_dwr": 3.511574192109148e-09,
+        "E_round": 4.5458519995468496e-09,
+        "E_cond": 1.221258652789774e-07,
+        "E": 1.9363877673641926e-08,
+        "E_wc": 1.3694389095307248e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "diagnostics": {
+        "consistency": {
+          "diff": 1.227523571678546e-08,
+          "limit": 1.3733462828441482e-07,
+          "ok": true
+        },
+        "B3v2": {
+          "eta_E": 3.319837386167025e-16,
+          "ok": true
+        },
+        "B5v2": {
+          "lin": 1.9990412358070845e-08,
+          "ok": false
+        },
+        "NS_vs_M_rel": 5.6872982163989914e-15,
+        "AC_vs_M_rel": 0.0
+      },
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": -3.0392934630191188e-06,
+            "psi_ox": 0.1996634536287568,
+            "psi_si": 0.1996634536287568,
+            "psi_lat_1col": 0.19966345362875682,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0010030392934630191,
+            "psi_ox": 0.1996634536287568,
+            "psi_si": 0.1996634536287568,
+            "psi_lat_1col": 0.19966345362875682,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "bd": -1.4291127174770053e-23,
+          "body": -1.0740846251367243e-21,
+          "bs": -1.429112717477003e-23,
+          "gate": 4.2241514076610757e-11
+        },
+        "sum_contact": 4.224151407550809e-11,
+        "space_charge_noncontact": 4.2241514075508067e-11,
+        "space_charge_all": 4.2241514075508067e-11,
+        "n_si_contact_rows": 71,
+        "closure_plus": 1.9999999999477918,
+        "closure_minus": 6.119428885858756e-16
+      },
+      "oxide_lateral_single_entry_rows": [],
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 5.551115123125783e-17,
+          "at_depth_cm": 1.651128961e-05,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 2.2758516014096907e-15,
+          "at_depth_cm": 1.897385009e-05,
+          "kind": "relative"
+        }
+      ],
+      "bottom_rows": [
+        {
+          "x_cm": -3.0392934630191188e-06,
+          "column": 0,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 0.0,
+          "column": 10,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 2e-05,
+          "column": 11,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.00098,
+          "column": 59,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.001,
+          "column": 60,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        },
+        {
+          "x_cm": 0.0010030392934630191,
+          "column": 70,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        }
+      ],
+      "contacts": {
+        "bd": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "body": [
+          "PotentialEquation"
+        ],
+        "bs": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "drain": [
+          "ElectronContinuityEquation"
+        ],
+        "gate": [
+          "PotentialEquation"
+        ],
+        "oxc_d": [],
+        "oxc_s": [],
+        "source": [
+          "ElectronContinuityEquation"
+        ]
+      },
+      "M0_G0_S_per_cm": 3.201703214997118e-06,
+      "wall_s": 5.496233940124512
+    },
+    "c:VG=1.25": {
+      "vg": 1.25,
+      "model": "c",
+      "mode": "b",
+      "equilibrium": {
+        "onecol_iterations": 49,
+        "onecol_last_update": 5.004755174638032e-17,
+        "newton_iterations": 1,
+        "newton_history": [
+          {
+            "dpsi": 5.988194060399008e-17,
+            "dphin": 1.0299325777201336e-16,
+            "dcirc": 4.776891281271713e-25
+          }
+        ]
+      },
+      "G_GCA_h_S_per_cm": 0.03475263559048185,
+      "Ns_FV_cm2": 160673252147.7189,
+      "G_2D_midcolumn_S_per_cm": 0.034752635590481855,
+      "eval": {
+        "n_unknowns": 31384,
+        "rhs_nnz": 1,
+        "adjoint": {
+          "res_lam_E": 4.3655745685100555e-11,
+          "res_lam_M": 2.9103830456733704e-11,
+          "lam_rel_diff": 0.8608436821798262
+        },
+        "E": {
+          "G": 0.0347526345326261,
+          "r0": -3.0439583298402795e-08,
+          "eta": 1.3832812108247532e-16,
+          "dwr_rel": -1.855018039167237e-08,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 1.855018039167237e-08,
+          "kappa_G": 1261719726.3576767,
+          "E_cond": 1.4007902908260447e-07,
+          "E_round": 5.833453758310636e-09,
+          "G_sections": [
+            0.03475263601709494,
+            0.03475263569751219,
+            0.0347526352765212
+          ],
+          "E_sec": 4.271528804351676e-08,
+          "max_abs_residual": 4.656612873077393e-10,
+          "dwr_with_lam_M_rel": -1.855018034372955e-08
+        },
+        "M": {
+          "G": 0.03475263534699014,
+          "r0": -7.006424218580776e-09,
+          "eta": 7.690477512502034e-16,
+          "dwr_rel": 7.026772240104615e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 7.026772240104615e-09,
+          "kappa_G": 1261719687.1245568,
+          "E_cond": 1.4007902472685316e-07,
+          "E_round": 5.833453588860659e-09,
+          "G_sections": [
+            0.0347526356992407,
+            0.034752635609605315,
+            0.03475263551721183
+          ],
+          "E_sec": 1.0135937868549141e-08,
+          "max_abs_residual": 2.3283064365386963e-10
+        },
+        "NS": {
+          "G": 0.03475263534698992,
+          "r0": -7.006430546852016e-09,
+          "eta": 1.434159806806491e-14,
+          "dwr_rel": 6.5820280108351e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 6.5820280108351e-09,
+          "kappa_G": 1261719687.124566,
+          "E_cond": 1.400790247268542e-07,
+          "E_round": 5.8334535888607e-09,
+          "G_sections": [
+            0.034752635699233675,
+            0.03475263560960978,
+            0.034752635517205754
+          ],
+          "E_sec": 1.0135742196597639e-08,
+          "max_abs_residual": 1.9038611753785517e-07
+        },
+        "AC_f1": {
+          "G": 0.03475263534699014,
+          "r0": -7.006424218580776e-09,
+          "eta": 7.690477512502034e-16,
+          "dwr_rel": 7.024286040258084e-09,
+          "dwr_imag_rel": -1.0136332380255043e-17,
+          "E_dwr": 7.024286040258084e-09,
+          "kappa_G": 1261719687.1245568,
+          "E_cond": 1.4007902472685316e-07,
+          "E_round": 5.833453588860659e-09,
+          "G_sections": [
+            0.03475263569924071,
+            0.03475263560960523,
+            0.034752635517212055
+          ],
+          "E_sec": 1.0135938267879654e-08,
+          "max_abs_residual": 2.3283064365386963e-10,
+          "ImY_rel": 9.855623903603038e-09
+        },
+        "AC_f2": {
+          "G": 0.03475263534699014,
+          "r0": -7.006424218580776e-09,
+          "eta": 7.690477512502034e-16,
+          "dwr_rel": 7.024286040258084e-09,
+          "dwr_imag_rel": -1.4840475543906818e-18,
+          "E_dwr": 7.024286040258084e-09,
+          "kappa_G": 1261719687.1245568,
+          "E_cond": 1.4007902472685316e-07,
+          "E_round": 5.833453588860659e-09,
+          "G_sections": [
+            0.03475263569924071,
+            0.03475263560960523,
+            0.034752635517212055
+          ],
+          "E_sec": 1.0135938267879654e-08,
+          "max_abs_residual": 2.3283064365386963e-10,
+          "ImY_rel": 9.855623903603022e-10
+        }
+      },
+      "tight": {
+        "newton_iterations": 1,
+        "G_GCA_h": 0.03475263559048185,
+        "r0_E": -2.861601378079115e-08,
+        "r0_AC_f2": -4.520773866367733e-09
+      },
+      "L1v2": {
+        "r0": -3.0439583298402795e-08,
+        "E_eq": 1.823569517611645e-09,
+        "E_sec": 4.271528804351676e-08,
+        "E_dwr": 1.855018039167237e-08,
+        "E_round": 5.833453758310636e-09,
+        "E_cond": 1.4007902908260447e-07,
+        "E": 6.892249171111142e-08,
+        "E_wc": 2.0316806703540525e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "L2v2": {
+        "r0": -7.006424218580776e-09,
+        "E_freq": 0.0,
+        "E_eq": 2.4856503522130424e-09,
+        "E_sec": 1.0135938267879654e-08,
+        "E_dwr": 7.024286040258084e-09,
+        "E_round": 5.833453588860659e-09,
+        "E_cond": 1.4007902472685316e-07,
+        "E": 2.5479328249211438e-08,
+        "E_wc": 1.5972489938720395e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "diagnostics": {
+        "consistency": {
+          "diff": 2.343315907982202e-08,
+          "limit": 2.832054598809686e-07,
+          "ok": true
+        },
+        "B3v2": {
+          "eta_E": 1.3832812108247532e-16,
+          "ok": true
+        },
+        "B5v2": {
+          "lin": 6.709892219349977e-08,
+          "ok": false
+        },
+        "NS_vs_M_rel": -6.3892882123117455e-15,
+        "AC_vs_M_rel": 0.0
+      },
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": -3.0392934630191188e-06,
+            "psi_ox": 0.45089616117861764,
+            "psi_si": 0.45089616117861764,
+            "psi_lat_1col": 0.45089616117861764,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0010030392934630191,
+            "psi_ox": 0.45089616117861764,
+            "psi_si": 0.45089616117861764,
+            "psi_lat_1col": 0.45089616117861764,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "bd": -5.287365825433428e-23,
+          "body": -3.973849138084355e-21,
+          "bs": -5.2873658254334186e-23,
+          "gate": 7.676861934431987e-11
+        },
+        "sum_contact": 7.676861934024028e-11,
+        "space_charge_noncontact": 7.676861934024024e-11,
+        "space_charge_all": 7.676861934024024e-11,
+        "n_si_contact_rows": 71,
+        "closure_plus": 1.999999999893717,
+        "closure_minus": 5.050773551041084e-16
+      },
+      "oxide_lateral_single_entry_rows": [],
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 5.551115123125783e-17,
+          "at_depth_cm": 5.0550254e-08,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 2.317085139900744e-15,
+          "at_depth_cm": 7.6662874e-08,
+          "kind": "relative"
+        }
+      ],
+      "bottom_rows": [
+        {
+          "x_cm": -3.0392934630191188e-06,
+          "column": 0,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 0.0,
+          "column": 10,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 2e-05,
+          "column": 11,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.00098,
+          "column": 59,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.001,
+          "column": 60,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        },
+        {
+          "x_cm": 0.0010030392934630191,
+          "column": 70,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        }
+      ],
+      "contacts": {
+        "bd": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "body": [
+          "PotentialEquation"
+        ],
+        "bs": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "drain": [
+          "ElectronContinuityEquation"
+        ],
+        "gate": [
+          "PotentialEquation"
+        ],
+        "oxc_d": [],
+        "oxc_s": [],
+        "source": [
+          "ElectronContinuityEquation"
+        ]
+      },
+      "M0_G0_S_per_cm": 0.034749907202928046,
+      "wall_s": 5.338841199874878
+    },
+    "c:VG=2.0": {
+      "vg": 2.0,
+      "model": "c",
+      "mode": "b",
+      "equilibrium": {
+        "onecol_iterations": 72,
+        "onecol_last_update": 1.0424931177284464e-16,
+        "newton_iterations": 1,
+        "newton_history": [
+          {
+            "dpsi": 1.0915759177337034e-16,
+            "dphin": 1.0243428455358167e-16,
+            "dcirc": 4.963412692653407e-20
+          }
+        ]
+      },
+      "G_GCA_h_S_per_cm": 0.193951644549413,
+      "Ns_FV_cm2": 896704407008.7034,
+      "G_2D_midcolumn_S_per_cm": 0.193951644549413,
+      "eval": {
+        "n_unknowns": 31384,
+        "rhs_nnz": 1,
+        "adjoint": {
+          "res_lam_E": 3.4924596548080444e-10,
+          "res_lam_M": 2.3283064365386963e-10,
+          "lam_rel_diff": 6.807324216746625
+        },
+        "E": {
+          "G": 0.19395164031991527,
+          "r0": -2.1806970118554148e-08,
+          "eta": 3.862892356957228e-17,
+          "dwr_rel": -2.64791089537549e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 2.64791089537549e-09,
+          "kappa_G": 1456404108.335926,
+          "E_cond": 1.616933374233216e-07,
+          "E_round": 8.099508914268748e-09,
+          "G_sections": [
+            0.19395164622564193,
+            0.1939516450076782,
+            0.19395164322600172
+          ],
+          "E_sec": 3.0449479670187186e-08,
+          "max_abs_residual": 3.725290298461914e-09,
+          "dwr_with_lam_M_rel": -2.6479108924946876e-09
+        },
+        "M": {
+          "G": 0.19395164183839805,
+          "r0": -1.3977787816088494e-08,
+          "eta": 7.294370468472878e-16,
+          "dwr_rel": 4.978467751138877e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 4.978467751138877e-09,
+          "kappa_G": 1456404093.3719802,
+          "E_cond": 1.6169333576198987e-07,
+          "E_round": 8.099508836268098e-09,
+          "G_sections": [
+            0.19395164548833488,
+            0.19395164501020157,
+            0.1939516438557362
+          ],
+          "E_sec": 1.8818798022983653e-08,
+          "max_abs_residual": 1.862645149230957e-09
+        },
+        "NS": {
+          "G": 0.1939516418383908,
+          "r0": -1.3977825230604424e-08,
+          "eta": 5.579024431913625e-15,
+          "dwr_rel": 3.1805133299896838e-09,
+          "dwr_imag_rel": 0.0,
+          "E_dwr": 3.1805133299896838e-09,
+          "kappa_G": 1456404093.372033,
+          "E_cond": 1.6169333576199575e-07,
+          "E_round": 8.099508836268432e-09,
+          "G_sections": [
+            0.1939516454883846,
+            0.19395164501018927,
+            0.19395164385568292
+          ],
+          "E_sec": 1.8819091675771674e-08,
+          "max_abs_residual": 2.5886670300678816e-06
+        },
+        "AC_f1": {
+          "G": 0.19395164183839805,
+          "r0": -1.3977787816088494e-08,
+          "eta": 7.294370468472878e-16,
+          "dwr_rel": 4.97846775113887e-09,
+          "dwr_imag_rel": -1.7124991206656511e-18,
+          "E_dwr": 4.97846775113887e-09,
+          "kappa_G": 1456404093.3719802,
+          "E_cond": 1.6169333576198987e-07,
+          "E_round": 8.099508836268098e-09,
+          "G_sections": [
+            0.1939516454883349,
+            0.19395164501020068,
+            0.19395164385573532
+          ],
+          "E_sec": 1.88187981660893e-08,
+          "max_abs_residual": 1.862645149230957e-09,
+          "ImY_rel": 2.062421655151078e-09
+        },
+        "AC_f2": {
+          "G": 0.19395164183839805,
+          "r0": -1.3977787816088494e-08,
+          "eta": 7.294370468472878e-16,
+          "dwr_rel": 4.97846775113887e-09,
+          "dwr_imag_rel": -2.597858834974998e-19,
+          "E_dwr": 4.97846775113887e-09,
+          "kappa_G": 1456404093.3719802,
+          "E_cond": 1.6169333576198987e-07,
+          "E_round": 8.099508836268098e-09,
+          "G_sections": [
+            0.1939516454883349,
+            0.19395164501020068,
+            0.19395164385573532
+          ],
+          "E_sec": 1.88187981660893e-08,
+          "max_abs_residual": 1.862645149230957e-09,
+          "ImY_rel": 2.062421655151075e-10
+        }
+      },
+      "tight": {
+        "newton_iterations": 1,
+        "G_GCA_h": 0.193951644549413,
+        "r0_E": -3.120028591041546e-08,
+        "r0_AC_f2": -5.346344811307802e-09
+      },
+      "L1v2": {
+        "r0": -2.1806970118554148e-08,
+        "E_eq": 9.393315791861312e-09,
+        "E_sec": 3.0449479670187186e-08,
+        "E_dwr": 2.64791089537549e-09,
+        "E_round": 8.099508914268748e-09,
+        "E_cond": 1.616933374233216e-07,
+        "E": 5.059021527169274e-08,
+        "E_wc": 2.041840437807456e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "L2v2": {
+        "r0": -1.3977787816088494e-08,
+        "E_freq": 0.0,
+        "E_eq": 8.631443004780692e-09,
+        "E_sec": 1.88187981660893e-08,
+        "E_dwr": 4.97846775113887e-09,
+        "E_round": 8.099508836268098e-09,
+        "E_cond": 1.6169333576198987e-07,
+        "E": 4.052821775827696e-08,
+        "E_wc": 1.9412204468399874e-07,
+        "verdict": "PASS",
+        "verdict_wc": "PASS"
+      },
+      "diagnostics": {
+        "consistency": {
+          "diff": 7.829182302465654e-09,
+          "limit": 2.733552990899091e-07,
+          "ok": true
+        },
+        "B3v2": {
+          "eta_E": 3.862892356957228e-17,
+          "ok": true
+        },
+        "B5v2": {
+          "lin": 4.1196899479831425e-08,
+          "ok": false
+        },
+        "NS_vs_M_rel": -3.7350573915002526e-14,
+        "AC_vs_M_rel": 0.0
+      },
+      "continuity": {
+        "max_abs_jump_V": 0.0,
+        "corners": [
+          {
+            "x_cm": -3.0392934630191188e-06,
+            "psi_ox": 0.5126533527246747,
+            "psi_si": 0.5126533527246747,
+            "psi_lat_1col": 0.5126533527246747,
+            "jump_V": 0.0
+          },
+          {
+            "x_cm": 0.0010030392934630191,
+            "psi_ox": 0.5126533527246747,
+            "psi_si": 0.5126533527246747,
+            "psi_lat_1col": 0.5126533527246747,
+            "jump_V": 0.0
+          }
+        ]
+      },
+      "gauss": {
+        "contact_charges_C_per_cm": {
+          "bd": -6.069280145678353e-23,
+          "body": -4.561515974491768e-21,
+          "bs": -6.069280145678345e-23,
+          "gate": 1.9632064223658725e-10
+        },
+        "sum_contact": 1.9632064223190435e-10,
+        "space_charge_noncontact": 1.9632064223190427e-10,
+        "space_charge_all": 1.9632064223190427e-10,
+        "n_si_contact_rows": 71,
+        "closure_plus": 1.999999999952293,
+        "closure_minus": 3.9500778697225604e-16
+      },
+      "oxide_lateral_single_entry_rows": [],
+      "uniformity": [
+        {
+          "quantity": "Potential",
+          "max_spread": 5.551115123125783e-17,
+          "at_depth_cm": 1.86988685e-07,
+          "kind": "absolute_V"
+        },
+        {
+          "quantity": "Electrons",
+          "max_spread": 2.8709108047909524e-15,
+          "at_depth_cm": 1.7296671326e-05,
+          "kind": "relative"
+        }
+      ],
+      "bottom_rows": [
+        {
+          "x_cm": -3.0392934630191188e-06,
+          "column": 0,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 0.0,
+          "column": 10,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 2
+        },
+        {
+          "x_cm": 2e-05,
+          "column": 11,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.00098,
+          "column": 59,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 8
+        },
+        {
+          "x_cm": 0.001,
+          "column": 60,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        },
+        {
+          "x_cm": 0.0010030392934630191,
+          "column": 70,
+          "psi_minus_psib0": 0.0,
+          "phin_V": 0.0,
+          "Potential_row_nnz": 1,
+          "Electrons_row_nnz": 3
+        }
+      ],
+      "contacts": {
+        "bd": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "body": [
+          "PotentialEquation"
+        ],
+        "bs": [
+          "ElectronContinuityEquation",
+          "PotentialEquation"
+        ],
+        "drain": [
+          "ElectronContinuityEquation"
+        ],
+        "gate": [
+          "PotentialEquation"
+        ],
+        "oxc_d": [],
+        "oxc_s": [],
+        "source": [
+          "ElectronContinuityEquation"
+        ]
+      },
+      "M0_G0_S_per_cm": 0.19393020221041773,
+      "wall_s": 5.3495306968688965
+    }
+  },
+  "wall_s": 16.272808074951172,
+  "end_utc": "2026-10-31T04:35:34.137+00:00"
+}
