@@ -29,6 +29,17 @@ from phase3.c6 import wprobe as WP
 from phase3.c7 import endprobe as E7
 
 _DONOR0 = E7.donor
+_LMAP0 = WP.lateral_map
+
+
+def lateral_map9(L_um, a_um=0.35, h0_nm=0.5, hmax_nm=20.0):
+    """C-9: allow L < 0.7 um by shrinking the graded end segment (a = 0.35 L); identical for L >= 0.7 um."""
+    if L_um <= 2 * a_um:
+        a_um = 0.35 * L_um
+    return _LMAP0(L_um, a_um, h0_nm, hmax_nm)
+
+
+WP.lateral_map = lateral_map9
 HALO = dict(Nh=0.0, xh=0.0, sx=1.0, yh=0.0, sy=1.0)
 
 

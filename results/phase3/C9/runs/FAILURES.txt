@@ -1,0 +1,1 @@
+2026-10-31T14:07:26Z attempt 1: all 44 L=0.5um jobs FAILED at mesh construction (AssertionError L > 2a in phase3/c6/wprobe.lateral_map, a = 0.35 um grading segment); logs preserved in logs_failed_attempt1/. Fix: probe9 clamps the graded segment a = min(0.35, 0.35*L) um for L < 0.7 um only (L >= 1 um meshes unchanged); failed jobs re-run (completed jobs skipped by checkpoint).

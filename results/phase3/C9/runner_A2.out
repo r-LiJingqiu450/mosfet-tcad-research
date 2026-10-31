@@ -1,0 +1,56 @@
+JOB job=0 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.08 --tox 2 --na 1e18' result=OK start=2026-10-31T14:07:31.696+00:00 end=2026-10-31T14:07:37.687+00:00
+JOB job=1 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.24 --tox 2 --na 1e18' result=OK start=2026-10-31T14:07:37.687+00:00 end=2026-10-31T14:07:43.631+00:00
+JOB job=2 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.32 --tox 2 --na 1e18' result=OK start=2026-10-31T14:07:43.631+00:00 end=2026-10-31T14:07:49.314+00:00
+JOB job=3 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.4 --tox 2 --na 1e18' result=OK start=2026-10-31T14:07:49.314+00:00 end=2026-10-31T14:07:55.001+00:00
+JOB job=4 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.48 --tox 2 --na 1e18' result=OK start=2026-10-31T14:07:55.002+00:00 end=2026-10-31T14:08:00.740+00:00
+JOB job=5 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.56 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:00.740+00:00 end=2026-10-31T14:08:06.878+00:00
+JOB job=6 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.64 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:06.878+00:00 end=2026-10-31T14:08:12.567+00:00
+JOB job=7 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.72 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:12.567+00:00 end=2026-10-31T14:08:18.054+00:00
+JOB job=8 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.8 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:18.054+00:00 end=2026-10-31T14:08:23.289+00:00
+JOB job=9 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 1.9 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:23.289+00:00 end=2026-10-31T14:08:28.777+00:00
+JOB job=10 script=phase3/c9/probe9.py args='--deck W --L 0.5 --vg 2 --tox 2 --na 1e18' result=OK start=2026-10-31T14:08:28.777+00:00 end=2026-10-31T14:08:34.814+00:00
+JOB job=11 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.08 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.815+00:00 end=2026-10-31T14:08:34.815+00:00
+JOB job=12 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.24 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.815+00:00 end=2026-10-31T14:08:34.815+00:00
+JOB job=13 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.32 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.816+00:00 end=2026-10-31T14:08:34.816+00:00
+JOB job=14 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.4 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.816+00:00 end=2026-10-31T14:08:34.816+00:00
+JOB job=15 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.48 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.817+00:00 end=2026-10-31T14:08:34.817+00:00
+JOB job=16 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.56 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.817+00:00 end=2026-10-31T14:08:34.817+00:00
+JOB job=17 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.64 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.817+00:00 end=2026-10-31T14:08:34.817+00:00
+JOB job=18 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.72 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.818+00:00 end=2026-10-31T14:08:34.818+00:00
+JOB job=19 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.8 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.818+00:00 end=2026-10-31T14:08:34.818+00:00
+JOB job=20 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 1.9 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.818+00:00 end=2026-10-31T14:08:34.818+00:00
+JOB job=21 script=phase3/c9/probe9.py args='--deck W --L 1 --vg 2 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.819+00:00 end=2026-10-31T14:08:34.819+00:00
+JOB job=22 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.08 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.819+00:00 end=2026-10-31T14:08:34.819+00:00
+JOB job=23 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.24 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.820+00:00 end=2026-10-31T14:08:34.820+00:00
+JOB job=24 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.32 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.820+00:00 end=2026-10-31T14:08:34.820+00:00
+JOB job=25 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.4 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.820+00:00 end=2026-10-31T14:08:34.820+00:00
+JOB job=26 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.48 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.821+00:00 end=2026-10-31T14:08:34.821+00:00
+JOB job=27 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.56 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.821+00:00 end=2026-10-31T14:08:34.821+00:00
+JOB job=28 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.64 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.821+00:00 end=2026-10-31T14:08:34.821+00:00
+JOB job=29 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.72 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.821+00:00 end=2026-10-31T14:08:34.821+00:00
+JOB job=30 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.8 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.822+00:00 end=2026-10-31T14:08:34.822+00:00
+JOB job=31 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 1.9 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.822+00:00 end=2026-10-31T14:08:34.822+00:00
+JOB job=32 script=phase3/c9/probe9.py args='--deck W --L 2 --vg 2 --tox 2 --na 1e18' result=SKIPPED(checkpoint) start=2026-10-31T14:08:34.822+00:00 end=2026-10-31T14:08:34.822+00:00
+JOB job=33 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.08 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:08:34.822+00:00 end=2026-10-31T14:08:41.510+00:00
+JOB job=34 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.24 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:08:41.510+00:00 end=2026-10-31T14:08:48.304+00:00
+JOB job=35 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.32 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:08:48.304+00:00 end=2026-10-31T14:08:55.348+00:00
+JOB job=36 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.4 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:08:55.348+00:00 end=2026-10-31T14:09:02.342+00:00
+JOB job=37 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.48 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:02.342+00:00 end=2026-10-31T14:09:09.184+00:00
+JOB job=38 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.56 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:09.184+00:00 end=2026-10-31T14:09:16.173+00:00
+JOB job=39 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.64 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:16.173+00:00 end=2026-10-31T14:09:23.164+00:00
+JOB job=40 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.72 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:23.164+00:00 end=2026-10-31T14:09:29.952+00:00
+JOB job=41 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.8 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:29.953+00:00 end=2026-10-31T14:09:36.493+00:00
+JOB job=42 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 1.9 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:36.493+00:00 end=2026-10-31T14:09:43.534+00:00
+JOB job=43 script=phase3/c9/probe9.py args='--deck R --L 0.5 --vg 2 --tox 2 --na 1e18 --halo-n 5e+17' result=OK start=2026-10-31T14:09:43.534+00:00 end=2026-10-31T14:09:50.427+00:00
+JOB job=44 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.08 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.427+00:00 end=2026-10-31T14:09:50.427+00:00
+JOB job=45 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.24 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.427+00:00 end=2026-10-31T14:09:50.427+00:00
+JOB job=46 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.32 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.428+00:00 end=2026-10-31T14:09:50.428+00:00
+JOB job=47 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.4 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.428+00:00 end=2026-10-31T14:09:50.428+00:00
+JOB job=48 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.48 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.429+00:00 end=2026-10-31T14:09:50.429+00:00
+JOB job=49 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.56 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.429+00:00 end=2026-10-31T14:09:50.429+00:00
+JOB job=50 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.64 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.430+00:00 end=2026-10-31T14:09:50.430+00:00
+JOB job=51 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.72 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.430+00:00 end=2026-10-31T14:09:50.430+00:00
+JOB job=52 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.8 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.430+00:00 end=2026-10-31T14:09:50.430+00:00
+JOB job=53 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 1.9 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.430+00:00 end=2026-10-31T14:09:50.430+00:00
+JOB job=54 script=phase3/c9/probe9.py args='--deck R --L 1 --vg 2 --tox 2 --na 1e18 --halo-n 5e+17' result=SKIPPED(checkpoint) start=2026-10-31T14:09:50.431+00:00 end=2026-10-31T14:09:50.431+00:00
+RUNNER_END jobs=jobs_A.json ok=22 failed=0 timeout=0 skipped=33 at=2026-10-31T14:09:50.431+00:00

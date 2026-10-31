@@ -229,3 +229,23 @@ venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --t
 - E8-2: `venv312/bin/python phase3/c8/e8_extraction.py`
 
 The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C8/jobs_*.json`. Run them with `phase3/c4/jobrunner.py`.
+
+---
+
+## C-9 (independent audit of C-8; halo realism; originality reassessment), 2026-10-31
+
+**Branch:** `phase3/C9-audit-realism-2026-10-31`, from `536e1ac`.
+
+**Report:** `phase3/reports/C9_Research_Phase_Report_2026-10-31.md`.
+
+**Registration:** `phase3/specs/C9_Preregistration_2026-10-31.md` (commit `b83892f`).
+
+**Probe:** `phase3/c9/probe9.py`.
+- Wraps `phase3/c7/endprobe.py` and adds a Gaussian halo, terminal-charge outputs, and short-L meshing.
+
+**Reproduce one state** (about 15 s):
+`venv312/bin/python phase3/c9/probe9.py --deck R --L 1 --vg 1.32 --out <dir>`
+
+**Batches:** `phase3/c4/jobrunner.py --jobs results/phase3/C9/jobs_A.json` (and `jobs_B.json`).
+
+**Analysis:** `venv312/bin/python phase3/c9/e9_analysis.py`
