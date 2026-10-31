@@ -213,3 +213,19 @@ venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --t
 
 **Analyses:**
 `venv312/bin/python phase3/c7/c7_analysis.py; venv312/bin/python phase3/c7/c7_scaling.py; python3 phase3/c7/m7_failure_diag.py`
+
+---
+
+## C-8 (theory of the end correction; extraction consequences), 2026-10-31
+
+**Branch:** `phase3/C8-theory-extraction-2026-10-31`, from `2cfa8e0`.
+
+**Report:** `phase3/reports/C8_Research_Phase_Report_2026-10-31.md`.
+
+**Registration:** `phase3/specs/C8_Preregistration_2026-10-31.md` (commit `8650c76`, before the runs).
+
+**Reproduce:**
+- E8-1: `python3 phase3/c8/e8_subth_eval.py`
+- E8-2: `venv312/bin/python phase3/c8/e8_extraction.py`
+
+The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C8/jobs_*.json`. Run them with `phase3/c4/jobrunner.py`.

@@ -1,0 +1,34 @@
+Terada-Muta:
+{'V1': 1.4, 'V2': 1.6, 'dL_true_V1_nm': np.float64(28.8), 'dL_true_V2_nm': np.float64(15.583), 'dL_TM_nm': np.float64(33.188), 'Rsd_TM_ohm_um': np.float64(73.501), 'Rsq_V1_ohm': np.float64(8375.356), 'Rsq_V2_ohm': np.float64(2087.532), 'Rsd_TM_over_channel_at_L1um': np.float64(0.009)}
+{'V1': 1.6, 'V2': 2.0, 'dL_true_V1_nm': np.float64(15.583), 'dL_true_V2_nm': np.float64(8.034), 'dL_TM_nm': np.float64(19.846), 'Rsd_TM_ohm_um': np.float64(17.796), 'Rsq_V1_ohm': np.float64(2087.532), 'Rsq_V2_ohm': np.float64(753.292), 'Rsd_TM_over_channel_at_L1um': np.float64(0.009)}
+{'V1': 1.4, 'V2': 2.0, 'dL_true_V1_nm': np.float64(28.8), 'dL_true_V2_nm': np.float64(8.034), 'dL_TM_nm': np.float64(30.852), 'Rsd_TM_ohm_um': np.float64(34.378), 'Rsq_V1_ohm': np.float64(8375.356), 'Rsq_V2_ohm': np.float64(753.292), 'Rsd_TM_over_channel_at_L1um': np.float64(0.004)}
+{'V1': 1.32, 'V2': 1.52, 'dL_true_V1_nm': np.float64(39.843), 'dL_true_V2_nm': np.float64(19.155), 'dL_TM_nm': np.float64(42.048), 'Rsd_TM_ohm_um': np.float64(141.531), 'Rsq_V1_ohm': np.float64(32098.543), 'Rsq_V2_ohm': np.float64(3091.193), 'Rsd_TM_over_channel_at_L1um': np.float64(0.005)}
+V_T(L):
+{'L_um': 0.25, 'VT_lin': 1.3618, 'VG_at_gm_max': 2.0, 'dVT_mV': -32.5238, 'dVT_times_L_mV_um': -8.131}
+{'L_um': 0.5, 'VT_lin': 1.379, 'VG_at_gm_max': 2.0, 'dVT_mV': -15.2975, 'dVT_times_L_mV_um': -7.6487}
+{'L_um': 1.0, 'VT_lin': 1.3869, 'VG_at_gm_max': 2.0, 'dVT_mV': -7.4285, 'dVT_times_L_mV_um': -7.4285}
+{'L_um': 2.0, 'VT_lin': 1.3907, 'VG_at_gm_max': 2.0, 'dVT_mV': -3.6615, 'dVT_times_L_mV_um': -7.323}
+{'L_um': 5.0, 'VT_lin': 1.3929, 'VG_at_gm_max': 2.0, 'dVT_mV': -1.4522, 'dVT_times_L_mV_um': -7.2612}
+{'L_um': 10.0, 'VT_lin': 1.3936, 'VG_at_gm_max': 2.0, 'dVT_mV': -0.7241, 'dVT_times_L_mV_um': -7.2408}
+{'L_um': 1000000.0, 'VT_lin': 1.3943, 'VG_at_gm_max': 2.0, 'dVT_mV': 0.0, 'dVT_times_L_mV_um': None}
+split-CV (L, VG, rel_err, dL_C, dL):
+0.5 1.32 -0.4256 end-only -0.426 268.1 39.8
+0.5 1.4 -0.1666 end-only -0.1667 89.1 28.8
+0.5 1.6 -0.0318 end-only -0.0318 25.4 15.6
+0.5 2.0 -0.0038 end-only -0.0038 9.3 8.0
+1.0 1.32 -0.2922 end-only -0.2927 268.1 39.8
+1.0 1.4 -0.0992 end-only -0.0993 89.1 28.8
+1.0 1.6 -0.0176 end-only -0.0177 25.4 15.6
+1.0 2.0 -0.0022 end-only -0.0022 9.3 8.0
+2.0 1.32 -0.1781 end-only -0.1787 268.1 39.8
+2.0 1.4 -0.0544 end-only -0.0546 89.1 28.8
+2.0 1.6 -0.0093 end-only -0.0093 25.4 15.6
+2.0 2.0 -0.0012 end-only -0.0012 9.3 8.0
+5.0 1.32 -0.0816 end-only -0.0822 268.1 39.8
+5.0 1.4 -0.023 end-only -0.0232 89.1 28.8
+5.0 1.6 -0.0038 end-only -0.0038 25.4 15.6
+5.0 2.0 -0.0005 end-only -0.0005 9.3 8.0
+10.0 1.32 -0.0426 end-only -0.0433 268.1 39.8
+10.0 1.4 -0.0116 end-only -0.0118 89.1 28.8
+10.0 1.6 -0.0019 end-only -0.0019 25.4 15.6
+10.0 2.0 -0.0002 end-only -0.0002 9.3 8.0
