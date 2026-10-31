@@ -12,7 +12,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from phase3.c7.model_m7 import Device
+import math
+from phase3.c7.model_m7 import Device, VT
 
 OUT = 'results/phase3/C7/analysis'
 
@@ -21,18 +22,25 @@ def main():
     rows = []
     for vg, dl in ((1.0, 369.873), (1.25, 153.687), (1.5, 92.878), (2.0, 53.385), (3.0, 29.909)):
         rows.append(dict(source='C6 W1 (L=4, lev0)', tox=20.0, NA=1e16, VG=vg, dL=dl, sample='development'))
-    for d, smp in (('results/phase3/C7/m7', 'M7 test states'), ('results/phase3/C7/scaled', 'out-of-sample (Addendum A)')):
+    for d, smp in (('results/phase3/C7/m7', 'M7 test states'), ('results/phase3/C7/scaled', 'out-of-sample (Addendum A)'),
+                   ('results/phase3/C7/kappa_test', 'out-of-sample (Addendum B)')):
         for p in sorted(glob.glob(os.path.join(d, 'e7_W_*lev0*.json'))):
             r = json.load(open(p)); a = r['args']
             rows.append(dict(source=os.path.basename(d), tox=a['tox'], NA=a['na'], VG=a['vg'],
                              dL=r['result']['const_mu']['dL_net_nm'], sample=smp))
     for z in rows:
         dev = Device(na=z['NA'], tox_nm=z['tox'])
-        m = dev.dL(z['VG'])
-        z.update(l0_nm=m['l0_nm'], Wd_nm=m['Wd_nm'], alpha_inf=m['alpha_inf'], kappa=z['dL'] / m['l0_nm'], dL_over_Wd=z['dL'] / m['Wd_nm'])
+        _, pinf, Wd = dev.far_field(z['VG'])
+        l0 = dev.l0(Wd) * 1e7
+        al = dev.ainf * math.sqrt(dev.ll) * dev.lam ** ((1 - pinf / (VT * dev.ll)) / 2)
+        z.update(l0_nm=l0, Wd_nm=Wd * 1e7, alpha_inf=al, kappa=z['dL'] / l0, dL_over_Wd=z['dL'] / (Wd * 1e7),
+                 psi_s_inf=pinf, ns_boltzmann_surface=1e10 * math.exp(pinf / VT), psi_bi_minus_psi_s=dev.psibi - pinf)
     os.makedirs(OUT, exist_ok=True)
-    with open(os.path.join(OUT, 'kappa_table.csv'), 'w', newline='') as fh:
-        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
+    # kappa_table.csv = the pre-registered development table (without Addendum B); the B points go to a separate file
+    dev_rows = [z for z in rows if z['sample'] != 'out-of-sample (Addendum B)']
+    for fn, data in (('kappa_table.csv', dev_rows), ('kappa_table_with_B.csv', rows)):
+        with open(os.path.join(OUT, fn), 'w', newline='') as fh:
+            w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(data)
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -41,7 +49,9 @@ def main():
     fig, ax = plt.subplots(figsize=(5.2, 3.8))
     style = {(20.0, 1e16): ('#2a78d6', 'o', 't_ox 20 nm, N_A 1e16'), (10.0, 1e16): ('#eb6834', 's', 't_ox 10 nm, N_A 1e16'),
              (40.0, 1e16): ('#1baf7a', 'D', 't_ox 40 nm, N_A 1e16'), (20.0, 4e16): ('#eda100', '^', 't_ox 20 nm, N_A 4e16'),
-             (2.0, 1e18): ('#1f1f1e', '*', 't_ox 2 nm, N_A 1e18 (out of sample)')}
+             (2.0, 1e18): ('#1f1f1e', '*', 't_ox 2 nm, N_A 1e18 (out of sample A)'),
+             (5.0, 3e17): ('#6250d6', 'P', 't_ox 5 nm, N_A 3e17 (out of sample B)'),
+             (10.0, 1e17): ('#e87ba4', 'X', 't_ox 10 nm, N_A 1e17 (out of sample B)')}
     for key, (col, mk, lab) in style.items():
         e = [z for z in rows if (z['tox'], z['NA']) == key]
         ax.semilogx([z['alpha_inf'] for z in e], [z['kappa'] for z in e], mk, color=col, ms=8 if mk == '*' else 7, label=lab, ls='none')

@@ -1,0 +1,9 @@
+JOB job=0 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.3857 --tox 5 --na 3e+17' result=OK start=2026-10-31T12:54:36.298+00:00 end=2026-10-31T12:54:52.993+00:00
+JOB job=1 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.5555 --tox 5 --na 3e+17' result=OK start=2026-10-31T12:54:52.994+00:00 end=2026-10-31T12:55:09.931+00:00
+JOB job=2 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.8845 --tox 5 --na 3e+17' result=OK start=2026-10-31T12:55:09.931+00:00 end=2026-10-31T12:55:27.275+00:00
+JOB job=3 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 3.3578 --tox 5 --na 3e+17' result=OK start=2026-10-31T12:55:27.275+00:00 end=2026-10-31T12:55:44.491+00:00
+JOB job=4 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.3809 --tox 10 --na 1e+17' result=OK start=2026-10-31T12:55:44.491+00:00 end=2026-10-31T12:56:08.863+00:00
+JOB job=5 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.5661 --tox 10 --na 1e+17' result=OK start=2026-10-31T12:56:08.863+00:00 end=2026-10-31T12:56:32.659+00:00
+JOB job=6 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.9304 --tox 10 --na 1e+17' result=OK start=2026-10-31T12:56:32.659+00:00 end=2026-10-31T12:56:56.313+00:00
+JOB job=7 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 3.5724 --tox 10 --na 1e+17' result=OK start=2026-10-31T12:56:56.313+00:00 end=2026-10-31T12:57:19.669+00:00
+RUNNER_END jobs=jobs_kappa_test.json ok=8 failed=0 timeout=0 skipped=0 at=2026-10-31T12:57:19.670+00:00

@@ -194,3 +194,22 @@ venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --t
 `DEVSIM_MATH_LIBS=... venv312/bin/python phase3/c6/wprobe.py --L 4 --level 0 --vg 1.25 --out <dir>`
 
 **Analysis:** `python3 phase3/c6/w1_analysis.py && venv312/bin/python phase3/c6/w1_figures.py`
+
+---
+
+## C-7 (realism, model test, scaling law), 2026-10-31
+
+**Branch:** `phase3/C7-realism-model-2026-10-31`, from `08d61cb`.
+
+**Report:** `phase3/reports/C7_Research_Phase_Report_2026-10-31.md`.
+
+**Registrations:** `phase3/specs/C7_Realism_Test_Registration_2026-10-31.md` and `phase3/specs/C7_M7_Model_Preregistration_2026-10-31.md` (with Addenda A and B).
+
+**Code:** `phase3/c7/`.
+- `endprobe.py`: decks W/R, N_A, t_ox, overlap, grading, ψ_bi shift, Lombardi post-processing.
+
+**Reproduce one state** (scaled device, about 15 s):
+`DEVSIM_MATH_LIBS=... venv312/bin/python phase3/c7/endprobe.py --deck W --L 1 --level 0 --vg 1.2914 --tox 2 --na 1e18 --out <dir>`
+
+**Analyses:**
+`venv312/bin/python phase3/c7/c7_analysis.py; venv312/bin/python phase3/c7/c7_scaling.py; python3 phase3/c7/m7_failure_diag.py`
