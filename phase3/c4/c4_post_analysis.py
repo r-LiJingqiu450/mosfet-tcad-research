@@ -133,14 +133,19 @@ def main():
                 ax[0].plot(v['levels'], v['eps_h'], marker='o', label=m)
             ax[0].set(xlabel='mesh level', ylabel='eps_h at V_D = 50 mV', title='Same-mesh GCA discrepancy, L = 1 um, V_G = 1.25 V')
             ax[0].axhline(0, c='k', lw=.6); ax[0].legend(fontsize=7)
-            cs = sorted([(float(m.split('_f')[1]), v) for m, v in o.items() if m.startswith('c_f') and 'eps_extrap' in v])
+            cs = sorted([(float(m.split('_f')[1]), v) for m, v in o.items() if m.startswith('c_f') and v.get('eps_extrap') is not None])
             if cs:
                 ax[1].errorbar([x for x, _ in cs], [v['eps_extrap'] for _, v in cs], yerr=[2 * (v['U_disc'] or 0) for _, v in cs],
-                               marker='s', color='C2', label='R-I(c), extrapolated (bars 2 U_disc)')
+                               marker='s', color='C2', ls='', capsize=3, label='R-I(c), extrapolated (bars 2 U_disc)')
+            na = sorted([(float(m.split('_f')[1]), v) for m, v in o.items() if m.startswith('c_f') and v.get('eps_extrap') is None and 'eps_finest' in v])
+            if na:
+                ax[1].errorbar([x for x, _ in na], [v['eps_finest'] for _, v in na], yerr=[2 * (v['U_disc'] or 0) for _, v in na],
+                               marker='o', mfc='none', color='C2', ls='', capsize=3,
+                               label='R-I(c), finest level, non-asymptotic (bars 2 U, exploratory f=3)')
             for m, col in (('a', 'C0'), ('b', 'C1')):
-                if m in o and 'eps_extrap' in o[m]:
+                if m in o and o[m].get('eps_extrap') is not None:
                     ax[1].axhline(o[m]['eps_extrap'], color=col, ls='--', label=f'R-I({m}) extrapolated')
-            ax[1].set(xscale='log', xlabel='l_res / W_dep', ylabel='eps (extrapolated)', title='Dependence on reservoir-strip length')
+            ax[1].set(xscale='log', xlabel='l_res / W_dep', ylabel='eps', title='Dependence on reservoir-strip length (L = 1 um, 1.25 V, 50 mV)')
             ax[1].axhline(0, c='k', lw=.6); ax[1].legend(fontsize=7)
             fig.tight_layout(); fig.savefig(os.path.join(a.out, 'lres_diagnostic.png'), dpi=150); fig.savefig(os.path.join(a.out, 'lres_diagnostic.svg'))
         except Exception as exc:
