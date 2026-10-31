@@ -13,3 +13,8 @@ Two design files sit at the top level:
 - `jobs_*.json`: the job lists.
 
 **Measured quantity.** ΔL is computed from the source-side network current, which is cancellation-free (E10-1). In 16 of the 22 runs, the endprobe field `result.const_mu.dL_net_nm` (from the drain-side current) violates the Rayleigh bounds and must not be used.
+
+**Software environments:**
+- `analysis/c10_result.json` and `c10_figure.*` were produced with the documented venv (Python 3.12, numpy 2.3.5).
+- The system Python 3.13 (numpy 2.5.3) reproduces `c10_result.json` except for ≤ 2e-15 relative differences in five tail-fit fields (λ_fit, β). These come from LAPACK least squares.
+- `tail/*.json` were produced with the system Python before the pre-registration commit. `c10_analysis.py` does not read them.
