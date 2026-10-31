@@ -1,0 +1,110 @@
+[
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "0.9294",
+   "--tox",
+   "20",
+   "--na",
+   "1e+16"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L2_lev0_VG0.9294_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "0.8532",
+   "--tox",
+   "20",
+   "--na",
+   "1e+16"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L2_lev0_VG0.8532_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "0.7835",
+   "--tox",
+   "20",
+   "--na",
+   "1e+16"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L2_lev0_VG0.7835_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "1.2218",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L1_lev0_VG1.2218_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "1.1475",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L1_lev0_VG1.1475_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "1.08",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18"
+  ],
+  "expect": "results/phase3/C8/subth/e7_W_L1_lev0_VG1.08_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json"
+ }
+]
