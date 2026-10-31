@@ -1,0 +1,121 @@
+{
+  "start_utc": "2026-10-31T03:52:27.053+00:00",
+  "git_sha": "409e521dea9cc1cef934c812ee64878724baab73",
+  "git_branch": "phase3/C4-2026-10-30",
+  "git_dirty": false,
+  "argv": [
+    "phase3/c4/fb4.py",
+    "--model",
+    "b",
+    "--lres",
+    "0",
+    "--L",
+    "1",
+    "--level",
+    "0",
+    "--out",
+    "results/phase3/C4/dev_smoke/fb4"
+  ],
+  "versions": {
+    "python": "3.12.3",
+    "executable": "/home/claude/venv312/bin/python",
+    "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "devsim": "2.11.2",
+    "DEVSIM_MATH_LIBS": "/lib/x86_64-linux-gnu/libblas.so.3:/lib/x86_64-linux-gnu/liblapack.so.3"
+  },
+  "config": {
+    "model": "b",
+    "L": 1.0,
+    "level": 0,
+    "lres": 0.0,
+    "vg": 1.25,
+    "vd": 0.05,
+    "out": "results/phase3/C4/dev_smoke/fb4",
+    "pm": {
+      "T_K": 300.0,
+      "V_T_V": 0.025851999786435535,
+      "n_i_cm3": 10000000000.0,
+      "eps_Si_rel": 11.7,
+      "eps_ox_rel": 3.9,
+      "statistics": "Boltzmann",
+      "mu_n_cm2_Vs": 1350.0,
+      "mobility": "constant",
+      "generation_recombination": "none",
+      "holes": "frozen p=n_i*exp(-psi/V_T)",
+      "interface_charge": "none",
+      "NA_cm3": 1e+16,
+      "psi_b0_V": -0.3571585759940161,
+      "gate": "psi_gate = V_G + psi_b0 (V_FB = 0)",
+      "units": "cm; I [A/cm]; I'[A/um]=I*1e-4"
+    },
+    "note": "C-4 l_res diagnostic (registered); not FB-1, not Package E",
+    "exploratory": false
+  },
+  "mesh": {
+    "kind": "explicit_c4",
+    "nx": 51,
+    "ny": 223,
+    "kif": 5,
+    "ic0": 0,
+    "ic1": 50,
+    "lateral_contact_rows": [
+      5,
+      221
+    ],
+    "dual_bottom_contacts": true,
+    "model": "b",
+    "L_um": 1.0,
+    "level": 0,
+    "l_res_factor": 0.0,
+    "l_res_cm": 0.0,
+    "W_dep_cm": 3.0392934630191186e-05,
+    "n_res_cells": 0,
+    "n_lateral_nodes": 51,
+    "n_channel_cells": 50,
+    "x_min_cm": 0.0,
+    "x_max_cm": 0.0001,
+    "strip_h_cm": null,
+    "channel_h_cm": 2.0000000000000003e-06
+  },
+  "result": {
+    "I_A_per_cm": 0.014588270572574344,
+    "I_drain_terminal_electron": 0.014588270572574377,
+    "contact_currents": {
+      "bd": 4.274648169250995e-16,
+      "bs": -4.921136888214655e-16,
+      "drain": 0.01458827057257395,
+      "source": -0.014588270572573836
+    },
+    "newton_iterations": [
+      4,
+      4,
+      4,
+      5,
+      5
+    ],
+    "final_update": {
+      "dpsi": 8.239551246698712e-17,
+      "dphin": 6.663564237778752e-17,
+      "dcirc": 6.493107088444974e-19,
+      "extra": true
+    },
+    "sections": [
+      -0.014588270572574382,
+      -0.014588270572574447,
+      -0.014588270572574304
+    ],
+    "delta_cont": 4.9943127685058185e-15,
+    "delta_KCL": 3.4166405997299454e-15,
+    "delta_terminal": 2.2593319667050132e-15,
+    "I_GCA_h": 0.014596320697240683,
+    "I_GCA_h_quad_est": 0.0,
+    "I_M0": 0.014595135937580604,
+    "eps_h": 0.0005518217273452475,
+    "eps_M0": 0.0004706085599457399
+  },
+  "wall_s": 7.9342262744903564,
+  "end_utc": "2026-10-31T03:52:35.166+00:00"
+}
