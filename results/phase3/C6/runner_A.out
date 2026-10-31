@@ -1,0 +1,14 @@
+JOB job=0 script=phase3/c6/wprobe.py args='--L 1 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:17:21.490+00:00 end=2026-10-31T08:18:24.613+00:00
+JOB job=1 script=phase3/c6/wprobe.py args='--L 1 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:18:24.613+00:00 end=2026-10-31T08:19:28.154+00:00
+JOB job=2 script=phase3/c6/wprobe.py args='--L 2 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:19:28.154+00:00 end=2026-10-31T08:21:19.431+00:00
+JOB job=3 script=phase3/c6/wprobe.py args='--L 2 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:21:19.431+00:00 end=2026-10-31T08:23:36.841+00:00
+JOB job=4 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:23:36.842+00:00 end=2026-10-31T08:26:52.379+00:00
+JOB job=5 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:26:52.380+00:00 end=2026-10-31T08:30:04.157+00:00
+JOB job=6 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 1.25 --hw 0.5' result=FAILED(exit=-9,output_complete=False) start=2026-10-31T08:30:04.158+00:00 end=2026-10-31T08:36:09.777+00:00
+JOB job=7 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:36:09.778+00:00 end=2026-10-31T08:42:24.441+00:00
+JOB job=8 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1 --hw 0.5' result=OK start=2026-10-31T08:42:24.443+00:00 end=2026-10-31T08:45:34.609+00:00
+JOB job=9 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.5 --hw 0.5' result=OK start=2026-10-31T08:45:34.610+00:00 end=2026-10-31T08:48:42.177+00:00
+JOB job=10 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 3 --hw 0.5' result=OK start=2026-10-31T08:48:42.177+00:00 end=2026-10-31T08:51:49.378+00:00
+JOB job=11 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.25 --hw 1' result=OK start=2026-10-31T08:51:49.378+00:00 end=2026-10-31T08:55:08.280+00:00
+JOB job=12 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 2 --hw 1' result=OK start=2026-10-31T08:55:08.280+00:00 end=2026-10-31T08:58:30.026+00:00
+RUNNER_END jobs=jobs_w1_A.json ok=12 failed=1 timeout=0 skipped=0 at=2026-10-31T08:58:30.026+00:00

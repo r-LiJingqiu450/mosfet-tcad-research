@@ -1,0 +1,114 @@
+[
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "1",
+   "--level",
+   "1",
+   "--vg",
+   "1.25",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L1_lev1_VG1.25_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "1",
+   "--level",
+   "1",
+   "--vg",
+   "2",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L1_lev1_VG2_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "2",
+   "--level",
+   "1",
+   "--vg",
+   "1.25",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L2_lev1_VG1.25_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "2",
+   "--level",
+   "1",
+   "--vg",
+   "2",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L2_lev1_VG2_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "4",
+   "--level",
+   "1",
+   "--vg",
+   "1.25",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L4_lev1_VG1.25_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "4",
+   "--level",
+   "1",
+   "--vg",
+   "2",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L4_lev1_VG2_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "8",
+   "--level",
+   "1",
+   "--vg",
+   "1.25",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L8_lev1_VG1.25_hw0.5.json"
+ },
+ {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "8",
+   "--level",
+   "1",
+   "--vg",
+   "2",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L8_lev1_VG2_hw0.5.json"
+ }
+]

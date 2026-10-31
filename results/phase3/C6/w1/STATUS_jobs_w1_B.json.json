@@ -1,0 +1,27 @@
+{
+ "runner_pid": 343,
+ "job_index": 6,
+ "n_jobs": 8,
+ "job": {
+  "script": "phase3/c6/wprobe.py",
+  "args": [
+   "--L",
+   "8",
+   "--level",
+   "1",
+   "--vg",
+   "1.25",
+   "--hw",
+   "0.5"
+  ],
+  "expect": "results/phase3/C6/w1/w1_L8_lev1_VG1.25_hw0.5.json"
+ },
+ "child_pid": 1388,
+ "start": "2026-10-31T08:52:28.687+00:00",
+ "counts": {
+  "ok": 6,
+  "failed": 0,
+  "timeout": 0,
+  "skipped": 0
+ }
+}

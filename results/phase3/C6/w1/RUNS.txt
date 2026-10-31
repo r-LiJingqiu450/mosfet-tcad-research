@@ -1,0 +1,27 @@
+job=0 script=phase3/c6/wprobe.py args='--L 1 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:17:21.490+00:00 end=2026-10-31T08:18:24.613+00:00
+job=1 script=phase3/c6/wprobe.py args='--L 1 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:18:24.613+00:00 end=2026-10-31T08:19:28.154+00:00
+job=0 script=phase3/c6/wprobe.py args='--L 1 --level 1 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:17:21.489+00:00 end=2026-10-31T08:20:19.867+00:00
+job=2 script=phase3/c6/wprobe.py args='--L 2 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:19:28.154+00:00 end=2026-10-31T08:21:19.431+00:00
+job=3 script=phase3/c6/wprobe.py args='--L 2 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:21:19.431+00:00 end=2026-10-31T08:23:36.841+00:00
+job=1 script=phase3/c6/wprobe.py args='--L 1 --level 1 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:20:19.868+00:00 end=2026-10-31T08:23:47.767+00:00
+job=4 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:23:36.842+00:00 end=2026-10-31T08:26:52.379+00:00
+job=2 script=phase3/c6/wprobe.py args='--L 2 --level 1 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:23:47.768+00:00 end=2026-10-31T08:28:36.829+00:00
+job=5 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:26:52.380+00:00 end=2026-10-31T08:30:04.157+00:00
+job=3 script=phase3/c6/wprobe.py args='--L 2 --level 1 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:28:36.830+00:00 end=2026-10-31T08:33:23.731+00:00
+job=6 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 1.25 --hw 0.5' result=FAILED(exit=-9,output_complete=False) start=2026-10-31T08:30:04.158+00:00 end=2026-10-31T08:36:09.777+00:00
+job=7 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:36:09.778+00:00 end=2026-10-31T08:42:24.441+00:00
+job=4 script=phase3/c6/wprobe.py args='--L 4 --level 1 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T08:33:23.732+00:00 end=2026-10-31T08:43:07.930+00:00
+job=8 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1 --hw 0.5' result=OK start=2026-10-31T08:42:24.443+00:00 end=2026-10-31T08:45:34.609+00:00
+job=9 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.5 --hw 0.5' result=OK start=2026-10-31T08:45:34.610+00:00 end=2026-10-31T08:48:42.177+00:00
+job=10 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 3 --hw 0.5' result=OK start=2026-10-31T08:48:42.177+00:00 end=2026-10-31T08:51:49.378+00:00
+job=5 script=phase3/c6/wprobe.py args='--L 4 --level 1 --vg 2 --hw 0.5' result=OK start=2026-10-31T08:43:07.931+00:00 end=2026-10-31T08:52:28.687+00:00
+job=11 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 1.25 --hw 1' result=OK start=2026-10-31T08:51:49.378+00:00 end=2026-10-31T08:55:08.280+00:00
+job=12 script=phase3/c6/wprobe.py args='--L 4 --level 0 --vg 2 --hw 1' result=OK start=2026-10-31T08:55:08.280+00:00 end=2026-10-31T08:58:30.026+00:00
+job=0 script=phase3/c6/rprobe.py args='--L 2 --level 0 --vg 1 --hw 0.5 --lw 0.3' result=OK start=2026-10-31T09:08:59.167+00:00 end=2026-10-31T09:10:24.839+00:00
+job=1 script=phase3/c6/rprobe.py args='--L 2 --level 0 --vg 1.25 --hw 0.5 --lw 0.3' result=OK start=2026-10-31T09:10:24.839+00:00 end=2026-10-31T09:11:47.479+00:00
+job=2 script=phase3/c6/rprobe.py args='--L 2 --level 0 --vg 2 --hw 0.5 --lw 0.3' result=OK start=2026-10-31T09:11:47.480+00:00 end=2026-10-31T09:13:06.259+00:00
+job=3 script=phase3/c6/rprobe.py args='--L 2 --level 0 --vg 1.25 --hw 0.5 --lw 0.6' result=OK start=2026-10-31T09:13:06.260+00:00 end=2026-10-31T09:15:07.247+00:00
+job=4 script=phase3/c6/wprobe.py args='--L 2 --level 0 --vg 1 --hw 0.5' result=OK start=2026-10-31T09:15:07.247+00:00 end=2026-10-31T09:16:58.549+00:00
+job=5 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 1 --hw 0.5' result=OK start=2026-10-31T09:16:58.549+00:00 end=2026-10-31T09:23:31.698+00:00
+job=6 script=phase3/c6/wprobe.py args='--L 8 --level 0 --vg 1.25 --hw 0.5' result=OK start=2026-10-31T09:23:31.698+00:00 end=2026-10-31T09:29:32.763+00:00
+job=7 script=phase3/c6/wprobe.py args='--L 2 --level 2 --vg 1.25 --hw 0.5' result=FAILED(exit=-9,output_complete=False) start=2026-10-31T09:29:32.763+00:00 end=2026-10-31T09:44:20.856+00:00

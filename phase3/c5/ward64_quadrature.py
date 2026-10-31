@@ -36,7 +36,7 @@ import sys
 import numpy as np
 from scipy.integrate import quad
 from scipy.optimize import brentq
-from scipy.special import ellipk
+from scipy.special import ellipk, ellipkm1
 
 Q_E = 1.602176634e-19
 VT = 0.025852
@@ -81,6 +81,10 @@ def make_conv(conv: str):
         return 2 * DINF / (np.pi * np.sqrt(s)) * K(1.0 / s)
 
     def a0_of_s(s):
+        # K((s-1)/s); for the parameter convention evaluated as ellipkm1(1/s) = K(1 - 1/s), which stays
+        # finite and accurate as s -> inf (yt -> 0), where a0 -> 0 (numerical-robustness fix, C-6)
+        if conv == 'parameter':
+            return np.sqrt(2) * DINF / (np.pi * np.sqrt(s)) * ellipkm1(1.0 / s)
         return np.sqrt(2) * DINF / (np.pi * np.sqrt(s)) * K((s - 1.0) / s)
 
     def a0_of_yt(yt):
