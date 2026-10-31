@@ -1,0 +1,178 @@
+[
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.783500",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.5",
+   "--psibi-shift",
+   "0.000000"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.783500",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.5",
+   "--psibi-shift",
+   "-0.119053"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi-0.119053.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.783500",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.04727",
+   "--psibi-shift",
+   "0.000000"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.04727_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.783500",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.04727",
+   "--psibi-shift",
+   "-0.119053"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.04727_ov0_sg0_dpsi-0.119053.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.621433",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.5",
+   "--psibi-shift",
+   "0.000000"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.621433_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "1",
+   "--level",
+   "0",
+   "--vg",
+   "0.621433",
+   "--tox",
+   "2",
+   "--na",
+   "1e+18",
+   "--hw",
+   "0.04727",
+   "--psibi-shift",
+   "-0.119053"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.621433_tox2_NA1e+18_hw0.04727_ov0_sg0_dpsi-0.119053.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "0.783500",
+   "--tox",
+   "20",
+   "--na",
+   "1e+16",
+   "--hw",
+   "0.46905",
+   "--psibi-shift",
+   "0.000000"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L2_lev0_VG0.7835_tox20_NA1e+16_hw0.46905_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "0.621433",
+   "--tox",
+   "20",
+   "--na",
+   "1e+16",
+   "--hw",
+   "0.46905",
+   "--psibi-shift",
+   "0.000000"
+  ],
+  "expect": "results/phase3/C10/runs/e7_W_L2_lev0_VG0.621433_tox20_NA1e+16_hw0.46905_ov0_sg0_dpsi0.json"
+ }
+]
