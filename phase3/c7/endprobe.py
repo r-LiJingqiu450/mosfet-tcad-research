@@ -301,6 +301,17 @@ def analyse(geo, sol0):
                dL_net_nm=dl(G_GCA, cst['G_net']), dL_slice_nm=dl(G_GCA, cst['G_slice']), dL_rows_nm=dl(G_GCA, cst['G_rows']),
                dL_net_meshref_nm=dl(G_GCA_mesh, cst['G_net']))
     cst['dL_spread_nm'] = cst['dL_slice_nm'] - cst['dL_net_nm']
+    # diagnostic (C-7): slice conductance using only the surface layer y <= y_c (not a bound): tests whether the
+    # slice-minus-network difference is carried by charge below the surface layer (junction spill-over)
+    lat_e = np.abs(ys[n0i] - ys[n1i]) < 1e-18
+    xcol = np.array(sorted(set(np.round(xs, 16)))); ci = np.searchsorted(xcol, np.round(xs, 16))
+    a_, b_ = np.minimum(ci[n0i], ci[n1i]), np.maximum(ci[n0i], ci[n1i])
+    for yc in (20e-7, 50e-7):
+        m = lat_e & ((b_ - a_) == 1) & (ys[n0i] <= yc * (1 + 1e-12))
+        Cc = np.bincount(a_[m], weights=c[m], minlength=len(xcol) - 1)[:len(xcol) - 1]
+        k = int(np.argmin(np.abs(0.5 * (xcol[:-1] + xcol[1:]) - L / 2)))
+        Gt = 1.0 / float(np.sum(1.0 / Cc)); Gref_t = Cc[k] * (xcol[k + 1] - xcol[k]) / L
+        cst[f'dL_slice_top{int(round(yc * 1e7))}nm_nm'] = dl(Gref_t, Gt)
     out['const_mu'] = cst
     # field-dependent mobility
     F, lat, ver = node_fields(xs, ys, psi, n0i, n1i)

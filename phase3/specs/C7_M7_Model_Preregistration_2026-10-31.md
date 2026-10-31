@@ -71,3 +71,29 @@ r = ΔL_2D,net / ΔL_M7. The 2-D values are at mesh level 0. The C-6 mesh uncert
 - At threshold, raising N_A from 1e16 to 4e16 roughly halves ΔL: M7 gives 155.2/275.0 = 0.56. The 2-D ratio uses the C-6 reference of 369.9 nm for N_A = 1e16 and is **confirmed** if it lies in [0.4, 0.7].
 
 Whatever the outcome, no parameter of M7 will be adjusted to these test data in this phase. A revised model would be a new model with new predictions.
+
+## Addendum A (committed before the runs): out-of-sample test of an empirical scaling on a scaled device
+
+The M7 test produced a post-hoc observation, not part of any rule above. Near threshold (α∞ ≈ 5–8), the 2-D ΔL/l₀ lies between 3.0 and 3.7 across t_ox = 10–40 nm and N_A = 1e16–4e16.
+
+It is now tested **out of sample** on a strongly scaled device it has never seen: N_A = 1e18, t_ox = 2 nm, l₀ ≈ 13 nm, W_d ≈ 35 nm.
+
+| State | α∞ | Predicted ΔL band (nm) |
+|---|---|---|
+| Threshold | 5.23 | 38.6–47.6, i.e. (3.0–3.7)·l₀ |
+| Moderate | 0.90 | 14.7–19.4, i.e. (1.1–1.45)·l₀, from the α∞ ≈ 0.9 points |
+
+Also recorded for comparison:
+
+| State | M7 (nm) | Ward (nm) |
+|---|---|---|
+| Threshold | 27.2 | 16.0 |
+| Moderate | 11.3 | 10.2 |
+
+Details are in `results/phase3/C7/scaled/predictions.json`.
+
+**Rule.** The scaling is **SUPPORTED** if both 2-D values lie inside their bands, and **REFUTED** if either is outside the band widened by ±25 %.
+
+Additional states:
+- deck R (resolved abrupt wells) and deck R with σ = 5 nm grading, at threshold;
+- a level-1 mesh check at threshold.

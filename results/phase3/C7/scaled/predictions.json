@@ -1,0 +1,33 @@
+{
+ "note": "Out-of-sample test of the EMPIRICAL near-threshold scaling dL ~ (3.0-3.7) l0 and of the moderate-inversion range dL ~ (1.1-1.45) l0, both read off C-6/C-7 data (N_A 1e16-4e16, t_ox 10-40 nm); and of M7 / Ward. Device: N_A = 1e18, t_ox = 2 nm, N_D = 1e20, F0 physics, L = 1 um. Written before any run of this device.",
+ "states": [
+  {
+   "label": "threshold",
+   "VG": 1.2914,
+   "alpha_inf": 5.23,
+   "l0_nm": 12.875633172781251,
+   "Wd_nm": 34.79525584003174,
+   "Ns_1D": 70126247742.48592,
+   "predicted_band_nm": [
+    38.626899518343755,
+    47.63984273929063
+   ],
+   "dL_M7_nm": 27.210852850662803,
+   "dL_Ward_nm": 15.979352587077722
+  },
+  {
+   "label": "moderate",
+   "VG": 1.5587,
+   "alpha_inf": 0.9,
+   "l0_nm": 13.409089331408342,
+   "Wd_nm": 36.44682997592078,
+   "Ns_1D": 1825474934305.048,
+   "predicted_band_nm": [
+    14.749998264549177,
+    19.443179530542096
+   ],
+   "dL_M7_nm": 11.265020381508206,
+   "dL_Ward_nm": 10.201248543417114
+  }
+ ]
+}
