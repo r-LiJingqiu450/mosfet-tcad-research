@@ -1,0 +1,6 @@
+JOB job=0 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 1.692 --tox 40 --na 1e+16' result=OK start=2026-10-31T12:41:01.323+00:00 end=2026-10-31T12:42:42.832+00:00
+JOB job=1 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 3.1303 --tox 40 --na 1e+16' result=OK start=2026-10-31T12:42:42.832+00:00 end=2026-10-31T12:44:28.289+00:00
+JOB job=2 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 1.3536 --tox 20 --na 4e+16' result=OK start=2026-10-31T12:44:28.289+00:00 end=2026-10-31T12:45:25.393+00:00
+JOB job=3 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 1.6162 --tox 20 --na 4e+16' result=OK start=2026-10-31T12:45:25.393+00:00 end=2026-10-31T12:46:22.630+00:00
+JOB job=4 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 2.3671 --tox 20 --na 4e+16' result=OK start=2026-10-31T12:46:22.631+00:00 end=2026-10-31T12:47:20.032+00:00
+RUNNER_END jobs=jobs_m7_test_B.json ok=5 failed=0 timeout=0 skipped=0 at=2026-10-31T12:47:20.032+00:00

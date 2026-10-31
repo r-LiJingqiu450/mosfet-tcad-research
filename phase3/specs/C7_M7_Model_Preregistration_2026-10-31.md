@@ -97,3 +97,22 @@ Details are in `results/phase3/C7/scaled/predictions.json`.
 Additional states:
 - deck R (resolved abrupt wells) and deck R with σ = 5 nm grading, at threshold;
 - a level-1 mesh check at threshold.
+
+## Addendum B (committed before the runs): out-of-sample test of the κ(α∞) scaling law
+
+**Observation (post hoc, development data).** Across every deck-W abrupt state of C-6/C-7, the ratio κ = ΔL_2D/l₀ collapses onto a single curve of Ward's inversion parameter α∞. This holds for N_A = 1e16–1e18, t_ox = 2–40 nm and α∞ = 0.14–7.6 (`results/phase3/C7/analysis/kappa_table.csv`, 17 points).
+
+**Law under test:** ΔL = l₀(V_G)·κ(α∞(V_G)).
+- l₀ is the exact two-layer depletion eigen-length.
+- κ is interpolated piecewise-linearly in ln α∞ through the pooled development points (`phase3/c7/kappa_predict.py`).
+
+**Test devices (never simulated):**
+
+| Device | N_A (cm⁻³) | t_ox (nm) | α∞ targets |
+|---|---|---|---|
+| 1 | 3e17 | 5 | 3.0, 1.2, 0.6, 0.2 |
+| 2 | 1e17 | 10 | 3.0, 1.2, 0.6, 0.2 |
+
+Deck W, L = 1 µm, level 0. The predictions are in `results/phase3/C7/kappa_test/predictions.json`.
+
+**Rule.** The law is **SUPPORTED** if every |ΔL_2D/ΔL_pred − 1| ≤ 0.12, and **REFUTED** if any exceeds 0.20. Otherwise the result is PARTIAL.

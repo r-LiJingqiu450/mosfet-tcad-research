@@ -1,0 +1,178 @@
+[
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "0",
+   "--sigma",
+   "0"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "10",
+   "--sigma",
+   "0"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov10_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "30",
+   "--sigma",
+   "0"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov30_sg0_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "0",
+   "--sigma",
+   "10"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov0_sg10_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "0",
+   "--sigma",
+   "30"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov0_sg30_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--ov",
+   "30",
+   "--sigma",
+   "30"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov30_sg30_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--psibi-shift",
+   "0.05"
+  ],
+  "expect": "results/phase3/C7/realism/e7_W_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi0.05.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "W",
+   "--L",
+   "2",
+   "--level",
+   "0",
+   "--vg",
+   "1.25",
+   "--psibi-shift",
+   "-0.05"
+  ],
+  "expect": "results/phase3/C7/realism/e7_W_L2_lev0_VG1.25_tox20_NA1e+16_hw0.5_ov0_sg0_dpsi-0.05.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "4",
+   "--level",
+   "0",
+   "--vg",
+   "1",
+   "--ov",
+   "30",
+   "--sigma",
+   "30"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L4_lev0_VG1_tox20_NA1e+16_hw0.5_ov30_sg30_dpsi0.json"
+ },
+ {
+  "script": "phase3/c7/endprobe.py",
+  "args": [
+   "--deck",
+   "R",
+   "--L",
+   "2",
+   "--level",
+   "1",
+   "--vg",
+   "1",
+   "--ov",
+   "30",
+   "--sigma",
+   "30"
+  ],
+  "expect": "results/phase3/C7/realism/e7_R_L2_lev1_VG1_tox20_NA1e+16_hw0.5_ov30_sg30_dpsi0.json"
+ }
+]

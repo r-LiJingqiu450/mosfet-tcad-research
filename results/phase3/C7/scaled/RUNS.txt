@@ -1,0 +1,5 @@
+job=0 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.2914 --tox 2 --na 1e18' result=OK start=2026-10-31T12:51:35.577+00:00 end=2026-10-31T12:51:50.580+00:00
+job=1 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 0 --vg 1.5587 --tox 2 --na 1e18' result=OK start=2026-10-31T12:51:50.580+00:00 end=2026-10-31T12:52:05.491+00:00
+job=2 script=phase3/c7/endprobe.py args='--deck R --L 1 --level 0 --vg 1.2914 --tox 2 --na 1e18' result=OK start=2026-10-31T12:52:05.492+00:00 end=2026-10-31T12:52:18.983+00:00
+job=3 script=phase3/c7/endprobe.py args='--deck R --L 1 --level 0 --vg 1.2914 --tox 2 --na 1e18 --sigma 5' result=OK start=2026-10-31T12:52:18.983+00:00 end=2026-10-31T12:52:30.039+00:00
+job=4 script=phase3/c7/endprobe.py args='--deck W --L 1 --level 1 --vg 1.2914 --tox 2 --na 1e18' result=OK start=2026-10-31T12:52:30.040+00:00 end=2026-10-31T12:53:07.343+00:00

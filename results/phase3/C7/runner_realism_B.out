@@ -1,0 +1,11 @@
+JOB job=0 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 0 --sigma 0' result=OK start=2026-10-31T12:23:21.489+00:00 end=2026-10-31T12:24:35.544+00:00
+JOB job=1 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 10 --sigma 0' result=OK start=2026-10-31T12:24:35.545+00:00 end=2026-10-31T12:25:53.528+00:00
+JOB job=2 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 30 --sigma 0' result=OK start=2026-10-31T12:25:53.528+00:00 end=2026-10-31T12:27:07.658+00:00
+JOB job=3 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 0 --sigma 10' result=OK start=2026-10-31T12:27:07.658+00:00 end=2026-10-31T12:28:14.320+00:00
+JOB job=4 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 0 --sigma 30' result=OK start=2026-10-31T12:28:14.320+00:00 end=2026-10-31T12:29:18.772+00:00
+JOB job=5 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 0 --vg 1.25 --ov 30 --sigma 30' result=OK start=2026-10-31T12:29:18.773+00:00 end=2026-10-31T12:30:22.872+00:00
+JOB job=6 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 1.25 --psibi-shift 0.05' result=OK start=2026-10-31T12:30:22.873+00:00 end=2026-10-31T12:32:07.718+00:00
+JOB job=7 script=phase3/c7/endprobe.py args='--deck W --L 2 --level 0 --vg 1.25 --psibi-shift -0.05' result=OK start=2026-10-31T12:32:07.718+00:00 end=2026-10-31T12:33:50.768+00:00
+JOB job=8 script=phase3/c7/endprobe.py args='--deck R --L 4 --level 0 --vg 1 --ov 30 --sigma 30' result=OK start=2026-10-31T12:33:50.769+00:00 end=2026-10-31T12:35:38.538+00:00
+JOB job=9 script=phase3/c7/endprobe.py args='--deck R --L 2 --level 1 --vg 1 --ov 30 --sigma 30' result=OK start=2026-10-31T12:35:38.539+00:00 end=2026-10-31T12:39:12.033+00:00
+RUNNER_END jobs=jobs_realism_B.json ok=10 failed=0 timeout=0 skipped=0 at=2026-10-31T12:39:12.033+00:00

@@ -1,0 +1,41 @@
+{
+ "dL_comb_1V": 337.7601021538451,
+ "dL_comb_1V_mu": 341.43829176507825,
+ "ratio_1V_2V": 25.564926563843265,
+ "ratio_1V_2V_mu": 11.891954718859456,
+ "S1": true,
+ "S0_any": false,
+ "S0_cases_available": [
+  [
+   30.0,
+   30.0
+  ]
+ ],
+ "verdict": "SURVIVES (S1)"
+}
+{
+ "R1": "REFUTED",
+ "R1_max_abs_dev": 0.4420470686734992,
+ "R2": "AS PREDICTED",
+ "R3": {
+  "sum_abs_log_M7": 2.1898678952678026,
+  "sum_abs_log_Ward": 5.521627175672725,
+  "M7_better": true
+ },
+ "R4": {
+  "tox_ratio_2D": 1.3163610499287899,
+  "tox_ok": false,
+  "NA_ratio_2D": 0.6498584665954372,
+  "NA_ok": true
+ }
+}
+S0_original  unseen bias VG 1.1000 2D   254.3 M7   195.8 r 1.299 | Ward  126.1 r 2.017 | mu 260.7
+S1_tox10     threshold   VG 0.8585 2D   316.6 M7   276.0 r 1.147 | Ward  138.3 r 2.289 | mu 322.1
+S1_tox10     moderate    VG 1.0291 2D   147.8 M7   148.6 r 0.994 | Ward   92.1 r 1.605 | mu 157.7
+S1_tox10     strong      VG 1.4350 2D    53.0 M7    65.8 r 0.806 | Ward   40.6 r 1.305 | mu 64.7
+S2_tox40     threshold   VG 1.2831 2D   416.7 M7   278.0 r 1.499 | Ward  156.3 r 2.667 | mu 419.2
+S2_tox40     moderate    VG 1.6920 2D   157.2 M7   129.0 r 1.219 | Ward  112.2 r 1.402 | mu 166.1
+S2_tox40     strong      VG 3.1303 2D    53.6 M7    55.6 r 0.964 | Ward   59.2 r 0.906 | mu 65.2
+S3_NA4e16    threshold   VG 1.3536 2D   240.4 M7   155.2 r 1.548 | Ward   81.4 r 2.954 | mu 241.5
+S3_NA4e16    moderate    VG 1.6162 2D   117.1 M7    81.2 r 1.442 | Ward   65.7 r 1.784 | mu 121.1
+S3_NA4e16    strong      VG 2.3671 2D    46.5 M7    40.9 r 1.135 | Ward   39.1 r 1.189 | mu 53.0
