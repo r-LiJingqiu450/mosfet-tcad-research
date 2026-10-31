@@ -1,5 +1,7 @@
 # Ward 1988 / Ward–Odeh–Cohen 1990 — Full-Text Audit (C-4 Task E)
 
+> **Superseded 2026-10-31** by `C5_Ward_FullText_Audit_2026-10-31.md` (full texts supplied by the user and audited). This file is kept unchanged below as the record of the blocked-access state.
+
 **Date:** 2026-10-30. **Status: NOT PERFORMED. The full texts were not accessible in this environment.** No equation, section content or assumption of these works is reported from memory or inferred from titles.
 
 ## 1. Access attempts (this session)

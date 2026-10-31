@@ -152,3 +152,22 @@ venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --t
 ```
 
 **User action needed:** attach the two Ward PDFs, Ward–Odeh–Cohen 1990 (CaltechAUTHORS 31400) and the Ward 1988 thesis (CaltechTHESIS 440). The Task E audit is blocked without them.
+
+---
+
+## C-5 (literature audit and direction decision), 2026-10-31
+
+**Branch:** `phase3/C5-literature-2026-10-31`, from `d3cc880`. No simulation was run.
+
+**Reports:**
+- `phase3/reports/C5_Ward_FullText_Audit_2026-10-31.md` — equation-level audit of Ward 1988 and Ward–Odeh–Cohen 1990. Printed p. 142 of the thesis is missing; the affected items (§6.5 only) are marked.
+- `phase3/reports/C5_Research_Direction_Decision_2026-10-31.md` — answers to the five questions, the E-W1 design and the abandonment criteria.
+
+**Analysis code:** `phase3/c5/ward64_quadrature.py` → `results/phase3/C5/ward64/ward64_predictions.json`. This is the a-priori evaluation of Ward's published §6.4 formulas and the pre-registered predictions for E-W1.
+
+**Decisions:**
+- D1: rejected.
+- C-W (R-II, verification and decomposition of Ward's O(ε) end correction): recommended, gated by literature gate LG-1 and then E-W1.
+- E-W1 needs authorization and a frozen pre-registration.
+
+**Reproduce:** `python3 -m phase3.c5.ward64_quadrature results/phase3/C5/ward64` (scipy only; ~10 s).
