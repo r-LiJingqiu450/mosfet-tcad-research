@@ -171,3 +171,26 @@ venv312/bin/python phase3/c4/c4_post_analysis.py --fb4 results/phase3/C4/fb4 --t
 - E-W1 needs authorization and a frozen pre-registration.
 
 **Reproduce:** `python3 -m phase3.c5.ward64_quadrature results/phase3/C5/ward64` (scipy only; ~10 s).
+
+---
+
+## C-6 (exploratory research phase: zero-bias end correction), 2026-10-31
+
+**Branch:** `phase3/C6-endcorrection-2026-10-31`, from `2922f86`.
+
+**Reports:**
+- `phase3/reports/C6_Research_Phase_Report_2026-10-31.md` — findings, paths, candidate, uncertainties, recommendation.
+- `phase3/reports/C6_Theory_ZeroBias_EndCorrection_2026-10-31.md` — P4–P7 and the end-layer observation.
+
+**Code:**
+- `phase3/c6/wprobe.py` — Ward-truncated n⁺ ends.
+- `phase3/c6/rprobe.py` — resolved n⁺ wells.
+- `phase3/c6/w1_analysis.py`, `phase3/c6/w1_figures.py`.
+- Test: `phase3/tests/test_c6_network.py`.
+
+**Data:** `results/phase3/C6/{w1, dev, analysis_w1}`, plus the job lists `jobs_w1_*.json`, the runner outputs and `CANCELLED.txt`.
+
+**Reproduce one state** (about 1–3 min at level 0; level ≥ 2 needs `--no-devsim` within 7 GB):
+`DEVSIM_MATH_LIBS=... venv312/bin/python phase3/c6/wprobe.py --L 4 --level 0 --vg 1.25 --out <dir>`
+
+**Analysis:** `python3 phase3/c6/w1_analysis.py && venv312/bin/python phase3/c6/w1_figures.py`
