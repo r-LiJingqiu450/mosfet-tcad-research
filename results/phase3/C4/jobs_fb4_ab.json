@@ -1,0 +1,98 @@
+[
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "a",
+   "--L",
+   "1",
+   "--level",
+   "0"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_a_L1_lev0_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "a",
+   "--L",
+   "1",
+   "--level",
+   "1"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_a_L1_lev1_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "a",
+   "--L",
+   "1",
+   "--level",
+   "2"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_a_L1_lev2_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "a",
+   "--L",
+   "1",
+   "--level",
+   "3"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_a_L1_lev3_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "b",
+   "--L",
+   "1",
+   "--level",
+   "0"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_b_L1_lev0_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "b",
+   "--L",
+   "1",
+   "--level",
+   "1"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_b_L1_lev1_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "b",
+   "--L",
+   "1",
+   "--level",
+   "2"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_b_L1_lev2_VG1.25.json"
+ },
+ {
+  "script": "phase3/c4/fb4.py",
+  "args": [
+   "--model",
+   "b",
+   "--L",
+   "1",
+   "--level",
+   "3"
+  ],
+  "expect": "results/phase3/C4/fb4/fb4_b_L1_lev3_VG1.25.json"
+ }
+]

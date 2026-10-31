@@ -1,0 +1,62 @@
+[
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "1",
+   "--level",
+   "0"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L1_lev0.json"
+ },
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "1",
+   "--level",
+   "1"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L1_lev1.json"
+ },
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "1",
+   "--level",
+   "2"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L1_lev2.json"
+ },
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "3",
+   "--level",
+   "0"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L3_lev0.json"
+ },
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "3",
+   "--level",
+   "1"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L3_lev1.json"
+ },
+ {
+  "script": "phase3/c4/tc1.py",
+  "args": [
+   "--L",
+   "3",
+   "--level",
+   "2"
+  ],
+  "expect": "results/phase3/C4/tc1/tc1_L3_lev2.json"
+ }
+]
