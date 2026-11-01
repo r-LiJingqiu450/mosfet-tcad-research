@@ -1,9 +1,9 @@
 # Active research handoff — 2026-11-01
 
 - Branch: `phase3/direction-reset-2026-11-01`, based on `fde679b561bddf35663933890d7ace617bf9b928`.
-- Active question: quantify how the already observed bias-dependent intrinsic `Delta L(V_G)` changes practical multi-length and gate-dependent extraction results.
-- Well-depth correction: the 0.50→1.00 um interval changes `Delta L` by 1.47115%, but it crosses the proposed threshold and also changes the bottom-boundary margin from 0.70 to 0.20 um. It is retained as a boundary-sensitivity check, not as a strict refutation of a `3 W_dep` semi-infinite criterion. See `phase3/reports/Direction_Reset_Correction_and_Next_Investment_2026-11-01.md`.
-- New evidence: existing C6 `L=2,4,8 um` states fit the affine `1/G` law with `Delta L_fit` = 369.865, 153.686, 53.385 nm at `V_G` = 1.0, 1.25, 2.0 V; maximum relative fit residuals are `3.71e-6`, `9.41e-8`, `5.77e-9`.
-- DEVSIM comparison correction: the machine-readable network-vs-E relative difference is `3.1334709456e-7`; the second is `3.3407079818e-7`; the earlier `1.57e-7` was a half-difference reporting error.
-- Next specification: `phase3/next_investment/Extraction_Impact_Specification_2026-11-01.md`; current post-processing outputs are under `results/phase3/next_investment/extraction_impact/`.
+- Active question: test whether the weak-inversion end correction has an electron-free dimensionless limit `F(eta,chi)=Delta L/W_dep`, rather than continuing the already closed extraction-impact narrative.
+- Closed extraction direction: C6–C9 established gate-dependent `Delta L`, affine conductance, extraction consequences, halo sign reversal and their prior-art overlap. The latest fit remains verification only.
+- Well-depth correction: the 0.50→1.00 um interval crosses the proposed threshold and changes the bottom-boundary margin from 0.70 to 0.20 um; it is not a strict refutation of a `3 W_dep` semi-infinite criterion. See `phase3/reports/Direction_Reset_Correction_and_Next_Investment_2026-11-01.md`.
+- New decision evidence: C8 E8-1 six-point data were reduced to `F=DeltaL/W_dep`, `eta`, `chi`, and `N_s/(N_A W_dep)`. Fitting `F=F_inf+A/chi` on alpha=15,50 predicts alpha=150 within 0.45% and 0.40% on the two existing structures. This is an exploratory mechanism test, not independent validation.
+- Next gate: one third structure with substantially different `eta`, a preregistered prediction and an independent discretization. Proceed only if the prediction is within 5%; close the direction if it exceeds 15% or is boundary-dominated.
 - Validation scope: the combined command `pytest -q semiconductor_sim phase3/tests` reports 171 passed, 4 skipped, 4 warnings. Production code and golden files remain unchanged.

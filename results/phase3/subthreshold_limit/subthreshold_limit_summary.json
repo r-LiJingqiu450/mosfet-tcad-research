@@ -1,0 +1,121 @@
+{
+  "source": "results/phase3/C8/subth/e8_1_result.json",
+  "new_simulations": 0,
+  "derived_limit": "F(eta, chi) = integral [1 - exp(-delta_psi_0/VT) E_0/E_inf] d(x/Wd) in the electron-free limit",
+  "exploratory_first_order_test": "F = F_inf + A/chi, fitted on alpha=15 and 50 and tested at alpha=150",
+  "rows": [
+    {
+      "NA_cm^-3": 1e+16,
+      "tox_nm": 20.0,
+      "VG_V": 0.9294,
+      "alpha_inf": 15.005194120864664,
+      "chi": 11.217411820487408,
+      "eta": 0.2091212780216453,
+      "Wd_nm": 286.9148494482214,
+      "l0_nm": 108.95175504662427,
+      "dL_nm": 410.69845072271113,
+      "F_dL_over_Wd": 1.4314297482773841,
+      "Ns_cm^-2": 798889717.3658531,
+      "sheet_charge_ratio": 0.0027844139782316362
+    },
+    {
+      "NA_cm^-3": 1e+16,
+      "tox_nm": 20.0,
+      "VG_V": 0.8532,
+      "alpha_inf": 49.970213279647055,
+      "chi": 13.623473175714555,
+      "eta": 0.22015354961423272,
+      "Wd_nm": 272.5370547290102,
+      "l0_nm": 104.2594692571679,
+      "dL_nm": 418.3261030790393,
+      "F_dL_over_Wd": 1.534932941485665,
+      "Ns_cm^-2": 76117776.11169335,
+      "sheet_charge_ratio": 0.00027929330999551234
+    },
+    {
+      "NA_cm^-3": 1e+16,
+      "tox_nm": 20.0,
+      "VG_V": 0.7835,
+      "alpha_inf": 149.9240145937633,
+      "chi": 15.82087618145634,
+      "eta": 0.23192084322972478,
+      "Wd_nm": 258.7089593347509,
+      "l0_nm": 99.73362383777128,
+      "dL_nm": 416.29783024069104,
+      "F_dL_over_Wd": 1.6091357304020981,
+      "Ns_cm^-2": 8934240.340693872,
+      "sheet_charge_ratio": 3.4533942557179106e-05
+    },
+    {
+      "NA_cm^-3": 1e+18,
+      "tox_nm": 2.0,
+      "VG_V": 1.2218,
+      "alpha_inf": 14.993303304264732,
+      "chi": 6.33764601518657,
+      "eta": 0.17768195178982285,
+      "Wd_nm": 33.76820177604366,
+      "l0_nm": 12.543453563638762,
+      "dL_nm": 48.978499499719334,
+      "F_dL_over_Wd": 1.4504325644744989,
+      "Ns_cm^-2": 9015002391.905663,
+      "sheet_charge_ratio": 0.0026696720339728663
+    },
+    {
+      "NA_cm^-3": 1e+18,
+      "tox_nm": 2.0,
+      "VG_V": 1.1475,
+      "alpha_inf": 50.01936309325669,
+      "chi": 8.747259089774083,
+      "eta": 0.18431149998941965,
+      "Wd_nm": 32.553584558448215,
+      "l0_nm": 12.150120044720397,
+      "dL_nm": 50.01586204577446,
+      "F_dL_over_Wd": 1.5364164261534292,
+      "Ns_cm^-2": 841505256.6333418,
+      "sheet_charge_ratio": 0.00025849849349845463
+    },
+    {
+      "NA_cm^-3": 1e+18,
+      "tox_nm": 2.0,
+      "VG_V": 1.08,
+      "alpha_inf": 149.99231366372098,
+      "chi": 10.943606806203501,
+      "eta": 0.19104890159399324,
+      "Wd_nm": 31.405571819255336,
+      "l0_nm": 11.777814558333526,
+      "dL_nm": 49.87546873477084,
+      "F_dL_over_Wd": 1.5881089197105869,
+      "Ns_cm^-2": 97043730.32711467,
+      "sheet_charge_ratio": 3.0900163475964914e-05
+    }
+  ],
+  "predictions": [
+    {
+      "NA_cm^-3": 1e+16,
+      "F_inf_fit": 2.0174800471238554,
+      "A_fit": -6.573967549680584,
+      "F_pred_alpha150": 1.6019551751584244,
+      "F_observed_alpha150": 1.6091357304020981,
+      "prediction_error_pct": -0.44623676598612994,
+      "fit_alpha_points": [
+        15.005194120864664,
+        49.970213279647055
+      ],
+      "test_alpha": 149.9240145937633
+    },
+    {
+      "NA_cm^-3": 1e+18,
+      "F_inf_fit": 1.7625669579906247,
+      "A_fit": -1.9781972952701516,
+      "F_pred_alpha150": 1.5818041317760727,
+      "F_observed_alpha150": 1.5881089197105869,
+      "prediction_error_pct": -0.39699971810894796,
+      "fit_alpha_points": [
+        14.993303304264732,
+        50.01936309325669
+      ],
+      "test_alpha": 149.99231366372098
+    }
+  ],
+  "interpretation": "The alpha=150 points are predicted within 0.5 percent by the chi correction on both structures. This supports chi as a better mechanistic coordinate than a continued log(alpha) law, but it is an internal reanalysis and not independent validation."
+}
