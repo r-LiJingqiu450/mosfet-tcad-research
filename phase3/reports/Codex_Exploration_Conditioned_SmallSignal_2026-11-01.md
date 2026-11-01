@@ -4,7 +4,7 @@
 
 本探索只读取 C10/C11 已冻结的 JSON 结果，没有重新运行二维 MOSFET 扫描，也没有修改生产求解器、正式 golden 或历史结果。当前结论是 `MORE_EVIDENCE_NEEDED`，不是新模型通过，也不是 SCI 新颖性结论。
 
-- 代码提交：`e61a443f2ef4c492b63e8b2c9fa827bd3145a6fb`
+- 分析输入生成基线：`e61a443f2ef4c492b63e8b2c9fa827bd3145a6fb`；本交付分支最终 HEAD：见 Git 记录。
 - 输入数据：`results/phase3/C10/analysis/c10_result.json`、`results/phase3/C11/c11_eval.json`、C11 DEVSIM 检查及独立有限体积结果。
 - 机器可读输出：`results/phase3/exploration/conditioned_small_signal_rows.csv`、`results/phase3/exploration/coupled_small_signal_rows.csv`、`results/phase3/exploration/conditioned_small_signal_summary.json`。
 
