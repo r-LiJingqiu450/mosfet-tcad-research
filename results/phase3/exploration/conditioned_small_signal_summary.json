@@ -1,0 +1,87 @@
+{
+  "coupled_vs_decoupled": {
+    "max_kappa_G": 3.820987613718328e+16,
+    "max_network_vs_independent_rel_dL": 0.001486602195553978,
+    "max_small_signal_discrepancy": 1.987790384338442,
+    "min_kappa_G": 2402294205403723.0,
+    "states": [
+      {
+        "E_dwr": 1.2923812820372431,
+        "E_round": 1.644825827519504,
+        "G_E": -1.2779214695256283e-09,
+        "G_M": 1.2937172600455077e-09,
+        "G_net_const_mu": 3.577274856056932e-12,
+        "abs_G_M_minus_G_E_over_max": 1.987790384338442,
+        "bounds_ok_const_mu": true,
+        "dL_net_const_mu_nm": 41.69984845824104,
+        "drain_side_rel_error_const_mu": 119.13083350401871,
+        "drain_side_rel_error_lombardi_mu": 51.60677733684408,
+        "independent_dL_net_nm": 41.68190810581519,
+        "kappa_G": 3.820987613718328e+16,
+        "n_unknowns": 24438,
+        "network_residual_const_mu": 4.854644625737926e-16,
+        "network_vs_independent_rel_dL": 0.0004304110162209756,
+        "source_swapped_rel_const_mu": -5.662137425588298e-15,
+        "vg": 0.488174
+      },
+      {
+        "E_dwr": 0.10118491354757812,
+        "E_round": 0.10273806026276802,
+        "G_E": 2.05667591082238e-08,
+        "G_M": 2.299673951887582e-08,
+        "G_net_const_mu": 2.155546233417537e-08,
+        "abs_G_M_minus_G_E_over_max": 0.10566630146232178,
+        "bounds_ok_const_mu": true,
+        "dL_net_const_mu_nm": 47.32393320582645,
+        "drain_side_rel_error_const_mu": 0.0013511860115913432,
+        "drain_side_rel_error_lombardi_mu": 0.0022166547818669446,
+        "independent_dL_net_nm": 47.3943898097746,
+        "kappa_G": 2402294205403723.0,
+        "n_unknowns": 24438,
+        "network_residual_const_mu": 4.854594948537198e-16,
+        "network_vs_independent_rel_dL": 0.001486602195553978,
+        "source_swapped_rel_const_mu": 6.8833827526759706e-15,
+        "vg": 0.7835
+      }
+    ]
+  },
+  "generated_utc": "2026-11-01T07:41:24.378411+00:00",
+  "git_head": "e61a443f2ef4c492b63e8b2c9fa827bd3145a6fb",
+  "h_lin": {
+    "abs_error_max": 0.2415809231986955,
+    "abs_error_median": 0.19670121259769174,
+    "abs_error_min": 0.13335270338124217,
+    "all_underestimate": true,
+    "corr_abs_error_log10_Binf_over_Blin": 0.869384894096963,
+    "corr_abs_error_log10_alpha": 0.8340406512851791,
+    "signed_error_max": -0.13335270338124217,
+    "signed_error_min": -0.2415809231986955
+  },
+  "h_q2d": {
+    "abs_error_max": 0.3512840500885954,
+    "abs_error_median": 0.218684759440532,
+    "abs_error_min": 0.12040326079809893,
+    "all_underestimate": true
+  },
+  "input_sha256": {
+    "results/phase3/C10/analysis/c10_result.json": "3c3ca80264976168bb86a70ec6c67524b487e7e955e505a831794180546366ee",
+    "results/phase3/C11/c11_eval.json": "f81f56602093e3d7792bb4f3c6deb2e43c5b4895d88c79304b92f697b50efe36",
+    "results/phase3/C11/devsim_check/e7_W_L1_lev0_VG0.488174_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json": "7b24ea343d847a54ed0c986d14380a1b2f5f5bd069d09c86e17e937fc1d36d7b",
+    "results/phase3/C11/devsim_check/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json": "7be5894a0e30e079e66e1e5b92710725b90aba8b3667a602f4b8b89daa3b64d2",
+    "results/phase3/C11/indep/fd2d_VG0.488174.json": "658cce43f9bc5bb4777b1ca28c0a78d1a2454d215f99f7e4d3068794b1446dcb",
+    "results/phase3/C11/indep/fd2d_VG0.783500.json": "013f2abf135561ae16745596572a0ac80909c49a867e026e03b02a1712b8030b"
+  },
+  "interpretation": {
+    "diagnostic": [
+      "The coupled small-signal G_E/G_M pair has large disagreement and large reported error estimates in the two deep-subthreshold checks.",
+      "The drain-side forward-current diagnostic is ill-conditioned while source-side and swapped currents agree to round-off."
+    ],
+    "established": [
+      "C11 archived rows show H-lin underestimates dL in all 24 states.",
+      "The independent finite-volume network and DEVSIM equilibrium network agree at the two archived states within the reported 0.25% scale."
+    ],
+    "hypothesis": "A conditioning-aware gate based on an equilibrium network plus an independent residual check could decide when coupled small-signal output is reportable; this is not yet a validated algorithm or a novelty claim."
+  },
+  "n_c11_states": 24,
+  "status": "EXPLORATORY_EVIDENCE_ONLY"
+}
