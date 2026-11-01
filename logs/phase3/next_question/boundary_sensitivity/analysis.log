@@ -1,0 +1,32 @@
+{
+  "status": "SPECIFICATION_SENSITIVITY_SMALL_IN_TESTED_WINDOW",
+  "specifications": {
+    "s0": "Potential=PsiLat",
+    "s1": "Potential=PsiLat+V_D"
+  },
+  "rows": [
+    {
+      "VG_V": 1.6,
+      "VD_V": 0.005,
+      "max_abs_G_relative_difference": 1.1217617796877022e-06,
+      "max_KCL_s0": 1.0728255230364276e-09,
+      "max_KCL_s1": 1.5298425685784058e-09,
+      "max_cross_spread_s0": 1.4415807819009565e-08,
+      "max_cross_spread_s1": 1.2548193285429592e-08,
+      "slope_s0": 2113.449640837015,
+      "slope_s1": 2113.4496411657424
+    },
+    {
+      "VG_V": 1.6,
+      "VD_V": 0.02,
+      "max_abs_G_relative_difference": 5.088884004189609e-06,
+      "max_KCL_s0": 1.0927626992498074e-10,
+      "max_KCL_s1": 3.470981447214957e-10,
+      "max_cross_spread_s0": 3.6343599570943933e-09,
+      "max_cross_spread_s1": 2.8500260221753808e-09,
+      "slope_s0": 2194.796994045776,
+      "slope_s1": 2194.7970007230365
+    }
+  ],
+  "interpretation": "The observed differences are below the tested current/conservation uncertainty scale; this does not select the physical specification or prove gauge equivalence."
+}
