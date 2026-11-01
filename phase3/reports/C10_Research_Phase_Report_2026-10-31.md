@@ -237,3 +237,15 @@ All verdicts above use the cancellation-free source-side value of the same physi
 - `results/phase3/C10/`: `runs/` (22 states with runner records), `netcheck/` (2 states and diagnostics), `ni_image/` (2 states);
 - `tail/` (tail fits of C-7, C-8 and C-9 states);
 - `analysis/`: `c10_result.json` and `c10_figure.png/.pdf`.
+
+---
+
+**Note added in C-11 (2026-10-31; post hoc).** Three statements of this report need correcting. See `phase3/reports/C11_Research_Phase_Report_2026-10-31.md` §3.
+
+1. **λ_fit excess over l₀.** This report attributes λ_fit > l₀ (by 2–10 %) to the soft depletion edge. That attribution is incorrect.
+   - The 1-D eigenproblem with Boltzmann holes gives λ within ≈ 1 % of l₀.
+   - The excess comes from the fit window (u < 0.5 V_T), which lies in a nonlinear, pre-asymptotic part of the tail.
+2. **Status of ΔL = λ_fit·Ein(B_fit/V_T).** The identity is descriptive, with window-fitted parameters. It is not the leading-order asymptotic law.
+3. **Predictability.** Two parameter-free predictors of ΔL (linear eigen-projection, and the classical quasi-2-D model) were tested in C-11. Both were rejected, with errors of −12 to −35 %.
+
+The C-10 numerical values themselves are independently confirmed to ≤ 0.25 % by a separate solver (C-11 §4).

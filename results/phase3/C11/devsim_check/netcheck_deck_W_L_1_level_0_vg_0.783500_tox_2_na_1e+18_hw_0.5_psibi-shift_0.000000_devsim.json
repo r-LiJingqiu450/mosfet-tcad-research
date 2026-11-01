@@ -1,0 +1,47 @@
+{
+ "argv": [
+  "--deck",
+  "W",
+  "--L",
+  "1",
+  "--level",
+  "0",
+  "--vg",
+  "0.783500",
+  "--tox",
+  "2",
+  "--na",
+  "1e+18",
+  "--hw",
+  "0.5",
+  "--psibi-shift",
+  "0.000000",
+  "--devsim",
+  "--out",
+  "results/phase3/C11/devsim_check"
+ ],
+ "networks": [
+  "const_mu",
+  "lombardi_mu"
+ ],
+ "diag": [
+  {
+   "G_drain_side_forward": 2.1584587773354695e-08,
+   "G_source_side_forward": 2.155546233417537e-08,
+   "G_near_zero_side_swapped": 2.1555462334175222e-08,
+   "rel_src_vs_swapped": 6.8833827526759706e-15,
+   "rel_drainside_error": 0.0013511860115913432,
+   "res": 4.854594948537198e-16,
+   "res_swapped": 6.47279326471901e-16
+  },
+  {
+   "G_drain_side_forward": 9.686741553114785e-09,
+   "G_source_side_forward": 9.665316882229533e-09,
+   "G_near_zero_side_swapped": 9.665316882229845e-09,
+   "rel_src_vs_swapped": -3.2307490016592055e-14,
+   "rel_drainside_error": 0.0022166547818669446,
+   "res": 6.472976829741268e-16,
+   "res_swapped": 6.472976829744012e-16
+  }
+ ]
+}

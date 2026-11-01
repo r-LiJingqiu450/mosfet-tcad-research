@@ -303,3 +303,32 @@ The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C
 | P10-6 (FS93 eq. 9) | Rejected, ΔL/x_s = 1.33–3.41 |
 
 **E10-1:** use the source-side network current. The drain-side value `dL_net_nm` in endprobe output is invalid in deep subthreshold. In C-7 to C-9 its effect is ≤ 3e-4 relative.
+
+## C-11 (predictability of the subthreshold end correction; independent solver check), 2026-10-31
+
+**Branch:** `phase3/C11-connection-coefficient-2026-10-31`, from `da913b5`.
+
+**Documents:**
+- Report: `phase3/reports/C11_Research_Phase_Report_2026-10-31.md`.
+- Pre-registration: `phase3/specs/C11_Preregistration_2026-10-31.md`, commit `d34f58a`.
+
+**Code** (`phase3/c11/`):
+
+| File | Purpose |
+|---|---|
+| `bpredict.py` | Linear eigen-projection predictor |
+| `c11_eval.py` | Evaluates both predictors on the 24 C-10 deep-subthreshold states |
+| `fd2d_indep.py` | Independent finite-volume 2-D solver |
+| `c11_figures.py` | Figure |
+
+**Commands:**
+- `python phase3/c11/c11_eval.py` (system Python 3 or venv) writes `results/phase3/C11/c11_eval.json`.
+- `python phase3/c11/fd2d_indep.py --na 1e18 --tox 2 --vg 0.488174 --hw 0.5 --L 1 --out <json>` takes about 1 min.
+- DEVSIM coupled check: `phase3/c10/probe10.py ... --devsim`.
+
+**Results:**
+- H-lin and H-q2D are both REJECTED, with errors of −12 to −35 %.
+- The independent solver confirms the C-10 values to ≤ 0.25 %.
+- DEVSIM's coupled small-signal solve fails in deep subthreshold, and its own error estimator flags the failure.
+
+**Decision:** close the bulk end-correction line as a publication direction. Next candidate: undoped double-gate or gate-all-around bodies (linear electrostatics), gated by a literature check.
