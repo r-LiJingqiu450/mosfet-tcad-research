@@ -56,4 +56,4 @@ DEVSIM_MATH_LIBS=/tmp/devsim-libs/libblas.so:/tmp/devsim-libs/liblapack.so \
 python3 phase3/exploration/conditioned_small_signal_audit.py
 ```
 
-两次测试的实际日志位于：`/workspace/c12_restore_backup/evidence/c12_phase3_tests.log` 与 `/workspace/c12_restore_backup/evidence/c12_phase3_tests_devsim.log`。
+两次测试的实际日志位于：`results/phase3/exploration/logs/c12_phase3_tests_main.log` 与 `results/phase3/exploration/logs/c12_phase3_tests_devsim.log`。

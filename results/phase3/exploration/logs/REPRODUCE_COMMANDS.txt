@@ -1,0 +1,10 @@
+# Phase 3 conditioned small-signal exploration checkpoint
+# Run from the restored C12 checkout.
+/workspace/mosfet-tcad-research/.venv/bin/python -m pytest phase3/tests -q -rA
+# Expected current environment result: 71 passed, 6 skipped (DEVSIM unavailable in this venv).
+DEVSIM_MATH_LIBS=/tmp/devsim-libs/libblas.so:/tmp/devsim-libs/liblapack.so \
+  LD_LIBRARY_PATH=/tmp/devsim-libs \
+  /workspace/mosfet-tcad-research/.venv-devsim/bin/python -m pytest phase3/tests -q -rA
+# Expected current environment result: 77 passed, 0 skipped.
+/workspace/mosfet-tcad-research/.venv/bin/python phase3/exploration/conditioned_small_signal_audit.py
+MPLCONFIGDIR=/tmp/mplconfig /workspace/mosfet-tcad-research/.venv/bin/python phase3/exploration/plot_conditioned_small_signal.py
