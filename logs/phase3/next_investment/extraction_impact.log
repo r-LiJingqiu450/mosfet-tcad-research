@@ -1,0 +1,60 @@
+{
+  "fits": [
+    {
+      "VG_V": 1.0,
+      "n_lengths": 3,
+      "lengths_um": [
+        2.0,
+        4.0,
+        8.0
+      ],
+      "DeltaL_fit_nm": 369.86500789589405,
+      "sigma_inf_S": 1.350136385550499e-06,
+      "max_relative_fit_residual": 3.706874012122014e-06,
+      "rms_relative_fit_residual": 2.4808752415482515e-06
+    },
+    {
+      "VG_V": 1.25,
+      "n_lengths": 3,
+      "lengths_um": [
+        2.0,
+        4.0,
+        8.0
+      ],
+      "DeltaL_fit_nm": 153.68629554169507,
+      "sigma_inf_S": 3.475263840287631e-05,
+      "max_relative_fit_residual": 9.409424801118505e-08,
+      "rms_relative_fit_residual": 6.619797705598471e-08
+    },
+    {
+      "VG_V": 2.0,
+      "n_lengths": 3,
+      "lengths_um": [
+        2.0,
+        4.0,
+        8.0
+      ],
+      "DeltaL_fit_nm": 53.384791027583006,
+      "sigma_inf_S": 0.0001939516447646379,
+      "max_relative_fit_residual": 5.767548541556673e-09,
+      "rms_relative_fit_residual": 4.1409408156342684e-09
+    }
+  ],
+  "well_depth_comparison": {
+    "states": [
+      {
+        "hw_um": 0.5,
+        "dL_net_nm": 153.34878901006545,
+        "G_net_S_per_cm": 0.20523584709007991
+      },
+      {
+        "hw_um": 1.0,
+        "dL_net_nm": 155.63845675288792,
+        "G_net_S_per_cm": 0.2057923875644292
+      }
+    ],
+    "delta_dL_nm": 2.2896677428224734,
+    "relative_dL_change_pct_of_deeper": 1.4711452365901128,
+    "relative_conductance_change_pct_of_shallow": 0.27117118292936687
+  }
+}
