@@ -332,3 +332,38 @@ The states come from `phase3/c7/endprobe.py`; job lists are in `results/phase3/C
 - DEVSIM's coupled small-signal solve fails in deep subthreshold, and its own error estimator flags the failure.
 
 **Decision:** close the bulk end-correction line as a publication direction. Next candidate: undoped double-gate or gate-all-around bodies (linear electrostatics), gated by a literature check.
+
+## C-12 (literature assessment: multi-gate short-channel theory and the end correction), 2026-11-01
+
+**Branch:** `phase3/C12-multigate-literature-2026-11-01`, from C-11 `ee2f5f3`.
+
+**Documents:**
+- Assessment (eight-point decision): `phase3/reports/C12_MultiGate_Literature_Assessment_2026-11-01.md`.
+- Mathematical notes: `phase3/reports/C12_Mathematical_Notes_2026-11-01.md`.
+- References: `phase3/reports/C12_references.bib`.
+- A note has been appended to the C-11 report.
+
+**Code** (`phase3/c12/`):
+
+| File | Purpose |
+|---|---|
+| `lt_endcorr.py` | Identities and end-correction integrals in the Liang–Taur model (K1–K7, K9) |
+| `lt_vt_rolloff.py` | V_t roll-off decomposition and rows/slice bounds (K8) |
+
+**Tests:** `phase3/tests/test_c12_lt_identities.py` (18).
+
+**Commands:**
+- `python -m phase3.c12.lt_endcorr`
+- `python -m phase3.c12.lt_vt_rolloff`
+
+Both run in seconds and write to `results/phase3/C12/`.
+
+**Findings:**
+- The multi-gate end correction is a special case of Liang–Taur 2004, eqs. (13) + (16). The C-11 double-gate test is withdrawn.
+- The dissertation reproduces the paper. It does not correct its physics.
+- The transport approximation of eq. (16) is rigorously bounded: I_rows/I_slice ≥ 0.9948 at t_si = 10 nm.
+- In the Liang–Taur model, the long-channel constant-current V_t roll-off **equals** the end-correction term, up to a remainder second order in the barrier lowering (O1).
+
+**Decision:**
+- The end-correction programme is closed as the main publication line.
+- O1 is conditional on a literature gate: the Xie–Xu–Taur 2010–2013 papers, the Taur–Ning appendix, Yu et al. 2009, and compact short-channel models. The user would need to supply these PDFs.

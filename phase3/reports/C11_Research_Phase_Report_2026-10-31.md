@@ -189,3 +189,14 @@ Under these assumptions:
 - The C-10 soft-edge attribution corrected.
 - A bug in the new independent code's rows bound, found and fixed before recording.
 - The device-1 far-tail fits are invalid (contaminated by the opposite tail) and were not used.
+
+---
+
+## Note added in C-12 (2026-11-01)
+
+Reading the Liang–Taur paper and the Liang dissertation at equation level (see `C12_MultiGate_Literature_Assessment_2026-11-01.md`) changes two statements in §7:
+
+1. **§7.6, novelty of the λ·Ein form.** For undoped double-gate bodies, the zero-bias end correction follows directly from Liang & Taur, IEEE T-ED 51(8) 2004, eq. (16) with eq. (13): ΔL = (λ₁/π)·F(b₁/V_T, s). The pure Ein form is its thin-film limit. A difference of notation does not make it new, so **the remaining novelty claim for the λ·Ein structure is withdrawn.** In bulk it stays a descriptive identity (C-10, C-11).
+2. **§7.8, the recommended double-gate test is withdrawn.** It would have re-validated the 2004 model in its most accurate regime. Also, the pure-Ein predictor differs from Liang–Taur's own finite-thickness formula by +2 to +7 %.
+
+All C-11 numerical results stand as recorded.
