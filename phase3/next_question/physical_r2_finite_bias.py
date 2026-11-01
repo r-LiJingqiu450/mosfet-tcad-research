@@ -125,11 +125,13 @@ def main():
     p.add_argument("--ov", type=float, default=0.0)
     p.add_argument("--lw", type=float, default=0.30)
     p.add_argument("--hw", type=float, default=0.50)
+    p.add_argument("--s-couple", type=float, default=0.0,
+                   help="electrostatic drain-contact shift per V_D (0 or 1 are diagnostic specifications)")
     p.add_argument("--out", required=True)
     a = p.parse_args()
     os.makedirs(a.out, exist_ok=True)
     rec = {"version": "physical-r2-finite-bias-2026-11-01", "start_utc": now(),
-           "args": vars(a), "model": "R-II resolved n+ wells; s_couple=0",
+           "args": vars(a), "model": f"R-II resolved n+ wells; s_couple={a.s_couple:g}",
            "units": {"length": "um/nm input, cm internal", "current": "A/cm", "V": "V"}}
     t0 = time.time()
     EP.set_bulk(a.na)
@@ -146,6 +148,7 @@ def main():
     sol0, eq = EP.equilibrium(geo, aa)
     rec["equilibrium"] = eq
     rec["equilibrium_psi_s_V"] = float(sol0["psi_s_V"] if isinstance(sol0, dict) and "psi_s_V" in sol0 else np.nan)
+    ds.set_parameter(device=D.DEV, name="s_couple", value=float(a.s_couple))
     rec["finite_states"] = []
     for vd in a.vd:
         rec["finite_states"].append(finite_state(geo, float(vd)))
