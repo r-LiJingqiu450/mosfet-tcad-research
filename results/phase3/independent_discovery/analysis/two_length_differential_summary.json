@@ -1,0 +1,93 @@
+{
+  "configuration": {
+    "N_A_cm-3": 1e+18,
+    "bias": "V_D -> 0; V_G in {1.32, 1.60, 2.00} V",
+    "deck": "R",
+    "lateral_grading_sigma_nm": 15.0,
+    "level": 0,
+    "mobility": "constant mu=1350 cm^2/(V s)",
+    "tox_nm": 2.0
+  },
+  "failed_or_unseen_limits": [
+    "L=0.5 um is not evaluated here because the inherited endprobe lateral mesh asserts L>0.7 um; the failed invocation is preserved in the log.",
+    "No finite-drain-bias, transient, quantum, or Fermi-Dirac claim is made."
+  ],
+  "generated_utc": "2026-11-01T11:21:36.823661+00:00",
+  "git_head": "35285d54ebb631f41bf13cf95b50684304ad16e2",
+  "identity": {
+    "charge": "Q_e(L)=q*(N_inf*L+2E)",
+    "conductance": "G(L)=sigma_inf/(L-2 DeltaL)",
+    "estimator": "mu=[d(1/G)/dL]^-1/[dQ_e/dL]",
+    "scope": "conditional on affine zero-bias response and the stated charge definition; not an independent physical law"
+  },
+  "input_sha256": {
+    "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG1.32_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "65ec18ba46ef53c494272e6d66890ad6185efd2b5c6b17a971c135b8dbbd9a91",
+    "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG1.6_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "b3b9ff258aca0385b199a44087fc88aec2479ee2eccb48d2912de7e480728d6b",
+    "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG2_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "0bd10f444ec7f40493515a58fe8de379a9cf5441c2c04eea16c27bffc9682eee",
+    "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG1.32_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "515ed1725899c9902f8929ff353a220f17b55ddc7bbba9b8c42dc9c09d287bc0",
+    "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG1.6_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "17a2b5ae685a66f0c85022d1923eb9969d3317f8ef1c6fc284f5c9699067fc76",
+    "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG2_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json": "16af6c9774e0533f100a1ec059ca1e96394dbb4b37eed0d824310202ed36d872"
+  },
+  "max_abs_dL_pair_difference_nm": 8.706933570579167e-06,
+  "max_abs_relative_error": 1.7413874120464357e-08,
+  "rows": [
+    {
+      "G_L1_S_per_cm": 0.3333986389194346,
+      "G_L2_S_per_cm": 0.16104961259098702,
+      "L1_um": 1.0,
+      "L2_um": 2.0,
+      "Qe_L1_C_per_cm": 3.078034382537683e-12,
+      "Qe_L2_C_per_cm": 5.3857426810943436e-12,
+      "VG_V": 1.32,
+      "abs_dL_pair_difference_nm": 8.706933570579167e-06,
+      "dL_L1_nm": 32.780605651437206,
+      "dL_L2_nm": 32.780596944503635,
+      "dQe_dL_C_per_cm2": 2.3077082985566604e-08,
+      "d_invG_dL_cm_per_S_per_cm": 32098.54356823165,
+      "mu_reference_cm2_Vs": 1350.0,
+      "mu_two_length_cm2_Vs": 1349.99997649127,
+      "relative_error_vs_reference": -1.7413874120464357e-08,
+      "source_L1": "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG1.32_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json",
+      "source_L2": "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG1.32_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json"
+    },
+    {
+      "G_L1_S_per_cm": 4.744941320667396,
+      "G_L2_S_per_cm": 2.3837678307614723,
+      "L1_um": 1.0,
+      "L2_um": 2.0,
+      "Qe_L1_C_per_cm": 3.670395159022837e-11,
+      "Qe_L2_C_per_cm": 7.218799777886374e-11,
+      "VG_V": 1.6,
+      "abs_dL_pair_difference_nm": 2.634405359636105e-06,
+      "dL_L1_nm": -4.784560201053002,
+      "dL_L2_nm": -4.784562835458361,
+      "dQe_dL_C_per_cm2": 3.5484046188635364e-07,
+      "d_invG_dL_cm_per_S_per_cm": 2087.531790218449,
+      "mu_reference_cm2_Vs": 1350.0,
+      "mu_two_length_cm2_Vs": 1349.99999288711,
+      "relative_error_vs_reference": -5.268807390379493e-09,
+      "source_L1": "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG1.6_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json",
+      "source_L2": "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG1.6_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json"
+    },
+    {
+      "G_L1_S_per_cm": 12.430903921078981,
+      "G_L2_S_per_cm": 6.41956187373272,
+      "L1_um": 1.0,
+      "L2_um": 2.0,
+      "Qe_L1_C_per_cm": 9.959603870922803e-11,
+      "Qe_L2_C_per_cm": 1.9792985424557226e-10,
+      "VG_V": 2.0,
+      "abs_dL_pair_difference_nm": 8.36488879940589e-07,
+      "dL_L1_nm": -33.95413485965704,
+      "dL_L2_nm": -33.95413569614592,
+      "dQe_dL_C_per_cm2": 9.833381553634421e-07,
+      "d_invG_dL_cm_per_S_per_cm": 753.2919758475194,
+      "mu_reference_cm2_Vs": 1350.0,
+      "mu_two_length_cm2_Vs": 1349.999997741482,
+      "relative_error_vs_reference": -1.6729763130385322e-09,
+      "source_L1": "results/phase3/independent_discovery/graded_probe/e7_R_L1_lev0_VG2_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json",
+      "source_L2": "results/phase3/independent_discovery/graded_probe/e7_R_L2_lev0_VG2_tox2_NA1e+18_hw0.5_ov0_sg15_dpsi0.json"
+    }
+  ],
+  "status": "PASS_WITHIN_ZERO_BIAS_MODEL_ASSUMPTIONS"
+}

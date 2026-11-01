@@ -1,0 +1,2 @@
+Command: DEVSIM_MATH_LIBS=/tmp/devsim-libs/libblas.so:/tmp/devsim-libs/liblapack.so LD_LIBRARY_PATH=/tmp/devsim-libs /workspace/mosfet-tcad-research/.venv-devsim/bin/python phase3/c7/endprobe.py --deck R --L {1,2} --level 0 --vg {1.32,1.6,2.0} --tox 2 --na 1e18 --hw 0.5 --sigma 15 --out results/phase3/independent_discovery/graded_probe
+Observed: six runs, exit code 0; all equilibrium/Newton diagnostics finite; results are new lateral-grading test.

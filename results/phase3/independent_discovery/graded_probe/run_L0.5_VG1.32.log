@@ -1,0 +1,17 @@
+Searching DEVSIM_MATH_LIBS="/tmp/devsim-libs/libblas.so:/tmp/devsim-libs/liblapack.so"
+Loading "/tmp/devsim-libs/libblas.so": MISSING SYMBOLS
+Loading "/tmp/devsim-libs/liblapack.so": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Traceback (most recent call last):
+  File "/workspace/c12_restore_backup/restored/phase3/c7/endprobe.py", line 392, in <module>
+    main()
+  File "/workspace/c12_restore_backup/restored/phase3/c7/endprobe.py", line 371, in main
+    geo = Geo(a)
+          ^^^^^^
+  File "/workspace/c12_restore_backup/restored/phase3/c7/endprobe.py", line 80, in __init__
+    core = WP.lateral_map(a.L).nodes(a.level)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/c12_restore_backup/restored/phase3/c6/wprobe.py", line 70, in lateral_map
+    assert L > 2 * a
+           ^^^^^^^^^
+AssertionError
