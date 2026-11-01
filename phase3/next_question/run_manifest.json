@@ -27,6 +27,11 @@
       "command": "DEVSIM_MATH_LIBS='libblas.so.3:liblapack.so.3' .venv-devsim/bin/python scripts/phase3_package_b/test_parameterized.py",
       "exit_code": 0,
       "result": "parameterized_default_regression: PASS"
+    },
+    {
+      "command": "DEVSIM_MATH_LIBS='libblas.so.3:liblapack.so.3' .venv-devsim/bin/python -u phase3/next_question/physical_r2_finite_bias.py --s-couple 1",
+      "scope": "R-II boundary specification sensitivity; VG=1.60 V; VD=5,20 mV; L=1,2,4 um",
+      "exit_code": 0
     }
   ],
   "official_and_candidate_sha256": {
@@ -44,5 +49,6 @@
   },
   "scientific_status": "MORE_EVIDENCE_NEEDED",
   "production_solver_modified": false,
-  "official_golden_modified": false
+  "official_golden_modified": false,
+  "latest_checkpoint_commit": "aff785a1fd1b3e04eae766c16ec065e5314b26ba"
 }
