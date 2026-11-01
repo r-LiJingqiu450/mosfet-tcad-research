@@ -1,0 +1,48 @@
+{
+  "generated_utc": "2026-11-01T12:33:40Z",
+  "branch": "phase3/next-scientific-question-2026-11-01",
+  "base_commit": "2ff93555f2013b33b1d03d4d4eefe89e97a02284",
+  "commands": [
+    {
+      "command": "DEVSIM_MATH_LIBS='libblas.so.3:liblapack.so.3' .venv-devsim/bin/python -u phase3/next_question/physical_r2_finite_bias.py",
+      "scope": "R-II L=1,2,4 um; VG=1.32,1.60 V; VD 0.1,1,5,20 mV where applicable",
+      "exit_code": 0
+    },
+    {
+      "command": "MPLCONFIGDIR=/tmp/mplconfig .venv/bin/python -m pytest semiconductor_sim phase3/tests -q",
+      "exit_code": 0,
+      "result": "165 passed, 10 skipped, 4 warnings"
+    },
+    {
+      "command": "DEVSIM_MATH_LIBS='libblas.so.3:liblapack.so.3' .venv-devsim/bin/python -m pytest semiconductor_sim phase3/tests -q",
+      "exit_code": 0,
+      "result": "171 passed, 4 skipped, 4 warnings"
+    },
+    {
+      "command": "python phase3/next_question/analyze_physical_r2.py",
+      "exit_code": 0,
+      "result": "7 finite-bias rows; exploratory conditional evidence"
+    },
+    {
+      "command": "DEVSIM_MATH_LIBS='libblas.so.3:liblapack.so.3' .venv-devsim/bin/python scripts/phase3_package_b/test_parameterized.py",
+      "exit_code": 0,
+      "result": "parameterized_default_regression: PASS"
+    }
+  ],
+  "official_and_candidate_sha256": {
+    "semiconductor_sim/results/golden/stage3.json": "17ca32745b69c34355113347eb0f51f95772cf8a76f76b1decdd85925ef67828",
+    "verification/candidates/phase2b_v1_0/stage1.json": "93244365320f005eb61ae242f5416cbb4cf9a9af92b1e63917370e336adc0bd0",
+    "verification/candidates/phase2b_v1_0/stage2.json": "7883dfdd80fe5fc3b768ed3e21088f6b212682dd74048c033a935dd1162afeac"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "pytest": "9.1.1",
+    "devsim": "2.11.2"
+  },
+  "scientific_status": "MORE_EVIDENCE_NEEDED",
+  "production_solver_modified": false,
+  "official_golden_modified": false
+}
