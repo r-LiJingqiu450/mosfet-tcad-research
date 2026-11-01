@@ -52,7 +52,10 @@ transient conditions, or with quantum/Fermi–Dirac corrections.
 
 ## New falsifiable test
 
-Before evaluating the new files, the prediction was fixed: for a resolved
+The prediction criterion was selected before post-processing the new files, but
+no separate pre-registration commit was made before the DEVSIM runs. This is
+therefore exploratory evidence with a falsifiable criterion, not a registered
+confirmation. For a resolved
 source/drain deck with lateral erfc grading (`σ = 15 nm`), `N_A = 10^18 cm⁻³`,
 `t_ox = 2 nm`, level 0, constant `μ = 1350 cm²/(V s)`, and `L = 1, 2 µm`,
 the two-length estimator should recover 1350 cm²/(V s) across `V_G = 1.32,
