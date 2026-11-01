@@ -1,0 +1,103 @@
+{
+  "specification": {
+    "NA_cm^-3": 1e+16,
+    "tox_nm": 20.0,
+    "L_um": 2.0,
+    "VG_V": 1.25,
+    "level": 0,
+    "mobility_cm2_per_Vs": 1350.0,
+    "depths_um": [
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "W_dep_um": 0.3039293463019119
+  },
+  "rows": [
+    {
+      "source_json": "results/phase3/direction_reset/well_depth/well_depth_L2_lev0_VG1.25_hw0.1.json",
+      "hw_um": 0.1,
+      "W_dep_um": 0.3039293463019119,
+      "h_over_Wdep": 0.3290238379964263,
+      "dL_net_nm": 98.69307609799027,
+      "G_net_S_per_cm": 0.19279023974377196,
+      "net_rel_residual": 3.78273788979656e-15,
+      "kcl_rel": 3.3178770692765075e-08,
+      "G_GCA_S_per_cm": 0.17376317794179008,
+      "iterations": 14,
+      "converged": true,
+      "wall_s": 41.76120376586914,
+      "successive_dL_rel_change": NaN,
+      "successive_G_rel_change": NaN
+    },
+    {
+      "source_json": "results/phase3/direction_reset/well_depth/well_depth_L2_lev0_VG1.25_hw0.25.json",
+      "hw_um": 0.25,
+      "W_dep_um": 0.3039293463019119,
+      "h_over_Wdep": 0.8225595949910658,
+      "dL_net_nm": 137.22893667520665,
+      "G_net_S_per_cm": 0.20140126002752368,
+      "net_rel_residual": 2.963698181763181e-13,
+      "kcl_rel": 1.3314692991151191e-08,
+      "G_GCA_S_per_cm": 0.1737631792688998,
+      "iterations": 17,
+      "converged": true,
+      "wall_s": 48.32092499732971,
+      "successive_dL_rel_change": 0.28081439316565593,
+      "successive_G_rel_change": 0.042755543250200735
+    },
+    {
+      "source_json": "results/phase3/direction_reset/well_depth/well_depth_L2_lev0_VG1.25_hw0.5.json",
+      "hw_um": 0.5,
+      "W_dep_um": 0.3039293463019119,
+      "h_over_Wdep": 1.6451191899821316,
+      "dL_net_nm": 153.34878901006545,
+      "G_net_S_per_cm": 0.20523584709007991,
+      "net_rel_residual": 6.437570141330465e-14,
+      "kcl_rel": 1.925341109327195e-08,
+      "G_GCA_S_per_cm": 0.1737631784773612,
+      "iterations": 18,
+      "converged": true,
+      "wall_s": 50.07473540306091,
+      "successive_dL_rel_change": 0.10511887598799834,
+      "successive_G_rel_change": 0.018683807516691773
+    },
+    {
+      "source_json": "results/phase3/direction_reset/well_depth/well_depth_L2_lev0_VG1.25_hw1.json",
+      "hw_um": 1.0,
+      "W_dep_um": 0.3039293463019119,
+      "h_over_Wdep": 3.290238379964263,
+      "dL_net_nm": 155.63845675288792,
+      "G_net_S_per_cm": 0.2057923875644292,
+      "net_rel_residual": 4.3582422667215696e-14,
+      "kcl_rel": 3.3166356691826245e-08,
+      "G_GCA_S_per_cm": 0.17376317795240923,
+      "iterations": 18,
+      "converged": true,
+      "wall_s": 47.9493510723114,
+      "successive_dL_rel_change": 0.014711452365901129,
+      "successive_G_rel_change": 0.0027043783345729222
+    }
+  ],
+  "cross_check": {
+    "source_json": "results/phase3/direction_reset/well_depth_devsim/well_depth_L2_lev0_VG1.25_hw1.json",
+    "hw_um": 1.0,
+    "G_network_S_per_cm": 0.2057923875644292,
+    "G_devsim_E_S_per_cm": 0.20579232307998246,
+    "G_devsim_M_S_per_cm": 0.20579245631365636,
+    "network_vs_devsim_E_rel": 3.1334709456446384e-07,
+    "network_vs_devsim_M_rel": 3.34070798176323e-07,
+    "devsim_condition_number_proxy": 34582387878.37111,
+    "devsim_E_dwr": 3.5677246943026854e-07,
+    "devsim_E_round": 5.524964279750056e-08
+  },
+  "acceptance": {
+    "criterion": "successive |dL(h)-dL(previous)|/|dL(h)| <= 0.01 once h/W_dep >= 3, and network residual < 1e-10",
+    "tested_pair": "0.50 -> 1.00 um",
+    "dL_relative_change_at_h_over_Wdep_3": 0.014711452365901129,
+    "network_residual_at_h_over_Wdep_3": 4.3582422667215696e-14,
+    "saturation_pass": false
+  },
+  "interpretation": "The fixed specification shows monotone approach to saturation but fails the preregistered 1% criterion at 3.29 W_dep; a semi-infinite replacement is therefore not established by this test."
+}
