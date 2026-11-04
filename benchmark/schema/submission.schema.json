@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mosfet-lowcurrent-benchmark/submission.schema.json",
+  "title": "Benchmark submission",
+  "type": "object",
+  "required": ["submission", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "submission": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "code": {"type": "string"},
+        "current_evaluation": {"type": "string", "description": "How the contact current was evaluated (e.g. drain-side flux sum, weighting function, coupled small-signal)"},
+        "notes": {"type": "string"}
+      }
+    },
+    "results": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["same_mesh"],
+        "additionalProperties": false,
+        "properties": {
+          "G0_S_per_cm": {"type": "number"},
+          "dL_nm": {"type": "number"},
+          "same_mesh": {"type": "boolean", "description": "true only if computed on the identical mesh and discrete network as the case reference"},
+          "label": {"type": "string"}
+        },
+        "anyOf": [{"required": ["G0_S_per_cm"]}, {"required": ["dL_nm"]}]
+      }
+    }
+  }
+}

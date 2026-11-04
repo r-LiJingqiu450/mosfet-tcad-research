@@ -1,0 +1,54 @@
+{
+ "results": [
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.488174_lev0",
+   "checks": [
+    {
+     "check": "tolerance_dL",
+     "error_nm": -0.017940352425853234,
+     "passed": true,
+     "tol_nm": 0.03588072867309666
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "tolerance_dL",
+     "error_nm": 0.07085137751789006,
+     "passed": true,
+     "tol_nm": 0.14170280651848194
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "tolerance_dL",
+     "error_nm": 0.07045660394815201,
+     "passed": true,
+     "tol_nm": 0.14091322404838888
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-W"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "source-side network current on its own mesh",
+  "name": "independent finite-volume solver (phase3/c11/fd2d_indep.py)"
+ },
+ "summary": {
+  "pass": 3
+ },
+ "validation": "ok"
+}

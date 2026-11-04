@@ -1,0 +1,161 @@
+{
+ "cross_paths": [],
+ "deck": "R",
+ "device": {
+  "bias": {
+   "V_D_V": [
+    0.0001,
+    0.005,
+    0.02
+   ],
+   "V_G_V": 1.32,
+   "V_S_V": 0.0
+  },
+  "contacts": {
+   "body": "Si bottom y = 1.2 um: psi = psi_b0; zero normal electron flux (no electron contact equation)",
+   "drain": "ohmic, far edge x = L + l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) + s_couple * V_D; phi_n = V_D",
+   "faces_below_well": "far edges for y > h_w: homogeneous Neumann for psi and zero normal electron flux",
+   "gate": "oxide top y = -t_ox: psi = V_G + psi_b0",
+   "oxide_sides": "homogeneous Neumann, except the two Si/SiO2 triple points at the source/drain faces, whose potential is tied to the adjacent silicon Dirichlet value",
+   "oxide_top_outside_gate": "homogeneous Neumann",
+   "s_couple": 0.0,
+   "s_couple_note": "s_couple = 0 keeps the drain-contact psi at its equilibrium value when V_D is applied (non-standard); s_couple = 1 shifts it by V_D (standard ohmic contact)",
+   "source": "ohmic, far edge x = -l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) (charge-neutral value); phi_n = 0"
+  },
+  "doping": {
+   "N_A_cm3": 1e+18,
+   "N_D_cm3": 1e+20,
+   "profile": "lateral erfc: N_D(x, y) = 1e20 * [0.5 erfc((x - x_c)/(sqrt(2) sigma)) + 0.5 erfc(((L - x) - x_c)/(sqrt(2) sigma))] * [y <= h_w], x_c = -sqrt(2) sigma erfcinv(2 N_A / N_D), so that N_D = N_A (metallurgical junction) at x = 0 and x = L",
+   "sigma_nm": 15.0,
+   "vertical": "box: donors only for 0 <= y <= h_w (realized mesh line)"
+  },
+  "geometry": {
+   "L_um": 2.0,
+   "coordinates": "x along the channel (source side first), y depth into Si (y = 0 at Si/SiO2 interface, oxide at -t_ox <= y <= 0)",
+   "gate_overlap_nm": 0.0,
+   "gate_x_range_um": [
+    -0.0,
+    2.0
+   ],
+   "h_w_um_realized": 0.5033626815989592,
+   "h_w_um_requested": 0.5,
+   "l_w_um": 0.3,
+   "si_depth_um": 1.2,
+   "si_x_range_um": [
+    -0.3,
+    2.3
+   ],
+   "t_ox_nm": 2.0
+  },
+  "physics": {
+   "T_K": 300.0,
+   "V_T_V": 0.025851999786435535,
+   "eps_ox_rel": 3.9,
+   "eps_si_rel": 11.7,
+   "gate_convention": "gate contact psi_gate = V_G + psi_b0 (V_FB = 0; no work-function difference, no oxide charge)",
+   "generation_recombination": "none",
+   "holes": "not solved; equilibrium p = n_i exp(-psi/V_T) everywhere (hole quasi-Fermi level 0 V)",
+   "mobility": "constant mu_n (field-independent); zero-bias network edge conductance c_e = q mu_n EdgeCouple EIL n0 B(Delta)",
+   "mu_n_cm2_per_Vs": 1350.0,
+   "n_i_cm3": 10000000000.0,
+   "oxide": "SiO2, no fixed or trapped charge, no carriers",
+   "psi_b0_V": -0.4762114346586538,
+   "psi_reference": "intrinsic Fermi level (psi = 0 at n = p = n_i)",
+   "statistics": "Boltzmann (n = n_i exp((psi - phi_n)/V_T))",
+   "units": "2-D simulation; currents in A/cm and conductances in S/cm per unit device width"
+  }
+ },
+ "family": "finite_bias_dd",
+ "id": "C__R2fb_L2_NA1e18_tox2_hw0.5_sg15_VG1.32_s0_lev0",
+ "known_bad_outputs": [],
+ "mesh": {
+  "dx_max_nm": 19.904390203496146,
+  "dx_min_nm": 0.5000000000000001,
+  "generator": "phase3/next_question/physical_r2_finite_bias.py (tensor-product node lines, each rectangle split into two triangles; refinement factor sqrt(2) per level)",
+  "level": 0,
+  "max_adjacent_ratio": 1.0692777377613738,
+  "n_depth_si": 79,
+  "n_lateral": 311,
+  "n_ox": 6,
+  "nx": 311,
+  "ny": 84
+ },
+ "notes": [
+  "Finite-bias drift-diffusion stress case; not a reference. Rows from several files are merged by V_D; duplicated V_D values are cross-checked (max relative I_drain difference recorded in the WP1 report)."
+ ],
+ "observables": {
+  "definition": "full drift-diffusion at finite V_D with Newton continuation from zero; I_drain/I_source are terminal sums, I_circuit the circuit-node current",
+  "finite_states": [
+   {
+    "G_eff_S_per_cm": 0.16083646631581866,
+    "I_circuit_A_per_cm": 1.6083646631581866e-05,
+    "I_drain_A_per_cm": 1.6083649252635553e-05,
+    "I_source_A_per_cm": -1.6083649802637772e-05,
+    "V_D_V": 0.0001,
+    "also_in": [
+     "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32_VD0p1_5_20mV.json"
+    ],
+    "cross_section_abs_spread_rel": 5.55093519085086e-06,
+    "kcl_rel": 3.419635749946545e-08,
+    "source": "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32.json",
+    "terminal_vs_circuit_rel": 1.629638675624055e-07
+   },
+   {
+    "G_eff_S_per_cm": 0.15070888026656148,
+    "I_circuit_A_per_cm": 0.0007535444013328075,
+    "I_drain_A_per_cm": 0.0007535444026549375,
+    "I_source_A_per_cm": -0.0007535444027576991,
+    "V_D_V": 0.005,
+    "also_in": [
+     "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32_VD0p1_5_20mV.json"
+    ],
+    "cross_section_abs_spread_rel": 8.898893257969858e-08,
+    "kcl_rel": 1.3637107160251564e-10,
+    "source": "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32.json",
+    "terminal_vs_circuit_rel": 1.7545482513287614e-09
+   },
+   {
+    "G_eff_S_per_cm": 0.12348573040316245,
+    "I_circuit_A_per_cm": 0.002469714608063249,
+    "I_drain_A_per_cm": 0.0024697146074778792,
+    "I_source_A_per_cm": -0.002469714610716563,
+    "V_D_V": 0.02,
+    "also_in": [
+     "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32_VD0p1_5_20mV.json"
+    ],
+    "cross_section_abs_spread_rel": 3.1610802968678936e-08,
+    "kcl_rel": 1.3113594648808836e-09,
+    "source": "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32.json",
+    "terminal_vs_circuit_rel": 2.3701923222708713e-10
+   }
+  ]
+ },
+ "provenance": {
+  "base_commit": "c05139b4ae037ece34257ff0382e84a91b059773",
+  "command": "python phase3/next_question/physical_r2_finite_bias.py --L 2 --level 0 --vg 1.32 --vd <V_D list> --tox 2 --na 1e+18 --sigma 15 --ov 0 --lw 0.3 --hw 0.5 --s-couple 0 --out <dir>   (reconstructed)",
+  "exporter": "benchmark/tools/export_cases.py",
+  "producing_script": "phase3/next_question/physical_r2_finite_bias.py",
+  "sources": [
+   {
+    "path": "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32.json",
+    "role": "finite-bias run",
+    "sha256": "754e0f3721c76eefadd86bd783756d884ee0d7a3a2ec348dc39355e65804f1df"
+   },
+   {
+    "path": "results/phase3/next_question/physical_r2_finite_bias/r2_finite_L2_lev0_VG1.32_VD0p1_5_20mV.json",
+    "role": "finite-bias run",
+    "sha256": "754e0f3721c76eefadd86bd783756d884ee0d7a3a2ec348dc39355e65804f1df"
+   }
+  ]
+ },
+ "related_cases": [],
+ "schema_version": "1.0.0",
+ "tier": "C",
+ "uncertainty": {
+  "basis": "single mesh (level 0) and single code path; stress tier",
+  "components": {},
+  "coverage_factor": 2.0,
+  "status": "not_established",
+  "tolerance": "not_established"
+ }
+}

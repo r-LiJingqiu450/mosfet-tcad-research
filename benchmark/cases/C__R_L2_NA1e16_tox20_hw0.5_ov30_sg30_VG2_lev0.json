@@ -1,0 +1,137 @@
+{
+ "cross_paths": [
+  {
+   "G0_S_per_cm": 0.9827420684309232,
+   "dL_nm": 13.211854972880799,
+   "evidence": "drain-side current of the same network",
+   "independent": false,
+   "inside_bracket": true,
+   "name": "drain_side_flux_sum",
+   "same_mesh": true
+  }
+ ],
+ "deck": "R",
+ "device": {
+  "bias": {
+   "V_D_V": 0.0,
+   "V_G_V": 2.0,
+   "V_S_V": 0.0
+  },
+  "contacts": {
+   "body": "Si bottom y = 1.2 um: psi = psi_b0; zero normal electron flux (no electron contact equation)",
+   "drain": "ohmic, far edge x = L + l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) + s_couple * V_D; phi_n = V_D",
+   "faces_below_well": "far edges for y > h_w: homogeneous Neumann for psi and zero normal electron flux",
+   "gate": "oxide top y = -t_ox: psi = V_G + psi_b0",
+   "oxide_sides": "homogeneous Neumann, except the two Si/SiO2 triple points at the source/drain faces, whose potential is tied to the adjacent silicon Dirichlet value",
+   "oxide_top_outside_gate": "homogeneous Neumann",
+   "source": "ohmic, far edge x = -l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) (charge-neutral value); phi_n = 0"
+  },
+  "doping": {
+   "N_A_cm3": 1e+16,
+   "N_D_cm3": 1e+20,
+   "profile": "lateral erfc: N_D(x, y) = 1e20 * [0.5 erfc((x - x_c)/(sqrt(2) sigma)) + 0.5 erfc(((L - x) - x_c)/(sqrt(2) sigma))] * [y <= h_w], x_c = -sqrt(2) sigma erfcinv(2 N_A / N_D), so that N_D = N_A (metallurgical junction) at x = 0 and x = L",
+   "sigma_nm": 30.0,
+   "vertical": "box: donors only for 0 <= y <= h_w (realized mesh line)"
+  },
+  "geometry": {
+   "L_um": 2.0,
+   "coordinates": "x along the channel (source side first), y depth into Si (y = 0 at Si/SiO2 interface, oxide at -t_ox <= y <= 0)",
+   "gate_overlap_nm": 30.0,
+   "gate_x_range_um": [
+    -0.03,
+    2.03
+   ],
+   "h_w_um_realized": 0.5014790401521669,
+   "h_w_um_requested": 0.5,
+   "l_w_um": 0.3,
+   "si_depth_um": 1.2,
+   "si_x_range_um": [
+    -0.3,
+    2.3
+   ],
+   "t_ox_nm": 20.0
+  },
+  "physics": {
+   "T_K": 300.0,
+   "V_T_V": 0.025851999786435535,
+   "eps_ox_rel": 3.9,
+   "eps_si_rel": 11.7,
+   "gate_convention": "gate contact psi_gate = V_G + psi_b0 (V_FB = 0; no work-function difference, no oxide charge)",
+   "generation_recombination": "none",
+   "holes": "not solved; equilibrium p = n_i exp(-psi/V_T) everywhere (hole quasi-Fermi level 0 V)",
+   "mobility": "constant mu_n (field-independent); zero-bias network edge conductance c_e = q mu_n EdgeCouple EIL n0 B(Delta)",
+   "mu_n_cm2_per_Vs": 1350.0,
+   "n_i_cm3": 10000000000.0,
+   "oxide": "SiO2, no fixed or trapped charge, no carriers",
+   "psi_b0_V": -0.3571585759940161,
+   "psi_reference": "intrinsic Fermi level (psi = 0 at n = p = n_i)",
+   "statistics": "Boltzmann (n = n_i exp((psi - phi_n)/V_T))",
+   "units": "2-D simulation; currents in A/cm and conductances in S/cm per unit device width"
+  }
+ },
+ "family": "zero_bias_network",
+ "id": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg30_VG2_lev0",
+ "known_bad_outputs": [],
+ "mesh": {
+  "dx_max_nm": 19.904390203496146,
+  "dx_min_nm": 0.5000000000000001,
+  "generator": "phase3/c7/endprobe.py (tensor-product node lines, each rectangle split into two triangles; refinement factor sqrt(2) per level)",
+  "level": 0,
+  "max_adjacent_ratio": 2.054871741603558,
+  "n_depth_si": 218,
+  "n_lateral": 313,
+  "n_ox": 6,
+  "nx": 313,
+  "ny": 223
+ },
+ "notes": [
+  "Zero-bias linear-response conductance: at equilibrium grad(phi_n) = 0, so the O(V_D) current is that of the medium sigma0 = q mu_n n0(x, y) and does not depend on the electrostatic response (phase3/reports/C6_Theory_ZeroBias_EndCorrection_2026-10-31.md, P4). Any drift-diffusion code can therefore be scored on G0 = lim I_D/V_D (V_D -> 0).",
+  "Near/above-threshold resolved device (V_G >= 1.0 V); stress tier."
+ ],
+ "observables": {
+  "G0_S_per_cm": {
+   "path": "source-side terminal current of the zero-bias network (phi_n = 0 source, 1 drain); cancellation-free side, equal to the edge-energy / characteristic-potential form",
+   "value": 0.9827420769881297
+  },
+  "G_GCA_S_per_cm": {
+   "definition": "long-channel (1-column) sheet conductance / L used as the dL reference",
+   "value": 0.9697582227470649
+  },
+  "bracket": {
+   "G_rows_S_per_cm": 0.9494896705208211,
+   "G_slice_S_per_cm": 0.998368846501142,
+   "dL_rows_nm": -21.34678538959345,
+   "dL_slice_nm": 28.657368320681442,
+   "rule": "G_rows (1 - 1e-12) <= G <= G_slice (1 + 1e-12)",
+   "scope": "Rayleigh bounds of THIS discrete network on THIS mesh; valid only for same-mesh submissions, not a bound on the continuum value"
+  },
+  "dL_nm": {
+   "definition": "per-end correction dL = (L/2)(1 - G_GCA/G0)",
+   "value": 13.211863565318339
+  },
+  "network_relative_residual": 1.3482946952456398e-13
+ },
+ "provenance": {
+  "base_commit": "c05139b4ae037ece34257ff0382e84a91b059773",
+  "command": "python phase3/c7/endprobe.py --deck R --L 2 --level 0 --vg 2 --tox 20 --na 1e+16 --hw 0.5 --lw 0.3 --ov 30 --sigma 30 --out <dir>   (reconstructed from the recorded args)",
+  "exporter": "benchmark/tools/export_cases.py",
+  "producing_script": "phase3/c7/endprobe.py",
+  "sources": [
+   {
+    "path": "results/phase3/C7/realism/e7_R_L2_lev0_VG2_tox20_NA1e+16_hw0.5_ov30_sg30_dpsi0.json",
+    "role": "endprobe state (deck R, resolved wells, ohmic contacts)",
+    "sha256": "2efec42e9ed0958bc0bbfd545c17b5c07523fcdb9d4aae59b0609e83e08eea0f"
+   }
+  ]
+ },
+ "related_cases": [],
+ "schema_version": "1.0.0",
+ "tier": "C",
+ "uncertainty": {
+  "basis": "no refinement pair and no independent path for this state",
+  "components": {},
+  "coverage_factor": 2.0,
+  "status": "not_established",
+  "tolerance": "not_established"
+ }
+}

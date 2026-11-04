@@ -1,0 +1,85 @@
+{
+ "results": [
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.488174_lev0",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.2779214695256283e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.569870665959422e-12,
+     "passed": false,
+     "upper": 3.5875278252472427e-12,
+     "value": -1.2779214695256283e-09
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": -358.2332350593332,
+     "tol": 7.8290894193229e-05
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.0782507526941503e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.648406237200172e-10,
+     "passed": false,
+     "upper": 1.649157432763987e-10,
+     "value": -1.0782507526941503e-09
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": -7.538683153438295,
+     "tol": 0.0003115569713016242
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.154907644613726e-08,
+     "passed": false,
+     "upper": 2.1555591285464575e-08,
+     "value": 2.05667591082238e-08
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": -0.0458678737956838,
+     "tol": 0.0003112893178699029
+    }
+   ],
+   "reason": "failed: same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "-x[V1.I] of the equilibrated SuperLU solve",
+  "name": "DEVSIM coupled-Jacobian small-signal G_E"
+ },
+ "summary": {
+  "fail": 3
+ },
+ "validation": "ok"
+}
