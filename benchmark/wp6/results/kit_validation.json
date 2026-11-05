@@ -1,0 +1,154 @@
+[
+ {
+  "task": "T01",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.498001805406602e-16,
+  "max_rel_dn": 1.2212453270876722e-14,
+  "G_DD_network_on_kit": 3.5326066984277396e-12,
+  "rel_vs_reference": 3.437783391291305e-11
+ },
+ {
+  "task": "T02",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.5673907444456745e-16,
+  "max_rel_dn": 1.2212453270876722e-14,
+  "G_DD_network_on_kit": 1.619157728917406e-10,
+  "rel_vs_reference": -4.986011603591578e-13,
+  "dd_circuit": {
+   "sym_1mV_rel": 0.00024905745227510323,
+   "sym_0p1mV_rel": 2.4903793887087744e-06,
+   "richardson_rel": -1.9710522103366657e-10
+  },
+  "dd_contact": {
+   "sym_1mV_rel": -2.9169127380176847,
+   "sym_0p1mV_rel": -25.580676072271984,
+   "richardson_rel": -25.80960297463819
+  },
+  "dd_raw_currents": {
+   "+0.0001": {
+    "circuit": 1.6160329597591013e-14,
+    "contact": 1.4435662680766986e-11
+   },
+   "-0.0001": {
+    "circuit": -1.622290562711396e-14,
+    "contact": 1.523166251365607e-11
+   },
+   "+0.001": {
+    "circuit": 1.5882691185862885e-13,
+    "contact": 1.548987628392076e-11
+   },
+   "-0.001": {
+    "circuit": -1.65085286584773e-13,
+    "contact": 1.611063309900538e-11
+   }
+  }
+ },
+ {
+  "task": "T03",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.636779683484747e-16,
+  "max_rel_dn": 1.199040866595169e-14,
+  "G_DD_network_on_kit": 2.114676927330495e-08,
+  "rel_vs_reference": -3.3306690738754696e-16
+ },
+ {
+  "task": "T04",
+  "newton_iterations": 1,
+  "max_dpsi_V": 1.1102230246251565e-16,
+  "max_rel_dn": 1.5543122344752192e-15,
+  "G_DD_network_on_kit": 2.550492913976137e-09,
+  "rel_vs_reference": -4.021227795192317e-13
+ },
+ {
+  "task": "T05",
+  "newton_iterations": 1,
+  "max_dpsi_V": 1.1102230246251565e-16,
+  "max_rel_dn": 1.3322676295501878e-15,
+  "G_DD_network_on_kit": 1.2035178051938235e-07,
+  "rel_vs_reference": -8.992806499463768e-15
+ },
+ {
+  "task": "T06",
+  "newton_iterations": 1,
+  "max_dpsi_V": 1.1102230246251565e-16,
+  "max_rel_dn": 1.5543122344752192e-15,
+  "G_DD_network_on_kit": 1.5975666886328094e-05,
+  "rel_vs_reference": 0.0
+ },
+ {
+  "task": "T07",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.636779683484747e-16,
+  "max_rel_dn": 1.199040866595169e-14,
+  "G_DD_network_on_kit": 6.177612976654674e-11,
+  "rel_vs_reference": 2.970734769291994e-12
+ },
+ {
+  "task": "T08",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.636779683484747e-16,
+  "max_rel_dn": 1.2656542480726785e-14,
+  "G_DD_network_on_kit": 1.1211190535870378e-09,
+  "rel_vs_reference": -6.672440377997191e-14
+ },
+ {
+  "task": "T09",
+  "newton_iterations": 1,
+  "max_dpsi_V": 1.1102230246251565e-16,
+  "max_rel_dn": 1.5543122344752192e-15,
+  "G_DD_network_on_kit": 4.5692472895269265e-08,
+  "rel_vs_reference": 6.661338147750939e-16
+ },
+ {
+  "task": "T10",
+  "newton_iterations": 1,
+  "max_dpsi_V": 1.1102230246251565e-16,
+  "max_rel_dn": 1.4432899320127035e-15,
+  "G_DD_network_on_kit": 8.401174475410329e-07,
+  "rel_vs_reference": -3.3306690738754696e-16
+ },
+ {
+  "task": "T11",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.3592239273284576e-16,
+  "max_rel_dn": 1.2212453270876722e-14,
+  "G_DD_network_on_kit": 1.7170575964141072e-12,
+  "rel_vs_reference": 1.4774004242212868e-10
+ },
+ {
+  "task": "SMOKE",
+  "newton_iterations": 1,
+  "max_dpsi_V": 2.7755575615628914e-16,
+  "max_rel_dn": 1.0436096431476471e-14,
+  "G_DD_network_on_kit": 2.0337679512499868e-11,
+  "rel_vs_reference": -3.766986722553156e-13,
+  "dd_circuit": {
+   "sym_1mV_rel": 0.0002490722231325293,
+   "sym_0p1mV_rel": 2.490529061871527e-06,
+   "richardson_rel": -1.951206973771491e-10
+  },
+  "dd_contact": {
+   "sym_1mV_rel": 66.30877961495166,
+   "sym_0p1mV_rel": 213.3752176280838,
+   "richardson_rel": 214.86073720397397
+  },
+  "dd_raw_currents": {
+   "+0.0001": {
+    "circuit": 2.029842888735741e-15,
+    "contact": 1.011292516324622e-11
+   },
+   "-0.0001": {
+    "circuit": -2.03770314408214e-15,
+    "contact": 9.240946268937415e-12
+   },
+   "+0.001": {
+    "circuit": 1.994968382945669e-14,
+    "contact": 1.0743061845778503e-11
+   },
+   "-0.001": {
+    "circuit": -2.073580629765744e-14,
+    "contact": 8.00525306940473e-12
+   }
+  }
+ }
+]

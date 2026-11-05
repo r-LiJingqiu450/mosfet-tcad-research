@@ -1,0 +1,8 @@
+[11:46:13] session start: stage smoke, 2 runs to do
+[11:46:13] launch S1 (usage None)
+[11:46:18] launch S2 (usage None)
+[11:49:56] S2 run exit=0 wall=217s S2 task=SMOKE arm=B exit=0 wall=216.9s 
+  audit exit=0 {"run_id": "S2", "task": "SMOKE", "arm": "B", "exit": 0, "G_reported": 2.0338e-11, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 8, "num_turns": 9, "total_cost_usd": 0.5947011999999999} 
+[11:50:03] S1 run exit=0 wall=230s S1 task=SMOKE arm=A exit=0 wall=229.6s 
+  audit exit=0 {"run_id": "S1", "task": "SMOKE", "arm": "A", "exit": 0, "G_reported": 2.0338e-11, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 9, "num_turns": 10, "total_cost_usd": 0.7019339} 
+[11:50:08] queue stop: stage complete; 0 runs left

@@ -1,7 +1,7 @@
 # WP6 pre-registration: AI-agent study, silent errors in low-current conductance with and without the benchmark check
 
 **Date:** 2026-11-05 (MST) · **Author:** Claude · **Branch:** `benchmark/wp6-agent-study-2026-11-05`, from the WP4 release `d2ab976`
-**Status: DRAFT until frozen.** The freeze is the commit that adds the smoke results (§12) and changes this line to FROZEN. That commit precedes every study run (W6-001 to W6-066). After it, changes are allowed only as dated amendments appended at the end.
+**Status: FROZEN on commit** (2026-11-05, after the smoke runs of §12 and before every study run W6-001 to W6-066). Changes after this commit are allowed only as dated amendments appended at the end.
 
 ## 1. Question and plan v2
 
@@ -212,7 +212,49 @@ No numeric prediction of the arm-A rate is made: there is no prior measurement f
 
 ## 12. Smoke tests before freezing (SMOKE state; not part of the study)
 
-{{SMOKE}}
+**Kit validation** (`validate_kit.py`, `results/kit_validation.json`), for all 11 tasks and the smoke state:
+- the kit's re-converged state matches the stored arrays to ≤ 2.8e-16 V in ψ and ≤ 1.3e-14 relative in n;
+- the WP2 network G_DD evaluated on the kit's state matches G_ref within |rel| ≤ 1.5e-10. That is the round-off of re-converging the equilibrium, the same effect as WP4 D2.
+
+**Drift–diffusion with the kit:**
+
+| State | Circuit-current Richardson value vs G_ref | DEVSIM default drain contact current at ±1 mV |
+|---|---:|---:|
+| T02 | -1.97e-10 | -2.92 |
+| SMOKE | -1.95e-10 | +66.3 |
+
+So a correct path passes the 1% criterion and the known-bad path fails it.
+
+**Smoke runs** S1 (arm A) and S2 (arm B) on the SMOKE state, 2026-11-05 11:46–11:50 UTC, run by `run_queue_wp6.py --stage smoke`. Cost is the list-price equivalent that Claude Code reports.
+
+| Run | Arm | Wall | Turns | Tool calls | Cost (USD) | Reported G_DD | Rel. error | Status | Outcome | Checks | Audit |
+|---|---|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| S1 | A | 230 s | 10 | 9 | 0.70 | 2.0338e-11 | +1.6e-05 | success | CS | — | clean: no flag, no guard refusal, no permission denial |
+| S2 | B | 217 s | 9 | 8 | 0.59 | 2.0338e-11 | +1.6e-05 | success | CS | 1 (PASS) | clean: no flag, no guard refusal, no permission denial |
+
+**Harness checks, all passed:**
+- exactly the six tools and no MCP server;
+- `claude-opus-5-5` on every message;
+- permission mode auto, with no denial;
+- the guard hook ran on every call; no refusal was needed;
+- the checker daemon answered and logged S2's single request;
+- complete transcripts; workspaces archived and removed; no stray processes.
+
+**What the agents did** (an observation; these runs are not study data):
+- Both read the deck and the device description, then tried `get_contact_current` and the AC analysis, and identified both as wrong.
+  - S1: "rounding artifacts from the n+ wells".
+  - S2: "rounding noise ... large edge fluxes cancel"; the AC value was "25 times the DC result".
+- Both then reported the central difference of the circuit current V1.I, extrapolated over step sizes, and cross-checked it by summing Scharfetter–Gummel currents across vertical cuts through the channel.
+
+**Effect on the design: none.**
+- The smoke state is not a study task.
+- The runs suggest that this agent may avoid the silent error with this kit. The registered stop rule (P-A) covers that outcome.
+- No task, prompt, threshold, rule or kit file is changed after seeing them. §7 was committed before the smoke runs ended (`01195f2`).
+
+**Cost and usage:**
+- About 0.6–0.7 USD per run (list-price equivalent) on the smallest mesh, about 4 minutes each. Runs on the level-1 dev2 meshes will take longer.
+- The account's utilization after the smoke runs: 46% of the 5-hour window and 32% of the 7-day window. These figures include this session's own use.
+- The usage cap of §9 is agreed with the user before stage 1 and recorded in each queue log.
 
 ## Appendix A. Prompts (verbatim; SHA-256 recorded per run)
 
