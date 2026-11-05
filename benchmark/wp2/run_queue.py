@@ -27,6 +27,9 @@ LOGS = os.path.join(HERE, 'logs', 'production')
 LEDGER = os.path.join(HERE, 'results', 'ledger.jsonl')
 PY = sys.executable
 MEM_BUDGET_GB = 5.4   # session 2 on: the bash-tool memory cgroup is 5.83 GiB (kernel OOM report, 2026-11-05 01:59 UTC); was 7.0
+# session 3 on (amendment A9): fixed glibc mmap threshold. Stops heap growth across Newton iterations; results verified
+# bitwise identical with and without it (P2_AR-1_B1_lev1 production rerun, dev2 level-0 P2 pair).
+ENV_EXTRA = {'MALLOC_MMAP_THRESHOLD_': '131072'}
 WORKERS = 2
 
 DEV = {'dev1': dict(na='1e18', tox='2'), 'dev2': dict(na='1e16', tox='20')}
@@ -43,8 +46,10 @@ def mem_est(path, dev, L, level=None, mesh=None):
     if path == 'P4':
         big = dev == 'dev2' or L == '2'
         return (3.0 if big else 1.8) if mesh == 'refined' else (1.2 if big else 0.8)
-    if path == 'P2' and dev == 'dev2' and level == 2:
-        return 5.9    # session 1 attempt reached 5.57 GB before the OOM kill: always run alone
+    if path == 'P2' and dev == 'dev2':
+        # A9: with MALLOC_MMAP_THRESHOLD_ fixed, dev2 level-1 P2 stays at ~0.8 GB (1.2 GB transient); without it the heap grew
+        # ~85 MB per Newton iteration (OOM at 5.96 GB, session 2)
+        return 2.0 if level == 1 else 4.0
     m = MEM[(dev, level)]
     if dev == 'dev1' and L == '2':
         m *= 1.4
@@ -111,7 +116,7 @@ def run_job(j, env):
         f.write(f'exit={p.returncode}\n')
     rec = dict(job=j['job'], out=j['out'], cmd=' '.join(c.replace(ROOT + '/', '') for c in j['cmd']), start_utc=start,
                end_utc=now(), exit=p.returncode, wall_s=round(time.time() - t0, 1), maxrss_MB=round(ru.ru_maxrss / 1024),
-               mem_estimate_GB=j['mem'])
+               mem_estimate_GB=j['mem'], env_extra=ENV_EXTRA)
     with LOCK:
         with open(LEDGER, 'a') as f:
             f.write(json.dumps(rec) + '\n')
@@ -136,7 +141,7 @@ def main():
             print(j['job'], j['mem'])
         return 0
     env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1',
-               DEVSIM_MATH_LIBS='/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3')
+               DEVSIM_MATH_LIBS='/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3', **ENV_EXTRA)
     running = {}
     t_start = time.time()
     while todo or running:

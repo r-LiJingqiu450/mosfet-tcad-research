@@ -316,3 +316,21 @@ P1's interface cells (0.25 / 0.177 / 0.125 nm at levels 0 / 1 / 2) are therefore
   - no other process is started while the queue runs.
 - The failed attempt stays in the ledger, and its log is kept (`P2_AR-4_B1_lev2.attempt1.log`).
 - **Contingency, fixed now.** If a dev2 level-2 P2 run exceeds the limit even when running alone, it is reported as not executable in this environment. Those runs feed only the atlas prediction P-DD and the expectation E-CIRC (never a kill), which then rest on the level-1 P2 runs of the same states. This will be stated with the results.
+
+## Amendment A9 (appended 2026-11-05, during production; changes no state, level, threshold, tolerance rule or kill criterion)
+
+**A9 — P2 memory growth traced to glibc heap retention; fixed by a numerically inert allocator setting.**
+
+- **What happened (session 2).** `P2_AR-4_B1_lev1` was killed by the memory cgroup while running alone (exit −9 after 355 s, peak 5.96 GB). P1 runs of the same mesh peak at 3.0 GB. To prevent a cascade of identical failures I stopped the next job, `P2_AR-4_B0_lev1`, with SIGTERM (exit −15 in the ledger) and paused the queue.
+- **Diagnosis** (non-production runs; `benchmark/wp2/memprofile.py`, evidence in `results/diagnostics/memory/`):
+  - with default glibc settings, the RSS of P2 at dev2 level 1 grows by about 85 MB per Newton iteration, from 1.0 GB to 4.6 GB after 42 iterations;
+  - at dev2 level 0 the same code stays flat at 0.57 GB;
+  - with the glibc mmap threshold fixed at 128 KB (`MALLOC_MMAP_THRESHOLD_=131072`), the dev2 level-1 run stays flat at about 0.77 GB, with a 1.2 GB transient per factorization.
+
+  The growth is heap retention under glibc's dynamic mmap threshold, not a property of the model or of the solver.
+- **The setting changes no result.** With it, `P2_AR-1_B1_lev1` reproduces the production record bitwise: all 186 values, including the noise-dominated DEVSIM contact currents. A dev2 level-0 P2 run is also bitwise identical with and without it (`benchmark/wp2/compare_runs.py`; `results/diagnostics/memory/bitwise_check.txt`).
+- **From session 3 on:**
+  - every remaining job runs with `MALLOC_MMAP_THRESHOLD_=131072`, recorded in each ledger line as `env_extra`;
+  - the memory estimates for dev2 P2 are 2.0 GB at level 1 and 4.0 GB at level 2.
+
+  Runs completed earlier are not repeated. The A8 contingency still applies if a run exceeds the limit.
