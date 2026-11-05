@@ -41,3 +41,56 @@
 [13:38:37] W6-013 run exit=0 wall=254s W6-013 task=T01 arm=A exit=0 wall=254.1s 
   audit exit=0 {"run_id": "W6-013", "task": "T01", "arm": "A", "exit": 0, "G_reported": 3.5326e-12, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 5, "num_turns": 6, "total_cost_usd": 0.5158713} 
 [13:38:43] queue stop: usage 0.93 >= cap 0.8; 20 runs left
+[16:25:04] session start: stage 1, 20 runs to do, usage cap 0.8, session 118.0 min
+[16:25:04] launch W6-014 (usage 0.4)
+[16:25:09] launch W6-015 (usage 0.4)
+[16:30:15] W6-015 run exit=0 wall=307s W6-015 task=T03 arm=A exit=0 wall=306.7s 
+  audit exit=0 {"run_id": "W6-015", "task": "T03", "arm": "A", "exit": 0, "G_reported": 2.1147e-08, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 10, "num_turns": 11, "total_cost_usd": 0.5226031} 
+[16:30:19] launch W6-016 (usage 0.41)
+[16:33:58] W6-016 run exit=0 wall=219s W6-016 task=T01 arm=A exit=0 wall=219.2s 
+  audit exit=0 {"run_id": "W6-016", "task": "T01", "arm": "A", "exit": 0, "G_reported": 3.533e-12, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 5, "num_turns": 6, "total_cost_usd": 0.3877145} 
+[16:33:59] launch W6-017 (usage 0.42)
+[16:36:37] W6-017 run exit=0 wall=158s W6-017 task=T02 arm=A exit=0 wall=158.4s 
+  audit exit=0 {"run_id": "W6-017", "task": "T02", "arm": "A", "exit": 0, "G_reported": 1.6192e-10, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 5, "num_turns": 6, "total_cost_usd": 0.41793550000000007} 
+[16:36:39] launch W6-018 (usage 0.42)
+[16:38:28] W6-014 run exit=0 wall=805s W6-014 task=T08 arm=A exit=0 wall=804.3s 
+  audit exit=0 {"run_id": "W6-014", "task": "T08", "arm": "A", "exit": 0, "G_reported": 1.1211e-09, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 11, "num_turns": 12, "total_cost_usd": 0.6518427} 
+[16:38:29] launch W6-019 (usage 0.42)
+[16:46:07] W6-019 run exit=0 wall=459s W6-019 task=T04 arm=A exit=0 wall=458.5s 
+  audit exit=0 {"run_id": "W6-019", "task": "T04", "arm": "A", "exit": 0, "G_reported": 2.5505e-09, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 4, "num_turns": 5, "total_cost_usd": 0.3284741} 
+[16:46:09] launch W6-020 (usage 0.42)
+[16:50:33] W6-020 run exit=0 wall=265s W6-020 task=T07 arm=A exit=0 wall=264.4s 
+  audit exit=0 {"run_id": "W6-020", "task": "T07", "arm": "A", "exit": 0, "G_reported": 6.177e-11, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 8, "num_turns": 9, "total_cost_usd": 0.6601675} 
+[16:50:34] launch W6-021 (usage 0.43)
+[16:51:29] W6-018 run exit=0 wall=891s W6-018 task=T09 arm=A exit=0 wall=890.2s 
+  audit exit=0 {"run_id": "W6-018", "task": "T09", "arm": "A", "exit": 0, "G_reported": 4.5692e-08, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 8, "num_turns": 9, "total_cost_usd": 0.5322447} 
+[16:51:34] launch W6-022 (usage 0.43)
+[16:54:39] W6-021 run exit=0 wall=246s W6-021 task=T01 arm=A exit=0 wall=245.6s 
+  audit exit=0 {"run_id": "W6-021", "task": "T01", "arm": "A", "exit": 0, "G_reported": 3.5326e-12, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 6, "num_turns": 7, "total_cost_usd": 0.45356549999999995} 
+[16:54:44] launch W6-023 (usage 0.43)
+[16:56:27] W6-022 run exit=0 wall=293s W6-022 task=T03 arm=A exit=0 wall=293.3s 
+  audit exit=0 {"run_id": "W6-022", "task": "T03", "arm": "A", "exit": 0, "G_reported": 2.1147e-08, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 10, "num_turns": 11, "total_cost_usd": 0.6202715} 
+[16:56:29] launch W6-024 (usage 0.43)
+[17:02:32] W6-024 run exit=0 wall=363s W6-024 task=T02 arm=A exit=0 wall=362.9s 
+  audit exit=0 {"run_id": "W6-024", "task": "T02", "arm": "A", "exit": 0, "G_reported": 1.6192e-10, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 22, "num_turns": 23, "total_cost_usd": 0.7224339} 
+[17:02:34] launch W6-025 (usage 0.44)
+[17:04:30] W6-023 run exit=0 wall=586s W6-023 task=T06 arm=A exit=0 wall=585.8s 
+  audit exit=0 {"run_id": "W6-023", "task": "T06", "arm": "A", "exit": 0, "G_reported": 1.5976e-05, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 7, "num_turns": 8, "total_cost_usd": 0.4560015} 
+[17:04:34] launch W6-026 (usage 0.44)
+[17:06:58] W6-025 run exit=0 wall=264s W6-025 task=T08 arm=A exit=0 wall=263.8s 
+  audit exit=0 {"run_id": "W6-025", "task": "T08", "arm": "A", "exit": 0, "G_reported": 1.1211e-09, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 10, "num_turns": 11, "total_cost_usd": 0.6235627} 
+[17:06:59] launch W6-027 (usage 0.44)
+[17:16:19] W6-027 run exit=0 wall=560s W6-027 task=T09 arm=A exit=0 wall=559.9s 
+  audit exit=0 {"run_id": "W6-027", "task": "T09", "arm": "A", "exit": 0, "G_reported": 4.569e-08, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 10, "num_turns": 11, "total_cost_usd": 0.4040187} 
+[17:16:19] launch W6-028 (usage 0.44)
+[17:20:12] W6-028 run exit=0 wall=233s W6-028 task=T07 arm=A exit=0 wall=233.1s 
+  audit exit=0 {"run_id": "W6-028", "task": "T07", "arm": "A", "exit": 0, "G_reported": 6.1776e-11, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 7, "num_turns": 8, "total_cost_usd": 0.5590164999999999} 
+[17:20:14] launch W6-029 (usage 0.45)
+[17:24:08] W6-029 run exit=0 wall=234s W6-029 task=T03 arm=A exit=0 wall=234.1s 
+  audit exit=0 {"run_id": "W6-029", "task": "T03", "arm": "A", "exit": 0, "G_reported": 2.1147e-08, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 9, "num_turns": 10, "total_cost_usd": 0.6484595} 
+[17:24:09] launch W6-030 (usage 0.45)
+[17:45:20] W6-030 run exit=0 wall=1271s W6-030 task=T10 arm=A exit=0 wall=1270.8s 
+  audit exit=0 {"run_id": "W6-030", "task": "T10", "arm": "A", "exit": 0, "G_reported": 8.401e-07, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 7, "num_turns": 8, "total_cost_usd": 0.6918702999999999} 
+[17:49:36] W6-026 run exit=0 wall=2702s W6-026 task=T06 arm=A exit=124 wall=2701.8s 
+  audit exit=0 {"run_id": "W6-026", "task": "T06", "arm": "A", "exit": 124, "G_reported": null, "status": null, "contaminated": false, "harness_failure": false, "n_tool_calls": 22, "num_turns": null, "total_cost_usd": null} 
+[17:49:44] queue stop: session time; 3 runs left

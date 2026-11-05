@@ -1,0 +1,149 @@
+Searching DEVSIM_MATH_LIBS="/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/usr/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/usr/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+/home/claude/venv-wp1/lib/python3.12/site-packages/numpy/_core/getlimits.py:552: UserWarning: Signature b'\x00\xd0\xcc\xcc\xcc\xcc\xcc\xcc\xfb\xbf\x00\x00\x00\x00\x00\x00' for <class 'numpy.longdouble'> does not match any known type: falling back to type probe function.
+This warnings indicates broken support for the dtype!
+  machar = _get_machar(dtype)
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 437 Lines.
+Physical group name body has 438 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 248 Lines.
+Physical group name drain has 249 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 279 Lines.
+Physical group name gate has 280 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 6118 Triangles.
+Physical group name ox has 9621 Lines.
+Physical group name ox has 3504 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 437 Lines.
+Physical group name ox_si has 438 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 268318 Triangles.
+Physical group name si has 403221 Lines.
+Physical group name si has 134904 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 248 Lines.
+Physical group name source has 249 Points.
+Device mos has 137970 coordinates with max index 137969
+Region ox has 3504 nodes.
+Region si has 134904 nodes.
+Contact body in region si with 438 nodes
+Contact drain in region si with 249 nodes
+Contact gate in region ox with 280 nodes
+Warning, contact "drain" shares a node with contact "oxc_d"
+Contact oxc_d in region ox with 1 nodes
+Contact oxc_s in region ox with 1 nodes
+Warning, contact "oxc_s" shares a node with contact "source"
+Contact source in region si with 249 nodes
+Warning, contact "drain" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Adding interface ox_si with 438, 438 nodes
+Replacing Node Model PotentialNodeCharge in region si of material Si
+Replacing Node Model PotentialNodeCharge:Potential in region si of material Si
+Replacing Node Model PotentialNodeCharge:Electrons in region si of material Si
+creating solution dcop with 2 nodes
+number of equations 273314
+creating solution dcop_prev with 2 nodes
+Iteration: 0
+  Device: "mos"	RelError: 3.68167e-13	AbsError: 2.83024e+05
+    Region: "ox"	RelError: 2.20624e-16	AbsError: 9.40658e-17
+      Equation: "PotentialEquation"	RelError: 2.20624e-16	AbsError: 9.40658e-17
+    Region: "si"	RelError: 3.67946e-13	AbsError: 2.83024e+05
+      Equation: "ElectronContinuityEquation"	RelError: 2.83053e-15	AbsError: 2.83024e+05
+      Equation: "PotentialEquation"	RelError: 3.65116e-13	AbsError: 1.05091e-16
+  Circuit: 	RelError: 2.41005e-14	AbsError: 2.41005e-24
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 1.16460e-24	AbsError: 7.61030e-09
+    Region: "ox"	RelError: 1.86586e-28	AbsError: 9.03125e-29
+      Equation: "PotentialEquation"	RelError: 1.86586e-28	AbsError: 9.03125e-29
+    Region: "si"	RelError: 1.16442e-24	AbsError: 7.61030e-09
+      Equation: "ElectronContinuityEquation"	RelError: 5.75726e-26	AbsError: 7.61030e-09
+      Equation: "PotentialEquation"	RelError: 1.10684e-24	AbsError: 9.07458e-29
+  Circuit: 	RelError: 2.41005e-14	AbsError: 2.41005e-24
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 7.72087e-31	AbsError: 2.89168e-14
+    Region: "ox"	RelError: 1.88338e-34	AbsError: 6.34551e-35
+      Equation: "PotentialEquation"	RelError: 1.88338e-34	AbsError: 6.34551e-35
+    Region: "si"	RelError: 7.71899e-31	AbsError: 2.89168e-14
+      Equation: "ElectronContinuityEquation"	RelError: 2.15343e-33	AbsError: 2.89168e-14
+      Equation: "PotentialEquation"	RelError: 7.69746e-31	AbsError: 6.34551e-35
+  Circuit: 	RelError: 3.12236e-26	AbsError: 3.12236e-36
+BUILD {'mesh': {'nx': 438, 'ny': 315}, 'n_si_nodes': 134904, 'V_G': 0.7835, 'psi_b0': -0.3571585759940161, 'newton_iterations': 1} 341.0592851638794
+creating solution ssac_real with 2 nodes
+creating solution ssac_imag with 2 nodes
+Device: mos	Region: ox	Creating: Potential_Real
+Device: mos	Region: ox	Creating: Potential_Imag
+Device: mos	Region: si	Creating: Electrons_Real
+Device: mos	Region: si	Creating: Electrons_Imag
+Device: mos	Region: si	Creating: Potential_Real
+Device: mos	Region: si	Creating: Potential_Imag
+AC Iteration:
+number of equations 273314
+R0 (-8.759286368260978e-30, -8.328799087728314e-30, -4.201225542045627e-41) AC -1.604271120322965e-05
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 1.58453e-01	AbsError: 9.45149e+12
+    Region: "ox"	RelError: 2.09321e-05	AbsError: 1.00000e-05
+      Equation: "PotentialEquation"	RelError: 2.09321e-05	AbsError: 1.00000e-05
+    Region: "si"	RelError: 1.58432e-01	AbsError: 9.45149e+12
+      Equation: "ElectronContinuityEquation"	RelError: 3.57817e-04	AbsError: 9.45149e+12
+      Equation: "PotentialEquation"	RelError: 1.58074e-01	AbsError: 1.00000e-05
+  Circuit: 	RelError: 9.99990e-01	AbsError: 1.00002e-05
+ONESTEP -1.6043007670416506e-05
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 4.37061e-07	AbsError: 1.55112e+08
+    Region: "ox"	RelError: 1.46164e-10	AbsError: 5.06829e-11
+      Equation: "PotentialEquation"	RelError: 1.46164e-10	AbsError: 5.06829e-11
+    Region: "si"	RelError: 4.36915e-07	AbsError: 1.55112e+08
+      Equation: "ElectronContinuityEquation"	RelError: 6.66855e-08	AbsError: 1.55112e+08
+      Equation: "PotentialEquation"	RelError: 3.70230e-07	AbsError: 5.36690e-11
+  Circuit: 	RelError: 2.71025e-03	AbsError: 7.03922e-13
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 1.63207e-16	AbsError: 3.21860e-02
+    Region: "ox"	RelError: 2.49786e-20	AbsError: 8.95681e-21
+      Equation: "PotentialEquation"	RelError: 2.49786e-20	AbsError: 8.95681e-21
+    Region: "si"	RelError: 1.63182e-16	AbsError: 3.21860e-02
+      Equation: "ElectronContinuityEquation"	RelError: 7.35831e-17	AbsError: 3.21860e-02
+      Equation: "PotentialEquation"	RelError: 8.95989e-17	AbsError: 9.50677e-21
+  Circuit: 	RelError: 1.84320e-12	AbsError: 4.78727e-22
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 2.00807e-27	AbsError: 2.52843e-14
+    Region: "ox"	RelError: 6.05478e-32	AbsError: 1.64274e-32
+      Equation: "PotentialEquation"	RelError: 6.05478e-32	AbsError: 1.64274e-32
+    Region: "si"	RelError: 2.00801e-27	AbsError: 2.52843e-14
+      Equation: "ElectronContinuityEquation"	RelError: 1.59264e-27	AbsError: 2.52843e-14
+      Equation: "PotentialEquation"	RelError: 4.15367e-28	AbsError: 1.74320e-32
+  Circuit: 	RelError: 1.63847e-17	AbsError: 4.25555e-27
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 2.73892e-31	AbsError: 1.75489e-14
+    Region: "ox"	RelError: 1.58587e-34	AbsError: 4.92145e-35
+      Equation: "PotentialEquation"	RelError: 1.58587e-34	AbsError: 4.92145e-35
+    Region: "si"	RelError: 2.73733e-31	AbsError: 1.75489e-14
+      Equation: "ElectronContinuityEquation"	RelError: 1.76003e-33	AbsError: 1.75489e-14
+      Equation: "PotentialEquation"	RelError: 2.71973e-31	AbsError: 5.47924e-35
+  Circuit: 	RelError: 1.63847e-17	AbsError: 4.25555e-27
+R 1e-05 (1.5972615433851874e-10, -1.5972610304844262e-10, -1.5972615433851874e-10) 960.6702446937561
+number of equations 273314
