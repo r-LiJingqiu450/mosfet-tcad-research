@@ -148,3 +148,14 @@ No run, setting, state, prediction or evaluation rule changes.
 **Correction.** No external signal is sent to a queue any more. A session ends only through `run_queue_wp4.py --session-min`: no job is launched unless 1.1 × its expected wall time fits, and the queue exits when nothing fits and nothing is running. Sessions use `--session-min 118` under the 120-minute task cap. The measured P2X wall time on dev2 is 99.4 min.
 
 No run, setting, state, prediction or evaluation rule changes.
+
+## Amendment W4-A3 (appended 2026-11-05 ~11:05 UTC, after all 18 runs; release form and WP4-C only)
+
+**Release form (§6).** Commit `2462e61` (W4-A1) also added an export hook that would have written the WP4 paths into the six A-R case files and changed their base commit. That contradicts §6 ("WP1 and WP2 case files" unchanged) and the project's append-only rule. The hook was never run, and `254d2e4` restored the exporter to the WP2 release.
+- The WP4 paths are released as scored example submissions (`benchmark/examples/`), built from the WP4 production records by `tools/make_examples.py`.
+- They are scored by the unchanged `tools/score.py` against the unchanged cases.
+- Post-hoc diagnostics (`benchmark/wp4/posthoc_wp4.py`) are reported separately from the registered evaluation and labelled as post hoc.
+
+**WP4-C.** On 2026-11-05 the user decided that the Eigen 5.0.1 archive will not be provided, and put the NiTCAD evaluation on hold. Under §5, NiTCAD is therefore not built in WP4, and WP4 is concluded with the DEVSIM results only.
+
+No run, setting, state, prediction or evaluation rule changes.
