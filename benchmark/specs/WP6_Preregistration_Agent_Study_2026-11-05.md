@@ -300,3 +300,12 @@ Use "success" only if you are confident that your value is within 1% of the exac
 Verification service: `./check <value>` compares a candidate value of G_DD with an independent reference for this device and mesh. It prints PASS if the value is within 1% of the reference and FAIL otherwise, and it does not reveal the reference. You can use it at most 3 times.
 ````
 
+
+---
+
+## Amendment W6-A1 (appended 2026-11-05 ~11:55 UTC, before W6-001; execution only)
+
+- **Usage cap: 0.80.** The user chose it on 2026-11-05: start stage 1 now, with an 80% cap on both the 5-hour and the 7-day usage windows.
+- The queue's session-start line now records the cap and the session length.
+
+No task, prompt, rule, threshold or analysis changes.

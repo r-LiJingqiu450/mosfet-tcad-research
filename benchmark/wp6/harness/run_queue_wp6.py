@@ -83,7 +83,8 @@ def main():
     log = a.log or os.path.join(WP6, 'logs', f'queue_stage{a.stage}.log')
     os.makedirs(os.path.dirname(log), exist_ok=True)
     with open(log, 'a') as f:
-        f.write(f"[{time.strftime('%H:%M:%S', time.gmtime())}] session start: stage {a.stage}, {len(todo)} runs to do\n")
+        f.write(f"[{time.strftime('%H:%M:%S', time.gmtime())}] session start: stage {a.stage}, {len(todo)} runs to do, "
+                f"usage cap {a.usage_cap}, session {a.session_min} min\n")
     t_start, running, stop_reason = time.time(), {}, None
     while todo or running:
         for k in [k for k, th in running.items() if not th.is_alive()]:
