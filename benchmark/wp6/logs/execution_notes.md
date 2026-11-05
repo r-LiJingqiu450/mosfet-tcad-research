@@ -10,3 +10,10 @@ They are summarized in the WP6 report under deviations.
   - Both runs finished normally (exit 0; outcome recorded by the registered rules). The queue then stopped at 0.93.
   - The cap is an execution limit agreed with the user, not a validity criterion, so no run is excluded.
   - Consequence: from here on the coordinating session keeps its own work light while runs are launched, and resumes the queue only after the 5-hour window resets (16:20 UTC).
+
+- **2026-11-05 16:24 UTC: container restart before queue session 3.** The cloud machine had restarted while idle (uptime 0 min at 16:24). Checked before relaunching:
+  - guard installed (`/opt/wp6/guard.py`), Claude Code 2.1.318, the Python environment, 2 CPUs;
+  - the timezone was America/Denver both before (file times in the agents' `ls -la` output of S1 to W6-013 are UTC−7) and after.
+  - Unchanged environment otherwise as far as the run records show (same tools, model, permission mode and session settings in every init event).
+- **2026-11-05 17:04 UTC: transient permission-classifier outage in W6-024.** Nine tool calls were refused with "Classifier unavailable" (Claude Code's auto-mode classifier gave no verdict). The agent repeated them and finished (CS). Recorded per run; not a harness failure under the registered F4 definition (tools, MCP servers, model).
+- **2026-11-05 18:06 UTC: stage 1 complete** (33 of 33 runs; queue sessions 1–4). Registered evaluation: 0 silent errors among 33 valid arm-A runs, so the stop rule (P-A) applies: stage 2 (arm B) is not run. Halt rule: 0 of 33 runs excluded.

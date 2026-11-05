@@ -1,0 +1,146 @@
+{
+ "status": "post hoc (not pre-registered); descriptive only; decides no outcome",
+ "source": "each run's final message: its reported 'method' and 'verification' fields, read by the analyst; method_hints (audit) as aids",
+ "coded_by": "analyst (Claude, the study designer), not blind",
+ "coded_utc": "2026-11-05T18:30:00Z",
+ "categories": {
+  "A": "central differences of a converged DC current, double precision",
+  "B": "central differences of a converged DC current, extended precision",
+  "C": "exact linearisation about the equilibrium: Scharfetter-Gummel resistor network on the mesh edges",
+  "D": "no report"
+ },
+ "runs": {
+  "W6-001": {
+   "category": "A",
+   "note": null
+  },
+  "W6-002": {
+   "category": "A",
+   "note": null
+  },
+  "W6-003": {
+   "category": "C",
+   "note": null
+  },
+  "W6-004": {
+   "category": "A",
+   "note": "an extended-precision rerun was started but stopped at its time limit; the reported value is from double precision"
+  },
+  "W6-005": {
+   "category": "C",
+   "note": null
+  },
+  "W6-006": {
+   "category": "C",
+   "note": null
+  },
+  "W6-007": {
+   "category": "A",
+   "note": null
+  },
+  "W6-008": {
+   "category": "A",
+   "note": "current taken both as edge-current sums across vertical cuts and as V1.I"
+  },
+  "W6-009": {
+   "category": "A",
+   "note": null
+  },
+  "W6-010": {
+   "category": "B",
+   "note": "final value from extended precision at +-10 uV; double-precision differences agree"
+  },
+  "W6-011": {
+   "category": "A",
+   "note": null
+  },
+  "W6-012": {
+   "category": "C",
+   "note": null
+  },
+  "W6-013": {
+   "category": "A",
+   "note": null
+  },
+  "W6-014": {
+   "category": "B",
+   "note": "all solves in extended precision; extrapolated to zero step"
+  },
+  "W6-015": {
+   "category": "A",
+   "note": null
+  },
+  "W6-016": {
+   "category": "A",
+   "note": null
+  },
+  "W6-017": {
+   "category": "A",
+   "note": null
+  },
+  "W6-018": {
+   "category": "A",
+   "note": null
+  },
+  "W6-019": {
+   "category": "A",
+   "note": null
+  },
+  "W6-020": {
+   "category": "A",
+   "note": null
+  },
+  "W6-021": {
+   "category": "A",
+   "note": null
+  },
+  "W6-022": {
+   "category": "A",
+   "note": null
+  },
+  "W6-023": {
+   "category": "A",
+   "note": null
+  },
+  "W6-024": {
+   "category": "C",
+   "note": null
+  },
+  "W6-025": {
+   "category": "A",
+   "note": null
+  },
+  "W6-026": {
+   "category": "D",
+   "note": "no report (time limit); see coding.json"
+  },
+  "W6-027": {
+   "category": "A",
+   "note": "current taken as the electron flux out of a box around the drain through low-doped silicon, checked against V1.I"
+  },
+  "W6-028": {
+   "category": "A",
+   "note": null
+  },
+  "W6-029": {
+   "category": "A",
+   "note": null
+  },
+  "W6-030": {
+   "category": "A",
+   "note": null
+  },
+  "W6-031": {
+   "category": "A",
+   "note": "value from double precision; the whole run was repeated in extended precision as a check"
+  },
+  "W6-032": {
+   "category": "A",
+   "note": null
+  },
+  "W6-033": {
+   "category": "A",
+   "note": null
+  }
+ }
+}
