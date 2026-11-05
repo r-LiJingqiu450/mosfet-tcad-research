@@ -1,0 +1,363 @@
+{
+ "note": "WP6 task table; private to the harness (never copied into a workspace)",
+ "tasks": [
+  {
+   "task": "T01",
+   "state_id": "AR-1",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "case_file": "benchmark/cases/AR__R_L1_NA1e18_tox2_VG0.488174_B1.json",
+   "tier": "A-R",
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.488174,
+   "level": 1,
+   "mesh_id": "dev1_L1_lev1",
+   "reference_G_DD_S_per_cm": 3.5326066983062963e-12,
+   "current_at_1mV_A_per_cm": 3.5326066983062965e-15,
+   "kit_generation": {
+    "task": "T01",
+    "G_DD": 3.5326066983062963e-12,
+    "G_DD_second": 3.5326066966833946e-12,
+    "psi_hat": 11.994241940300387,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "a543ff6f8323df08d2e374d8314c94f49b18f78e587590e7b9aeebdb16318f03",
+     "psi_ox": "2ab056318c04b3db8e1f6940c09b4f196fcb8d1e4885acd325783469b13281c9",
+     "n_si": "6262f2dc964f1a2cfe86a324a23f9cbe1eaa7accb59d2b7a7920417ea0fe0a63"
+    },
+    "n_si": 41216,
+    "n_ox": 2944,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T02",
+   "state_id": "AR-2",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "case_file": "benchmark/cases/AR__R_L1_NA1e18_tox2_VG0.621433_B1.json",
+   "tier": "A-R",
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.621433,
+   "level": 1,
+   "mesh_id": "dev1_L1_lev1",
+   "reference_G_DD_S_per_cm": 1.6191577289182132e-10,
+   "current_at_1mV_A_per_cm": 1.6191577289182132e-13,
+   "kit_generation": {
+    "task": "T02",
+    "G_DD": 1.6191577289182132e-10,
+    "G_DD_second": 1.6191577286964898e-10,
+    "psi_hat": 15.993302984745965,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "c871ffd55732cc11ba992f5b314d06b94a4abac51c8c431db1875395b0adfeb1",
+     "psi_ox": "85af55924b61e079a9cf533a9f1a1f18e9ba8093d3b18af9de00eb4916ef010c",
+     "n_si": "dad5e7bd7f445de0b6f462c1383c3970f2469eb315e56b03d60bb5c4a2f423b9"
+    },
+    "n_si": 41216,
+    "n_ox": 2944,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T03",
+   "state_id": "AR-3",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "case_file": "benchmark/cases/AR__R_L1_NA1e18_tox2_VG0.7835_B1.json",
+   "tier": "A-R",
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.7835,
+   "level": 1,
+   "mesh_id": "dev1_L1_lev1",
+   "reference_G_DD_S_per_cm": 2.1146769273304958e-08,
+   "current_at_1mV_A_per_cm": 2.1146769273304958e-11,
+   "kit_generation": {
+    "task": "T03",
+    "G_DD": 2.1146769273304958e-08,
+    "G_DD_second": 2.1146769270946543e-08,
+    "psi_hat": 21.013016873790225,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "c155e228e8da1ed738ab10390cff5b483fb288e09d64baff05c2d06e3370e341",
+     "psi_ox": "6f673fdb12454a77b26662189bc1fd4e055d1a31d3e4c6022b855eaeb0753c94",
+     "n_si": "02c1568dc4b0e3b935ebbe7c1dda723d5b7d13169b7e0fae639d26ca03b61b5d"
+    },
+    "n_si": 41216,
+    "n_ox": 2944,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T04",
+   "state_id": "AR-4",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "case_file": "benchmark/cases/AR__R_L2_NA1e16_tox20_VG0.488174_B1.json",
+   "tier": "A-R",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+16,
+   "t_ox_nm": 20.0,
+   "V_G_V": 0.488174,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "reference_G_DD_S_per_cm": 2.550492913977163e-09,
+   "current_at_1mV_A_per_cm": 2.550492913977163e-12,
+   "kit_generation": {
+    "task": "T04",
+    "G_DD": 2.550492913977163e-09,
+    "G_DD_second": 2.550492914069546e-09,
+    "psi_hat": 11.999931417485612,
+    "equilibrium_iterations": 16,
+    "array_sha256": {
+     "psi_si": "9b47a71b947b67ae5fdeebee26076b974b9acf52e51f609595a3cedea09a2688",
+     "psi_ox": "11f0ad713930a606397d850f5d4ae13be052cb7d1eab39529e4ae4a7b3e7167f",
+     "n_si": "85e5cff761d6f95d0e861924cd8caaad67dda43ac01bbac69481fa7bc89aea54"
+    },
+    "n_si": 134904,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T05",
+   "state_id": "AR-5",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "case_file": "benchmark/cases/AR__R_L2_NA1e16_tox20_VG0.621433_B1.json",
+   "tier": "A-R",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+16,
+   "t_ox_nm": 20.0,
+   "V_G_V": 0.621433,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "reference_G_DD_S_per_cm": 1.2035178051938344e-07,
+   "current_at_1mV_A_per_cm": 1.2035178051938345e-10,
+   "kit_generation": {
+    "task": "T05",
+    "G_DD": 1.2035178051938344e-07,
+    "G_DD_second": 1.2035178052144726e-07,
+    "psi_hat": 15.999925385207606,
+    "equilibrium_iterations": 16,
+    "array_sha256": {
+     "psi_si": "873edefa9d89d9e9d28f1e92848983b63d3a84c74aa4d0c3687e9a280b47eef8",
+     "psi_ox": "79ef7dd0c885620fac09e6b5d665988fc4c2c0d0d3044a68c02f9beb8a446a8f",
+     "n_si": "aed7ce59044d9162008693c022bbc0109f44eb004081fc3ec9644e14ac46cc5e"
+    },
+    "n_si": 134904,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T06",
+   "state_id": "AR-6",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "case_file": "benchmark/cases/AR__R_L2_NA1e16_tox20_VG0.7835_B1.json",
+   "tier": "A-R",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+16,
+   "t_ox_nm": 20.0,
+   "V_G_V": 0.7835,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "reference_G_DD_S_per_cm": 1.5975666886328094e-05,
+   "current_at_1mV_A_per_cm": 1.5975666886328092e-08,
+   "kit_generation": {
+    "task": "T06",
+    "G_DD": 1.5975666886328094e-05,
+    "G_DD_second": 1.5975666886360627e-05,
+    "psi_hat": 21.020388295700144,
+    "equilibrium_iterations": 16,
+    "array_sha256": {
+     "psi_si": "387f48376b797b1e002d92a5e5d53e54295d1eee0215d1a6c0da1262a70c1b1c",
+     "psi_ox": "32f6caffd73ca6b68f75cb9f495228332da1af118b0bb5286ce5e589ad38da50",
+     "n_si": "5284122b86dcc88095bf58e0b6c51097cdb533b8abde66f6ed40fd8ce5c68c6b"
+    },
+    "n_si": 134904,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T07",
+   "state_id": "HO-1",
+   "case": "HO__R_L1_NA1e18_tox2_VG0.588534_B1",
+   "case_file": "benchmark/cases/HO__R_L1_NA1e18_tox2_VG0.588534_B1.json",
+   "tier": "HO",
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.588534,
+   "level": 1,
+   "mesh_id": "dev1_L1_lev1",
+   "reference_G_DD_S_per_cm": 6.177612976636322e-11,
+   "current_at_1mV_A_per_cm": 6.177612976636322e-14,
+   "kit_generation": {
+    "task": "T07",
+    "G_DD": 6.177612976636322e-11,
+    "G_DD_second": 6.177612977008189e-11,
+    "psi_hat": 14.99349960437838,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "3fb578cb3305c84ffcf870f984c10f7fbc6de7567afce5163c99eb04eafeadb7",
+     "psi_ox": "3af602cfd10e36d4e312428103cf57116fc8b45b7d043cf7aab333fc075ef430",
+     "n_si": "0fda82fdc053830a3ce4cddd2dc2c9f214745bc1db6866c9b173bc313e804774"
+    },
+    "n_si": 41216,
+    "n_ox": 2944,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T08",
+   "state_id": "HO-2",
+   "case": "HO__R_L1_NA1e18_tox2_VG0.686557_B1",
+   "case_file": "benchmark/cases/HO__R_L1_NA1e18_tox2_VG0.686557_B1.json",
+   "tier": "HO",
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.686557,
+   "level": 1,
+   "mesh_id": "dev1_L1_lev1",
+   "reference_G_DD_S_per_cm": 1.1211190535871126e-09,
+   "current_at_1mV_A_per_cm": 1.1211190535871126e-12,
+   "kit_generation": {
+    "task": "T08",
+    "G_DD": 1.1211190535871126e-09,
+    "G_DD_second": 1.1211190532864362e-09,
+    "psi_hat": 17.992879663693763,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "b0055f0d8ba9c8e7fecbd1f966480be9b4aae379d762af25dda030193ef8eb0e",
+     "psi_ox": "c23749b60d6e0bd837ae465a7bfce776dff6e1a5fce4a66bc1fef1bfb0b77291",
+     "n_si": "202bf323ce887d8c70592fe67848c67da6e1f1d3d5d3f2bbbbfa9b125cbb51cb"
+    },
+    "n_si": 41216,
+    "n_ox": 2944,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T09",
+   "state_id": "HO-3",
+   "case": "HO__R_L2_NA1e16_tox20_VG0.588534_B1",
+   "case_file": "benchmark/cases/HO__R_L2_NA1e16_tox20_VG0.588534_B1.json",
+   "tier": "HO",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+16,
+   "t_ox_nm": 20.0,
+   "V_G_V": 0.588534,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "reference_G_DD_S_per_cm": 4.569247289526923e-08,
+   "current_at_1mV_A_per_cm": 4.5692472895269233e-11,
+   "kit_generation": {
+    "task": "T09",
+    "G_DD": 4.569247289526923e-08,
+    "G_DD_second": 4.569247289641553e-08,
+    "psi_hat": 14.999903439313703,
+    "equilibrium_iterations": 16,
+    "array_sha256": {
+     "psi_si": "d0c3dcb610f94517d0d1a7b6772167b42c63bc0e11f9e85f79e9a6143604072d",
+     "psi_ox": "911d29b644d0f42215b87d66cc0dfd786cfc8b6e314f70ef6dddcb53a40b8389",
+     "n_si": "abc4a469e3c54d75898adb3f35b65ebabef1041be8b67bb0cc180cf45bf0ec12"
+    },
+    "n_si": 134904,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T10",
+   "state_id": "HO-4",
+   "case": "HO__R_L2_NA1e16_tox20_VG0.686557_B1",
+   "case_file": "benchmark/cases/HO__R_L2_NA1e16_tox20_VG0.686557_B1.json",
+   "tier": "HO",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+16,
+   "t_ox_nm": 20.0,
+   "V_G_V": 0.686557,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "reference_G_DD_S_per_cm": 8.401174475410332e-07,
+   "current_at_1mV_A_per_cm": 8.401174475410332e-10,
+   "kit_generation": {
+    "task": "T10",
+    "G_DD": 8.401174475410332e-07,
+    "G_DD_second": 8.401174475898426e-07,
+    "psi_hat": 17.999907892080486,
+    "equilibrium_iterations": 16,
+    "array_sha256": {
+     "psi_si": "2594476ef5c380c9d915e9201d42ea17a23b1931eb52b737ab9201636f82d0fa",
+     "psi_ox": "fc694b25b64596cd7b1dfd292e74127bd8bf94407eed1c094c4e6c9ac97e628c",
+     "n_si": "546d0643d7079c1c6d9adc453b00f657c0db9da3ed53dd5db676271a21d129de"
+    },
+    "n_si": 134904,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "T11",
+   "state_id": "HO-5",
+   "case": "HO__R_L2_NA1e18_tox2_VG0.488174_B1",
+   "case_file": "benchmark/cases/HO__R_L2_NA1e18_tox2_VG0.488174_B1.json",
+   "tier": "HO",
+   "L_um": 2.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.488174,
+   "level": 1,
+   "mesh_id": "dev1_L2_lev1",
+   "reference_G_DD_S_per_cm": 1.7170575961604291e-12,
+   "current_at_1mV_A_per_cm": 1.7170575961604292e-15,
+   "kit_generation": {
+    "task": "T11",
+    "G_DD": 1.7170575961604291e-12,
+    "G_DD_second": 1.7170575954224927e-12,
+    "psi_hat": 11.994241940300387,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "d2aecce08fb9d8756df94b705f7a5a12da9206635645765384dfe8be6fbdaa9d",
+     "psi_ox": "2cdf74081fc769db5df20db7a16d0e5fe39c357461d4496fbd29a83bb612d973",
+     "n_si": "957a4280475226544deaa1d139fd4bc9521f82c0e1c2bd6f6b73e533adfa5678"
+    },
+    "n_si": 49056,
+    "n_ox": 3504,
+    "rel_vs_reference": 0.0
+   }
+  },
+  {
+   "task": "SMOKE",
+   "state_id": "SMOKE-sub",
+   "case": null,
+   "L_um": 1.0,
+   "N_A_cm3": 1e+18,
+   "t_ox_nm": 2.0,
+   "V_G_V": 0.55,
+   "level": 0,
+   "mesh_id": "dev1_L1_lev0",
+   "reference_G_DD_S_per_cm": 2.033767951250753e-11,
+   "reference_note": "network G_DD computed here (smoke state; no case file)",
+   "kit_generation": {
+    "task": "SMOKE",
+    "G_DD": 2.033767951250753e-11,
+    "G_DD_second": 2.0337679512049872e-11,
+    "psi_hat": 13.825737388220805,
+    "equilibrium_iterations": 15,
+    "array_sha256": {
+     "psi_si": "5916dd013a552e9659e658d35673eaca3916e613a9e85689639750b9e30ec2c7",
+     "psi_ox": "bebf3062542f6710370c126d82ca7f9d8143e8eb6d23d486dd4cd196f23e51b8",
+     "n_si": "3182f58e900448364ee06ad744598018d719e8da9faee012c205b3be981ec73c"
+    },
+    "n_si": 20619,
+    "n_ox": 1566,
+    "rel_vs_reference": null
+   }
+  }
+ ]
+}
