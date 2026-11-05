@@ -1,0 +1,43 @@
+$ python benchmark/wp2/smoke_geometry.py
+Searching DEVSIM_MATH_LIBS="/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/usr/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/usr/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 153600 Triangles.
+Physical group name si has 230960 Lines.
+Physical group name si has 77361 Points.
+dev1 wj=0.000 B0 G_DD: plan=0.897442 planFV=0.893859 P1=0.893859 P4=0.893859 | P1/plan-1=-3.99e-03 P4/plan-1=-3.99e-03 | P1/planFV-1=-1.68e-13 P4/planFV-1=-1.68e-13 | P1/P4-1=-2.2e-16
+dev1 wj=0.000 B0 G_SD: plan=0.897442 planFV=0.893859 P1=0.893859 P4=0.893859 | P1/plan-1=-3.99e-03 P4/plan-1=-3.99e-03 | P1/planFV-1=+2.10e-13 P4/planFV-1=-1.56e-13 | P1/P4-1=+3.7e-13
+dev1 wj=0.000 B1 G_DD: plan=1.499921 planFV=1.493723 P1=1.493723 P4=1.493723 | P1/plan-1=-4.13e-03 P4/plan-1=-4.13e-03 | P1/planFV-1=-4.64e-14 P4/planFV-1=-4.65e-14 | P1/P4-1=+2.2e-16
+dev1 wj=0.000 B1 G_SD: plan=0.511269 planFV=0.508763 P1=0.508763 P4=0.508763 | P1/plan-1=-4.90e-03 P4/plan-1=-4.90e-03 | P1/planFV-1=-2.46e-13 P4/planFV-1=-2.51e-13 | P1/P4-1=+4.4e-15
+dev1 wj=0.000 B1 G_DB: plan=0.988652 planFV=0.984961 P1=0.984961 P4=0.984961 | P1/plan-1=-3.73e-03 P4/plan-1=-3.73e-03 | P1/planFV-1=+1.47e-14 P4/planFV-1=-3.89e-14 | P1/P4-1=+5.4e-14
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 153600 Triangles.
+Physical group name si has 230960 Lines.
+Physical group name si has 77361 Points.
+dev1 wj=0.037 B0 G_DD: plan=0.989155 planFV=0.985381 P1=0.985381 P4=0.985381 | P1/plan-1=-3.82e-03 P4/plan-1=-3.82e-03 | P1/planFV-1=-6.17e-14 P4/planFV-1=-6.17e-14 | P1/P4-1=+0.0e+00
+dev1 wj=0.037 B0 G_SD: plan=0.989155 planFV=0.985381 P1=0.985381 P4=0.985381 | P1/plan-1=-3.82e-03 P4/plan-1=-3.82e-03 | P1/planFV-1=+1.54e-13 P4/planFV-1=-1.62e-13 | P1/P4-1=+3.2e-13
+dev1 wj=0.037 B1 G_DD: plan=1.650020 planFV=1.643491 P1=1.643491 P4=1.643491 | P1/plan-1=-3.96e-03 P4/plan-1=-3.96e-03 | P1/planFV-1=-5.54e-14 P4/planFV-1=-5.55e-14 | P1/P4-1=+2.2e-16
+dev1 wj=0.037 B1 G_SD: plan=0.592248 planFV=0.589554 P1=0.589554 P4=0.589554 | P1/plan-1=-4.55e-03 P4/plan-1=-4.55e-03 | P1/planFV-1=-2.00e-13 P4/planFV-1=-1.79e-13 | P1/P4-1=-2.0e-14
+dev1 wj=0.037 B1 G_DB: plan=1.057772 planFV=1.053936 P1=1.053936 P4=1.053936 | P1/plan-1=-3.63e-03 P4/plan-1=-3.63e-03 | P1/planFV-1=+5.73e-14 P4/planFV-1=-2.55e-14 | P1/P4-1=+8.3e-14
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 249600 Triangles.
+Physical group name si has 375160 Lines.
+Physical group name si has 125561 Points.
+dev2 wj=0.000 B0 G_DD: plan=0.509763 planFV=0.507736 P1=0.507736 P4=0.507736 | P1/plan-1=-3.98e-03 P4/plan-1=-3.98e-03 | P1/planFV-1=+2.03e-13 P4/planFV-1=+2.03e-13 | P1/P4-1=+0.0e+00
+dev2 wj=0.000 B0 G_SD: plan=0.509763 planFV=0.507736 P1=0.507736 P4=0.507736 | P1/plan-1=-3.98e-03 P4/plan-1=-3.98e-03 | P1/planFV-1=+9.19e-13 P4/planFV-1=-2.47e-13 | P1/P4-1=+1.2e-12
+dev2 wj=0.000 B1 G_DD: plan=1.380065 planFV=1.374811 P1=1.374811 P4=1.374811 | P1/plan-1=-3.81e-03 P4/plan-1=-3.81e-03 | P1/planFV-1=-2.78e-15 P4/planFV-1=-2.78e-15 | P1/P4-1=+0.0e+00
+dev2 wj=0.000 B1 G_SD: plan=0.130249 planFV=0.129310 P1=0.129310 P4=0.129310 | P1/plan-1=-7.21e-03 P4/plan-1=-7.21e-03 | P1/planFV-1=+3.44e-13 P4/planFV-1=-4.12e-13 | P1/P4-1=+7.6e-13
+dev2 wj=0.000 B1 G_DB: plan=1.249816 planFV=1.245501 P1=1.245501 P4=1.245501 | P1/plan-1=-3.45e-03 P4/plan-1=-3.45e-03 | P1/planFV-1=+1.63e-13 P4/planFV-1=-8.06e-14 | P1/P4-1=+2.4e-13
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 249600 Triangles.
+Physical group name si has 375160 Lines.
+Physical group name si has 125561 Points.
+dev2 wj=0.351 B0 G_DD: plan=0.882136 planFV=0.878900 P1=0.878900 P4=0.878900 | P1/plan-1=-3.67e-03 P4/plan-1=-3.67e-03 | P1/planFV-1=-2.16e-13 P4/planFV-1=-2.16e-13 | P1/P4-1=-1.1e-16
+dev2 wj=0.351 B0 G_SD: plan=0.882136 planFV=0.878900 P1=0.878900 P4=0.878900 | P1/plan-1=-3.67e-03 P4/plan-1=-3.67e-03 | P1/planFV-1=+2.47e-13 P4/planFV-1=-2.40e-13 | P1/P4-1=+4.9e-13
+dev2 wj=0.351 B1 G_DD: plan=3.358740 planFV=3.349613 P1=3.349613 P4=3.349613 | P1/plan-1=-2.72e-03 P4/plan-1=-2.72e-03 | P1/planFV-1=-3.36e-14 P4/planFV-1=-3.34e-14 | P1/P4-1=-2.2e-16
+dev2 wj=0.351 B1 G_SD: plan=0.444682 planFV=0.442820 P1=0.442820 P4=0.442820 | P1/plan-1=-4.19e-03 P4/plan-1=-4.19e-03 | P1/planFV-1=+1.62e-13 P4/planFV-1=-2.90e-13 | P1/P4-1=+4.5e-13
+dev2 wj=0.351 B1 G_DB: plan=2.914058 planFV=2.906794 P1=2.906794 P4=2.906794 | P1/plan-1=-2.49e-03 P4/plan-1=-2.49e-03 | P1/planFV-1=+1.75e-14 P4/planFV-1=-3.94e-14 | P1/P4-1=+5.7e-14
+PASS vs planning script: False | PASS vs FV-weight planning stencil: True | P1 == P4: True
+exit=0

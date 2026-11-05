@@ -1,0 +1,109 @@
+$ python benchmark/wp2/rdeck_dd.py --id SMOKE-above --na 1e18 --tox 2 --L 1 --vg 1.0 --level 0 --body B1 --out benchmark/wp2/results/smoke
+Searching DEVSIM_MATH_LIBS="/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/usr/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/usr/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 260 Lines.
+Physical group name body has 261 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 43 Lines.
+Physical group name drain has 44 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 148 Lines.
+Physical group name gate has 149 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 2600 Triangles.
+Physical group name ox has 4165 Lines.
+Physical group name ox has 1566 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 260 Lines.
+Physical group name ox_si has 261 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 40560 Triangles.
+Physical group name si has 61178 Lines.
+Physical group name si has 20619 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 43 Lines.
+Physical group name source has 44 Points.
+Warning, contact "drain" shares a node with contact "oxc_d"
+Warning, contact "oxc_s" shares a node with contact "source"
+Warning, contact "oxc_d" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Replacing Node Model PotentialNodeCharge in region si of material Si
+Replacing Node Model PotentialNodeCharge:Potential in region si of material Si
+Replacing Node Model PotentialNodeCharge:Electrons in region si of material Si
+creating solution dcop with 2 nodes
+number of equations 42806
+creating solution dcop_prev with 2 nodes
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+number of equations 42806
+SMOKE-above B1 lev0 G_net=1.808665e-05 | 1mV: default +2.768e-04 circuit +2.489e-04 weighted +2.489e-04 | 0.1mV: default +1.861e-03 weighted +2.489e-06 | indicator check 3.4e-16 | wall 19s
+exit=0
