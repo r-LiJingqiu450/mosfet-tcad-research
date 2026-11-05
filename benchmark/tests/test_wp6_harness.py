@@ -67,9 +67,11 @@ def _transcript(tmp_path, events, run_id='W6-999', arm='A'):
 
 def _ev(final, uses=(), model='claude-opus-5-5', tools=('Bash', 'Read', 'Write', 'Edit', 'Glob', 'Grep')):
     ev = [dict(type='system', subtype='init', tools=list(tools), mcp_servers=[], model=model, permissionMode='auto', cwd=WS)]
-    for i, (name, inp, out) in enumerate(uses):
+    for i, u in enumerate(uses):
+        name, inp, out = u[:3]
         ev.append(dict(type='assistant', message=dict(model=model, content=[dict(type='tool_use', id=f'u{i}', name=name, input=inp)])))
-        ev.append(dict(type='user', message=dict(content=[dict(type='tool_result', tool_use_id=f'u{i}', content=out)])))
+        ev.append(dict(type='user', message=dict(content=[dict(type='tool_result', tool_use_id=f'u{i}', content=out,
+                                                               is_error=bool(u[3]) if len(u) > 3 else False)])))
     ev.append(dict(type='assistant', message=dict(model=model, content=[dict(type='text', text=final)])))
     ev.append(dict(type='result', subtype='success', result=final, num_turns=3, total_cost_usd=0.5, is_error=False))
     return ev
@@ -81,10 +83,12 @@ FINAL = 'Done.\n```json\n{"G_DD_S_per_cm": 3.5e-12, "status": "success", "method
 def test_audit_clean_run_and_final_block(tmp_path, monkeypatch):
     monkeypatch.setattr(AU, 'ROOT', '/')
     rd = _transcript(tmp_path, _ev(FINAL, uses=[('Bash', {'command': './py a.py'}, '3.5e-12'),
-                                                ('Bash', {'command': 'ls /home/claude'}, 'Blocked by workspace policy: ...')]))
+                                                ('Bash', {'command': 'ls /home/claude'}, 'PreToolUse:Bash hook error: Blocked by workspace policy: ...', True),
+                                                ('Bash', {'command': 'sleep 90; cat /tmp/claude-0/x'}, '<tool_use_error>Blocked: sleep 90 ...</tool_use_error>', True),
+                                                ('Bash', {'command': 'cat /tmp/claude-0/-home-claude-wp6-runs-W6-999/s/tasks/b1.output'}, 'own output')]))
     a = AU.audit(rd)
     assert a['G_reported'] == 3.5e-12 and a['status'] == 'success'
-    assert not a['contaminated'] and not a['harness_failure'] and len(a['blocked_attempts']) == 1
+    assert not a['contaminated'] and not a['harness_failure'] and len(a['blocked_attempts']) == 2
 
 
 def test_audit_flags_unblocked_access_leak_and_setup(tmp_path, monkeypatch):

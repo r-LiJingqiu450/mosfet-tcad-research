@@ -11,6 +11,11 @@ answered, the final message, the reported JSON block, usage and cost. Flags (pre
                         memory or environment (/proc/<pid>);
   F4 setup              the session had a tool, MCP server or model other than the pre-registered ones.
 A run is contaminated if F1, F2 or F3 is raised; F4 invalidates the run as a harness failure.
+Amendment W6-A2: a tool call that did not execute (its result is a tool-use error: refused by the guard, by Claude Code's
+own command checks or by a permission denial) is a blocked attempt, not an access; paths inside the agent's own Claude Code
+scratch directory (/tmp/claude-0/-home-claude-wp6-runs-<its run id>/, background-task output) are not forbidden for F1;
+turns and duration are summed over a session's result events (one per segment when the session waits on a background
+task), and the cost is the last, cumulative value.
 Method hints (which DEVSIM calls the agent's code used) are recorded for the root-cause coding; they decide nothing.
 
 Usage:  python benchmark/wp6/harness/audit.py benchmark/wp6/results/runs/<run_id>   (writes audit.json there)
@@ -31,6 +36,7 @@ import guard as G  # noqa: E402
 EXPECTED_TOOLS = {'Bash', 'Read', 'Write', 'Edit', 'Glob', 'Grep'}
 EXPECTED_MODEL = 'claude-opus-5-5'
 BLOCK_MARK = 'Blocked by workspace policy'
+NOT_EXECUTED = ('<tool_use_error>', 'hook error', BLOCK_MARK)
 LEAK_MARKERS = ('same_mesh_references', 'known_bad_outputs', 'cross_paths', 'mosfet-tcad-research', 'benchmark/cases',
                 'Preregistration', 'network_same_run', 'rdeck_', 'phase3/', 'reference_G_DD', 'tasks.json',
                 'evaluation_wp', 'posthoc_wp4', 'G_DD_rel_forms', 'kappa_G', 'edge energy')
@@ -76,6 +82,8 @@ def forbidden(inp, tool, run_id):
     """Reasons a tool input refers to a forbidden location (guard patterns plus other runs' workspaces)."""
     why = []
     cwd = f'{G.ALLOWED_ROOTS[0]}{run_id}'
+    own_scratch = f'/tmp/claude-0/-home-claude-wp6-runs-{run_id}/'
+    inp = {k: (v.replace(own_scratch, f'{cwd}/') if isinstance(v, str) else v) for k, v in (inp or {}).items()}
     for key in ('file_path', 'path', 'notebook_path'):
         p = (inp or {}).get(key)
         if isinstance(p, str) and p:
@@ -124,6 +132,7 @@ def audit(rundir):
     ev = load(os.path.join(ROOT, run['transcript']))
     init = next((e for e in ev if e.get('type') == 'system' and e.get('subtype') == 'init'), {})
     result = next((e for e in reversed(ev) if e.get('type') == 'result'), {})
+    all_results = [e for e in ev if e.get('type') == 'result']
     uses, results, models, texts = [], {}, set(), []
     for e in ev:
         if e.get('type') == 'assistant':
@@ -143,7 +152,7 @@ def audit(rundir):
     f1, blocked, f3 = [], [], []
     for u in uses:
         res = results.get(u['id'], {})
-        was_blocked = BLOCK_MARK in res.get('text', '')
+        was_blocked = res.get('is_error', False) and any(m in res.get('text', '') for m in NOT_EXECUTED)
         if was_blocked:
             blocked.append(dict(tool=u['name'], input=json.dumps(u['input'])[:300]))
         why = forbidden(u['input'], u['name'], run['run_id'])
@@ -180,8 +189,10 @@ def audit(rundir):
                             claude_code_version=init.get('claude_code_version')),
                models=sorted(models), n_tool_calls=len(uses), n_bash=sum(u['name'] == 'Bash' for u in uses),
                n_python_runs=sum(1 for u in uses if u['name'] == 'Bash' and re.search(r'(?:^|[\s;&|(])\./py\b|python', u['input'].get('command', '') or '')),
-               result_subtype=result.get('subtype'), is_error=result.get('is_error'), num_turns=result.get('num_turns'),
-               duration_ms=result.get('duration_ms'), total_cost_usd=result.get('total_cost_usd'), usage=result.get('usage'),
+               result_subtype=result.get('subtype'), is_error=result.get('is_error'),
+               num_turns=sum(r.get('num_turns') or 0 for r in all_results) or None,
+               duration_ms=sum(r.get('duration_ms') or 0 for r in all_results) or None, n_result_events=len(all_results),
+               total_cost_usd=result.get('total_cost_usd'), usage=result.get('usage'),
                model_usage=result.get('modelUsage'), permission_denials=result.get('permission_denials'),
                rate_limits=[e.get('rate_limit_info') for e in ev if e.get('type') == 'rate_limit_event'][-1:],
                final_message=final_text[-4000:] if final_text else None, reported=rep,

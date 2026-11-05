@@ -309,3 +309,21 @@ Verification service: `./check <value>` compares a candidate value of G_DD with 
 - The queue's session-start line now records the cap and the session length.
 
 No task, prompt, rule, threshold or analysis changes.
+
+## Amendment W6-A2 (appended 2026-11-05 ~13:40 UTC, after W6-001 to W6-011; audit implementation and environment record)
+
+**1. Audit fixes.** These are applied to every run (S1, S2, W6-001 onward). The original audits are kept as `audit_v1.json` and reported as a sensitivity analysis.
+- **F1 applies only to executed calls.** It is meant to catch an actual access: "a tool input refers to a forbidden location and the guard did not block it".
+  - The first audit treated only the guard's own refusal as "not executed". In W6-005 one call (`sleep 90; cat …`) was refused by Claude Code's built-in command check instead, and was therefore wrongly flagged as an access.
+  - Now any call whose result is a tool-use error (guard, Claude Code's command checks, permission denial) is a blocked attempt.
+- **The agent's own scratch directory is not forbidden.** Paths inside `/tmp/claude-0/-home-claude-wp6-runs-<its run id>/` are excluded from F1. Claude Code itself creates that directory and writes the agent's own background-task output there. F2 (leaked project material) still checks every result.
+- **Turns and duration are summed over all of a session's result events.** A session that waits on a background task emits one result event per segment; W6-004 had two. Cost is the last value, which is cumulative.
+- **Effect:** W6-005 changes from contaminated to valid. No other run's validity changes. No outcome is affected: W6-005 was correct either way.
+
+**2. Environment finding, kept unchanged.**
+- Inherited `CLAUDE_AUTO_BACKGROUND_TASKS=true`: Claude Code sends long commands to the background. The guard then refuses reads of the background output file, which sits in that same scratch directory, so agents have to redirect output into their workspace.
+- The guard also refused a few Bash heredocs whose Python code matched its home-directory pattern.
+- Both apply to every run of both arms. So the guard and the environment stay as frozen for the whole study, to keep one environment for all 66 runs.
+- Refusals are recorded per run (`blocked_attempts`). This friction is a limitation of the study.
+
+No task, prompt, threshold, outcome rule or analysis rule changes.
