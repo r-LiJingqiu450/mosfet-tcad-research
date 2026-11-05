@@ -1,0 +1,117 @@
+{
+ "version": "wp2-fv-rdeck-2026-11-04",
+ "path": "P4",
+ "start_utc": "2026-11-05T04:36:19.494+00:00",
+ "args": {
+  "id": "AR-6",
+  "na": 1e+16,
+  "tox": 20.0,
+  "L": 2.0,
+  "vg": 0.7835,
+  "mesh": "refined",
+  "out": "/home/claude/mosfet-tcad-research/benchmark/wp2/results/production"
+ },
+ "argv": [
+  "benchmark/wp2/fv_rdeck.py",
+  "--id",
+  "AR-6",
+  "--na",
+  "1e16",
+  "--tox",
+  "20",
+  "--L",
+  "2",
+  "--vg",
+  "0.7835",
+  "--mesh",
+  "refined",
+  "--out",
+  "/home/claude/mosfet-tcad-research/benchmark/wp2/results/production"
+ ],
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0"
+ },
+ "mesh": {
+  "nx": 793,
+  "ny": 532,
+  "nodes": 421876,
+  "n_ox_cells": 8,
+  "dx_min_nm": 0.12433766112600288,
+  "dx_max_nm": 4.999988871499318,
+  "dx_at_x0_nm": 0.12499742383561842,
+  "dx_at_L_nm": 0.12433766112600288,
+  "dy_si_min_nm": 0.024943620840596526,
+  "dy_si_max_nm": 5.000000000000122,
+  "dy_at_interface_nm": 0.024943620840596526,
+  "h_w_is_mesh_line": true,
+  "contact_extent_um": 0.5,
+  "kwargs": {
+   "h0x": 1.25e-08,
+   "h0y": 2.5e-09,
+   "gx": 1.04,
+   "gy": 1.025,
+   "hmax": 5e-07,
+   "hj": 1.25e-07
+  }
+ },
+ "equilibrium": {
+  "iterations": 22,
+  "converged": true,
+  "last": [
+   {
+    "it": 18,
+    "max_update_V": 1.89754433229051e-12,
+    "max_raw_V": 1.89754433236015e-12
+   },
+   {
+    "it": 19,
+    "max_update_V": 1.6506351078090145e-13,
+    "max_raw_V": 1.6506351078142841e-13
+   },
+   {
+    "it": "extra",
+    "max_update_V": 1.5692448553130604e-13
+   },
+   {
+    "it": "extra",
+    "max_update_V": 1.645561834500324e-13
+   }
+  ],
+  "rel_residual": 1.5797391948224874e-15,
+  "psi_b0": -0.3571585759940161
+ },
+ "results": {
+  "B0": {
+   "G_DD": 1.5972180072422192e-05,
+   "G_DD_second": 1.597218007826635e-05,
+   "G_SD": 1.597218007826635e-05,
+   "G_SD_second": 1.5972180078268627e-05,
+   "G_DD_direct_drain_sum": 1.589983730809763e-05,
+   "residual": 2.9261000354638845e-13,
+   "G_DD_rel_forms": 3.658959801811079e-10,
+   "G_SD_rel_forms": 1.425526363618701e-13
+  },
+  "B1": {
+   "G_DD": 1.59721841808983e-05,
+   "G_DD_second": 1.5972184187173548e-05,
+   "G_SD": 1.5972179057996585e-05,
+   "G_SD_second": 1.5972179057999245e-05,
+   "G_DD_direct_drain_sum": 1.5910962247289717e-05,
+   "residual": 2.452537982845187e-13,
+   "G_DD_rel_forms": 3.928859459989553e-10,
+   "G_SD_rel_forms": 1.6653345369377348e-13,
+   "G_DB": 5.129176963967501e-12,
+   "kcl_closure_rel": 3.928860082999884e-10
+  }
+ },
+ "psi_s_centre_V": 0.18634860399394887,
+ "psi_hat_centre": 21.023796397876403,
+ "Ns_centre_cm2": 8967062.383187827,
+ "G_centre_sheet_over_L": 9.697602032525625e-06,
+ "t_s": 88.1589937210083,
+ "mesh_preset": "refined",
+ "end_utc": "2026-11-05T04:37:47.686+00:00"
+}
