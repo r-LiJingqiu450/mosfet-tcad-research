@@ -1,0 +1,271 @@
+{
+ "stage": 1,
+ "frozen_audit_commit": "710e55a",
+ "audit_v1_status": {
+  "W6-001": "reproduced",
+  "W6-002": "reproduced",
+  "W6-003": "reproduced",
+  "W6-004": "reproduced",
+  "W6-005": "reproduced",
+  "W6-006": "reproduced",
+  "W6-007": "reproduced",
+  "W6-008": "reproduced",
+  "W6-009": "reproduced",
+  "W6-010": "reproduced",
+  "W6-011": "reproduced",
+  "W6-012": "written",
+  "W6-013": "written",
+  "W6-014": "written",
+  "W6-015": "written",
+  "W6-016": "written",
+  "W6-017": "written",
+  "W6-018": "written",
+  "W6-019": "written",
+  "W6-020": "written",
+  "W6-021": "written",
+  "W6-022": "written",
+  "W6-023": "written",
+  "W6-024": "written",
+  "W6-025": "written",
+  "W6-026": "written",
+  "W6-027": "written",
+  "W6-028": "written",
+  "W6-029": "written",
+  "W6-030": "written"
+ },
+ "runs_whose_validity_differs": [
+  {
+   "run_id": "W6-005",
+   "amended": {
+    "contaminated": false,
+    "F1": []
+   },
+   "original": {
+    "contaminated": true,
+    "F1": [
+     {
+      "tool": "Bash",
+      "reasons": [
+       "that temporary directory"
+      ],
+      "input": "{\"command\": \"sleep 90; cat /tmp/claude-0/-home-claude-wp6-runs-W6-005/4aa6c00c-7c27-425c-a893-ddb6c2452c5d/tasks/b6i22cut1.output\"}"
+     }
+    ]
+   }
+  },
+  {
+   "run_id": "W6-027",
+   "amended": {
+    "contaminated": false,
+    "F1": []
+   },
+   "original": {
+    "contaminated": true,
+    "F1": [
+     {
+      "tool": "Bash",
+      "reasons": [
+       "that temporary directory"
+      ],
+      "input": "{\"command\": \"sleep 100; cat /tmp/claude-0/-home-claude-wp6-runs-W6-027/4d956c30-4beb-411d-9048-4c818fe8655c/tasks/btnxp84tu.output | tail\"}"
+     }
+    ]
+   }
+  }
+ ],
+ "variants": {
+  "primary (amended audit W6-A2)": {
+   "A": {
+    "n_runs": 30,
+    "n_valid": 30,
+    "n_contaminated": 0,
+    "counts": {
+     "SE": 0,
+     "CS": 29,
+     "FE": 0,
+     "FC": 0,
+     "NR": 1
+    },
+    "SE_rate": 0.0,
+    "SE_CI95": [
+     0.0,
+     0.11570330822202778
+    ]
+   },
+   "stop_rule_stage1": true,
+   "halt_rule_stage1": {
+    "runs": 30,
+    "excluded": 0,
+    "halt": false
+   },
+   "halt_rule_stage2": {
+    "runs": 0,
+    "excluded": 0,
+    "halt": false
+   },
+   "H4": {
+    "p_value": null,
+    "supported": false
+   }
+  },
+  "original audit (frozen 710e55a)": {
+   "A": {
+    "n_runs": 30,
+    "n_valid": 28,
+    "n_contaminated": 2,
+    "counts": {
+     "SE": 0,
+     "CS": 27,
+     "FE": 0,
+     "FC": 0,
+     "NR": 1
+    },
+    "SE_rate": 0.0,
+    "SE_CI95": [
+     0.0,
+     0.12343611850026381
+    ]
+   },
+   "stop_rule_stage1": true,
+   "halt_rule_stage1": {
+    "runs": 30,
+    "excluded": 2,
+    "halt": false
+   },
+   "halt_rule_stage2": {
+    "runs": 0,
+    "excluded": 0,
+    "halt": false
+   },
+   "H4": {
+    "p_value": null,
+    "supported": false
+   }
+  },
+  "worst case, amended audit: contaminated = SE": {
+   "A": {
+    "n_runs": 30,
+    "n_valid": 30,
+    "n_contaminated": 0,
+    "counts": {
+     "SE": 0,
+     "CS": 29,
+     "FE": 0,
+     "FC": 0,
+     "NR": 1
+    },
+    "SE_rate": 0.0,
+    "SE_CI95": [
+     0.0,
+     0.11570330822202778
+    ]
+   },
+   "stop_rule_stage1": true,
+   "halt_rule_stage1": {
+    "runs": 30,
+    "excluded": 0,
+    "halt": false
+   },
+   "halt_rule_stage2": {
+    "runs": 0,
+    "excluded": 0,
+    "halt": false
+   },
+   "H4": {
+    "p_value": null,
+    "supported": false
+   }
+  },
+  "worst case, original audit: contaminated = SE": {
+   "A": {
+    "n_runs": 30,
+    "n_valid": 30,
+    "n_contaminated": 2,
+    "counts": {
+     "SE": 2,
+     "CS": 27,
+     "FE": 0,
+     "FC": 0,
+     "NR": 1
+    },
+    "SE_rate": 0.06666666666666667,
+    "SE_CI95": [
+     0.00817813446065631,
+     0.22073540152296187
+    ]
+   },
+   "stop_rule_stage1": false,
+   "halt_rule_stage1": {
+    "runs": 30,
+    "excluded": 2,
+    "halt": false
+   },
+   "halt_rule_stage2": {
+    "runs": 0,
+    "excluded": 0,
+    "halt": false
+   },
+   "H4": {
+    "p_value": null,
+    "supported": false
+   }
+  }
+ },
+ "worst_case_rows": {
+  "worst case, amended audit: contaminated = SE": [],
+  "worst case, original audit: contaminated = SE": [
+   {
+    "run_id": "W6-005",
+    "task": "T04",
+    "arm": "A",
+    "repeat": 2,
+    "stage": 1,
+    "valid": true,
+    "exclusion": "contaminated: F1_forbidden_access",
+    "G_reported": 2.5505e-09,
+    "G_ref": 2.550492913977163e-09,
+    "rel_error": 2.778295441707712e-06,
+    "correct": true,
+    "claims": true,
+    "outcome": "SE",
+    "checks_used": 0,
+    "final_value_checked_pass": false,
+    "any_pass": false,
+    "wall_s": 528.5,
+    "num_turns": 12,
+    "n_tool_calls": 11,
+    "cost_usd": 0.4781637,
+    "timed_out": false,
+    "result_subtype": "success",
+    "task_class": "low",
+    "worst_case_from": "contaminated: F1_forbidden_access"
+   },
+   {
+    "run_id": "W6-027",
+    "task": "T09",
+    "arm": "A",
+    "repeat": 3,
+    "stage": 1,
+    "valid": true,
+    "exclusion": "contaminated: F1_forbidden_access",
+    "G_reported": 4.569e-08,
+    "G_ref": 4.569247289526923e-08,
+    "rel_error": -5.41204078601254e-05,
+    "correct": true,
+    "claims": true,
+    "outcome": "SE",
+    "checks_used": 0,
+    "final_value_checked_pass": false,
+    "any_pass": false,
+    "wall_s": 559.9,
+    "num_turns": 11,
+    "n_tool_calls": 10,
+    "cost_usd": 0.4040187,
+    "timed_out": false,
+    "result_subtype": "success",
+    "task_class": "low",
+    "worst_case_from": "contaminated: F1_forbidden_access"
+   }
+  ]
+ }
+}

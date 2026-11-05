@@ -147,6 +147,16 @@ def test_queue_usage_reading_drops_windows_that_have_reset():
     assert Q.window_values(info, now=2100) == []             # after both resets: nothing known
 
 
+def test_worst_case_counts_contaminated_runs_as_silent_errors():
+    import sensitivity_wp6 as S
+    rows = [dict(run_id='W6-001', valid=False, exclusion='contaminated: F1_forbidden_access', outcome='CS'),
+            dict(run_id='W6-002', valid=True, exclusion=None, outcome='CS'),
+            dict(run_id='W6-003', valid=False, exclusion='harness failure: x', outcome='NR')]
+    w = S.worst_case(rows)
+    assert (w[0]['valid'], w[0]['outcome']) == (True, 'SE') and w[1]['outcome'] == 'CS' and not w[2]['valid']
+    assert rows[0]['outcome'] == 'CS'          # the input rows are not changed
+
+
 def test_task_files_carry_no_reference_or_identity():
     bad = ('reference_G', 'state_id', 'AR-', 'HO-', 'benchmark', 'network', 'case', 'tolerance', 'G_DD', 'SMOKE')
     tasks = {t['task']: t for t in json.load(open(os.path.join(WP6, 'tasks', 'tasks.json')))['tasks']}
