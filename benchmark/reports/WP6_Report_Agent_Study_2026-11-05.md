@@ -263,6 +263,6 @@ The agents' explanations of the AC error vary: round-off, ill-conditioning, "the
 | `python benchmark/wp6/harness/run_queue_wp6.py --stage 1 --session-min 118 --usage-cap 0.80` (4 sessions) | 0, 0, 0, 0 |
 | `python benchmark/wp6/harness/evaluate_wp6.py --selftest` | 0 (exact p 0.052 = brute force 0.052) |
 | `python benchmark/wp6/harness/evaluate_wp6.py --stage 1 > benchmark/wp6/results/report_tables_wp6_stage1.md` | 0 |
-| `python benchmark/wp6/harness/sensitivity_wp6.py --stage 1` | 0 (30 original audits reproduced, 3 written) |
+| `python benchmark/wp6/harness/sensitivity_wp6.py --stage 1` | 0. The final invocation reproduced 30 stored original audits and wrote 3. An interim invocation at 30 runs had written 19 of the 30; the other 11 are the pre-amendment originals. |
 | `python benchmark/wp6/harness/explore_wp6.py --stage 1` | 0 |
 | `python -m pytest -q benchmark/tests/test_wp6_harness.py` | 0 (31 passed) |
