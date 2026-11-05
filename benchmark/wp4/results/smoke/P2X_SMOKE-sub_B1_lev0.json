@@ -1,0 +1,360 @@
+{
+ "version": "wp2-rdeck-dd-2026-11-04",
+ "path": "P2",
+ "start_utc": "2026-11-05T06:10:02.658+00:00",
+ "args": {
+  "id": "SMOKE-sub",
+  "na": 1e+18,
+  "tox": 2.0,
+  "L": 1.0,
+  "vg": 0.55,
+  "level": 0,
+  "body": "B1",
+  "out": "benchmark/wp4/results/smoke"
+ },
+ "argv": [
+  "benchmark/wp4/rdeck_dd_ext.py",
+  "--id",
+  "SMOKE-sub",
+  "--na",
+  "1e18",
+  "--tox",
+  "2",
+  "--L",
+  "1",
+  "--vg",
+  "0.55",
+  "--level",
+  "0",
+  "--body",
+  "B1",
+  "--out",
+  "benchmark/wp4/results/smoke"
+ ],
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39",
+  "packages": {
+   "numpy": "2.3.5",
+   "scipy": "1.17.0",
+   "devsim": "2.11.2"
+  },
+  "DEVSIM_MATH_LIBS": "/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+ },
+ "tau_V": 1e-12,
+ "bulk": {
+  "N_A": 1e+18,
+  "P0": 1.0000000000000001e+18,
+  "psi_b0": -0.4762114346586538
+ },
+ "geometry": {
+  "deck": "R",
+  "L_um": 1.0,
+  "level": 0,
+  "t_ox_nm": 2.0,
+  "N_A": 1e+18,
+  "ov_cm": 0.0,
+  "sigma_cm": 1.5e-06,
+  "l_w_cm": 3e-05,
+  "h_w_cm": 5.033626815989592e-05,
+  "n_lateral": 261,
+  "n_depth_si": 79,
+  "n_ox": 6,
+  "dx_min_nm": 0.49999999999987665,
+  "dx_max_nm": 19.904390203496146,
+  "max_adjacent_ratio": 1.0692777377613514,
+  "contact_extent_cm": 5.033626815989592e-05,
+  "h_w_doping_cm": 5e-05
+ },
+ "mesh": {
+  "nx": 261,
+  "ny": 84,
+  "kif": 5,
+  "jw": 48,
+  "gate_cols": [
+   56,
+   204
+  ]
+ },
+ "equilibrium": {
+  "n_donor_nodes": 4984,
+  "psi_contact_V": 0.5950044720429788,
+  "tau_V": 1e-12,
+  "converged": true,
+  "iterations": 15,
+  "last": [
+   {
+    "dpsi": 2.5330506233270363e-30,
+    "dphin": 4.161860176166648e-23,
+    "dcirc": 3.5221462193435925e-27
+   },
+   {
+    "dpsi": 1.0951705491494537e-34,
+    "dphin": 1.501298029825568e-33,
+    "dcirc": 3.74696916259955e-40,
+    "extra": true
+   },
+   {
+    "dpsi": 7.886809505366976e-35,
+    "dphin": 9.070761711473656e-35,
+    "dcirc": 5.1268177643688e-44,
+    "extra": true
+   }
+  ]
+ },
+ "onecol": {
+  "psi_s_V": -0.11878847465105576,
+  "psi_hat": 13.825737388220805,
+  "converged": true,
+  "last_update_V": 5.811525058774131e-13
+ },
+ "network_same_run": {
+  "G_DD": 2.033767951252181e-11,
+  "G_SD": 2.031419560384482e-11,
+  "residual": 2.7688238555014388e-14
+ },
+ "sign_weighted": 1.0,
+ "states": [
+  {
+   "V_D": 0.0001,
+   "continuation": [
+    {
+     "target_V": 0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 1.3113886709193936e-17,
+       "dphin": 6.032841052693839e-15,
+       "dcirc": 4.2347365372679885e-21
+      },
+      {
+       "dpsi": 8.777668265685637e-32,
+       "dphin": 3.122934183372052e-26,
+       "dcirc": 8.603508456184488e-30,
+       "extra": true
+      },
+      {
+       "dpsi": 1.0544396997542948e-34,
+       "dphin": 1.7639798624218214e-34,
+       "dcirc": 7.396150124593284e-32,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 2.029842888778954e-15,
+   "I_source": -2.0274990266201417e-15,
+   "I_body": -2.343862158822765e-18,
+   "I_circuit": 2.0298428887789606e-15,
+   "I_weighted": 2.029842888778961e-15,
+   "I_indicator": 2.029842888778954e-15,
+   "drain_edge_abs_sum": 2.029842888778954e-15,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": -0.0001,
+   "continuation": [
+    {
+     "target_V": -0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 1.3122148142064603e-17,
+       "dphin": 6.0002059940338155e-15,
+       "dcirc": 7.52972681595637e-21
+      },
+      {
+       "dpsi": 1.250532388208928e-31,
+       "dphin": 1.8941618959580382e-26,
+       "dcirc": 5.797478410664683e-29,
+       "extra": true
+      },
+      {
+       "dpsi": 1.0254742190196858e-34,
+       "dphin": 1.3490206328147715e-34,
+       "dcirc": 6.492427093496371e-33,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": -2.0377031439993585e-15,
+   "I_source": 2.0353502127432486e-15,
+   "I_body": 2.352931256112802e-18,
+   "I_circuit": -2.0377031439993605e-15,
+   "I_weighted": -2.037703143999361e-15,
+   "I_indicator": -2.037703143999358e-15,
+   "drain_edge_abs_sum": 2.037703143999358e-15,
+   "indicator_vs_devsim_abs": 3.944304526105059e-31,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": 0.001,
+   "continuation": [
+    {
+     "target_V": 0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 1.429727460291159e-25,
+       "dphin": 1.9502894965677464e-22,
+       "dcirc": 3.6983473371792745e-25
+      },
+      {
+       "dpsi": 1.2562290158887957e-34,
+       "dphin": 7.443209709113662e-33,
+       "dcirc": 9.641324768949037e-31,
+       "extra": true
+      },
+      {
+       "dpsi": 9.942934547401839e-35,
+       "dphin": 9.72938401028358e-35,
+       "dcirc": 9.641324768950855e-31,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 1.994968382954554e-14,
+   "I_source": -1.9926647589497028e-14,
+   "I_body": -2.3036240048507328e-17,
+   "I_circuit": 1.9949683829545542e-14,
+   "I_weighted": 1.994968382954554e-14,
+   "I_indicator": 1.994968382954554e-14,
+   "drain_edge_abs_sum": 1.994968382954554e-14,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  },
+  {
+   "V_D": -0.001,
+   "continuation": [
+    {
+     "target_V": -0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 1.4413515564216197e-25,
+       "dphin": 2.240918332884287e-22,
+       "dcirc": 2.550437794629795e-25
+      },
+      {
+       "dpsi": 9.945195887936972e-35,
+       "dphin": 4.4874194812657256e-33,
+       "dcirc": 1.262082110212338e-30,
+       "extra": true
+      },
+      {
+       "dpsi": 9.118870484749837e-35,
+       "dphin": 1.0952598369578877e-34,
+       "dcirc": 1.2620821102123523e-30,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": -2.0735806297567092e-14,
+   "I_source": 2.071186303602883e-14,
+   "I_body": 2.39432615382606e-17,
+   "I_circuit": -2.073580629756709e-14,
+   "I_weighted": -2.0735806297567086e-14,
+   "I_indicator": -2.0735806297567092e-14,
+   "drain_edge_abs_sum": 2.0735806297567092e-14,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  }
+ ],
+ "symmetric": {
+  "0.1mV": {
+   "I_drain": {
+    "G": 2.0337730163891562e-11,
+    "rel_vs_network": 2.4905186317703e-06,
+    "one_sided_plus": 2.029842888778954e-11,
+    "one_sided_rel": -0.0019299460741382113
+   },
+   "I_circuit": {
+    "G": 2.0337730163891604e-11,
+    "rel_vs_network": 2.4905186337687013e-06,
+    "one_sided_plus": 2.0298428887789604e-11,
+    "one_sided_rel": -0.0019299460741349916
+   },
+   "I_weighted": {
+    "G": 2.0337730163891607e-11,
+    "rel_vs_network": 2.490518633990746e-06,
+    "one_sided_plus": 2.029842888778961e-11,
+    "one_sided_rel": -0.0019299460741346586
+   },
+   "I_source_minus": 2.0314246196816952e-11,
+   "G_times_V_A_per_cm": 2.0337679512521813e-15
+  },
+  "1mV": {
+   "I_drain": {
+    "G": 2.0342745063556318e-11,
+    "rel_vs_network": 0.0002490722223933428,
+    "one_sided_plus": 1.994968382954554e-11,
+    "one_sided_rel": -0.019077677113428004
+   },
+   "I_circuit": {
+    "G": 2.0342745063556318e-11,
+    "rel_vs_network": 0.0002490722223933428,
+    "one_sided_plus": 1.9949683829545542e-11,
+    "one_sided_rel": -0.019077677113427893
+   },
+   "I_weighted": {
+    "G": 2.034274506355631e-11,
+    "rel_vs_network": 0.00024907222239312077,
+    "one_sided_plus": 1.994968382954554e-11,
+    "one_sided_rel": -0.019077677113428004
+   },
+   "I_source_minus": 2.031925531276293e-11,
+   "G_times_V_A_per_cm": 2.033767951252181e-14
+  }
+ },
+ "indicator_check_max_rel": 1.9356619916498992e-16,
+ "wall_s": 164.63371419906616,
+ "end_utc": "2026-11-05T06:12:47.298+00:00",
+ "precision": {
+  "wrapper": "wp4-rdeck-dd-ext-2026-11-04",
+  "devsim_info": {
+   "blas_symbol_prefix": "",
+   "blas_symbol_suffix": "_",
+   "copyright": "Copyright \u00a9 2009-2026 DEVSIM LLC",
+   "direct_solver": "custom",
+   "extended_precision": true,
+   "license": "Apache License, Version 2.0",
+   "math_libraries": [
+    "/usr/lib/x86_64-linux-gnu/libblas.so.3",
+    "/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+   ],
+   "version": "2.11.2",
+   "website": "https://devsim.org",
+   "custom_solver": "UMFPACK 5.1"
+  },
+  "parameters_after_run": {
+   "extended_solver": true,
+   "extended_model": true,
+   "extended_equation": true
+  },
+  "note": "Newton residual, models and equations in float128; linear solves in double (UMFPACK)"
+ }
+}
