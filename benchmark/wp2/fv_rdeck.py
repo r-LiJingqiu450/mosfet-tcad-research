@@ -70,7 +70,7 @@ def axis(hard, hfun):
     return x
 
 
-def make_mesh(L, tox, h0x=0.25e-7, h0y=0.05e-7, gx=1.08, gy=1.05, hmax=10e-7, hj=2.5e-7):
+def make_mesh(L, tox, h0x=0.25e-7, h0y=0.05e-7, gx=1.08, gy=1.05, hmax=10e-7, hj=2.5e-7, y_hard=()):
     """Graded tensor mesh. Lateral: fine (h0x) at x = 0 and L, geometric growth gx, cap hmax.
     Depth: fine (h0y) at y = 0, growth gy, cap hmax; cap hj in the well-bottom junction band
     [h_w - 60 nm, h_w + 120 nm]. Oxide: uniform, >= 8 cells, cell <= 0.25 nm or t_ox/8."""
@@ -84,7 +84,7 @@ def make_mesh(L, tox, h0x=0.25e-7, h0y=0.05e-7, gx=1.08, gy=1.05, hmax=10e-7, hj
             h = min(h, hj)
         return h
     xs = axis([-LW, 0.0, L, L + LW], hx)
-    ysi = axis([0.0, HW, YMAX], hy)
+    ysi = axis(sorted({0.0, HW, YMAX, *[float(v) for v in y_hard]}), hy)
     nox = max(8, int(math.ceil(tox / 0.25e-7))) if tox <= 2e-7 else 8
     yox = np.linspace(-tox, 0.0, nox + 1)
     return xs, yox, ysi
@@ -158,12 +158,12 @@ def bern(v):
 
 
 # ------------------------------------------------------------------------------------------------- equilibrium
-def equilibrium(g, L, tox, na, vg, tol=1e-12, max_it=200):
+def equilibrium(g, L, tox, na, vg, tol=1e-12, max_it=200, contact_extent=HW):
     pb = psi_b0(na)
     netd = np.where(g.is_si, donors(g.X, np.maximum(g.Y, 0.0), L, na) - na, 0.0)
     tol_x = 1e-6 * min(np.diff(g.x).min(), 1e-9)
     left, right = np.abs(g.X - g.x[0]) < tol_x, np.abs(g.X - g.x[-1]) < tol_x
-    contact = (left | right) & g.is_si & (g.Y <= HW * (1 + 1e-12))
+    contact = (left | right) & g.is_si & (g.Y <= contact_extent * (1 + 1e-12))
     gate = (np.abs(g.Y - g.y[0]) < 1e-18) & (g.X >= -tol_x) & (g.X <= L + tol_x)
     body = np.abs(g.Y - g.y[-1]) < 1e-18
     fixed = contact | gate | body
@@ -244,12 +244,13 @@ def conductances(N, a, b, c, terms):
     return out
 
 
-def run(L_um, tox_nm, na, vg, **mesh_kw):
+def run(L_um, tox_nm, na, vg, contact_extent_um=None, **mesh_kw):
     L, tox = L_um * 1e-4, tox_nm * 1e-7
     xs, yox, ysi = make_mesh(L, tox, **mesh_kw)
     g = Grid(xs, yox, ysi)
     t0 = time.time()
-    psi, eq = equilibrium(g, L, tox, na, vg)
+    ce = HW if contact_extent_um is None else contact_extent_um * 1e-4
+    psi, eq = equilibrium(g, L, tox, na, vg, contact_extent=ce)
     masks = eq.pop('masks')
     a, b, c = network_couplings(g, psi)
     left = masks['contact'] & (g.X < L / 2); right = masks['contact'] & (g.X > L / 2)
@@ -272,12 +273,19 @@ def run(L_um, tox_nm, na, vg, **mesh_kw):
                 dx_at_x0_nm=float(min(hxs[np.argmin(np.abs(xs[:-1]))], hxs[np.argmin(np.abs(xs[1:]))]) * 1e7),
                 dx_at_L_nm=float(min(hxs[np.argmin(np.abs(xs[:-1] - L))], hxs[np.argmin(np.abs(xs[1:] - L))]) * 1e7),
                 dy_si_min_nm=float(hys.min() * 1e7), dy_si_max_nm=float(hys.max() * 1e7), dy_at_interface_nm=float(hys[0] * 1e7),
-                h_w_is_mesh_line=bool(np.any(np.abs(ysi - HW) < 1e-15)), kwargs={k: v for k, v in mesh_kw.items()})
+                h_w_is_mesh_line=bool(np.any(np.abs(ysi - HW) < 1e-15)), contact_extent_um=ce * 1e4,
+                kwargs={k: (list(v) if isinstance(v, tuple) else v) for k, v in mesh_kw.items()})
     assert mesh['dx_at_x0_nm'] <= 0.5 and mesh['dx_at_L_nm'] <= 0.5 and mesh['dy_at_interface_nm'] <= 0.5
     assert mesh['dx_max_nm'] <= 10.0 + 1e-9 and mesh['dy_si_max_nm'] <= 10.0 + 1e-9
     return dict(mesh=mesh, equilibrium=eq, results=res, psi_s_centre_V=psi_s,
                 psi_hat_centre=(psi_s - eq['psi_b0']) / VT, Ns_centre_cm2=Ns_centre,
                 G_centre_sheet_over_L=Q * MU_N * Ns_centre / L, t_s=time.time() - t0)
+
+
+MESH_PRESETS = {
+    'base': {},
+    'refined': dict(h0x=0.125e-7, h0y=0.025e-7, gx=1.04, gy=1.025, hmax=5e-7, hj=1.25e-7),   # production (amendment A3)
+}
 
 
 def main():
@@ -287,18 +295,20 @@ def main():
     ap.add_argument('--tox', type=float, required=True)
     ap.add_argument('--L', type=float, required=True)
     ap.add_argument('--vg', type=float, required=True)
+    ap.add_argument('--mesh', choices=sorted(MESH_PRESETS), default='refined')
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     rec = dict(version=VERSION, path='P4', start_utc=now(), args=vars(a), argv=sys.argv,
                environment=dict(python=sys.version.split()[0], platform=platform.platform(),
                                 numpy=np.__version__, scipy=__import__('scipy').__version__))
-    rec.update(run(a.L, a.tox, a.na, a.vg))
+    rec.update(run(a.L, a.tox, a.na, a.vg, **MESH_PRESETS[a.mesh]))
+    rec['mesh_preset'] = a.mesh
     rec['end_utc'] = now()
-    with open(os.path.join(a.out, f'P4_{a.id}.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(a.out, f'P4_{a.id}_{a.mesh}.json'), 'w', encoding='utf-8') as f:
         json.dump(rec, f, indent=1)
     r = rec['results']
-    print(f"{a.id} P4 nodes={rec['mesh']['nodes']} conv={rec['equilibrium']['converged']} res={rec['equilibrium']['rel_residual']:.1e} "
+    print(f"{a.id} P4[{a.mesh}] nodes={rec['mesh']['nodes']} conv={rec['equilibrium']['converged']} res={rec['equilibrium']['rel_residual']:.1e} "
           f"psi_hat_c={rec['psi_hat_centre']:.3f} B1: G_DD={r['B1']['G_DD']:.10e} G_SD={r['B1']['G_SD']:.10e} G_DB={r['B1']['G_DB']:.4e} "
           f"| B0: G0={r['B0']['G_SD']:.10e} t={rec['t_s']:.0f}s", flush=True)
     return 0

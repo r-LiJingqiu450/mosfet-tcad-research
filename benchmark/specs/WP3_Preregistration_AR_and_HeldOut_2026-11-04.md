@@ -262,3 +262,41 @@ That is about 81 runs in total. Level-0 runs take 15–100 s; level 2 is expecte
 - Every run is logged with command, exit code and environment.
 - Failed runs are kept.
 - Production code, golden files, `main` and existing results remain untouched.
+
+---
+
+## Amendments (appended 2026-11-04 18:40 MST, before any production A-R or held-out run)
+
+All evidence below comes from **non-production states only** (dev1/dev2 at V_G = 0.55 V and 1.0 V, labelled TRY/SMOKE in the logs). The original text above is unchanged. No threshold, state, level or kill criterion is changed.
+
+**A1 — Smoke-test reference (§5).** The literal criterion **failed**: P1 and P4 differ from `support/body_geometry.py` by −2.5e-3 to −7.2e-3, against a limit of 1e-3. The cause is a difference in boundary weights. The planning script gives edges on the outer Neumann boundary unit weight, while box integration (DEVSIM and P4) gives them half weight. Against the same planning algorithm with box weights (`benchmark/wp2/smoke_geometry.py: planning_fv`), P1 and P4 agree to ≤ 9.2e-13 and agree with each other to ≤ 1.2e-12. **No change was made to P1 or P4.** For H-B, the planning factors move by < 0.75%, which is negligible against the ×/÷3 bands, so the bands are not changed. Evidence: `benchmark/wp2/logs/smoke_geometry.log` and `results/smoke_geometry.json`.
+
+**A2 — P3 implementation (§5).** `phase3/c1/corner_study.eqnums` factors the raw, unscaled Newton matrix only to record the equation numbering, and on a dev2 level-1 trial state SuperLU reported that matrix "exactly singular". P3 therefore uses `rdeck_common.eqnums_capture`, which records the numbering without factoring. The G_E / G_M / κ_G computation is otherwise identical to `phase3/c6/wprobe.devsim_G`. Both routes gave identical results on a trial state (G_E relative −3.39e-4, κ_G = 4.0e13). Cost at level 1 on the largest geometry: 138 s and 3.0 GB.
+
+**A3 — P4 production mesh (§5).** The mesh rules are unchanged: ≤ 0.5 nm at the interface and at x = 0, L, and ≤ 10 nm everywhere. Production P4 (`--mesh refined`) uses:
+- first cell 0.125 nm laterally and 0.025 nm in depth;
+- growth 1.04 laterally and 1.025 in depth;
+- cap 5 nm, with 1.25 nm in the well-bottom band.
+
+Every state is also run with the base settings (0.25 nm, 0.05 nm, 1.08, 1.05, 10 nm, 2.5 nm) as a P4 self-convergence companion. *Basis* (trial state dev1, V_G = 1.0 V, ψ̂ = 27.9):
+- refined vs base differs by −4.75e-4;
+- P4 with a 0.25 nm interface cell moves +1.7%, onto P1 level 0;
+- P1 level 0 differs from base P4 by −1.19%.
+
+P1's interface cells (0.25 / 0.177 / 0.125 nm at levels 0 / 1 / 2) are therefore expected to dominate P1's discretization error. This is recorded as an expectation; the H1 thresholds stay as registered.
+
+**A4 — Contact extent (§4).** P1 and P2 inherit the existing deck-R convention: the far-edge contacts end on the depth line nearest h_w, which lies at 0.498259–0.503363 µm depending on device and level. P4 places the contact at exactly 0.5 µm. `benchmark/wp2/contact_extent_check.py` (P4, non-production states) bounds the effect at ≤ 6.5e-9 relative for G_DD and G_SD and ≤ 1.5e-11 for G_DB. The device definition stays at 0.5 µm.
+
+**A5 — P2 details and the symmetric-difference term (§5, §8).**
+- P2 Newton settings: τ = 1e-12 V on both ψ and φ_n, with step halving on failure; s_couple = 1.
+- The symmetric difference carries a physical O(v²) term, with v = V_D/V_T. In both smoke states G_sym/G_net − 1 = 2.49e-4 at 1 mV and 2.49e-6 at 0.1 mV, i.e. v²/6.
+- P-DD is evaluated exactly as registered (±1 mV, threshold 1e-2 ≫ 2.5e-4).
+- A Richardson value G_R = (100·G(0.1 mV) − G(1 mV))/99 is reported as a diagnostic only.
+
+**A6 — Exploratory observation and an informed expectation (not a pre-registered prediction).** The smoke states showed two things.
+- (a) DEVSIM's post-solve contact currents (`get_contact_current`) at both drain and source carry an absolute error of about 1e-11 A/cm at level 0. At dev1, V_G = 0.55 V the drain current is off by +7.8 relative at 1 mV and the source current has the wrong sign. This is consistent with Newton updates of n ≈ 1e20 cm⁻³ in the wells at machine precision, which leave flux residuals of about 1e-13 A/cm per well node.
+- (b) The circuit current −V1.I and the weighting-function current agree with each other, and their Richardson values agree with the same-run network G_DD to ≤ 2.2e-10.
+
+**Expectation E-CIRC** (informed by these smoke states, so weak evidence): in every production P2 run, the Richardson value from the circuit current agrees with the same-level network G_DD within 1e-6. It is recorded so that the production runs test it, and it is not used for any release decision.
+
+**A7 — Execution.** `benchmark/wp2/run_queue.py` runs the 81 registered jobs with two workers under a 7 GB memory budget and single-threaded BLAS. Every run's command, exit code, wall time and peak memory is appended to `benchmark/wp2/results/ledger.jsonl`, with per-run logs in `benchmark/wp2/logs/production/`.
