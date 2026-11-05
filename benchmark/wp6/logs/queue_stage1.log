@@ -36,3 +36,8 @@
 [13:34:18] session start: stage 1, 22 runs to do, usage cap 0.8, session 118.0 min
 [13:34:18] launch W6-012 (usage 0.75)
 [13:34:23] launch W6-013 (usage 0.75)
+[13:37:38] W6-012 run exit=0 wall=200s W6-012 task=T11 arm=A exit=0 wall=200.1s 
+  audit exit=0 {"run_id": "W6-012", "task": "T11", "arm": "A", "exit": 0, "G_reported": 1.7171e-12, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 5, "num_turns": 6, "total_cost_usd": 0.4458327} 
+[13:38:37] W6-013 run exit=0 wall=254s W6-013 task=T01 arm=A exit=0 wall=254.1s 
+  audit exit=0 {"run_id": "W6-013", "task": "T01", "arm": "A", "exit": 0, "G_reported": 3.5326e-12, "status": "success", "contaminated": false, "harness_failure": false, "n_tool_calls": 5, "num_turns": 6, "total_cost_usd": 0.5158713} 
+[13:38:43] queue stop: usage 0.93 >= cap 0.8; 20 runs left
