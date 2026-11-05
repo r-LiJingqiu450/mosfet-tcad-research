@@ -1,0 +1,175 @@
+{
+ "results": [
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.541049057478045e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.541049057478045e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.759328193472394e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -1.171811753720138e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev2",
+     "passed": false,
+     "rel_error": -0.9244255828769107,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "passed": false,
+     "rel_error": -0.9244255828769107,
+     "tol": 0.0002496859783568663
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD, tolerance_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev2",
+     "passed": false,
+     "rel_error": -0.0009597254481136241,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "passed": false,
+     "rel_error": -0.0009597254481136241,
+     "tol": 0.00023630284075180675
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD, tolerance_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "HO__R_L1_NA1e18_tox2_VG0.588534_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.868318713176304e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L1_NA1e18_tox2_VG0.686557_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.868318713176304e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e16_tox20_VG0.588534_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": -0.9040634469853165,
+     "tol": 1e-06
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e16_tox20_VG0.686557_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": 0.034880193782635294,
+     "tol": 1e-06
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.868318713176304e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "get_contact_current, symmetric +-0.1/+-1 mV, Richardson",
+  "name": "DEVSIM default drain contact current"
+ },
+ "summary": {
+  "fail": 11
+ },
+ "validation": "ok"
+}

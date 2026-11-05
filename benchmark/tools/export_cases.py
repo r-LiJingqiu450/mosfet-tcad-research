@@ -521,6 +521,7 @@ def dump(obj):
 
 
 def main():
+    import export_wp2   # WP2 tiers (schema 1.1.0); WP1 cases above are exported unchanged (schema 1.0.0)
     os.makedirs(CASES, exist_ok=True)
     for p in glob.glob(os.path.join(CASES, '*.json')):
         os.remove(p)
@@ -529,13 +530,22 @@ def main():
     cr, dup_r = export_c_rdeck()
     cw = export_c_welldepth()
     cf, dup_fb = export_c_finite_bias()
-    allc = aw + bw + cr + cw + cf
+    wp2, mesh_files, wp2_info = export_wp2.export(sys.modules[__name__])
+    allc = aw + bw + cr + cw + cf + wp2
     ids = [c['id'] for c in allc]
     assert len(ids) == len(set(ids)), [i for i, n in collections.Counter(ids).items() if n > 1]
     for c in allc:
         with open(os.path.join(CASES, c['id'] + '.json'), 'w', encoding='utf-8', newline='\n') as f:
             f.write(dump(c))
-    index = dict(schema_version=SCHEMA_VERSION, base_commit=BASE_COMMIT,
+    meshes = os.path.join(BENCH, 'meshes')
+    os.makedirs(meshes, exist_ok=True)
+    for p in glob.glob(os.path.join(meshes, '*.json')):
+        os.remove(p)
+    for p, b in sorted(mesh_files.items()):
+        with open(os.path.join(ROOT, p), 'wb') as f:
+            f.write(b)
+    index = dict(schema_version='1.1.0', schema_versions_used=sorted({c['schema_version'] for c in allc}), base_commit=BASE_COMMIT,
+                 wp2=wp2_info,
                  counts=dict(sorted(collections.Counter(c['tier'] + '/' + c['family'] for c in allc).items())),
                  cases=[dict(id=c['id'], tier=c['tier'], deck=c['deck'], family=c['family'], uncertainty=c['uncertainty']['status'])
                         for c in sorted(allc, key=lambda c: c['id'])],
@@ -543,7 +553,7 @@ def main():
     with open(os.path.join(BENCH, 'INDEX.json'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(dump(index))
     files = sorted(glob.glob(os.path.join(CASES, '*.json'))) + [os.path.join(BENCH, 'INDEX.json')] + \
-        sorted(glob.glob(os.path.join(BENCH, 'schema', '*.json')))
+        sorted(glob.glob(os.path.join(BENCH, 'schema', '*.json'))) + sorted(glob.glob(os.path.join(meshes, '*.json')))
     with open(os.path.join(BENCH, 'MANIFEST.sha256'), 'w', encoding='utf-8', newline='\n') as f:
         for p in files:
             f.write(f'{sha256(rel(p))}  {rel(p)}\n')

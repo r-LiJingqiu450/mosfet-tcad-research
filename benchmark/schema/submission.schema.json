@@ -24,11 +24,16 @@
         "additionalProperties": false,
         "properties": {
           "G0_S_per_cm": {"type": "number"},
+          "G_DD_S_per_cm": {"type": "number", "description": "three-terminal cases: dI_D/dV_D with source and body grounded"},
+          "G_SD_S_per_cm": {"type": "number", "description": "three-terminal cases: -dI_S/dV_D"},
+          "G_DB_S_per_cm": {"type": "number", "description": "three-terminal cases: -dI_B/dV_D"},
           "dL_nm": {"type": "number"},
           "same_mesh": {"type": "boolean", "description": "true only if computed on the identical mesh and discrete network as the case reference"},
+          "mesh_id": {"type": "string", "description": "three-terminal cases with same_mesh = true: the mesh used (a key of observables.same_mesh_references); default: the case mesh"},
           "label": {"type": "string"}
         },
-        "anyOf": [{"required": ["G0_S_per_cm"]}, {"required": ["dL_nm"]}]
+        "anyOf": [{"required": ["G0_S_per_cm"]}, {"required": ["dL_nm"]}, {"required": ["G_DD_S_per_cm"]},
+                  {"required": ["G_SD_S_per_cm"]}, {"required": ["G_DB_S_per_cm"]}]
       }
     }
   }

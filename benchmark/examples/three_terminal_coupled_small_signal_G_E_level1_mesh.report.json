@@ -1,0 +1,177 @@
+{
+ "results": [
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -2.2169645417968406e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -2.1963546876157584e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -1.260011539707057e-09 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -5.506045266172341e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": -0.4607931027597457,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": -0.46072882879459265,
+     "tol": 0.0002496859783568663
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": -0.0035841662210074343,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": -0.0034664244392486054,
+     "tol": 0.00023630284075180675
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "HO__R_L1_NA1e18_tox2_VG0.588534_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -2.2375743959779225e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L1_NA1e18_tox2_VG0.686557_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -2.07831643185138e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e16_tox20_VG0.588534_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -1.8462697191201807e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e16_tox20_VG0.686557_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": -0.07534400456340196,
+     "tol": 1e-06
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  },
+  {
+   "case": "HO__R_L2_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "sign_G_DD",
+     "detail": "G_DD = -1.2009924118248678e-08 is not positive",
+     "passed": false
+    }
+   ],
+   "reason": "failed: sign_G_DD",
+   "status": "fail",
+   "tier": "HO"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "-x[V1.I] of the equilibrated SuperLU solve",
+  "name": "DEVSIM coupled-Jacobian small-signal G_E (level-1 mesh)"
+ },
+ "summary": {
+  "fail": 11
+ },
+ "validation": "ok"
+}

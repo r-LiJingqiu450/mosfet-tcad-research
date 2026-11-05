@@ -72,6 +72,211 @@
    "reason": "failed: same_mesh_bracket, tolerance_G0",
    "status": "fail",
    "tier": "A-W"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -2.290035842984313e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.5068946561338767e-12,
+     "passed": false,
+     "upper": 3.524405995168383e-12,
+     "value": -2.290035842984313e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.588534_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -2.2844149736621998e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 6.173052014996228e-11,
+     "passed": false,
+     "upper": 6.176878157049165e-11,
+     "value": -2.2844149736621998e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.621433_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -2.1420196175019968e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6183768720411873e-10,
+     "passed": false,
+     "upper": 1.6190945419091886e-10,
+     "value": -2.1420196175019968e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.686557_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -2.1157888939988018e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.1207465763496376e-09,
+     "passed": false,
+     "upper": 1.1211199634453032e-09,
+     "value": -2.1157888939988018e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.7835_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.0913854600436591e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1140719334660577e-08,
+     "passed": false,
+     "upper": 2.1146867926555734e-08,
+     "value": -1.0913854600436591e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -5.586243447588236e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.5391602645159736e-09,
+     "passed": false,
+     "upper": 2.5471548602573723e-09,
+     "value": -5.586243447588236e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.588534_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.9132645414005315e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 4.558460318612327e-08,
+     "passed": false,
+     "upper": 4.5693484588446275e-08,
+     "value": -1.9132645414005315e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.621433_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.2008437314728572e-07,
+     "passed": false,
+     "upper": 1.2035861579049038e-07,
+     "value": 6.573561302946108e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.686557_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 8.383816990776949e-07,
+     "passed": false,
+     "upper": 8.401679561033495e-07,
+     "value": 7.776509573519459e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.7835_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.594452289751029e-05,
+     "passed": false,
+     "upper": 1.5976431042270634e-05,
+     "value": 1.5918671507898758e-05
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e18_tox2_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.2084869042543522e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6878459246336949e-12,
+     "passed": false,
+     "upper": 1.6959480443686595e-12,
+     "value": -1.2084869042543522e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
   }
  ],
  "submission": {
@@ -79,7 +284,7 @@
   "name": "DEVSIM coupled-Jacobian small-signal G_E"
  },
  "summary": {
-  "fail": 3
+  "fail": 14
  },
  "validation": "ok"
 }

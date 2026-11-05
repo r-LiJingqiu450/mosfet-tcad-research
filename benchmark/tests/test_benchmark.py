@@ -52,7 +52,8 @@ def test_all_cases_validate_against_schema():
 
 def test_manifest_hashes_match():
     lines = open(os.path.join(BENCH, 'MANIFEST.sha256')).read().splitlines()
-    assert len(lines) == len(CASES) + 1 + 2       # cases + INDEX.json + 2 schemas
+    meshes = glob.glob(os.path.join(BENCH, 'meshes', '*.json'))     # WP2: published mesh node lines
+    assert len(lines) == len(CASES) + 1 + 2 + len(meshes)       # cases + INDEX.json + 2 schemas + meshes
     for ln in lines:
         h, p = ln.split('  ', 1)
         assert sha(os.path.join(ROOT, p)) == h, p

@@ -1,0 +1,132 @@
+{
+ "results": [
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -0.0014178825071691215,
+     "tol": 0.0028463666116877247
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -0.0014224823134990627,
+     "tol": 0.0028477970630442014
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -0.0018252190990435402,
+     "tol": 0.003650438423801217
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -0.0018253792986500095,
+     "tol": 0.0036507585974687954
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -0.002328670971045277,
+     "tol": 0.004657341980682522
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -0.002328668810059109,
+     "tol": 0.0046573376202906965
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -0.0001301581880751579,
+     "tol": 0.0002603164365896197
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -0.00013032645146504596,
+     "tol": 0.0002606529033318653
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -0.0001248428843887428,
+     "tol": 0.0002496859783568663
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -0.00012484604921403353,
+     "tol": 0.00024969209867178784
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "tolerance_G_DD",
+     "passed": true,
+     "rel_error": -9.986108324677723e-05,
+     "tol": 0.00023630284075180675
+    },
+    {
+     "check": "tolerance_G_SD",
+     "passed": true,
+     "rel_error": -9.986078403634302e-05,
+     "tol": 0.00023630254582305865
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "network terminal currents",
+  "name": "independent finite-volume solver (benchmark/wp2/fv_rdeck.py, refined mesh)"
+ },
+ "summary": {
+  "pass": 6
+ },
+ "validation": "ok"
+}

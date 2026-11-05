@@ -6,11 +6,11 @@
   "required": ["schema_version", "id", "tier", "deck", "family", "device", "mesh", "observables", "uncertainty", "known_bad_outputs", "cross_paths", "provenance", "notes"],
   "additionalProperties": false,
   "properties": {
-    "schema_version": {"const": "1.0.0"},
+    "schema_version": {"enum": ["1.0.0", "1.1.0"]},
     "id": {"type": "string", "pattern": "^[A-Za-z0-9_.+\\-]+$"},
-    "tier": {"enum": ["A-R", "A-W", "B-W", "C"]},
+    "tier": {"enum": ["A-R", "A-W", "B-R", "B-W", "C", "HO"]},
     "deck": {"enum": ["W", "R"]},
-    "family": {"enum": ["zero_bias_network", "finite_bias_dd", "well_depth"]},
+    "family": {"enum": ["zero_bias_network", "finite_bias_dd", "well_depth", "zero_bias_3terminal"]},
     "related_cases": {"type": "array", "items": {"type": "string"}},
     "device": {
       "type": "object",
@@ -38,10 +38,12 @@
         "tolerance": {
           "oneOf": [
             {"const": "not_established"},
-            {"type": "object", "required": ["dL_nm", "G0_rel"], "properties": {"dL_nm": {"type": "number", "exclusiveMinimum": 0}, "G0_rel": {"type": "number", "exclusiveMinimum": 0}}}
+            {"type": "object", "required": ["dL_nm", "G0_rel"], "properties": {"dL_nm": {"type": "number", "exclusiveMinimum": 0}, "G0_rel": {"type": "number", "exclusiveMinimum": 0}}},
+            {"type": "object", "required": ["dL_nm", "G_DD_rel", "G_SD_rel"], "properties": {"dL_nm": {"type": "number", "exclusiveMinimum": 0}, "G_DD_rel": {"type": "number", "exclusiveMinimum": 0}, "G_SD_rel": {"type": "number", "exclusiveMinimum": 0}, "G_DB_rel": {"type": "number", "exclusiveMinimum": 0}}}
           ]
         },
-        "basis": {"type": "string"}
+        "basis": {"type": "string"},
+        "tau_num_rel": {"type": "number", "exclusiveMinimum": 0}
       }
     },
     "known_bad_outputs": {

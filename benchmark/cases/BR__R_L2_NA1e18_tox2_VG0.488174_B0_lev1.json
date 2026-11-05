@@ -1,0 +1,194 @@
+{
+ "cross_paths": [
+  {
+   "G0_S_per_cm": 1.6941248117477437e-12,
+   "independent": false,
+   "inside_bracket": true,
+   "name": "edge_energy",
+   "note": "phi^T L phi of the same network (G_DD reference form)",
+   "path": "P1",
+   "rel_vs_reference": 5.368154809559655e-10,
+   "rule": "same mesh: inside the bracket",
+   "same_mesh": true
+  }
+ ],
+ "deck": "R",
+ "device": {
+  "bias": {
+   "V_D_V": 0.0,
+   "V_G_V": 0.488174,
+   "V_S_V": 0.0
+  },
+  "body": "B0",
+  "contacts": {
+   "body": "B0 (electron-blocking companion, as all existing decks): Si bottom y = 1.2 um: psi = psi_b0 and ZERO normal electron flux (no electron contact equation). In a code with ohmic-only contacts: zero electron surface recombination velocity.",
+   "drain": "ohmic, far edge x = L + l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) + V_D; phi_n = V_D",
+   "faces_below_well": "far edges for y > h_w: homogeneous Neumann for psi and zero normal electron flux",
+   "gate": "oxide top y = -t_ox over 0 <= x <= L: psi = V_G + psi_b0 (V_FB = 0)",
+   "oxide_top_outside_gate": "homogeneous Neumann",
+   "oxide_triple_points": "the Si/SiO2 nodes at x = -l_w and x = L + l_w are tied to the adjacent contact psi",
+   "source": "ohmic, far edge x = -l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)); phi_n = 0"
+  },
+  "doping": {
+   "N_A_cm3": 1e+18,
+   "N_D_peak_cm3": 1e+20,
+   "h_w_um": 0.5,
+   "profile": "N_A uniform plus donors N_D(x, y) = 1e20 f_x(x) f_y(y): f_x = 0.5 erfc((x - x_c)/(sqrt(2) sigma)) + 0.5 erfc(((L - x) - x_c)/(sqrt(2) sigma)), x_c = -sqrt(2) sigma erfcinv(2 N_A/N_D) (N_D = N_A at x = 0 and x = L); f_y = 0.5 erfc((y - h_w)/(sqrt(2) sigma_y)); fully analytic, no doping step on a mesh line",
+   "sigma_nm": 15.0,
+   "sigma_y_nm": 15.0
+  },
+  "geometry": {
+   "L_um": 2.0,
+   "contact_extent_note": "source/drain contacts cover 0 <= y <= h_w; on a tensor mesh the realized extent is the depth line nearest h_w (this mesh: contact_extent_um_this_mesh). Its effect on G_DD/G_SD/G_DB is <= 6.5e-9 relative (benchmark/wp2/results/contact_extent_check.json, amendment A4).",
+   "contact_extent_um_this_mesh": 0.49825911150078306,
+   "coordinates": "x along the channel (source side first), y depth into Si (y = 0 at the Si/SiO2 interface, oxide at -t_ox <= y <= 0)",
+   "gate_overlap_nm": 0.0,
+   "gate_x_range_um": [
+    0.0,
+    2.0
+   ],
+   "h_w_um": 0.5,
+   "l_w_um": 0.3,
+   "si_depth_um": 1.2,
+   "si_x_range_um": [
+    -0.3,
+    2.3
+   ],
+   "t_ox_nm": 2.0
+  },
+  "physics": {
+   "T_K": 300.0,
+   "V_T_V": 0.025851999786435535,
+   "eps_ox_rel": 3.9,
+   "eps_si_rel": 11.7,
+   "gate_convention": "gate contact psi_gate = V_G + psi_b0 (V_FB = 0; no work-function difference, no oxide charge)",
+   "gate_work_function": "phi_m = chi_Si + 1.0362 V (equals the p-substrate work function, so V_FB = 0); E_c - E_i = 0.56 eV",
+   "generation_recombination": "none",
+   "holes": "not part of the observable: report the electron component of each terminal current, or hold holes at equilibrium p = n_i exp(-psi/V_T) (pre-registration section 2.5); the body is ohmic for holes in B0 and B1",
+   "mobility": "constant mu_n (field-independent); zero-bias network edge conductance c_e = q mu_n EdgeCouple EIL n0 B(Delta)",
+   "mu_n_cm2_per_Vs": 1350.0,
+   "n_i_cm3": 10000000000.0,
+   "oxide": "SiO2, no fixed or trapped charge, no carriers",
+   "psi_b0_V": -0.4762114346586538,
+   "psi_reference": "intrinsic Fermi level (psi = 0 at n = p = n_i)",
+   "statistics": "Boltzmann (n = n_i exp((psi - phi_n)/V_T))",
+   "units": "2-D simulation; currents in A/cm and conductances in S/cm per unit device width"
+  },
+  "state_id": "HO-5"
+ },
+ "family": "zero_bias_network",
+ "id": "BR__R_L2_NA1e18_tox2_VG0.488174_B0_lev1",
+ "known_bad_outputs": [
+  {
+   "G0_S_per_cm": -7.1158865466713905e-09,
+   "evaluation": "direct sum of edge currents at the drain contact (phi = 1)",
+   "evidence": "outside the same-mesh bracket [1.687846e-12, 1.695948e-12] S/cm: G = -7.1158865466713905e-09 S/cm, rel vs reference -4.201e+03",
+   "inside_bracket": false,
+   "name": "drain_side_flux_sum",
+   "path": "P1",
+   "rel_vs_reference": -4201.331936081029,
+   "rule": "same mesh: inside the bracket",
+   "same_mesh": true
+  },
+  {
+   "E_dwr": 0.8370417894239579,
+   "E_round": 0.43213391487431135,
+   "G0_S_per_cm": -1.2084869042543522e-08,
+   "evidence": "outside the same-mesh bracket [1.687846e-12, 1.695948e-12] S/cm: G = -1.2084869042543522e-08 S/cm, rel vs reference -7.134e+03",
+   "inside_bracket": false,
+   "kappa_G": 1.2330173449577141e+17,
+   "name": "coupled_small_signal_G_E",
+   "path": "P3",
+   "rel_vs_reference": -7134.399478733514,
+   "rule": "same mesh: inside the bracket",
+   "same_mesh": true
+  },
+  {
+   "E_dwr": 0.8370417894239579,
+   "E_round": 0.43213391487431135,
+   "G0_S_per_cm": 1.1974985914497158e-08,
+   "evidence": "outside the same-mesh bracket [1.687846e-12, 1.695948e-12] S/cm: G = 1.1974985914497158e-08 S/cm, rel vs reference +7.068e+03",
+   "inside_bracket": false,
+   "kappa_G": 1.2330173449577141e+17,
+   "name": "coupled_small_signal_G_M",
+   "path": "P3",
+   "rel_vs_reference": 7067.538184368791,
+   "rule": "same mesh: inside the bracket",
+   "same_mesh": true
+  }
+ ],
+ "mesh": {
+  "dx_max_nm": 14.246366665185828,
+  "dx_min_nm": 0.35095856998427477,
+  "generator": "endprobe deck-R maps (phase3.c6.rprobe.lateral_nodes, phase3.c7.endprobe.depth_map, oxide_map(t_ox, 5)); refinement factor sqrt(2) per level; each rectangle split into two triangles (node_lines_file has the exact node lines and rules); box integration, Scharfetter-Gummel edge currents (DEVSIM 2.11.2)",
+  "level": 1,
+  "max_adjacent_ratio": 1.0486272315532554,
+  "mesh_id": "dev1_L2_lev1",
+  "n_depth_si": 112,
+  "n_lateral": 438,
+  "n_ox": 8,
+  "node_lines_file": "benchmark/meshes/mesh_dev1_L2_lev1.json",
+  "node_lines_file_sha256": "18bc674f310e33da3a10dce98f5fea9352e78cc4c789eb4d68638f68862b098a",
+  "nx": 438,
+  "ny": 119
+ },
+ "notes": [
+  "Two-terminal companion of the three-terminal case (electron-blocking body B0, the boundary data of every existing deck). Not separately pre-registered for reference quality; no tolerance is established, so only same-mesh (bracket) scoring applies."
+ ],
+ "observables": {
+  "G0_S_per_cm": {
+   "path": "-I_S of the two-terminal network (source side, cancellation-free); G_DD = G_SD = G0 with body B0",
+   "value": 1.694124810838311e-12
+  },
+  "G_GCA_S_per_cm": {
+   "definition": "long-channel (1-column) sheet conductance / L on this depth mesh",
+   "value": 1.6344946440925056e-12
+  },
+  "bracket": {
+   "G_rows_S_per_cm": 1.6878459246353828e-12,
+   "G_slice_S_per_cm": 1.6959480443669634e-12,
+   "dL_rows_nm": 31.609094031733065,
+   "dL_slice_nm": 36.235426243494516,
+   "rule": "G_rows (1 - 1e-12) <= G <= G_slice (1 + 1e-12)",
+   "scope": "Rayleigh bounds of THIS discrete network on THIS mesh; valid only for same-mesh submissions"
+  },
+  "dL_nm": {
+   "definition": "per-end correction dL = (L/2)(1 - G_GCA/G0)",
+   "value": 35.19821347536867
+  },
+  "network_relative_residual": 6.622307944154724e-14,
+  "psi_hat": {
+   "value": 11.994241940300387
+  },
+  "two_terminal_aliases": {
+   "G_DD_S_per_cm": "G0_S_per_cm",
+   "G_SD_S_per_cm": "G0_S_per_cm"
+  }
+ },
+ "provenance": {
+  "base_commit": "454db70e71660a896b23ca378d2f5c3413808204",
+  "command": "/home/claude/venv-wp1/bin/python benchmark/wp2/rdeck_probe.py --id HO-5 --na 1e18 --tox 2 --L 2 --vg 0.488174 --level 1 --body B0 --smallsignal --out benchmark/wp2/results/production   (benchmark/wp2/results/ledger.jsonl)",
+  "exporter": "benchmark/tools/export_cases.py",
+  "pre_registration": "benchmark/specs/WP3_Preregistration_AR_and_HeldOut_2026-11-04.md",
+  "producing_script": "benchmark/wp2/rdeck_probe.py",
+  "sources": [
+   {
+    "path": "benchmark/wp2/results/production/P1_HO-5_B0_lev1.json",
+    "role": "P1 network, body B0 (reference)",
+    "sha256": "6014902c6b86897fa2dec4ca800301681beaef2e317938e6c04d2bf9aad84b02"
+   }
+  ]
+ },
+ "related_cases": [
+  "HO__R_L2_NA1e18_tox2_VG0.488174_B1"
+ ],
+ "schema_version": "1.1.0",
+ "tier": "B-R",
+ "uncertainty": {
+  "basis": "B0 companion (pre-registration sections 2.3 and 10.6): scored by the same-mesh bracket only",
+  "components": {},
+  "coverage_factor": 2.0,
+  "status": "not_established",
+  "tolerance": "not_established"
+ }
+}
