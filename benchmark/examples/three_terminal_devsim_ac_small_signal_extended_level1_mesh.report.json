@@ -1,0 +1,152 @@
+{
+ "results": [
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": false,
+     "rel_error": 3264.720384342922,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 3269.37472391574,
+     "tol": 0.0028463666116877247
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": false,
+     "rel_error": 67.35995398100388,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 67.48425106005556,
+     "tol": 0.003650438423801217
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": false,
+     "rel_error": 0.5606738829103783,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 0.5642781869168481,
+     "tol": 0.004657341980682522
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": 29.47731069510357,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 29.480882650437064,
+     "tol": 0.0002603164365896197
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": 0.5866719792983395,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 0.5868611120784073,
+     "tol": 0.0002496859783568663
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": false,
+     "rel_error": 0.004272361942375458,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": false,
+     "rel_error": 0.004391032093187697,
+     "tol": 0.00023630284075180675
+    }
+   ],
+   "reason": "failed: same_mesh_tau_num_G_DD",
+   "status": "fail",
+   "tier": "A-R"
+  }
+ ],
+ "submission": {
+  "code": "DEVSIM 2.11.2",
+  "current_evaluation": "devsim.solve(type='ac', frequency=1e-6 Hz) with acreal = 1 V on the drain source; G_DD = -Re(V1.I); extended precision (float128 assembly; one double-precision LU solve, no refinement)",
+  "name": "DEVSIM 2.11.2 built-in AC analysis, extended precision (level-1 mesh)",
+  "notes": "values from benchmark/wp4/results/production/AC_<state>_B1_lev1_extended.json (WP4 pre-registration benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md; evaluation benchmark/wp4/results/evaluation_wp4.json)"
+ },
+ "summary": {
+  "fail": 6
+ },
+ "validation": "ok"
+}

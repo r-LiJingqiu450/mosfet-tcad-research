@@ -10,6 +10,12 @@ A code-agnostic reference set for the **zero-bias (linear-response) terminal con
   - **B-R**: electron-blocking-body companions.
 
   All of it was pre-registered in `specs/WP3_Preregistration_AR_and_HeldOut_2026-11-04.md` before the first production run. Amendments A1–A9 are appended there with dates; none changes a state, threshold or tolerance rule. Results and evaluation: `reports/WP2_Report_2026-11-04.md`.
+- **WP4 (2026-11-05; runs 06:17–11:02 UTC)** scores DEVSIM's own user-facing output paths as submissions. No case file changes. The paths are:
+  - the default post-solve contact current in double precision (H3): fails 17 of 17 scorable cases;
+  - the same current with DEVSIM's extended precision: passes 6 of 6 A-R cases on the level-1 mesh;
+  - DEVSIM's built-in AC analysis, in double and in extended precision: fails 6 of 6 each.
+
+  Pre-registered in `specs/WP4_Preregistration_External_Paths_2026-11-04.md`, with amendments W4-A1 to W4-A3 (execution and release form only). Results: `reports/WP4_Report_2026-11-05.md`. NiTCAD was not built, because Eigen 5.0.1 is unavailable; its evaluation is on hold.
 
 | Tier | Cases | Content | Scored by |
 |---|---:|---|---|
@@ -105,7 +111,7 @@ Because each cross-path spread is part of its own tolerance, the independent sol
 python benchmark/tools/score.py my_submission.json --out my_report.json
 ```
 
-**Worked examples** (`examples/`) re-submit the project's own output paths:
+**Worked examples** (`examples/`) re-submit the project's own output paths and, from WP4, DEVSIM's user-facing ones:
 
 | Example | Result |
 |---|---|
@@ -116,12 +122,22 @@ python benchmark/tools/score.py my_submission.json --out my_report.json
 | Independent finite volume (`wp2/fv_rdeck.py`), other mesh | 6/6 pass |
 | Two-terminal source-side reference (A-W, B-W, C, B-R), same mesh | 86/86 pass |
 | Two-terminal drain-side flux sum, same mesh | 38 fail, 48 pass |
+| WP4: DEVSIM drain and source contact currents with extended precision, Richardson values, level-1 mesh (A-R) | 6/6 pass |
+| WP4: DEVSIM built-in AC analysis (`solve(type='ac')`, 1e-6 Hz), double precision, level-1 mesh (A-R) | 6/6 fail |
+| WP4: the same in extended precision | 6/6 fail |
 
 ## Failure signatures in the data (atlas)
 
 - **Direct drain-side flux sum.** On every A-R and HO mesh it misses the same-mesh reference by more than τ_num. At ψ̂ = 12 the miss is up to about 4e3 relative, with the wrong sign. The source side of the same solution is exact to round-off. The looser B0 bracket misses it on 4 of 23 B-R meshes.
 - **DEVSIM's post-solve contact current** (`get_contact_current`) has an absolute error of 3e-12 to 2.7e-11 A/cm, set by round-off in the n⁺ contact regions. On the dev1 meshes the raw values at ±0.1 mV are bit-identical across gate voltages whose G_DD spans four decades. Below about 1e-11 A/cm the value carries no channel information. **Use the circuit-node current or a weighting function instead.** Their Richardson values agree with the reference to ≤ 1.2e-9 in all 23 drift–diffusion runs.
+
+  **DEVSIM's extended precision repairs this current** (WP4), when `extended_solver`, `extended_model` and `extended_equation` are set:
+  - the current then equals the circuit-node current to float64 resolution;
+  - its Richardson value matches the reference to ≤ 6.2e-10 in all 6 A-R states on the level-1 mesh;
+  - the cost is ×11–16 wall time, with the same Newton iteration count.
 - **Coupled small-signal output** (DEVSIM full Jacobian). The backward residual is near machine precision, yet the error is up to −7e3 relative at ψ̂ = 12, with κ_G ≈ 1e17. A residual check alone accepts it.
+
+  **DEVSIM's built-in AC analysis is this same solve** (WP4). At 1e-6 Hz, `solve(type='ac')` reproduces `G_M` bit for bit in 5 of 6 A-R states. Its error reaches 1.7e3 relative, and 3.3e3 in extended precision. Extended precision cannot help here: the AC system is factored and solved once, in double precision.
 
 ## Reproduce
 
@@ -131,17 +147,21 @@ python benchmark/wp2/evaluate_wp2.py                # registered evaluation -> w
 python benchmark/tools/export_cases.py              # deterministic; rewrites cases/, meshes/, INDEX.json, MANIFEST.sha256
 python benchmark/tools/make_examples.py
 python -m pytest -q benchmark/tests
+python benchmark/wp4/run_queue_wp4.py --list        # the 18 registered WP4 jobs (ledger: wp4/results/ledger.jsonl)
+python benchmark/wp4/evaluate_wp4.py                # registered WP4 evaluation -> wp4/results/evaluation_wp4.json
+python benchmark/wp4/posthoc_wp4.py                 # WP4 post-hoc diagnostics -> wp4/results/posthoc_wp4.json
 ```
 
 Source files are checked before export:
 - WP1 sources must be byte-identical to commit `c05139b4ae037ece34257ff0382e84a91b059773`;
 - WP2 sources must be byte-identical to `454db70e71660a896b23ca378d2f5c3413808204`, the commit that holds the production results.
 
-Each case lists its sources with their SHA-256. The WP2 runs use DEVSIM 2.11.2, NumPy 2.3.5 and SciPy 1.17.0. A DEVSIM equilibrium needs `DEVSIM_MATH_LIBS` pointing at BLAS/LAPACK.
+Each case lists its sources with their SHA-256. The WP2 and WP4 runs use DEVSIM 2.11.2, NumPy 2.3.5 and SciPy 1.17.0. A DEVSIM equilibrium needs `DEVSIM_MATH_LIBS` pointing at BLAS/LAPACK. DEVSIM's extended precision needs a build that reports `extended_precision: True` in `get_parameter(name='info')`.
 
 ## Limits
 
-- Everything here is agreement between internal code paths: the DEVSIM network, an independent finite-volume solver and drift–diffusion. **Nothing is experimental validation.** No external TCAD code has been scored yet.
+- Everything here is agreement between internal code paths: the DEVSIM network, an independent finite-volume solver and drift–diffusion. **Nothing is experimental validation.**
+- WP4 scores DEVSIM's own user-facing output paths, but the reference equilibrium also comes from DEVSIM. No code independent of DEVSIM has been scored; NiTCAD is on hold.
 - G_DB and the HO and B-R cases have no established tolerance.
 - The physics envelope is narrow: constant mobility, Boltzmann statistics, no holes or generation/recombination, and zero or small V_D.
 - The licence for public release is not yet decided.

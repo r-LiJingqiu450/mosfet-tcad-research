@@ -1,0 +1,242 @@
+{
+ "results": [
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -6.931502039009274e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -2.340370119924273e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0014252099868290458,
+     "tol": 0.0028463666116877247
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0014259286751516775,
+     "tol": 0.0028477970630442014
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -1.9385848482045276e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -5.6903814993347623e-11,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0018182731048936862,
+     "tol": 0.003650438423801217
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.001818345546059419,
+     "tol": 0.0036507585974687954
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -1.8616774788426937e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev1_L1_lev1",
+     "passed": true,
+     "rel_error": -7.464151519087636e-11,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0023094534705292435,
+     "tol": 0.004657341980682522
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0023094545909192465,
+     "tol": 0.0046573376202906965
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -1.8445645011411216e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -2.2075841155100306e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.00011720029194295378,
+     "tol": 0.0002603164365896197
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.00011721019378385655,
+     "tol": 0.0002606529033318653
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -1.8178936134205514e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -1.989385323142301e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.0001192007510442128,
+     "tol": 0.0002496859783568663
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.00011920094929096514,
+     "tol": 0.00024969209867178784
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  },
+  {
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "checks": [
+    {
+     "check": "same_mesh_tau_num_G_DD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -1.7918388994786483e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "same_mesh_tau_num_G_SD",
+     "mesh_id": "dev2_L2_lev1",
+     "passed": true,
+     "rel_error": -1.8122037204193475e-10,
+     "tol": 1e-06
+    },
+    {
+     "check": "tolerance_G_DD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.00011816512665152601,
+     "tol": 0.00023630284075180675
+    },
+    {
+     "check": "tolerance_G_SD",
+     "detail": "same-mesh submission on a coarser published mesh: reported, not scored",
+     "informational": true,
+     "passed": true,
+     "rel_error": 0.00011816505284256706,
+     "tol": 0.00023630254582305865
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "A-R"
+  }
+ ],
+ "submission": {
+  "code": "DEVSIM 2.11.2, extended_solver/extended_model/extended_equation = True (float128 models, equations and Newton residuals; double-precision UMFPACK LU)",
+  "current_evaluation": "get_contact_current at the drain (G_DD) and at the source (G_SD); symmetric +-0.1/+-1 mV differences, Richardson",
+  "name": "DEVSIM 2.11.2 default contact currents with extended precision (level-1 mesh)",
+  "notes": "values from benchmark/wp4/results/production/P2X_<state>_B1_lev1.json (WP4 pre-registration benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md; evaluation benchmark/wp4/results/evaluation_wp4.json). G_DD is the registered quantity (X2); G_SD is post hoc."
+ },
+ "summary": {
+  "pass": 6
+ },
+ "validation": "ok"
+}
