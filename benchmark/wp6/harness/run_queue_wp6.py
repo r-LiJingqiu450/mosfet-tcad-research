@@ -35,8 +35,19 @@ def done(run_id):
     return os.path.exists(os.path.join(RUNS, run_id, 'run.json'))
 
 
-def last_utilization():
-    """Latest 5-hour and 7-day utilization reported in any run transcript, as max(5h, 7d) (None if none reported)."""
+def window_values(info, now):
+    """Utilizations in one rate_limit_info, leaving out any window whose reported reset time has already passed."""
+    wins = [x for x in (info.get('unifiedWindows') or {}).values() if isinstance(x, dict)]
+    wins.append(dict(utilization=info.get('utilization'), resetsAt=info.get('resetsAt')))
+    return [x['utilization'] for x in wins
+            if x.get('utilization') is not None and (x.get('resetsAt') is None or x['resetsAt'] > now)]
+
+
+def last_utilization(now=None):
+    """Latest utilization reported in any run transcript, as the max over the 5-hour and 7-day windows (None if none
+    reported). A window whose reset time has passed since it was reported is stale and is left out, so the queue can
+    resume after a reset (amended 2026-11-05 13:40 UTC, after W6-011; before, a stale value blocked launches)."""
+    now = time.time() if now is None else now
     best = (0.0, None)
     if not os.path.isdir(RUNS):
         return None
@@ -53,9 +64,7 @@ def last_utilization():
                     info = json.loads(line)['rate_limit_info']
                 except (json.JSONDecodeError, KeyError):
                     continue
-                w = info.get('unifiedWindows') or {}
-                vals = [x.get('utilization') for x in w.values() if isinstance(x, dict)] + [info.get('utilization')]
-                vals = [v for v in vals if v is not None]
+                vals = window_values(info, now)
                 if vals and mt >= best[0]:
                     best = (mt, max(vals))
     return best[1]

@@ -138,6 +138,15 @@ def test_schedule_is_deterministic_and_balanced():
         assert sorted((r['task'], r['repeat']) for r in rr) == sorted((f'T{k:02d}', j) for k in range(1, 12) for j in (1, 2, 3))
 
 
+def test_queue_usage_reading_drops_windows_that_have_reset():
+    import run_queue_wp6 as Q
+    info = dict(utilization=0.37, resetsAt=2000, rateLimitType='seven_day',
+                unifiedWindows=dict(five_hour=dict(utilization=0.79, resetsAt=1000), seven_day=dict(utilization=0.37, resetsAt=2000)))
+    assert max(Q.window_values(info, now=900)) == 0.79       # before the 5-hour reset: both windows count
+    assert max(Q.window_values(info, now=1100)) == 0.37      # after it: the stale 5-hour value is left out
+    assert Q.window_values(info, now=2100) == []             # after both resets: nothing known
+
+
 def test_task_files_carry_no_reference_or_identity():
     bad = ('reference_G', 'state_id', 'AR-', 'HO-', 'benchmark', 'network', 'case', 'tolerance', 'G_DD', 'SMOKE')
     tasks = {t['task']: t for t in json.load(open(os.path.join(WP6, 'tasks', 'tasks.json')))['tasks']}
