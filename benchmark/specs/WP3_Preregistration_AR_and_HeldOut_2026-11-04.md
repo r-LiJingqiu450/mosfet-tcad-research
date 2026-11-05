@@ -300,3 +300,19 @@ P1's interface cells (0.25 / 0.177 / 0.125 nm at levels 0 / 1 / 2) are therefore
 **Expectation E-CIRC** (informed by these smoke states, so weak evidence): in every production P2 run, the Richardson value from the circuit current agrees with the same-level network G_DD within 1e-6. It is recorded so that the production runs test it, and it is not used for any release decision.
 
 **A7 — Execution.** `benchmark/wp2/run_queue.py` runs the 81 registered jobs with two workers under a 7 GB memory budget and single-threaded BLAS. Every run's command, exit code, wall time and peak memory is appended to `benchmark/wp2/results/ledger.jsonl`, with per-run logs in `benchmark/wp2/logs/production/`.
+
+---
+
+## Amendment A8 (appended 2026-11-05, during production; changes no state, level, threshold, tolerance rule or kill criterion)
+
+**A8 — Execution correction after an out-of-memory kill.** Some production results existed when this was written; nothing below depends on them.
+
+- **What happened.** At 01:59 UTC the run `P2_AR-4_B1_lev2` was killed by the kernel (exit −9 after 630 s, peak RSS 5.57 GB). The kernel report shows a **memory-cgroup limit of 5.83 GiB** for every process started from the session shell, not the 8 GB of the machine that A7 assumed. A post-hoc diagnostic (`benchmark/wp2/forms_diagnostic.py`, below 1 GB) that I had started outside the queue was running at the same time. Whether the job alone would have exceeded the limit is not known.
+- **Session 1 stopped cleanly.** The queue process was paused (SIGSTOP) by a watcher the moment the job running at that time (`P1_AR-5_B0_lev2`) wrote its ledger line, and was then terminated. No job was interrupted.
+- **Corrections to `run_queue.py` for session 2 on:**
+  - memory budget 5.4 GB (was 7.0);
+  - the dev2 level-2 P2 runs are estimated at 5.9 GB, and a job above the budget may run when nothing else is running, so these run alone;
+  - the log of every earlier attempt is kept as `<job>.attemptN.log`;
+  - no other process is started while the queue runs.
+- The failed attempt stays in the ledger, and its log is kept (`P2_AR-4_B1_lev2.attempt1.log`).
+- **Contingency, fixed now.** If a dev2 level-2 P2 run exceeds the limit even when running alone, it is reported as not executable in this environment. Those runs feed only the atlas prediction P-DD and the expectation E-CIRC (never a kill), which then rest on the level-1 P2 runs of the same states. This will be stated with the results.

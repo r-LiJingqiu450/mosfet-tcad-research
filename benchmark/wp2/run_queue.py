@@ -26,7 +26,7 @@ OUT = os.path.join(HERE, 'results', 'production')
 LOGS = os.path.join(HERE, 'logs', 'production')
 LEDGER = os.path.join(HERE, 'results', 'ledger.jsonl')
 PY = sys.executable
-MEM_BUDGET_GB = 7.0
+MEM_BUDGET_GB = 5.4   # session 2 on: the bash-tool memory cgroup is 5.83 GiB (kernel OOM report, 2026-11-05 01:59 UTC); was 7.0
 WORKERS = 2
 
 DEV = {'dev1': dict(na='1e18', tox='2'), 'dev2': dict(na='1e16', tox='20')}
@@ -43,6 +43,8 @@ def mem_est(path, dev, L, level=None, mesh=None):
     if path == 'P4':
         big = dev == 'dev2' or L == '2'
         return (3.0 if big else 1.8) if mesh == 'refined' else (1.2 if big else 0.8)
+    if path == 'P2' and dev == 'dev2' and level == 2:
+        return 5.9    # session 1 attempt reached 5.57 GB before the OOM kill: always run alone
     m = MEM[(dev, level)]
     if dev == 'dev1' and L == '2':
         m *= 1.4
@@ -95,6 +97,11 @@ LOCK = threading.Lock()
 
 def run_job(j, env):
     log = os.path.join(LOGS, j['job'] + '.log')
+    if os.path.exists(log):                        # keep the log of every earlier attempt (failed runs are kept)
+        k = 1
+        while os.path.exists(os.path.join(LOGS, f"{j['job']}.attempt{k}.log")):
+            k += 1
+        os.replace(log, os.path.join(LOGS, f"{j['job']}.attempt{k}.log"))
     start, t0 = now(), time.time()
     with open(log, 'w') as f:
         f.write('$ ' + ' '.join(j['cmd']) + '\n'); f.flush()
@@ -138,6 +145,8 @@ def main():
         used = sum(j['mem'] for _, j in running.values())
         if todo and len(running) < WORKERS and (time.time() - t_start) / 60 < a.budget_min:
             pick = next((j for j in todo if used + j['mem'] <= MEM_BUDGET_GB), None)
+            if pick is None and not running:      # a job above the budget may still run alone
+                pick = todo[0]
             if pick is not None:
                 todo.remove(pick)
                 th = threading.Thread(target=run_job, args=(pick, env), daemon=False)
