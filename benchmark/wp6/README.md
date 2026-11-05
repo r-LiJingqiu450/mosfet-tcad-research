@@ -17,7 +17,15 @@ Pre-registration: `benchmark/specs/WP6_Preregistration_Agent_Study_2026-11-05.md
 | `harness/run_queue_wp6.py` | runs a stage two at a time within a session and a usage cap; audits each run |
 | `harness/audit.py` | mechanical transcript audit (contamination flags F1–F4, final block, usage) |
 | `harness/evaluate_wp6.py` | registered evaluation (outcomes, rates, exact stratified test, stop and halt rules) |
-| `results/` | ledger, `runs/<id>/` (run record, gzip transcript, audit, checker log, files the agent wrote), evaluations |
+| `harness/sensitivity_wp6.py` | registered sensitivity: the audit as frozen (`710e55a`, loaded from git) and the worst case (contaminated = SE) |
+| `harness/explore_wp6.py` | exploratory description (post hoc): per task, paths called, final methods (analyst coding), refused calls |
+| `results/` | ledger, `runs/<id>/` (run record, gzip transcript, audit, frozen-audit `audit_v1.json`, checker log, files the agent wrote), evaluations, `coding.json` (registered root-cause codes), `method_coding_stage1.json` (post hoc) |
+| `logs/` | queue logs and dated execution notes |
+
+**Status (2026-11-05):**
+- Stage 1 (arm A) is complete: 33 of 33 runs, with 0 silent errors.
+- The registered stop rule applied, so stage 2 (arm B, W6-034 to W6-066) was not run.
+- Report: `benchmark/reports/WP6_Report_Agent_Study_2026-11-05.md`.
 
 Reproduce (repository root, Python environment with DEVSIM 2.11.2):
 
@@ -28,4 +36,6 @@ python benchmark/wp6/harness/install_guard.py
 python benchmark/wp6/harness/run_queue_wp6.py --stage smoke
 python benchmark/wp6/harness/run_queue_wp6.py --stage 1     # repeat until the stage is complete
 python benchmark/wp6/harness/evaluate_wp6.py --stage 1
+python benchmark/wp6/harness/sensitivity_wp6.py --stage 1
+python benchmark/wp6/harness/explore_wp6.py --stage 1
 ```

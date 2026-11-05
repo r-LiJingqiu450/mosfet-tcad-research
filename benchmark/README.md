@@ -16,6 +16,12 @@ A code-agnostic reference set for the **zero-bias (linear-response) terminal con
   - DEVSIM's built-in AC analysis, in double and in extended precision: fails 6 of 6 each.
 
   Pre-registered in `specs/WP4_Preregistration_External_Paths_2026-11-04.md`, with amendments W4-A1 to W4-A3 (execution and release form only). Results: `reports/WP4_Report_2026-11-05.md`. NiTCAD was not built, because Eigen 5.0.1 is unavailable; its evaluation is on hold.
+- **WP6 (2026-11-05; runs 11:53–18:06 UTC)** is an AI-agent study, not a benchmark change; no case file changes.
+  - Fresh headless Claude Code sessions on Claude Opus 5.5 computed G_DD for the 11 A-R and HO three-terminal states with the kit's DEVSIM deck. Arm A had no checker: 33 runs, 3 per task.
+  - **Result: 0 silent errors among 33 valid runs** (95% upper bound 0.106). 32 runs reported a value within 1.1e-4 of the reference; one ran out of time.
+  - Every run called DEVSIM's default contact current and 30 ran its AC analysis. All set them aside in favour of bias-step differences of the circuit current or the conductance network, each with an independent check.
+  - The registered stop rule therefore applied, and arm B (with the scorer as checker) was not run.
+  - Pre-registered in `specs/WP6_Preregistration_Agent_Study_2026-11-05.md` (amendments W6-A1, W6-A2). Results, sensitivity and limits: `reports/WP6_Report_Agent_Study_2026-11-05.md`.
 
 | Tier | Cases | Content | Scored by |
 |---|---:|---|---|
@@ -163,5 +169,6 @@ Each case lists its sources with their SHA-256. The WP2 and WP4 runs use DEVSIM 
 - Everything here is agreement between internal code paths: the DEVSIM network, an independent finite-volume solver and drift–diffusion. **Nothing is experimental validation.**
 - WP4 scores DEVSIM's own user-facing output paths, but the reference equilibrium also comes from DEVSIM. No code independent of DEVSIM has been scored; NiTCAD is on hold.
 - G_DB and the HO and B-R cases have no established tolerance.
+- WP6 tested one agent (Claude Opus 5.5, custom system prompt, a stated 1% requirement, a ready deck). Its null result does not transfer to other agents, prompts or tasks.
 - The physics envelope is narrow: constant mobility, Boltzmann statistics, no holes or generation/recombination, and zero or small V_D.
 - The licence for public release is not yet decided.

@@ -17,3 +17,4 @@ They are summarized in the WP6 report under deviations.
   - Unchanged environment otherwise as far as the run records show (same tools, model, permission mode and session settings in every init event).
 - **2026-11-05 17:04 UTC: transient permission-classifier outage in W6-024.** Nine tool calls were refused with "Classifier unavailable" (Claude Code's auto-mode classifier gave no verdict). The agent repeated them and finished (CS). Recorded per run; not a harness failure under the registered F4 definition (tools, MCP servers, model).
 - **2026-11-05 18:06 UTC: stage 1 complete** (33 of 33 runs; queue sessions 1–4). Registered evaluation: 0 silent errors among 33 valid arm-A runs, so the stop rule (P-A) applies: stage 2 (arm B) is not run. Halt rule: 0 of 33 runs excluded.
+- **Correction (2026-11-05 18:15 UTC) to the 17:04 entry:** the W6-024 classifier outage happened during that run, 16:56–17:02 UTC (queue log), not at 17:04.
