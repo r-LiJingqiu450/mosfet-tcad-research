@@ -34,9 +34,11 @@ ENV_EXTRA = {'MALLOC_MMAP_THRESHOLD_': '131072'}
 AR = [('AR-1', 'dev1', '1', '0.488174'), ('AR-2', 'dev1', '1', '0.621433'), ('AR-3', 'dev1', '1', '0.7835'),
       ('AR-4', 'dev2', '2', '0.488174'), ('AR-5', 'dev2', '2', '0.621433'), ('AR-6', 'dev2', '2', '0.7835')]
 DEV = {'dev1': dict(na='1e18', tox='2'), 'dev2': dict(na='1e16', tox='20')}
-# (memory GB, expected wall s) from the WP2 level-1 runs and the smoke ratio extended/double = 9
-EST = {('P2X', 'dev1'): (1.2, 500), ('P2X', 'dev2'): (2.6, 3500), ('ACd', 'dev1'): (0.8, 30), ('ACd', 'dev2'): (2.0, 150),
-       ('ACx', 'dev1'): (1.2, 250), ('ACx', 'dev2'): (2.6, 1400)}
+# (memory GB, expected wall s). Session 1 measured 105 s per extended Newton iteration on the dev2 level-1 mesh (about 58
+# iterations per P2 run, 17 per equilibrium); dev1 level 1 has 3.2x fewer nodes. Used only for scheduling.
+EST = {('P2X', 'dev1'): (1.2, 2000), ('P2X', 'dev2'): (2.6, 6300), ('ACd', 'dev1'): (0.8, 30), ('ACd', 'dev2'): (2.0, 150),
+       ('ACx', 'dev1'): (1.2, 600), ('ACx', 'dev2'): (2.6, 1800)}
+FIT = 1.1    # a job is launched only if elapsed + FIT * expected wall fits in the session (background tasks stop at 2 h)
 
 
 def jobs():
@@ -105,6 +107,7 @@ def run_job(j, env):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--list', action='store_true')
+    ap.add_argument('--session-min', type=float, default=1e9, help='launch only jobs expected to finish within this many minutes')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True); os.makedirs(LOGS, exist_ok=True)
     J = jobs()
@@ -118,19 +121,23 @@ def main():
     env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1',
                DEVSIM_MATH_LIBS='/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3', **ENV_EXTRA)
     running = {}
+    t_start = time.time()
     while todo or running:
         for k in [k for k, (th, j) in running.items() if not th.is_alive()]:
             running.pop(k)
         used = sum(j['mem'] for _, j in running.values())
+        left = a.session_min * 60 - (time.time() - t_start)
+        if not running and not any(FIT * j['t'] <= left for j in todo):
+            break
         if todo and len(running) < WORKERS:
-            pick = next((j for j in todo if used + j['mem'] <= MEM_BUDGET_GB), None)
+            pick = next((j for j in todo if used + j['mem'] <= MEM_BUDGET_GB and FIT * j['t'] <= left), None)
             if pick is not None:
                 todo.remove(pick)
                 th = threading.Thread(target=run_job, args=(pick, env), daemon=False)
                 th.start(); running[pick['job']] = (th, pick)
                 continue
         time.sleep(2)
-    print('queue stop: 0 jobs left', flush=True)
+    print(f'queue stop: {len(todo)} jobs left', flush=True)
     return 0
 
 

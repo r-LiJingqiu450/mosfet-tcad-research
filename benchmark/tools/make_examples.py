@@ -81,6 +81,18 @@ def main():
                              G_SD_S_per_cm=pick(cases[k], 'independent_finite_volume_refined')['G_SD_S_per_cm'], same_mesh=False)
                      for k in tt if pick(cases[k], 'independent_finite_volume_refined')}),
     })
+    # WP4 paths (A-R cases, level-1 mesh): present only after the WP4 release
+    for label, entry, title, how in (
+            ('three_terminal_devsim_drain_contact_current_extended_level1_mesh', 'devsim_drain_contact_current_extended_richardson_lev1',
+             'DEVSIM default drain contact current with extended precision (level-1 mesh)', 'get_contact_current, float128 residuals, Richardson'),
+            ('three_terminal_devsim_ac_small_signal_double_level1_mesh', 'devsim_ac_small_signal_double_lev1',
+             'DEVSIM built-in AC analysis, double precision (level-1 mesh)', "solve(type='ac', frequency=1e-6), -Re(V1.I)"),
+            ('three_terminal_devsim_ac_small_signal_extended_level1_mesh', 'devsim_ac_small_signal_extended_lev1',
+             'DEVSIM built-in AC analysis, extended precision (level-1 mesh)', "solve(type='ac', frequency=1e-6), -Re(V1.I), float128 assembly")):
+        res = {k: dict(G_DD_S_per_cm=pick(cases[k], entry)['G_DD_S_per_cm'], same_mesh=True, mesh_id=ref3(cases[k], 1)[0])
+               for k in tt if pick(cases[k], entry)}
+        if res:
+            ex[label] = dict(submission=dict(name=title, current_evaluation=how), results=res)
     os.makedirs(OUT, exist_ok=True)
     for name, sub in ex.items():
         with open(os.path.join(OUT, f'{name}.submission.json'), 'w', encoding='utf-8', newline='\n') as f:

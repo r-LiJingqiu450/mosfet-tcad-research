@@ -125,3 +125,14 @@ If it is supplied, the plan is:
 - **Time limit:** a run still going after 4 h is stopped and reported as not completed.
 - **Evaluation:** X1–X3 and Y1–Y2 are evaluated exactly as written, by `benchmark/wp4/evaluate_wp4.py`.
 - **Unchanged:** the WP2 code paths, the WP2 results, and WP1 and WP2 case files. New benchmark artefacts (for example the atlas entries) are added only after the evaluation, as a new release.
+
+---
+
+## Amendment W4-A1 (appended 2026-11-05 ~06:45 UTC, during session 1; execution only)
+
+Each background task is stopped after 2 hours, while the WP4 queue needs about 5 hours. Session 1 measured 105 s per extended-precision Newton iteration on the dev2 level-1 mesh, against 6.5 s in double precision; a P2 run takes about 58 iterations.
+
+- Session 1 (P2X for AR-4 and AR-5, started 06:18 UTC) is ended at its first job boundary by `benchmark/wp4/stop_session.py`. The script pauses the queue, stops any job launched after that boundary (SIGTERM, exit −15 in the ledger), lets the queue record every finished job, and then ends it.
+- From session 2 on, `run_queue_wp4.py --session-min` launches a job only if 1.1 × its expected wall time fits in what remains of the session. Expected times are scheduling estimates from the session-1 rate.
+
+No run, setting, state, prediction or evaluation rule changes.

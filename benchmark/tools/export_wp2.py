@@ -30,6 +30,12 @@ MESH_SRC = RES + '/meshes'
 MESH_PUB = 'benchmark/meshes'
 TAU_NUM = 1e-6
 PREREG = 'benchmark/specs/WP3_Preregistration_AR_and_HeldOut_2026-11-04.md'
+# WP4 (benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md): when WP4_COMMIT is set, the A-R cases also carry
+# the WP4 output paths (DEVSIM extended precision; DEVSIM built-in AC analysis), all on the level-1 mesh; those cases then
+# cite WP4_COMMIT as their base commit (it contains every WP2 source unchanged).
+WP4_COMMIT = None
+WP4_PROD = 'benchmark/wp4/results/production'
+PREREG_WP4 = 'benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md'
 TOL_FORMS = 1e-9
 RICHARDSON = 'G_R = (100 G(+-0.1 mV) - G(+-1 mV)) / 99; removes the physical (V_D/V_T)^2/6 term of the symmetric difference (residual ~2e-10)'
 GEOM_OF = {('dev1', 1.0): 'dev1_L1', ('dev2', 2.0): 'dev2_L2', ('dev1', 2.0): 'dev1_L2'}
@@ -41,19 +47,19 @@ ZB3_NOTE = ('Zero-bias linear response of the three-terminal electron network (o
 
 
 class Ctx:
-    """Committed-file access: every source must be byte-identical to its file at WP2_COMMIT."""
+    """Committed-file access: every source must be byte-identical to its file at `commit` (default WP2_COMMIT)."""
 
-    def __init__(self, E):
-        self.E, self.ok = E, {}
-        if not (len(WP2_COMMIT) == 40 and all(ch in '0123456789abcdef' for ch in WP2_COMMIT)):
-            raise SystemExit('export_wp2.WP2_COMMIT is not set to a commit hash')
+    def __init__(self, E, commit=None):
+        self.E, self.ok, self.commit = E, {}, commit or WP2_COMMIT
+        if not (len(self.commit) == 40 and all(ch in '0123456789abcdef' for ch in self.commit)):
+            raise SystemExit('export commit is not set to a commit hash')
 
     def check(self, path):
         if path not in self.ok:
-            at = self.E.git('rev-parse', f'{WP2_COMMIT}:{path}')
+            at = self.E.git('rev-parse', f'{self.commit}:{path}')
             here = self.E.git('hash-object', path)
             if at != here:
-                raise SystemExit(f'source file differs from {WP2_COMMIT[:7]}: {path}')
+                raise SystemExit(f'source file differs from {self.commit[:7]}: {path}')
             self.ok[path] = True
 
     def load(self, path):
@@ -195,7 +201,7 @@ def place(entry, verdicts, known_bad, cross):
         cross.append(entry)
 
 
-def p2_paths(d, refs, mid):
+def p2_paths(d, refs, mid, suffix='', path_label='P2'):
     """Output paths of one P2 drift-diffusion run (DEVSIM contact currents, circuit node, weighting function), judged against the
     reference-path values `refs` on the same mesh `mid`."""
     lev = d['args']['level']
@@ -207,7 +213,7 @@ def p2_paths(d, refs, mid):
     for k, nm, q, how in names:
         g1, g01 = s['1mV'][k]['G'], s['0.1mV'][k]['G']
         gr = (100.0 * g01 - g1) / 99.0
-        e = dict(name=f'{nm}_richardson_lev{lev}', path='P2', level=lev, same_mesh=True, mesh_id=mid, evaluation=how, definition=RICHARDSON,
+        e = dict(name=f'{nm}{suffix}_richardson_lev{lev}', path=path_label, level=lev, same_mesh=True, mesh_id=mid, evaluation=how, definition=RICHARDSON,
                  **{f'{q}_S_per_cm': gr}, symmetric_pm1mV_S_per_cm=g1, symmetric_pm0p1mV_S_per_cm=g01,
                  rel_pm1mV=g1 / refs[q] - 1.0, rel_pm0p1mV=g01 / refs[q] - 1.0,
                  note_pm='the +-1 mV and +-0.1 mV symmetric differences contain the physical (V_D/V_T)^2/6 term (2.5e-4 and 2.5e-6)')
@@ -217,7 +223,7 @@ def p2_paths(d, refs, mid):
     gs1 = -(I_S[1e-3] - I_S[-1e-3]) / 2e-3
     gs01 = -(I_S[1e-4] - I_S[-1e-4]) / 2e-4
     gsr = (100.0 * gs01 - gs1) / 99.0
-    e = dict(name=f'devsim_source_contact_current_richardson_lev{lev}', path='P2', level=lev, same_mesh=True, mesh_id=mid,
+    e = dict(name=f'devsim_source_contact_current{suffix}_richardson_lev{lev}', path=path_label, level=lev, same_mesh=True, mesh_id=mid,
              evaluation='-DEVSIM get_contact_current at the source', definition=RICHARDSON, G_SD_S_per_cm=gsr,
              symmetric_pm1mV_S_per_cm=gs1, symmetric_pm0p1mV_S_per_cm=gs01,
              raw_source_current_A_per_cm={f'{v:+g}': I_S[v] for v in sorted(I_S)})
@@ -348,6 +354,28 @@ def three_terminal_case(X, E, sid, files, ev, ledger, kind):
                      note='benchmark/wp2/fv_rdeck.py: own mesh, Poisson-Boltzmann Newton and SG network; imports nothing from phase3/, '
                           'semiconductor_sim/ or DEVSIM. Its refined-mesh spread is part of u_disc, so passing is a consistency check.')
             place(e, [judge(e, q, refs[q], False, jt.get(q)) for q in ('G_DD', 'G_SD')], known_bad, cross)
+    base_commit = WP2_COMMIT
+    if kind == 'AR' and WP4_COMMIT:
+        base_commit = WP4_COMMIT
+        X4 = Ctx(E, WP4_COMMIT)
+        mid1 = mids[1]
+        refs1 = dict(G_DD=n[1]['G_DD'], G_SD=n[1]['G_SD'])
+        px = f'{WP4_PROD}/P2X_{sid}_B1_lev1.json'
+        d = X4.load(px)
+        sources.append(X4.src(px, 'WP4 P2 with DEVSIM extended precision (float128 models/equations/Newton residual), body B1, level 1'))
+        for e, vs in p2_paths(d, refs1, mid1, suffix='_extended', path_label='P2X'):
+            e['precision'] = 'DEVSIM extended_solver/extended_model/extended_equation (float128 residuals, double LU)'
+            place(e, vs, known_bad, cross)
+        for prec in ('double', 'extended'):
+            pa = f'{WP4_PROD}/AC_{sid}_B1_lev1_{prec}.json'
+            d = X4.load(pa)
+            sources.append(X4.src(pa, f'WP4 DEVSIM built-in AC analysis at 1e-6 Hz, {prec} precision, body B1, level 1'))
+            e = dict(name=f'devsim_ac_small_signal_{prec}_lev1', path='AC', level=1, same_mesh=True, mesh_id=mid1,
+                     G_DD_S_per_cm=d['ac']['G_AC'], evaluation=f"devsim.solve(type='ac', frequency=1e-6), -Re(V1.I); {prec} precision",
+                     frequency_Hz=d['frequency_Hz'])
+            place(e, [judge(e, 'G_DD', refs1['G_DD'], True, None)], known_bad, cross)
+        notes.append('WP4 output paths on the level-1 mesh (benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md): DEVSIM '
+                     'post-solve contact currents with extended precision, and DEVSIM built-in AC analysis in double and extended precision.')
     if unc_status == 'established':
         unc = dict(status='established', coverage_factor=E.COVERAGE_K, tau_num_rel=TAU_NUM,
                    components=dict(G_DD=comps['G_DD'], G_SD=comps['G_SD']),
@@ -374,9 +402,9 @@ def three_terminal_case(X, E, sid, files, ev, ledger, kind):
                     bias=dict(V_G_V=a['vg'], V_D_V=0.0, V_S_V=0.0, V_B_V=0.0), state_id=sid, body='B1'),
         mesh=mesh_obj(r, files), observables=obs, uncertainty=unc,
         known_bad_outputs=known_bad, cross_paths=cross,
-        provenance=dict(base_commit=WP2_COMMIT, sources=sources, producing_script='benchmark/wp2/rdeck_probe.py',
+        provenance=dict(base_commit=base_commit, sources=sources, producing_script='benchmark/wp2/rdeck_probe.py',
                         command=ledger[job]['cmd'] + '   (benchmark/wp2/results/ledger.jsonl)', exporter='benchmark/tools/export_cases.py',
-                        pre_registration=PREREG),
+                        pre_registration=PREREG if base_commit == WP2_COMMIT else f'{PREREG}; {PREREG_WP4}'),
         notes=notes)
 
 
