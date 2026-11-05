@@ -1,0 +1,360 @@
+{
+ "version": "wp2-rdeck-dd-2026-11-04",
+ "path": "P2",
+ "start_utc": "2026-11-05T06:17:54.738+00:00",
+ "args": {
+  "id": "AR-5",
+  "na": 1e+16,
+  "tox": 20.0,
+  "L": 2.0,
+  "vg": 0.621433,
+  "level": 1,
+  "body": "B1",
+  "out": "/home/claude/mosfet-tcad-research/benchmark/wp4/results/production"
+ },
+ "argv": [
+  "benchmark/wp4/rdeck_dd_ext.py",
+  "--id",
+  "AR-5",
+  "--na",
+  "1e16",
+  "--tox",
+  "20",
+  "--L",
+  "2",
+  "--vg",
+  "0.621433",
+  "--level",
+  "1",
+  "--body",
+  "B1",
+  "--out",
+  "/home/claude/mosfet-tcad-research/benchmark/wp4/results/production"
+ ],
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39",
+  "packages": {
+   "numpy": "2.3.5",
+   "scipy": "1.17.0",
+   "devsim": "2.11.2"
+  },
+  "DEVSIM_MATH_LIBS": "/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+ },
+ "tau_V": 1e-12,
+ "bulk": {
+  "N_A": 1e+16,
+  "P0": 1.000000000001e+16,
+  "psi_b0": -0.3571585759940161
+ },
+ "geometry": {
+  "deck": "R",
+  "L_um": 2.0,
+  "level": 1,
+  "t_ox_nm": 20.0,
+  "N_A": 1e+16,
+  "ov_cm": 0.0,
+  "sigma_cm": 1.5e-06,
+  "l_w_cm": 3e-05,
+  "h_w_cm": 5.032779911853189e-05,
+  "n_lateral": 438,
+  "n_depth_si": 308,
+  "n_ox": 8,
+  "dx_min_nm": 0.35095856998427477,
+  "dx_max_nm": 14.246366665185828,
+  "max_adjacent_ratio": 1.0486272315532554,
+  "contact_extent_cm": 5.032779911853189e-05,
+  "h_w_doping_cm": 5e-05
+ },
+ "mesh": {
+  "nx": 438,
+  "ny": 315,
+  "kif": 7,
+  "jw": 255,
+  "gate_cols": [
+   79,
+   358
+  ]
+ },
+ "equilibrium": {
+  "n_donor_nodes": 39936,
+  "psi_contact_V": 0.5952617079940699,
+  "tau_V": 1e-12,
+  "converged": true,
+  "iterations": 16,
+  "last": [
+   {
+    "dpsi": 9.843738444524045e-24,
+    "dphin": 1.750277503389586e-21,
+    "dcirc": 3.406756428737718e-24
+   },
+   {
+    "dpsi": 6.515982675901138e-35,
+    "dphin": 1.6495591962465104e-34,
+    "dcirc": 5.235064162122376e-35,
+    "extra": true
+   },
+   {
+    "dpsi": 5.254447759179113e-35,
+    "dphin": 3.2115369699930057e-35,
+    "dcirc": 5.344609762537727e-43,
+    "extra": true
+   }
+  ]
+ },
+ "onecol": {
+  "psi_s_V": 0.05647149164735536,
+  "psi_hat": 15.999925385207606,
+  "converged": true,
+  "last_update_V": 8.071372061527365e-13
+ },
+ "network_same_run": {
+  "G_DD": 1.2035178051938254e-07,
+  "G_SD": 1.2034667777107615e-07,
+  "residual": 1.595101116846306e-13
+ },
+ "sign_weighted": 1.0,
+ "states": [
+  {
+   "V_D": 0.0001,
+   "continuation": [
+    {
+     "target_V": 0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 1.8212208322588053e-17,
+       "dphin": 6.267925036390429e-15,
+       "dcirc": 1.668780440657733e-20
+      },
+      {
+       "dpsi": 1.7316488142584044e-30,
+       "dphin": 8.854547521484247e-26,
+       "dcirc": 6.673182118729651e-28,
+       "extra": true
+      },
+      {
+       "dpsi": 5.542330952170683e-35,
+       "dphin": 4.32671221406164e-35,
+       "dcirc": 6.673182118730709e-28,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 1.2012156753001008e-11,
+   "I_source": -1.2011647442179877e-11,
+   "I_body": -5.093108211302956e-16,
+   "I_circuit": 1.2012156753001008e-11,
+   "I_weighted": 1.2012156753001008e-11,
+   "I_indicator": 1.2012156753001007e-11,
+   "drain_edge_abs_sum": 1.2012156753001007e-11,
+   "indicator_vs_devsim_abs": 1.6155871338926322e-27,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": -0.0001,
+   "continuation": [
+    {
+     "target_V": -0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 1.822273761314815e-17,
+       "dphin": 6.247013693779248e-15,
+       "dcirc": 1.6177732550903568e-20
+      },
+      {
+       "dpsi": 1.9039938652677606e-30,
+       "dphin": 1.0374107571403037e-25,
+       "dcirc": 6.452960764930474e-28,
+       "extra": true
+      },
+      {
+       "dpsi": 6.016323334012166e-35,
+       "dphin": 3.965268027260035e-35,
+       "dcirc": 6.452960764929261e-28,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": -1.2058258476576645e-11,
+   "I_source": 1.2057747233753426e-11,
+   "I_body": 5.112428232187895e-16,
+   "I_circuit": -1.2058258476576645e-11,
+   "I_weighted": -1.2058258476576647e-11,
+   "I_indicator": -1.2058258476576644e-11,
+   "drain_edge_abs_sum": 1.2058258476576644e-11,
+   "indicator_vs_devsim_abs": 1.6155871338926322e-27,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": 0.001,
+   "continuation": [
+    {
+     "target_V": 0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 2.671342793512721e-25,
+       "dphin": 1.25124370669346e-21,
+       "dcirc": 5.013164839791989e-25
+      },
+      {
+       "dpsi": 6.199799591626118e-35,
+       "dphin": 6.460454723994087e-32,
+       "dcirc": 1.0177995277079648e-26,
+       "extra": true
+      },
+      {
+       "dpsi": 5.379400045978028e-35,
+       "dphin": 3.561971260250705e-35,
+       "dcirc": 1.0177995277079682e-26,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 1.1807597785663302e-10,
+   "I_source": -1.180709704804051e-10,
+   "I_body": -5.007376227898754e-15,
+   "I_circuit": 1.1807597785663302e-10,
+   "I_weighted": 1.18075977856633e-10,
+   "I_indicator": 1.1807597785663302e-10,
+   "drain_edge_abs_sum": 1.1807597785663302e-10,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  },
+  {
+   "V_D": -0.001,
+   "continuation": [
+    {
+     "target_V": -0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 2.7080282417157885e-25,
+       "dphin": 7.732939409910726e-22,
+       "dcirc": 5.99072355830769e-25
+      },
+      {
+       "dpsi": 5.783885717595449e-35,
+       "dphin": 1.383841104692773e-32,
+       "dcirc": 4.536290559937601e-27,
+       "extra": true
+      },
+      {
+       "dpsi": 5.57553062739404e-35,
+       "dphin": 3.6340058412548593e-35,
+       "dcirc": 4.5362905599375964e-27,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": -1.2268671321507148e-10,
+   "I_source": 1.2268151261530404e-10,
+   "I_body": 5.200599767452125e-15,
+   "I_circuit": -1.2268671321507148e-10,
+   "I_weighted": -1.2268671321507148e-10,
+   "I_indicator": -1.2268671321507148e-10,
+   "drain_edge_abs_sum": 1.2268671321507148e-10,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  }
+ ],
+ "symmetric": {
+  "0.1mV": {
+   "I_drain": {
+    "G": 1.2035207614788825e-07,
+    "rel_vs_network": 2.4563700216084783e-06,
+    "one_sided_plus": 1.2012156753001007e-07,
+    "one_sided_rel": -0.0019128340966704238
+   },
+   "I_circuit": {
+    "G": 1.2035207614788825e-07,
+    "rel_vs_network": 2.4563700216084783e-06,
+    "one_sided_plus": 1.2012156753001007e-07,
+    "one_sided_rel": -0.0019128340966704238
+   },
+   "I_weighted": {
+    "G": 1.2035207614788825e-07,
+    "rel_vs_network": 2.4563700216084783e-06,
+    "one_sided_plus": 1.2012156753001007e-07,
+    "one_sided_rel": -0.0019128340966704238
+   },
+   "I_source_minus": 1.203469733796665e-07,
+   "G_times_V_A_per_cm": 1.2035178051938255e-11
+  },
+  "1mV": {
+   "I_drain": {
+    "G": 1.2038134553585224e-07,
+    "rel_vs_network": 0.0002456549985558887,
+    "one_sided_plus": 1.1807597785663302e-07,
+    "one_sided_rel": -0.018909588648611697
+   },
+   "I_circuit": {
+    "G": 1.2038134553585224e-07,
+    "rel_vs_network": 0.0002456549985558887,
+    "one_sided_plus": 1.1807597785663302e-07,
+    "one_sided_rel": -0.018909588648611697
+   },
+   "I_weighted": {
+    "G": 1.2038134553585224e-07,
+    "rel_vs_network": 0.0002456549985558887,
+    "one_sided_plus": 1.18075977856633e-07,
+    "one_sided_rel": -0.01890958864861192
+   },
+   "I_source_minus": 1.2037624154785458e-07,
+   "G_times_V_A_per_cm": 1.2035178051938254e-10
+  }
+ },
+ "indicator_check_max_rel": 1.3449600826171442e-16,
+ "wall_s": 5964.727650403976,
+ "end_utc": "2026-11-05T07:57:19.471+00:00",
+ "precision": {
+  "wrapper": "wp4-rdeck-dd-ext-2026-11-04",
+  "devsim_info": {
+   "blas_symbol_prefix": "",
+   "blas_symbol_suffix": "_",
+   "copyright": "Copyright \u00a9 2009-2026 DEVSIM LLC",
+   "direct_solver": "custom",
+   "extended_precision": true,
+   "license": "Apache License, Version 2.0",
+   "math_libraries": [
+    "/usr/lib/x86_64-linux-gnu/libblas.so.3",
+    "/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+   ],
+   "version": "2.11.2",
+   "website": "https://devsim.org",
+   "custom_solver": "UMFPACK 5.1"
+  },
+  "parameters_after_run": {
+   "extended_solver": true,
+   "extended_model": true,
+   "extended_equation": true
+  },
+  "note": "Newton residual, models and equations in float128; linear solves in double (UMFPACK)"
+ }
+}

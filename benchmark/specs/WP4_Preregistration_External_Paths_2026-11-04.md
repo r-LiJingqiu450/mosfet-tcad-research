@@ -136,3 +136,15 @@ Each background task is stopped after 2 hours, while the WP4 queue needs about 5
 - From session 2 on, `run_queue_wp4.py --session-min` launches a job only if 1.1 × its expected wall time fits in what remains of the session. Expected times are scheduling estimates from the session-1 rate.
 
 No run, setting, state, prediction or evaluation rule changes.
+
+## Amendment W4-A2 (appended 2026-11-05 ~08:00 UTC; execution only)
+
+**The W4-A1 stopper failed and cost one run.**
+- At 07:57:20 UTC `P2X_AR-5_B1_lev1` finished and was recorded: exit 0, 99.4 min.
+- `stop_session.py` then paused the queue with SIGSTOP. The background-task shell treated the stopped queue as a finished job and exited, and the platform ended the task's whole process group.
+- That killed `P2X_AR-4_B1_lev1`. It had completed all 58 Newton iterations (log last written 07:57:19) and was writing its output.
+- The queue died before it could record the attempt, so the ledger has no line for it. It is recorded here, and its log is kept as `P2X_AR-4_B1_lev1.attempt1.log`. The run is repeated in session 2.
+
+**Correction.** No external signal is sent to a queue any more. A session ends only through `run_queue_wp4.py --session-min`: no job is launched unless 1.1 × its expected wall time fits, and the queue exits when nothing fits and nothing is running. Sessions use `--session-min 118` under the 120-minute task cap. The measured P2X wall time on dev2 is 99.4 min.
+
+No run, setting, state, prediction or evaluation rule changes.

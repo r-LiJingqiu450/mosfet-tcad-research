@@ -1,0 +1,10 @@
+06:36:56 queue 1315, ledger 0 lines, running children [1318, 1321]
+07:57:20 ledger grew to 1; queue stopped (SIGSTOP)
+07:57:20 all children exited; expecting 2 ledger lines; SIGCONT
+Traceback (most recent call last):
+  File "/home/claude/mosfet-tcad-research/benchmark/wp4/stop_session.py", line 70, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/claude/mosfet-tcad-research/benchmark/wp4/stop_session.py", line 61, in main
+    os.kill(qpid, signal.SIGKILL)
+ProcessLookupError: [Errno 3] No such process
