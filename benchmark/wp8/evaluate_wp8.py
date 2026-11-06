@@ -31,6 +31,7 @@ RES = os.path.join(HERE, 'results')
 REPRO_TOL = 1e-12
 SHARE = 1e-2
 ERR_GATE = 1e-2
+OMEGA_MAX = 1e-20      # M1 counts as converged only with a final double-double componentwise backward error <= this
 
 
 def mechanism():
@@ -44,14 +45,16 @@ def mechanism():
         e_IR = abs(m1['rel_vs_G_net'])
         S = r['M2']['spread_rel_G_net']
         m1b = r.get('M1b', {})
+        m1_conv = bool(m1['converged']) and m1['omega_dd_final'] <= OMEGA_MAX
+        m2_conv = all(x['converged'] for x in m2['samples'])
         rows.append(dict(state=r['args']['id'], n=r['system']['n'], G_net=r['G_net'], reproduces_wp2=repro,
-                         rel_G_E=m0['rel_G_E'], rel_G_M=m0['rel_G_M'], e_dbl=e_dbl, M1_converged=m1['converged'],
+                         rel_G_E=m0['rel_G_E'], rel_G_M=m0['rel_G_M'], e_dbl=e_dbl, M1_converged=m1_conv,
                          M1_iterations=m1['iterations'], rel_G_IR=m1['rel_vs_G_net'], e_IR=e_IR,
-                         omega_dd=m1['omega_dd_final'], S=S, M2_all_converged=m2['all_converged'],
+                         omega_dd=m1['omega_dd_final'], S=S, M2_all_converged=m2_conv,
                          M1b_rel_vs_G_IR=m1b.get('rel_vs_G_IR'), M1b_converged=m1b.get('converged'),
                          in_gate=e_dbl > ERR_GATE,
-                         M1_ok=m1['converged'] and e_IR <= SHARE * e_dbl, M2_ok=S <= SHARE * e_dbl,
-                         resolved=m1['converged'] and e_IR <= 1e-6, wall_s=r['wall_s']))
+                         M1_ok=m1_conv and e_IR <= SHARE * e_dbl, M2_ok=m2_conv and S <= SHARE * e_dbl,
+                         resolved=m1_conv and e_IR <= 1e-6, wall_s=r['wall_s']))
     valid = [x for x in rows if x['reproduces_wp2']]
     gate = [x for x in valid if x['in_gate']]
     n = len(gate)

@@ -2,10 +2,9 @@
 
 **Date:** 2026-11-06 (MST) · **Author:** Claude · **Branch:** `benchmark/wp8-mechanism-gci-2026-11-06`, from the WP7 head `75f989d`.
 
-**Status: PREDICTIONS COMMITTED.**
-- The predictions of sections 3 and 4 are committed before any WP8 computation on a study state, and before the smoke run.
-- After the smoke run (section 5), a separate commit changes this status to FROZEN and lists any procedure changes the smoke required.
-- The predictions never change. Later changes are dated amendments appended at the end.
+**Status: FROZEN** (2026-11-06, after the smoke run and before any study run).
+- The predictions of sections 3 and 4 were committed at `6337336`, before any WP8 computation on a study state and before the smoke run. They are unchanged.
+- The smoke run required two procedure changes, listed in section 7. Later changes are dated amendments appended at the end.
 
 This is step A of the pre-submission plan agreed with the user on 2026-11-06.
 
@@ -121,3 +120,18 @@ Descriptive only: GCI_fine against the tolerance, the asymptotic ratio, and the 
 - **M1 is exact only to double-double accuracy** (a residual relative to its scale near 1e-32). With an output condition number up to about 1e21 relative to the true G, the attainable accuracy of G_IR is about 1e-11 relative. That is far below the 1e-6 level that matters here.
 - **G_net and A come from the same double-precision equilibrium.** The network forms agree to ≤ 1e-9, so G_net is an adequate reference for errors above 1e-6.
 - **This is the system DEVSIM's AC analysis solves.** The Jacobian is exported in double precision. In extended mode DEVSIM also converts the AC system to double, so this double-precision system is the one its AC analysis solves.
+
+## 7. Procedure changes required by the smoke run (before any study run)
+
+The smoke state (dev1, V_G = 0.55 V, level 0) is not a study state; its outcome is not evaluated. Its records are kept in
+`benchmark/wp8/results/smoke/` (the first run under the name `*.run1_plain_superlu_M1b.json`).
+
+1. **M1b inner solver.**
+   - Plain SuperLU without equilibration, the registered M1b inner solver, diverged in the smoke: G grew by a factor of about 20 per iteration over 40 iterations. As an inner solver for this matrix it is useless, so it says nothing about M1.
+   - M1b now starts from the UMFPACK solution and uses UMFPACK, factorized once through DEVSIM's interface, as its inner solver.
+   - In the smoke this converged to the same G as M1 (relative difference 0).
+2. **Convergence of M1 and M2.**
+   - Besides the stability of G, a converged refinement must reach a final componentwise backward error in double-double of at most 1e-20.
+   - The smoke reached 1.8e-27 (M1). This criterion is stricter than the registered one and was fixed before any study run.
+
+Neither change touches a prediction, a threshold of section 3 or 4, or the interpretation table.

@@ -8,8 +8,8 @@ In one fresh DEVSIM process, for one deck-R state on one mesh level:
            rhs = (b(V1 = 1 mV) - b(V1 = 0)) / 1 mV, exactly as WP2 P3 did (phase3/c4/t1v2.systems);
   M0       G_E (equilibrated SuperLU) and G_M (UMFPACK) recomputed, compared with the WP2 record of the same state;
   M1       the same double-precision system solved by iterative refinement with double-double residuals
-           (benchmark/wp8/ddlinalg.py), inner solver the equilibrated SuperLU factorization; M1b the same with plain
-           SuperLU as inner solver;
+           (benchmark/wp8/ddlinalg.py), inner solver the equilibrated SuperLU factorization; M1b the same from the
+           UMFPACK solution with UMFPACK (factorized once) as inner solver;
   M2       sensitivity to rounding of the Jacobian entries: three systems with every nonzero of A multiplied by
            (1 + 2^-52 u), u ~ U[-1, 1] (seeds 20261106 + k), each solved as in M1.
 G is -x[V1.I] (the circuit branch current per volt), the output DEVSIM's AC analysis reports.
@@ -20,6 +20,7 @@ Usage (repository root):
 from __future__ import annotations
 
 import argparse
+import array
 import gc
 import json
 import os
@@ -37,13 +38,27 @@ import ddlinalg as DD  # noqa: E402
 import rdeck_common as RC  # noqa: E402
 import rdeck_probe as RP  # noqa: E402
 import scipy  # noqa: E402
-import scipy.sparse.linalg as spla  # noqa: E402
 from phase3.c4.t1v2 import DELTA, EqSolver, systems, umf_solve  # noqa: E402
+from devsim.umfpack import umfshim as UMF  # noqa: E402
 
 VERSION = 'wp8-ssmech-2026-11-06'
 EPS = 2.0 ** -52
 SEED0 = 20261106
 N_PERTURB = 3
+
+
+class UMFFactor:
+    """UMFPACK (DEVSIM's interface) factorized once, solved many times."""
+
+    def __init__(self, A):
+        A = A.tocsc()
+        self.so = UMF.dsobject(A.shape[0], False)
+        self.so.factor(Ap=array.array('i', A.indptr.astype(np.int32)), Ai=array.array('i', A.indices.astype(np.int32)),
+                       Ax=array.array('d', A.data), is_complex=False, is_same_symbolic=False)
+
+    def solve(self, b):
+        self.so.solve(b=array.array('d', np.asarray(b, dtype=np.float64)))
+        return np.array(self.so.x)
 
 
 def now():
@@ -142,16 +157,16 @@ def main():
                      all_converged=all(x['converged'] for x in m2))
     rec['t_M2_s'] = time.time() - t1
 
-    # M1b: the same refinement with plain SuperLU (no equilibration) as inner solver
+    # M1b: the same refinement from the UMFPACK solution, with UMFPACK (factorized once) as inner solver
     t1 = time.time()
     del s
     gc.collect()
     try:
-        lu = spla.splu(A.tocsc())
-        m1b = DD.refine(A, rhs, lu.solve, lu.solve(rhs), iV, sign=-1.0, residual=res)
+        uf = UMFFactor(A)
+        m1b = DD.refine(A, rhs, uf.solve, uf.solve(rhs), iV, sign=-1.0, residual=res)
         rec['M1b'] = brief(m1b, G_net)
         rec['M1b']['rel_vs_G_IR'] = m1b['G'] / G_IR - 1
-        del lu
+        del uf
     except Exception as e:  # recorded, not fatal
         rec['M1b'] = dict(error=f'{type(e).__name__}: {e}')
     rec['t_M1b_s'] = time.time() - t1
