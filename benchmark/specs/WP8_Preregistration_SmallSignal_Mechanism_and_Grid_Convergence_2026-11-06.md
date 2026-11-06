@@ -135,3 +135,36 @@ The smoke state (dev1, V_G = 0.55 V, level 0) is not a study state; its outcome 
    - The smoke reached 1.8e-27 (M1). This criterion is stricter than the registered one and was fixed before any study run.
 
 Neither change touches a prediction, a threshold of section 3 or 4, or the interpretation table.
+
+## 8. Amendment 1 (2026-11-06): exploratory sensitivity analysis X, no predictions
+
+**When.** Added after the study records of AR-1 to AR-6 and HO-1 to HO-3 were seen (HO-4 and HO-5 still running), and before the registered evaluation was run. Sections 1 to 7 are unchanged, and nothing below changes a prediction, a threshold or the interpretation table.
+
+**What was seen that motivates it.**
+- In every record so far, the exact solve of the double-precision system (M1) misses G_net by an amount of the same size as the one-ulp spread S (M2).
+- Within a device the absolute numbers do not depend on the state:
+  - the M2 shift G_k − G_IR of each seed is the same to three digits in all states of the device (dev1: −2.23e-9, −5.71e-9, −5.07e-9 S/cm; dev2: −2.59e-9, −1.69e-8, −1.46e-8 S/cm);
+  - the M1 error G_IR − G_net is within a factor of 2 per device (dev1: −4.4e-9 to −5.5e-9 S/cm; dev2: −0.9e-9 to +7.5e-9 S/cm).
+- All M2 shifts so far have the same sign (6 independent draws: 3 seeds × 2 devices). A response linear in a symmetric perturbation gives that with probability 1/32. The realized perturbation is not exactly symmetric: rounding A_ij (1 + 2⁻⁵² u) to double biases it slightly.
+- WP2 reported a componentwise condition number κ_G computed with the double-precision solution and adjoint and normalized by |G_E|. The M1 records show that this solution has a componentwise backward error up to 0.7, so that κ_G may be inaccurate.
+
+**Questions** (descriptive):
+- **X1.** Is the response of G to the M2 perturbations linear?
+- **X2.** How large is the first-order sensitivity of G to the Jacobian entries, measured with accurate solutions? What absolute and relative spread does it predict?
+- **X3.** Where is that sensitivity: in which equation block and which part of the device?
+
+**Procedure** (`benchmark/wp8/xsens.py`, one fresh DEVSIM process per state; all 11 states, level 1, body B1):
+1. **Build.** Build the state, G_net, A and rhs exactly as `ssmech.py`. Compute x (the M1 refinement) and the adjoint λ = A⁻ᵀ e_V1.I by the same refinement on Aᵀ, with the transposed equilibrated SuperLU as inner solver. Both are refined until the double-double componentwise backward error is at most 1e-24 (at most 12 iterations). Check: λ[V1.I] = x[V1.I], since both equal (A⁻¹)_{V1.I,V1.I}.
+2. **First-order coefficients.** c_ij = λ_i A_ij x_j over the nonzeros, so that a perturbation δA changes G by δG₁ = Σ c_ij δA_ij / A_ij. Report:
+   - κ_A = Σ|c_ij| / |G_net|, the componentwise condition number of G with respect to the entries;
+   - the absolute scales u·Σ|c_ij| and u·(Σ c_ij²)^½ in S/cm, with u = 2⁻⁵³;
+   - the same κ computed from the unrefined double-precision x and λ, normalized as in WP2.
+3. **Linearity (X1).** For each M2 seed:
+   - rebuild the perturbed matrix exactly as `ssmech.py` and take δA = A_k − A, which is exact in floating point;
+   - compute δG₁ = λᵀ δA x and the second-order term δG₂ = −λᵀ δA z, where z = A⁻¹(δA x) is refined as in step 1;
+   - re-solve the perturbed system as M2 did, record its backward error, and compare G_k − G_IR with δG₁ and δG₁ + δG₂.
+4. **Location (X3).**
+   - Per row i, s_i = Σ_j |c_ij|. Aggregate the s_i by equation block (silicon potential, silicon electron continuity, oxide potential, circuit) and by the class of the row's node: contact node (source, drain, body), n-type node on the drain side or the source side (net doping > 0, x above or below L/2), p-type node, oxide node.
+   - Report the fractions of Σ s_i, the 10 largest rows with their position and doping, and a map of s binned on 64 × 32 cells of the silicon region.
+
+**Output.** `benchmark/wp8/results/exploratory/XS_<id>_B1_lev1.json`, and a ledger line per run in the same ledger. This is reported as exploratory, separately from the registered results, in the WP8 report and the manuscript.
