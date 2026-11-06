@@ -168,3 +168,20 @@ Neither change touches a prediction, a threshold of section 3 or 4, or the inter
    - Report the fractions of Σ s_i, the 10 largest rows with their position and doping, and a map of s binned on 64 × 32 cells of the silicon region.
 
 **Output.** `benchmark/wp8/results/exploratory/XS_<id>_B1_lev1.json`, and a ledger line per run in the same ledger. This is reported as exploratory, separately from the registered results, in the WP8 report and the manuscript.
+
+## 9. Amendment 2 (2026-11-06): check X4 of the cancellation, no predictions
+
+**When.** Added after the X records of AR-1 to AR-3 were seen. Those records put 99.9% of Σ|c_ij| in the electron-continuity rows of the drain-side n-type region, with λ_i ≈ 1 there and the large c_ij in the potential columns. Sections 1 to 8 are unchanged.
+
+**Proposed explanation, to be checked.**
+- The Scharfetter–Gummel flux of an edge depends on the two potentials only through their difference.
+- So in each electron-continuity row the potential-column entries sum to zero, up to the recombination term, whose potential derivative is small where holes are few.
+- In the drain-side n-type region the potential response is nearly uniform: δψ ≈ 1 V/V and δn ≈ 0. The large c_ij of a row then cancel, and rounding the entries leaves a current that the drain collects (λ ≈ 1).
+
+**X4** (`benchmark/wp8/xsens_rowsum.py`; AR-1 and AR-4, one state per device of the A-R tier, level 1, B1). Over the electron-continuity rows of the drain-side n-type region, report:
+- the distribution (median, 99th percentile, maximum) of |Σ_{j∈ψ} A_ij| / Σ_{j∈ψ} |A_ij|, the relative row sum over the potential columns;
+- the same quantity over the full row;
+- the range of the refined δψ_j (x on the potential unknowns) and of δn_j / n_j in that region;
+- the equilibrium n and the largest |A_ij| of the rows with the 10 largest s_i.
+
+Descriptive; reported with X.
