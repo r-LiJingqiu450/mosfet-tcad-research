@@ -1,0 +1,327 @@
+{
+ "cross_paths": [
+  {
+   "G_DD_S_per_cm": 4.569247289641553e-08,
+   "G_SD_S_per_cm": 4.568737552504028e-08,
+   "independent": false,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "second_forms_lev1",
+   "note": "-(I_S + I_B) and source-excited reciprocity on the same network",
+   "path": "P1",
+   "rel_G_DD_vs_reference": 2.5087265598244812e-11,
+   "rel_G_SD_vs_reference": -2.631228568361621e-14,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true
+  },
+  {
+   "G_DD_S_per_cm": 4.569247288695019e-08,
+   "definition": "G_R = (100 G(+-0.1 mV) - G(+-1 mV)) / 99; removes the physical (V_D/V_T)^2/6 term of the symmetric difference (residual ~2e-10)",
+   "evaluation": "-x[V1.I] of the drain circuit node (Newton linear-system current)",
+   "independent": false,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "circuit_node_current_richardson_lev1",
+   "note_pm": "the +-1 mV and +-0.1 mV symmetric differences contain the physical (V_D/V_T)^2/6 term (2.5e-4 and 2.5e-6)",
+   "path": "P2",
+   "rel_G_DD_vs_reference": -1.8206591789748927e-10,
+   "rel_pm0p1mV": 2.4576817103660886e-06,
+   "rel_pm1mV": 0.0002457861955553753,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true,
+   "symmetric_pm0p1mV_S_per_cm": 4.5692585192824166e-08,
+   "symmetric_pm1mV_S_per_cm": 4.5703703474347673e-08
+  },
+  {
+   "G_DD_S_per_cm": 4.5692472886945876e-08,
+   "definition": "G_R = (100 G(+-0.1 mV) - G(+-1 mV)) / 99; removes the physical (V_D/V_T)^2/6 term of the symmetric difference (residual ~2e-10)",
+   "evaluation": "sum_e J_e (w_i - w_j) with w the zero-bias network solution (P1)",
+   "independent": false,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "weighting_function_current_richardson_lev1",
+   "note_pm": "the +-1 mV and +-0.1 mV symmetric differences contain the physical (V_D/V_T)^2/6 term (2.5e-4 and 2.5e-6)",
+   "path": "P2",
+   "rel_G_DD_vs_reference": -1.821602868545824e-10,
+   "rel_pm0p1mV": 2.45768161688531e-06,
+   "rel_pm1mV": 0.00024578619555160053,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true,
+   "symmetric_pm0p1mV_S_per_cm": 4.56925851928199e-08,
+   "symmetric_pm1mV_S_per_cm": 4.57037034743475e-08
+  }
+ ],
+ "deck": "R",
+ "device": {
+  "bias": {
+   "V_B_V": 0.0,
+   "V_D_V": 0.0,
+   "V_G_V": 0.588534,
+   "V_S_V": 0.0
+  },
+  "body": "B1",
+  "contacts": {
+   "body": "B1 (ohmic, primary): Si bottom y = 1.2 um, full width: psi = psi_b0, phi_n = 0 (n = n_i exp(psi_b0/V_T)); holes at equilibrium",
+   "drain": "ohmic, far edge x = L + l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)) + V_D; phi_n = V_D",
+   "faces_below_well": "far edges for y > h_w: homogeneous Neumann for psi and zero normal electron flux",
+   "gate": "oxide top y = -t_ox over 0 <= x <= L: psi = V_G + psi_b0 (V_FB = 0)",
+   "oxide_top_outside_gate": "homogeneous Neumann",
+   "oxide_triple_points": "the Si/SiO2 nodes at x = -l_w and x = L + l_w are tied to the adjacent contact psi",
+   "source": "ohmic, far edge x = -l_w, 0 <= y <= h_w: psi = V_T asinh(N_net/(2 n_i)); phi_n = 0"
+  },
+  "doping": {
+   "N_A_cm3": 1e+16,
+   "N_D_peak_cm3": 1e+20,
+   "h_w_um": 0.5,
+   "profile": "N_A uniform plus donors N_D(x, y) = 1e20 f_x(x) f_y(y): f_x = 0.5 erfc((x - x_c)/(sqrt(2) sigma)) + 0.5 erfc(((L - x) - x_c)/(sqrt(2) sigma)), x_c = -sqrt(2) sigma erfcinv(2 N_A/N_D) (N_D = N_A at x = 0 and x = L); f_y = 0.5 erfc((y - h_w)/(sqrt(2) sigma_y)); fully analytic, no doping step on a mesh line",
+   "sigma_nm": 15.0,
+   "sigma_y_nm": 15.0
+  },
+  "geometry": {
+   "L_um": 2.0,
+   "contact_extent_note": "source/drain contacts cover 0 <= y <= h_w; on a tensor mesh the realized extent is the depth line nearest h_w (this mesh: contact_extent_um_this_mesh). Its effect on G_DD/G_SD/G_DB is <= 6.5e-9 relative (benchmark/wp2/results/contact_extent_check.json, amendment A4).",
+   "contact_extent_um_this_mesh": 0.5032779911853189,
+   "coordinates": "x along the channel (source side first), y depth into Si (y = 0 at the Si/SiO2 interface, oxide at -t_ox <= y <= 0)",
+   "gate_overlap_nm": 0.0,
+   "gate_x_range_um": [
+    0.0,
+    2.0
+   ],
+   "h_w_um": 0.5,
+   "l_w_um": 0.3,
+   "si_depth_um": 1.2,
+   "si_x_range_um": [
+    -0.3,
+    2.3
+   ],
+   "t_ox_nm": 20.0
+  },
+  "physics": {
+   "T_K": 300.0,
+   "V_T_V": 0.025851999786435535,
+   "eps_ox_rel": 3.9,
+   "eps_si_rel": 11.7,
+   "gate_convention": "gate contact psi_gate = V_G + psi_b0 (V_FB = 0; no work-function difference, no oxide charge)",
+   "gate_work_function": "phi_m = chi_Si + 0.9172 V (equals the p-substrate work function, so V_FB = 0); E_c - E_i = 0.56 eV",
+   "generation_recombination": "none",
+   "holes": "not part of the observable: report the electron component of each terminal current, or hold holes at equilibrium p = n_i exp(-psi/V_T) (pre-registration section 2.5); the body is ohmic for holes in B0 and B1",
+   "mobility": "constant mu_n (field-independent); zero-bias network edge conductance c_e = q mu_n EdgeCouple EIL n0 B(Delta)",
+   "mu_n_cm2_per_Vs": 1350.0,
+   "n_i_cm3": 10000000000.0,
+   "oxide": "SiO2, no fixed or trapped charge, no carriers",
+   "psi_b0_V": -0.3571585759940161,
+   "psi_reference": "intrinsic Fermi level (psi = 0 at n = p = n_i)",
+   "statistics": "Boltzmann (n = n_i exp((psi - phi_n)/V_T))",
+   "units": "2-D simulation; currents in A/cm and conductances in S/cm per unit device width"
+  },
+  "state_id": "HO-3"
+ },
+ "family": "zero_bias_3terminal",
+ "id": "HO__R_L2_NA1e16_tox20_VG0.588534_B1",
+ "known_bad_outputs": [
+  {
+   "G_DD_S_per_cm": 3.687000571517274e-08,
+   "evaluation": "direct sum of the edge currents at the drain contact nodes (phi = 1 there)",
+   "evidence": "fails the case rule (same mesh: |rel| <= tau_num = 1e-06): G_DD rel = -1.931e-01",
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "drain_side_flux_sum_lev1",
+   "path": "P1",
+   "rel_G_DD_vs_reference": -0.1930836004503037,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true
+  },
+  {
+   "E_dwr": 3.5164701511540124,
+   "E_round": 0.7618348885255494,
+   "G_DD_S_per_cm": -1.8462697191201807e-08,
+   "eta": 1.2569794556922298e-17,
+   "evaluation": "DEVSIM full coupled Jacobian, row/column-equilibrated SuperLU solve, -x[V1.I]",
+   "evidence": "fails the case rule (sign: a zero-bias conductance is positive): G_DD rel = -1.404e+00",
+   "kappa_G": 4.185513601245248e+17,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "coupled_small_signal_G_E_lev1",
+   "path": "P3",
+   "rel_G_DD_vs_reference": -1.4040643025278972,
+   "rule": "sign: a zero-bias conductance is positive",
+   "same_mesh": true
+  },
+  {
+   "E_dwr": 3.5164701511540124,
+   "E_round": 0.7618348885255494,
+   "G_DD_S_per_cm": 1.1843110096670126e-07,
+   "eta": 1.2569794556922298e-17,
+   "evaluation": "same Newton linear system solved with UMFPACK",
+   "evidence": "fails the case rule (same mesh: |rel| <= tau_num = 1e-06): G_DD rel = +1.592e+00",
+   "kappa_G": 4.185513601245248e+17,
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "coupled_small_signal_G_M_lev1",
+   "path": "P3",
+   "rel_G_DD_vs_reference": 1.5919170809195364,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true
+  },
+  {
+   "G_DD_S_per_cm": 4.383578348288985e-09,
+   "definition": "G_R = (100 G(+-0.1 mV) - G(+-1 mV)) / 99; removes the physical (V_D/V_T)^2/6 term of the symmetric difference (residual ~2e-10)",
+   "evaluation": "DEVSIM get_contact_current at the drain (default post-solve current)",
+   "evidence": "fails the case rule (same mesh: |rel| <= tau_num = 1e-06): G_DD rel = -9.041e-01",
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "devsim_drain_contact_current_richardson_lev1",
+   "note_pm": "the +-1 mV and +-0.1 mV symmetric differences contain the physical (V_D/V_T)^2/6 term (2.5e-4 and 2.5e-6)",
+   "path": "P2",
+   "rel_G_DD_vs_reference": -0.9040634469853165,
+   "rel_pm0p1mV": -0.8956608368324012,
+   "rel_pm1mV": -0.06380243169378086,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true,
+   "symmetric_pm0p1mV_S_per_cm": 4.7675143849505844e-09,
+   "symmetric_pm1mV_S_per_cm": 4.2777182014448885e-08
+  },
+  {
+   "G_SD_S_per_cm": 8.515972219894112e-10,
+   "definition": "G_R = (100 G(+-0.1 mV) - G(+-1 mV)) / 99; removes the physical (V_D/V_T)^2/6 term of the symmetric difference (residual ~2e-10)",
+   "evaluation": "-DEVSIM get_contact_current at the source",
+   "evidence": "fails the case rule (same mesh: |rel| <= tau_num = 1e-06): G_SD rel = -9.814e-01",
+   "level": 1,
+   "mesh_id": "dev2_L2_lev1",
+   "name": "devsim_source_contact_current_richardson_lev1",
+   "path": "P2",
+   "raw_source_current_A_per_cm": {
+    "+0.0001": 4.111422484166114e-12,
+    "+0.001": -4.388386355431024e-11,
+    "-0.0001": 4.366097274767426e-12,
+    "-0.001": 4.217467709309821e-11
+   },
+   "rel_G_SD_vs_reference": -0.9813603383384838,
+   "rule": "same mesh: |rel| <= tau_num = 1e-06",
+   "same_mesh": true,
+   "symmetric_pm0p1mV_S_per_cm": 1.2733739530065593e-09,
+   "symmetric_pm1mV_S_per_cm": 4.302927032370422e-08
+  }
+ ],
+ "mesh": {
+  "dx_max_nm": 14.246366665185828,
+  "dx_min_nm": 0.35095856998427477,
+  "generator": "endprobe deck-R maps (phase3.c6.rprobe.lateral_nodes, phase3.c7.endprobe.depth_map, oxide_map(t_ox, 5)); refinement factor sqrt(2) per level; each rectangle split into two triangles (node_lines_file has the exact node lines and rules); box integration, Scharfetter-Gummel edge currents (DEVSIM 2.11.2)",
+  "level": 1,
+  "max_adjacent_ratio": 1.0486272315532554,
+  "mesh_id": "dev2_L2_lev1",
+  "n_depth_si": 308,
+  "n_lateral": 438,
+  "n_ox": 8,
+  "node_lines_file": "benchmark/meshes/mesh_dev2_L2_lev1.json",
+  "node_lines_file_sha256": "35fd3190235b92b559e3ba1dda1b11411bfca0a04c58cd89a90dbcea0f3cdf0c",
+  "nx": 438,
+  "ny": 315
+ },
+ "notes": [
+  "Zero-bias linear response of the three-terminal electron network (ohmic body B1): at equilibrium grad(phi_n) = 0, so the O(V_D) electron current is that of sigma0 = q mu_n n0(x, y) (C6 theory, P4). Excite phi_n = 1 at the drain and 0 at source and body: G_DD = I_D, G_SD = -I_S, G_DB = -I_B, G_DD = G_SD + G_DB. Any drift-diffusion code can be scored on these limits (V_D -> 0); report the ELECTRON component of each terminal current (pre-registration section 2.5).",
+  "Held-out state (pre-registration section 6): level 1 only, not used to set any threshold or tolerance. No refinement pair or independent path, so only same-mesh scoring applies."
+ ],
+ "observables": {
+  "G_DB_S_per_cm": {
+   "note": "reported, not scored: the pre-registered tolerance rule (section 7) covers G_DD and G_SD only",
+   "path": "-I_B of the drain-excited network",
+   "scored": false,
+   "second_form": 5.097370227745138e-12,
+   "second_form_definition": "G_DD - G_SD (cancellation-prone)",
+   "value": 5.097371374046031e-12
+  },
+  "G_DD_S_per_cm": {
+   "path": "edge energy phi^T L phi of the drain-excited network (cancellation-free)",
+   "second_form": 4.569247289641553e-08,
+   "second_form_definition": "-(I_S + I_B), evaluated where phi = 0",
+   "value": 4.569247289526923e-08
+  },
+  "G_GCA_S_per_cm": {
+   "definition": "long-channel (1-column) sheet conductance / L on the reference depth mesh; the dL reference",
+   "value": 2.842370728511342e-08
+  },
+  "G_SD_S_per_cm": {
+   "path": "-I_S of the drain-excited network (source side, cancellation-free)",
+   "second_form": 4.568737552504028e-08,
+   "second_form_definition": "reciprocity: -I_D with the source excited",
+   "value": 4.5687375525041487e-08
+  },
+  "body_effect_vs_B0": {
+   "B0_case": "BR__R_L2_NA1e16_tox20_VG0.588534_B0_lev1",
+   "Delta_DD": 8.943722838217205e-05,
+   "Delta_SD": -2.2130953407861753e-05,
+   "G0_B0_S_per_cm": 4.5688386652597774e-08,
+   "G_DB_over_G0": 0.00011156820687946533
+  },
+  "dL_nm": {
+   "definition": "per-end correction dL = (L/2)(1 - G_GCA/G_SD)",
+   "value": 377.8651770107863
+  },
+  "psi_hat": {
+   "definition": "(psi_s,inf - psi_b0)/V_T of the 1-column problem (long-channel surface potential)",
+   "value": 14.999903439313703
+  },
+  "same_mesh_references": {
+   "dev2_L2_lev1": {
+    "G_DB_S_per_cm": 5.097371374046031e-12,
+    "G_DB_rel_forms": -2.248807882132553e-07,
+    "G_DD_S_per_cm": 4.569247289526923e-08,
+    "G_DD_rel_forms": 2.5087265598244812e-11,
+    "G_SD_S_per_cm": 4.5687375525041487e-08,
+    "G_SD_rel_forms": -2.631228568361621e-14,
+    "kcl_closure_rel": 2.5087302567597575e-11,
+    "level": 1,
+    "network_relative_residual": 1.172476752975086e-13,
+    "node_lines_file": "benchmark/meshes/mesh_dev2_L2_lev1.json"
+   }
+  },
+  "scored": [
+   "G_DD_S_per_cm",
+   "G_SD_S_per_cm",
+   "dL_nm"
+  ]
+ },
+ "provenance": {
+  "base_commit": "454db70e71660a896b23ca378d2f5c3413808204",
+  "command": "/home/claude/venv-wp1/bin/python benchmark/wp2/rdeck_probe.py --id HO-3 --na 1e16 --tox 20 --L 2 --vg 0.588534 --level 1 --body B1 --smallsignal --out benchmark/wp2/results/production   (benchmark/wp2/results/ledger.jsonl)",
+  "exporter": "benchmark/tools/export_cases.py",
+  "pre_registration": "benchmark/specs/WP3_Preregistration_AR_and_HeldOut_2026-11-04.md",
+  "producing_script": "benchmark/wp2/rdeck_probe.py",
+  "sources": [
+   {
+    "path": "benchmark/wp2/results/production/P1_HO-3_B1_lev1.json",
+    "role": "P1 network, body B1, level 1 (reference)",
+    "sha256": "ac9a977c139549aea9c1111d83b3d6148e7aefa2ba4ad1af6db70b8e3dc061d1"
+   },
+   {
+    "path": "benchmark/wp2/results/production/P2_HO-3_B1_lev1.json",
+    "role": "P2 drift-diffusion at V_D = +-0.1, +-1 mV, body B1, level 1",
+    "sha256": "dd8b47168b8b0a039023ae3ce243484ce48a37b21d03fa322f366a42f876c61b"
+   },
+   {
+    "path": "benchmark/wp2/results/evaluation.json",
+    "role": "WP2 evaluation against the frozen pre-registration (H1, H-B, H2, P-DD, P-SS, E-CIRC)",
+    "sha256": "a10038f19ec61025ab6d9749ed89ff7530ab82aa50c124da0b705a135bd23512"
+   },
+   {
+    "path": "benchmark/wp2/results/production/P1_HO-3_B0_lev1.json",
+    "role": "P1 network, body B0, same mesh (body effect)",
+    "sha256": "aa0ad4899bb43b398e44b17c4659572ec9009a99f2edec127073bc0ecf36ab4f"
+   }
+  ]
+ },
+ "related_cases": [
+  "BR__R_L2_NA1e16_tox20_VG0.588534_B0_lev1"
+ ],
+ "schema_version": "1.1.0",
+ "tier": "HO",
+ "uncertainty": {
+  "basis": "held-out state: level 1 only, no refinement pair or independent path; same-mesh scoring only (tau_num = 1e-6)",
+  "components": {},
+  "coverage_factor": 2.0,
+  "status": "not_established",
+  "tau_num_rel": 1e-06,
+  "tolerance": "not_established"
+ }
+}

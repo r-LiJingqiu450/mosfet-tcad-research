@@ -1,0 +1,6 @@
+$ python benchmark/tools/make_examples.py
+source_side_reference_same_mesh          {"pass": 63}
+drain_side_flux_sum_same_mesh            {"fail": 19, "pass": 44}
+coupled_small_signal_G_E_same_mesh       {"fail": 3}
+independent_finite_volume_other_mesh     {"pass": 3}
+exit=0

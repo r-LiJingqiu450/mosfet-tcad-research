@@ -1,0 +1,10 @@
+{
+ "W6-026": {
+  "code": "C5",
+  "registered_codebook": "pre-registration section 8: every SE, FE and NR run gets one primary code C1-C5",
+  "note": "No value was reported: the session reached the 2700 s wall limit (exit 124) and wrote no final block. None of C1-C4 applies because there is no reported value to attribute an error to, so the registered code is C5. The cause of the missing report is determinable: the run was waiting for an extended-precision finite-difference run on the 273 314-unknown mesh of T06 (its build step alone took 341 s) when time ran out. The candidate values already in its log were within 1% of G_ref: double-precision central difference at +-3 mV 1.60110e-5 (+0.22%), the AC solve -1.60487e-5 (sign reversed, magnitude +0.46%), and an extended-precision one-step linear response 1.60430e-5 (+0.42%). This matches threat 'the time cap binds unequally' (pre-registration section 11).",
+  "post_hoc_label": "time limit reached during an extended-precision check",
+  "coded_by": "analyst (Claude, the study designer), from the transcript, not blind to the arm",
+  "coded_utc": "2026-11-05T18:20:00Z"
+ }
+}

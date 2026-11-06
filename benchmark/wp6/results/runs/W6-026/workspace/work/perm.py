@@ -1,0 +1,10 @@
+import pickle, numpy as np, scipy.sparse as sp
+d0=pickle.load(open('work/mat0.pkl','rb'))
+s=d0['static']; N=len(s['rhs'])
+J=sp.csc_matrix((s['av'],s['ai'],s['ap']),shape=(N,N)).tocsr()
+row=np.array(d0['permutation']['row']); cp=np.array(d0['permutation']['copy'])
+print(np.unique(row[row!=np.arange(N)])[:10], np.sum(row==-1))
+print(np.unique(cp)[:10], np.sum(cp!=-1), np.sum(cp!=np.arange(N)))
+idx=np.flatnonzero(row!=np.arange(N))[:10]; print(idx, row[idx], cp[idx])
+idx=np.flatnonzero((cp!=-1)&(cp!=np.arange(N)))[:10]; print(idx, row[idx], cp[idx])
+nnzrow=np.diff(J.indptr); print('empty rows', np.sum(nnzrow==0), np.flatnonzero(nnzrow==0)[:10])

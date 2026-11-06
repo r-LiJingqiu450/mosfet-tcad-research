@@ -1,0 +1,46 @@
+{
+ "results": {
+  "AR__R_L1_NA1e18_tox2_VG0.488174_B1": {
+   "G_DD_S_per_cm": 3.5326066958576693e-12,
+   "G_SD_S_per_cm": 3.509144356469025e-12,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L1_NA1e18_tox2_VG0.621433_B1": {
+   "G_DD_S_per_cm": 1.6191577286043259e-10,
+   "G_SD_S_per_cm": 1.6189230790077556e-10,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L1_NA1e18_tox2_VG0.7835_B1": {
+   "G_DD_S_per_cm": 2.114676926936811e-08,
+   "G_SD_S_per_cm": 2.1146745801923472e-08,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.488174_B1": {
+   "G_DD_S_per_cm": 2.550492913506708e-09,
+   "G_SD_S_per_cm": 2.545411746112199e-09,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.621433_B1": {
+   "G_DD_S_per_cm": 1.2035178049750476e-07,
+   "G_SD_S_per_cm": 1.2034667774160398e-07,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.7835_B1": {
+   "G_DD_S_per_cm": 1.5975666883465512e-05,
+   "G_SD_S_per_cm": 1.5975661753487184e-05,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  }
+ },
+ "submission": {
+  "code": "DEVSIM 2.11.2, extended_solver/extended_model/extended_equation = True (float128 models, equations and Newton residuals; double-precision UMFPACK LU)",
+  "current_evaluation": "get_contact_current at the drain (G_DD) and at the source (G_SD); symmetric +-0.1/+-1 mV differences, Richardson",
+  "name": "DEVSIM 2.11.2 default contact currents with extended precision (level-1 mesh)",
+  "notes": "values from benchmark/wp4/results/production/P2X_<state>_B1_lev1.json (WP4 pre-registration benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md; evaluation benchmark/wp4/results/evaluation_wp4.json). G_DD is the registered quantity (X2); G_SD is post hoc."
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "status": "post hoc (WP7, not pre-registered); descriptive; decides no outcome",
+ "source": "each reporting run's 'verification' field (audit.json: reported.verification), read in full by the analyst",
+ "coded_by": "analyst (Claude), not blind",
+ "coded_utc": "2026-11-05T22:30:00Z",
+ "kinds": {
+  "cuts": "electron current summed across channel cuts or boxes (second current measure)",
+  "network": "linearized Scharfetter-Gummel network compared with a finite difference or another network form (second current measure)",
+  "contacts": "drain and/or source contact currents of the same runs (second current measure; moderate-current task only)",
+  "sheet_density": "conductance estimate from the sheet electron density (not a current measure)"
+ },
+ "runs": {
+  "W6-001": {
+   "kind": "cuts",
+   "evidence": "electron current summed across three channel cut lines"
+  },
+  "W6-002": {
+   "kind": "cuts",
+   "evidence": "electron current summed across cuts inside the channel"
+  },
+  "W6-003": {
+   "kind": "network",
+   "evidence": "source plus body current of the linear solution vs energy value; finite differences of V1.I"
+  },
+  "W6-004": {
+   "kind": "cuts",
+   "evidence": "electron current across channel cuts plus drain-side body current"
+  },
+  "W6-005": {
+   "kind": "network",
+   "evidence": "three network readings; central difference of V1.I"
+  },
+  "W6-006": {
+   "kind": "network",
+   "evidence": "both network formulations; central difference of V1.I"
+  },
+  "W6-007": {
+   "kind": "cuts",
+   "evidence": "channel-cut edge currents plus body-contact conductance"
+  },
+  "W6-008": {
+   "kind": "cuts",
+   "evidence": "six cuts from x = 0 to 2 um; V1 current"
+  },
+  "W6-009": {
+   "kind": "cuts",
+   "evidence": "current through vertical lines in the channel plus body share"
+  },
+  "W6-010": {
+   "kind": "contacts",
+   "evidence": "drain-contact, source-contact and V1 currents agree (moderate-current task)"
+  },
+  "W6-011": {
+   "kind": "cuts",
+   "evidence": "electron current through vertical cuts at x = 0.5, 1.0, 1.5 um"
+  },
+  "W6-012": {
+   "kind": "network",
+   "evidence": "power-based G vs source+body current; finite differences of V1.I"
+  },
+  "W6-013": {
+   "kind": "cuts",
+   "evidence": "edge fluxes summed across three channel cuts plus drain-side body current"
+  },
+  "W6-014": {
+   "kind": "cuts",
+   "evidence": "drain contact, source contact, V1 current and five vertical cut currents"
+  },
+  "W6-015": {
+   "kind": "cuts",
+   "evidence": "three vertical cuts across the channel"
+  },
+  "W6-016": {
+   "kind": "cuts",
+   "evidence": "electron current through channel cuts plus body-contact current"
+  },
+  "W6-017": {
+   "kind": "network",
+   "evidence": "network source plus body current and dissipated power"
+  },
+  "W6-018": {
+   "kind": "cuts",
+   "evidence": "electron current summed across three vertical cuts"
+  },
+  "W6-019": {
+   "kind": "cuts",
+   "evidence": "summed edge currents across vertical channel cuts"
+  },
+  "W6-020": {
+   "kind": "network",
+   "evidence": "independent linear-response resistor-network solve; current through every channel cut"
+  },
+  "W6-021": {
+   "kind": "cuts",
+   "evidence": "edge currents across three closed channel cuts"
+  },
+  "W6-022": {
+   "kind": "cuts",
+   "evidence": "currents through cuts in the channel"
+  },
+  "W6-023": {
+   "kind": "contacts",
+   "evidence": "drain contact current (moderate-current task)"
+  },
+  "W6-024": {
+   "kind": "network",
+   "evidence": "network value vs Richardson-extrapolated central differences of V1.I"
+  },
+  "W6-025": {
+   "kind": "sheet_density",
+   "evidence": "estimate from the zero-bias sheet electron density, G = 1/int dx/(q mu_n N_s)"
+  },
+  "W6-027": {
+   "kind": "cuts",
+   "evidence": "three boxes at different positions; V1 circuit current"
+  },
+  "W6-028": {
+   "kind": "network",
+   "evidence": "network dissipated power, source plus body current, mid-channel cut"
+  },
+  "W6-029": {
+   "kind": "network",
+   "evidence": "linearized network (drain = 0 setup and source-side current)"
+  },
+  "W6-030": {
+   "kind": "cuts",
+   "evidence": "edge-current sums across three channel cuts"
+  },
+  "W6-031": {
+   "kind": "cuts",
+   "evidence": "electron current through channel cuts at L/4, L/2, 3L/4; source + body conductances"
+  },
+  "W6-032": {
+   "kind": "cuts",
+   "evidence": "edge currents summed across vertical cuts at every channel column"
+  },
+  "W6-033": {
+   "kind": "cuts",
+   "evidence": "electron-current sums across channel cross-sections"
+  }
+ }
+}

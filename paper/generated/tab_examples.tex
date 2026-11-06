@@ -1,0 +1,19 @@
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Submitted evaluation path & Pass & Fail \\
+\midrule
+Reference forms (A-R, HO), same mesh & 11 & 0 \\
+DEVSIM circuit-node current $-x[\mathrm{V1.I}]$, Richardson, same mesh & 11 & 0 \\
+Independent finite volume (A-R), other mesh & 6 & 0 \\
+DEVSIM \texttt{get\_contact\_current}, double, Richardson, same mesh & 0 & 11 \\
+DEVSIM \texttt{get\_contact\_current}, extended precision (A-R) & 6 & 0 \\
+Coupled small-signal solve $G_E$ (full Jacobian), level-1 mesh & 0 & 11 \\
+DEVSIM AC analysis, double (A-R) & 0 & 6 \\
+DEVSIM AC analysis, extended precision (A-R) & 0 & 6 \\
+\midrule
+Two-terminal source-side reference, same mesh & 86 & 0 \\
+Two-terminal drain-side flux sum, same mesh & 48 & 38 \\
+Two-terminal coupled small-signal $G_E$, same mesh & 0 & 14 \\
+Two-terminal independent finite volume (A-W), other mesh & 3 & 0 \\
+\bottomrule
+\end{tabular}

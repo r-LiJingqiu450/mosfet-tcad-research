@@ -1,0 +1,128 @@
+{
+ "note": "post-hoc exploratory diagnostic; not pre-registered and not used in any registered decision",
+ "args": {
+  "id": "AR-4",
+  "out": "benchmark/wp2/results/diagnostics",
+  "na": 1e+16,
+  "tox": 20.0,
+  "L": 2.0,
+  "vg": 0.488174,
+  "level": 1
+ },
+ "mesh": {
+  "nx": 438,
+  "ny": 315
+ },
+ "psi_hat": 11.999931417485612,
+ "G_energy": 2.546418332633354e-09,
+ "G_source": 2.5464183326969394e-09,
+ "energy_vs_source_rel": -2.4970470136054246e-11,
+ "network_relative_residual": 1.1723218887889847e-13,
+ "edge_conductance": {
+  "max": 1709952.884649121,
+  "min_nonzero": 5.5386709570706045e-14,
+  "max_over_G": 671512949263953.5
+ },
+ "channel_cuts": {
+  "n": 279,
+  "max_abs_rel_vs_source": 0.00012786061584391106,
+  "median_rel_vs_source": -5.700107053030479e-12,
+  "median_rel_vs_energy": 1.9270363083023767e-11,
+  "max_abs_rel_vs_energy": 0.00012786059087654955
+ },
+ "source_half_channel_cuts": {
+  "n": 140,
+  "max_abs_rel_vs_source": 2.5462965069777965e-11,
+  "min_rel_vs_energy": -4.924949337237194e-13,
+  "max_rel_vs_energy": 2.4722890401562836e-11
+ },
+ "source_side_cuts_max_abs_rel_vs_source": 2.9254376698872875e-13,
+ "drain_side_cuts_max_abs_rel_vs_source": 6.571688699360801,
+ "drain_side_cuts": [
+  {
+   "x_mid_um": 2.000175479284992,
+   "region": "drain_side",
+   "I": 2.5463190899406322e-09,
+   "rel_vs_source": -3.897346914016886e-05,
+   "rel_vs_energy": -3.89734441705869e-05
+  },
+  {
+   "x_mid_um": 2.0005349709268008,
+   "region": "drain_side",
+   "I": 2.5460255106166956e-09,
+   "rel_vs_source": -0.00015426455080058687,
+   "rel_vs_energy": -0.0001542645258338915
+  },
+  {
+   "x_mid_um": 2.0009119436519165,
+   "region": "drain_side",
+   "I": 2.546046614257339e-09,
+   "rel_vs_source": -0.0001459769727650828,
+   "rel_vs_energy": -0.0001459769477981654
+  },
+  {
+   "x_mid_um": 2.0013072475170257,
+   "region": "drain_side",
+   "I": 2.545853709273314e-09,
+   "rel_vs_source": -0.00022173239030498504,
+   "rel_vs_energy": -0.00022173236534006602
+  },
+  {
+   "x_mid_um": 2.001721773914717,
+   "region": "drain_side",
+   "I": 2.5460997595211554e-09,
+   "rel_vs_source": -0.00012510637851348427,
+   "rel_vs_energy": -0.00012510635354612276
+  },
+  {
+   "x_mid_um": 2.0021564575835336,
+   "region": "drain_side",
+   "I": 2.5461203507139086e-09,
+   "rel_vs_source": -0.00011702004309532832,
+   "rel_vs_energy": -0.00011702001812774476
+  },
+  {
+   "x_mid_um": 2.002612278715766,
+   "region": "drain_side",
+   "I": 2.54605298592876e-09,
+   "rel_vs_source": -0.00014347476354859,
+   "rel_vs_energy": -0.0001434747385816726
+  },
+  {
+   "x_mid_um": 2.0030902651677422,
+   "region": "drain_side",
+   "I": 2.546388661627162e-09,
+   "rel_vs_source": -1.1652079863089249e-05,
+   "rel_vs_energy": -1.1652054892841157e-05
+  },
+  {
+   "x_mid_um": 2.0035914947775977,
+   "region": "drain_side",
+   "I": 2.546133433107687e-09,
+   "rel_vs_source": -0.00011188247649429606,
+   "rel_vs_energy": -0.00011188245152660148
+  },
+  {
+   "x_mid_um": 2.0041170977957523,
+   "region": "drain_side",
+   "I": 2.5459519060460815e-09,
+   "rel_vs_source": -0.0001831696877409028,
+   "rel_vs_energy": -0.0001831696627749846
+  },
+  {
+   "x_mid_um": 2.004668259433576,
+   "region": "drain_side",
+   "I": 2.546266411993609e-09,
+   "rel_vs_source": -5.9660544137418725e-05,
+   "rel_vs_energy": -5.966051916839188e-05
+  },
+  {
+   "x_mid_um": 2.005246222535985,
+   "region": "drain_side",
+   "I": 2.5459974366186944e-09,
+   "rel_vs_source": -0.0001652894470797195,
+   "rel_vs_energy": -0.00016528942211335718
+  }
+ ],
+ "wall_s": 118.30380249023438
+}

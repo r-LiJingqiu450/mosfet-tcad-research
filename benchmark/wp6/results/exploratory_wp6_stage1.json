@@ -1,0 +1,543 @@
+{
+ "status": "exploratory (post hoc, not pre-registered); descriptive; decides no outcome",
+ "stage": 1,
+ "n_runs": 33,
+ "per_task": [
+  {
+   "task": "T01",
+   "state_id": "AR-1",
+   "task_class": "low",
+   "G_ref": 3.5326066983062963e-12,
+   "runs": [
+    "W6-013",
+    "W6-016",
+    "W6-021"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 0.00011133469624358128,
+   "wall_s": [
+    254,
+    219,
+    246
+   ]
+  },
+  {
+   "task": "T02",
+   "state_id": "AR-2",
+   "task_class": "low",
+   "G_ref": 1.6191577289182132e-10,
+   "runs": [
+    "W6-009",
+    "W6-017",
+    "W6-024"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 2.6106833838301924e-05,
+   "wall_s": [
+    282,
+    158,
+    363
+   ]
+  },
+  {
+   "task": "T03",
+   "state_id": "AR-3",
+   "task_class": "low",
+   "G_ref": 2.1146769273304958e-08,
+   "runs": [
+    "W6-015",
+    "W6-022",
+    "W6-029"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 1.0910730242619238e-05,
+   "wall_s": [
+    307,
+    293,
+    234
+   ]
+  },
+  {
+   "task": "T04",
+   "state_id": "AR-4",
+   "task_class": "low",
+   "G_ref": 2.550492913977163e-09,
+   "runs": [
+    "W6-004",
+    "W6-005",
+    "W6-019"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 2.778295441707712e-06,
+   "wall_s": [
+    2488,
+    528,
+    458
+   ]
+  },
+  {
+   "task": "T05",
+   "state_id": "AR-5",
+   "task_class": "moderate",
+   "G_ref": 1.2035178051938344e-07,
+   "runs": [
+    "W6-002",
+    "W6-008",
+    "W6-011"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 1.4794291997688447e-05,
+   "wall_s": [
+    869,
+    766,
+    1029
+   ]
+  },
+  {
+   "task": "T06",
+   "state_id": "AR-6",
+   "task_class": "moderate",
+   "G_ref": 1.5975666886328094e-05,
+   "runs": [
+    "W6-010",
+    "W6-023",
+    "W6-026"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "NR"
+   ],
+   "max_abs_rel_error": 2.0851315583714225e-05,
+   "wall_s": [
+    2658,
+    586,
+    2702
+   ]
+  },
+  {
+   "task": "T07",
+   "state_id": "HO-1",
+   "task_class": "low",
+   "G_ref": 6.177612976636322e-11,
+   "runs": [
+    "W6-020",
+    "W6-028",
+    "W6-031"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 9.92254837978157e-05,
+   "wall_s": [
+    264,
+    233,
+    553
+   ]
+  },
+  {
+   "task": "T08",
+   "state_id": "HO-2",
+   "task_class": "low",
+   "G_ref": 1.1211190535871126e-09,
+   "runs": [
+    "W6-014",
+    "W6-025",
+    "W6-032"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 1.699515056108325e-05,
+   "wall_s": [
+    804,
+    264,
+    282
+   ]
+  },
+  {
+   "task": "T09",
+   "state_id": "HO-3",
+   "task_class": "low",
+   "G_ref": 4.569247289526923e-08,
+   "runs": [
+    "W6-006",
+    "W6-018",
+    "W6-027"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 5.41204078601254e-05,
+   "wall_s": [
+    386,
+    890,
+    560
+   ]
+  },
+  {
+   "task": "T10",
+   "state_id": "HO-4",
+   "task_class": "moderate",
+   "G_ref": 8.401174475410332e-07,
+   "runs": [
+    "W6-001",
+    "W6-030",
+    "W6-033"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 2.0767978434754752e-05,
+   "wall_s": [
+    587,
+    1271,
+    671
+   ]
+  },
+  {
+   "task": "T11",
+   "state_id": "HO-5",
+   "task_class": "low",
+   "G_ref": 1.7170575961604291e-12,
+   "runs": [
+    "W6-003",
+    "W6-007",
+    "W6-012"
+   ],
+   "outcomes": [
+    "CS",
+    "CS",
+    "CS"
+   ],
+   "max_abs_rel_error": 3.3543522685475224e-05,
+   "wall_s": [
+    154,
+    243,
+    200
+   ]
+  }
+ ],
+ "reported_relative_error": {
+  "n": 32,
+  "median": 1.2852511120153842e-05,
+  "max": 0.00011133469624358128,
+  "n_below_1e_3": 32,
+  "n_below_1e_4": 31
+ },
+ "by_class": {
+  "low": {
+   "n": 24,
+   "outcomes": {
+    "CS": 24
+   },
+   "median_wall_s": 282.1,
+   "median_turns": 8.5,
+   "cost_usd": 13.21
+  },
+  "moderate": {
+   "n": 9,
+   "outcomes": {
+    "CS": 8,
+    "NR": 1
+   },
+   "median_wall_s": 869.0,
+   "median_turns": 8.0,
+   "cost_usd": 4.89
+  }
+ },
+ "method_hints": {
+  "get_contact_current": [
+   "W6-001",
+   "W6-002",
+   "W6-003",
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-007",
+   "W6-008",
+   "W6-009",
+   "W6-010",
+   "W6-011",
+   "W6-012",
+   "W6-013",
+   "W6-014",
+   "W6-015",
+   "W6-016",
+   "W6-017",
+   "W6-018",
+   "W6-019",
+   "W6-020",
+   "W6-021",
+   "W6-022",
+   "W6-023",
+   "W6-024",
+   "W6-025",
+   "W6-026",
+   "W6-027",
+   "W6-028",
+   "W6-029",
+   "W6-030",
+   "W6-031",
+   "W6-032",
+   "W6-033"
+  ],
+  "ac_analysis": [
+   "W6-001",
+   "W6-002",
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-007",
+   "W6-008",
+   "W6-009",
+   "W6-010",
+   "W6-011",
+   "W6-012",
+   "W6-013",
+   "W6-014",
+   "W6-015",
+   "W6-016",
+   "W6-017",
+   "W6-018",
+   "W6-020",
+   "W6-021",
+   "W6-022",
+   "W6-023",
+   "W6-024",
+   "W6-025",
+   "W6-026",
+   "W6-028",
+   "W6-029",
+   "W6-030",
+   "W6-031",
+   "W6-032",
+   "W6-033"
+  ],
+  "circuit_node_value": [
+   "W6-001",
+   "W6-002",
+   "W6-003",
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-007",
+   "W6-008",
+   "W6-009",
+   "W6-010",
+   "W6-011",
+   "W6-012",
+   "W6-013",
+   "W6-014",
+   "W6-015",
+   "W6-016",
+   "W6-017",
+   "W6-018",
+   "W6-019",
+   "W6-020",
+   "W6-021",
+   "W6-022",
+   "W6-023",
+   "W6-024",
+   "W6-025",
+   "W6-026",
+   "W6-027",
+   "W6-028",
+   "W6-029",
+   "W6-030",
+   "W6-031",
+   "W6-032",
+   "W6-033"
+  ],
+  "circuit_alter": [
+   "W6-001",
+   "W6-002",
+   "W6-003",
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-007",
+   "W6-008",
+   "W6-009",
+   "W6-010",
+   "W6-011",
+   "W6-012",
+   "W6-013",
+   "W6-014",
+   "W6-015",
+   "W6-016",
+   "W6-017",
+   "W6-018",
+   "W6-019",
+   "W6-020",
+   "W6-021",
+   "W6-022",
+   "W6-023",
+   "W6-024",
+   "W6-025",
+   "W6-026",
+   "W6-027",
+   "W6-028",
+   "W6-029",
+   "W6-030",
+   "W6-031",
+   "W6-032",
+   "W6-033"
+  ],
+  "extended_precision": [
+   "W6-004",
+   "W6-010",
+   "W6-014",
+   "W6-018",
+   "W6-026",
+   "W6-031"
+  ],
+  "jacobian_export": [
+   "W6-004",
+   "W6-010",
+   "W6-025",
+   "W6-026"
+  ],
+  "richardson_or_extrapolation": [
+   "W6-014"
+  ],
+  "electron_density_postprocessing": [
+   "W6-001",
+   "W6-003",
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-009",
+   "W6-012",
+   "W6-017",
+   "W6-024",
+   "W6-029"
+  ]
+ },
+ "final_method": {
+  "A": {
+   "label": "central differences of a converged DC current, double precision",
+   "runs": [
+    "W6-001",
+    "W6-002",
+    "W6-004",
+    "W6-007",
+    "W6-008",
+    "W6-009",
+    "W6-011",
+    "W6-013",
+    "W6-015",
+    "W6-016",
+    "W6-017",
+    "W6-018",
+    "W6-019",
+    "W6-020",
+    "W6-021",
+    "W6-022",
+    "W6-023",
+    "W6-025",
+    "W6-027",
+    "W6-028",
+    "W6-029",
+    "W6-030",
+    "W6-031",
+    "W6-032",
+    "W6-033"
+   ]
+  },
+  "B": {
+   "label": "central differences of a converged DC current, extended precision",
+   "runs": [
+    "W6-010",
+    "W6-014"
+   ]
+  },
+  "C": {
+   "label": "exact linearisation about the equilibrium: Scharfetter-Gummel resistor network on the mesh edges",
+   "runs": [
+    "W6-003",
+    "W6-005",
+    "W6-006",
+    "W6-012",
+    "W6-024"
+   ]
+  },
+  "D": {
+   "label": "no report",
+   "runs": [
+    "W6-026"
+   ]
+  }
+ },
+ "method_coding": "benchmark/wp6/results/method_coding_stage1.json",
+ "refused_calls": {
+  "by_mechanism": {
+   "workspace guard": 7,
+   "Claude Code's command check": 3,
+   "classifier: Classifier unavailable": 9
+  },
+  "guard_targets": {
+   "own background-task output": 5,
+   "code text matched the home-directory rule": 2
+  },
+  "runs_with_refusals": [
+   "W6-004",
+   "W6-005",
+   "W6-006",
+   "W6-024",
+   "W6-027",
+   "W6-033"
+  ],
+  "per_run": {
+   "W6-004": {
+    "workspace guard": 1
+   },
+   "W6-005": {
+    "Claude Code's command check": 1,
+    "workspace guard": 1
+   },
+   "W6-006": {
+    "workspace guard": 3
+   },
+   "W6-024": {
+    "classifier: Classifier unavailable": 9
+   },
+   "W6-027": {
+    "Claude Code's command check": 1,
+    "workspace guard": 1
+   },
+   "W6-033": {
+    "Claude Code's command check": 1,
+    "workspace guard": 1
+   }
+  }
+ }
+}

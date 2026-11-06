@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""Verification service: ./check <value>
+
+Compares a candidate value of G_DD (S/cm) with an independent reference for this device and mesh and prints PASS (within
+1% of the reference) or FAIL. The reference is not revealed. At most 3 checks are available.
+"""
+import os
+import socket
+import sys
+
+if len(sys.argv) != 2 or sys.argv[1] in ('-h', '--help'):
+    print(__doc__.strip())
+    sys.exit(0 if len(sys.argv) == 2 else 2)
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.checker.sock')
+try:
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.settimeout(30)
+    s.connect(path)
+    s.sendall(sys.argv[1].encode()[:200])
+    s.shutdown(socket.SHUT_WR)
+    print(s.recv(4096).decode().strip())
+except OSError as e:
+    print(f'verification service unavailable: {e}')
+    sys.exit(1)

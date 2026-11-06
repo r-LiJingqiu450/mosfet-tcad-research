@@ -1,0 +1,103 @@
+Searching DEVSIM_MATH_LIBS="/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+Loading "/usr/lib/x86_64-linux-gnu/libblas.so.3": MISSING SYMBOLS
+Loading "/usr/lib/x86_64-linux-gnu/liblapack.so.3": ALL BLAS/LAPACK LOADED
+loading UMFPACK 5.1 as direct solver
+Physical group name body has 0 Tetrahedra.
+Physical group name body has 0 Triangles.
+Physical group name body has 437 Lines.
+Physical group name body has 438 Points.
+Physical group name drain has 0 Tetrahedra.
+Physical group name drain has 0 Triangles.
+Physical group name drain has 248 Lines.
+Physical group name drain has 249 Points.
+Physical group name gate has 0 Tetrahedra.
+Physical group name gate has 0 Triangles.
+Physical group name gate has 279 Lines.
+Physical group name gate has 280 Points.
+Physical group name ox has 0 Tetrahedra.
+Physical group name ox has 6118 Triangles.
+Physical group name ox has 9621 Lines.
+Physical group name ox has 3504 Points.
+Physical group name ox_si has 0 Tetrahedra.
+Physical group name ox_si has 0 Triangles.
+Physical group name ox_si has 437 Lines.
+Physical group name ox_si has 438 Points.
+Physical group name oxc_d has 0 Tetrahedra.
+Physical group name oxc_d has 0 Triangles.
+Physical group name oxc_d has 1 Lines.
+Physical group name oxc_d has 1 Points.
+Physical group name oxc_s has 0 Tetrahedra.
+Physical group name oxc_s has 0 Triangles.
+Physical group name oxc_s has 1 Lines.
+Physical group name oxc_s has 1 Points.
+Physical group name si has 0 Tetrahedra.
+Physical group name si has 268318 Triangles.
+Physical group name si has 403221 Lines.
+Physical group name si has 134904 Points.
+Physical group name source has 0 Tetrahedra.
+Physical group name source has 0 Triangles.
+Physical group name source has 248 Lines.
+Physical group name source has 249 Points.
+Device mos has 137970 coordinates with max index 137969
+Region ox has 3504 nodes.
+Region si has 134904 nodes.
+Contact body in region si with 438 nodes
+Contact drain in region si with 249 nodes
+Contact gate in region ox with 280 nodes
+Warning, contact "drain" shares a node with contact "oxc_d"
+Contact oxc_d in region ox with 1 nodes
+Contact oxc_s in region ox with 1 nodes
+Warning, contact "oxc_s" shares a node with contact "source"
+Contact source in region si with 249 nodes
+Warning, contact "oxc_d" shares a node with interface "ox_si"
+Warning, contact "oxc_s" shares a node with interface "ox_si"
+Adding interface ox_si with 438, 438 nodes
+Replacing Node Model PotentialNodeCharge in region si of material Si
+Replacing Node Model PotentialNodeCharge:Potential in region si of material Si
+Replacing Node Model PotentialNodeCharge:Electrons in region si of material Si
+creating solution dcop with 2 nodes
+number of equations 273314
+creating solution dcop_prev with 2 nodes
+Iteration: 0
+  Device: "mos"	RelError: 8.05025e-13	AbsError: 4.37978e+04
+    Region: "ox"	RelError: 4.68328e-16	AbsError: 7.17355e-17
+      Equation: "PotentialEquation"	RelError: 4.68328e-16	AbsError: 7.17355e-17
+    Region: "si"	RelError: 8.04556e-13	AbsError: 4.37978e+04
+      Equation: "ElectronContinuityEquation"	RelError: 1.55053e-15	AbsError: 4.37978e+04
+      Equation: "PotentialEquation"	RelError: 8.03006e-13	AbsError: 8.22262e-17
+  Circuit: 	RelError: 1.03426e-14	AbsError: 1.03426e-24
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 6.34034e-13	AbsError: 1.41540e+04
+    Region: "ox"	RelError: 5.54830e-16	AbsError: 6.01144e-17
+      Equation: "PotentialEquation"	RelError: 5.54830e-16	AbsError: 6.01144e-17
+    Region: "si"	RelError: 6.33479e-13	AbsError: 1.41540e+04
+      Equation: "ElectronContinuityEquation"	RelError: 1.76694e-15	AbsError: 1.41540e+04
+      Equation: "PotentialEquation"	RelError: 6.31713e-13	AbsError: 6.73859e-17
+  Circuit: 	RelError: 3.23046e-15	AbsError: 3.23046e-25
+number of equations 273314
+Iteration: 0
+  Device: "mos"	RelError: 3.15214e-13	AbsError: 1.39183e+04
+    Region: "ox"	RelError: 4.20063e-16	AbsError: 5.62552e-17
+      Equation: "PotentialEquation"	RelError: 4.20063e-16	AbsError: 5.62552e-17
+    Region: "si"	RelError: 3.14794e-13	AbsError: 1.39183e+04
+      Equation: "ElectronContinuityEquation"	RelError: 1.99355e-15	AbsError: 1.39183e+04
+      Equation: "PotentialEquation"	RelError: 3.12800e-13	AbsError: 5.85121e-17
+  Circuit: 	RelError: 1.98407e-15	AbsError: 1.98407e-25
+symmetry check max rel diff 4.5433345425298726e-15
+n vs n_i exp(psi/VT) max rel 5.5916376310881665e-15
+contact nodes 249 249 438
+residual free 1.0
+G_DD (drain flux)  = 6.94926711730659e-08
+source flux -4.568737551905641e-08 body flux -5.0973713739825114e-12 sum 2.3800198282635507e-08
+energy phi^T L phi = 5.061075401487888e-08
+Ge range 0.0 1709952.8846683549 neg 0 couple min 0.0
+worst node 1747 0.0002246857231794768 5.3624858968966344e-08 -1.1641532182693481e-09 0.9999999999991337 diag 2854749.319099974
+refine 0 7.958078640513122e-13
+refine 1 4.547473508864641e-13
+refine 2 3.410605131648481e-13
+refine 3 3.410605131648481e-13
+refine 4 3.410605131648481e-13
+scaled: residual 1.1641532182693481e-09 drain 2.7623173082247376e-08 source -4.56873755282921e-08 body -5.097371374086449e-12 energy 5.3373037957193817e-08
+complementary: drain flux -4.569247289907966e-08
+G_DD from problem1 = -(I_S+I_B) = 4.5692472899666186e-08

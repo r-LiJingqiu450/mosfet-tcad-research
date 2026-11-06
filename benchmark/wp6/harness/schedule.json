@@ -1,0 +1,485 @@
+{
+ "note": "WP6 run schedule; runs are executed in this order, two at a time",
+ "seeds": {
+  "1": 20261105,
+  "2": 20261106
+ },
+ "runs": [
+  {
+   "run_id": "S1",
+   "task": "SMOKE",
+   "arm": "A",
+   "repeat": 0,
+   "stage": "smoke"
+  },
+  {
+   "run_id": "S2",
+   "task": "SMOKE",
+   "arm": "B",
+   "repeat": 0,
+   "stage": "smoke"
+  },
+  {
+   "run_id": "W6-001",
+   "task": "T10",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-002",
+   "task": "T05",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-003",
+   "task": "T11",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-004",
+   "task": "T04",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-005",
+   "task": "T04",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-006",
+   "task": "T09",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-007",
+   "task": "T11",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-008",
+   "task": "T05",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-009",
+   "task": "T02",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-010",
+   "task": "T06",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-011",
+   "task": "T05",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-012",
+   "task": "T11",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-013",
+   "task": "T01",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-014",
+   "task": "T08",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-015",
+   "task": "T03",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-016",
+   "task": "T01",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-017",
+   "task": "T02",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-018",
+   "task": "T09",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-019",
+   "task": "T04",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-020",
+   "task": "T07",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-021",
+   "task": "T01",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-022",
+   "task": "T03",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-023",
+   "task": "T06",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-024",
+   "task": "T02",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-025",
+   "task": "T08",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-026",
+   "task": "T06",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-027",
+   "task": "T09",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-028",
+   "task": "T07",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-029",
+   "task": "T03",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-030",
+   "task": "T10",
+   "arm": "A",
+   "repeat": 3,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-031",
+   "task": "T07",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-032",
+   "task": "T08",
+   "arm": "A",
+   "repeat": 2,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-033",
+   "task": "T10",
+   "arm": "A",
+   "repeat": 1,
+   "stage": 1
+  },
+  {
+   "run_id": "W6-034",
+   "task": "T03",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-035",
+   "task": "T04",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-036",
+   "task": "T06",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-037",
+   "task": "T07",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-038",
+   "task": "T07",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-039",
+   "task": "T08",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-040",
+   "task": "T06",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-041",
+   "task": "T05",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-042",
+   "task": "T01",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-043",
+   "task": "T09",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-044",
+   "task": "T04",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-045",
+   "task": "T01",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-046",
+   "task": "T05",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-047",
+   "task": "T07",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-048",
+   "task": "T09",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-049",
+   "task": "T10",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-050",
+   "task": "T05",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-051",
+   "task": "T03",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-052",
+   "task": "T11",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-053",
+   "task": "T10",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-054",
+   "task": "T03",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-055",
+   "task": "T10",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-056",
+   "task": "T04",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-057",
+   "task": "T08",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-058",
+   "task": "T01",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-059",
+   "task": "T02",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-060",
+   "task": "T02",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-061",
+   "task": "T02",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-062",
+   "task": "T11",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-063",
+   "task": "T08",
+   "arm": "B",
+   "repeat": 3,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-064",
+   "task": "T11",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-065",
+   "task": "T06",
+   "arm": "B",
+   "repeat": 2,
+   "stage": 2
+  },
+  {
+   "run_id": "W6-066",
+   "task": "T09",
+   "arm": "B",
+   "repeat": 1,
+   "stage": 2
+  }
+ ]
+}

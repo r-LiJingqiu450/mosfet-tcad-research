@@ -1,0 +1,63 @@
+{
+ "description": "Two-dimensional n-channel MOSFET (quantities per unit width) with resolved n+ source and drain wells",
+ "geometry": {
+  "channel_length_L_um": 1.0,
+  "oxide_thickness_nm": 2.0,
+  "silicon_x_range_um": [
+   -0.3,
+   1.3
+  ],
+  "gate_x_range_um": [
+   0.0,
+   1.0
+  ],
+  "silicon_depth_um": 1.2,
+  "well_depth_h_w_um": 0.5,
+  "source_drain_contact_depth_um": 0.49825911150078306,
+  "coordinates": "x along the channel, source side first; y = depth into silicon, y = 0 at the Si/SiO2 interface, oxide at -t_ox <= y <= 0"
+ },
+ "doping": {
+  "N_A_cm3": 1e+18,
+  "N_D_peak_cm3": 1e+20,
+  "h_w_um": 0.5,
+  "sigma_nm": 15.0,
+  "sigma_y_nm": 15.0,
+  "profile": "uniform acceptors N_A plus donors N_D(x, y) = 1e20 f_x(x) f_y(y), with f_x = 0.5 erfc((x - x_c)/(sqrt(2) sigma)) + 0.5 erfc(((L - x) - x_c)/(sqrt(2) sigma)), x_c = -sqrt(2) sigma erfcinv(2 N_A / 1e20) (so N_D = N_A at x = 0 and x = L), f_y = 0.5 erfc((y - h_w)/(sqrt(2) sigma_y))"
+ },
+ "physics": {
+  "T_K": 300.0,
+  "V_T_V": 0.025851999786435535,
+  "n_i_cm3": 10000000000.0,
+  "eps_si_rel": 11.7,
+  "eps_ox_rel": 3.9,
+  "mu_n_cm2_per_Vs": 1350.0,
+  "mobility": "constant",
+  "statistics": "Boltzmann, n = n_i exp((psi - phi_n)/V_T)",
+  "holes": "held at equilibrium, p = n_i exp(-psi/V_T) (not a solution variable)",
+  "generation_recombination": "none",
+  "psi_reference": "intrinsic level (psi = 0 where n = p = n_i)",
+  "psi_b0_V": -0.4762114346586538,
+  "oxide": "SiO2 without charge"
+ },
+ "contacts": {
+  "gate": "oxide top y = -t_ox over 0 <= x <= L: psi = V_G + psi_b0 (flat-band voltage 0)",
+  "source": "silicon edge x = -0.3 um, 0 <= y <= contact depth: psi = V_T asinh(N_net/(2 n_i)), n = n_i exp(psi/V_T)",
+  "drain": "silicon edge x = L + 0.3 um, 0 <= y <= contact depth: psi = V_T asinh(N_net/(2 n_i)) + V_D, n = n_i exp((psi - V_D)/V_T); driven by the circuit voltage source V1",
+  "body": "silicon bottom y = 1.2 um, full width: psi = psi_b0, n = n_i exp(psi_b0/V_T)",
+  "other_boundaries": "zero normal electric displacement and zero normal electron current",
+  "oxide_corners": "the two Si/SiO2 corner nodes at the far silicon edges are tied to the adjacent source/drain contact potential"
+ },
+ "bias": {
+  "V_G_V": 0.7835,
+  "V_S_V": 0.0,
+  "V_B_V": 0.0,
+  "V_D_V": 0.0
+ },
+ "mesh": {
+  "file": "mesh.json",
+  "nx": 368,
+  "ny": 119,
+  "note": "fixed tensor-product mesh; each rectangle is split into two triangles"
+ },
+ "units": "cm, V, cm^-3; currents in A/cm and conductances in S/cm (per cm of device width)"
+}

@@ -1,0 +1,110 @@
+{
+ "run_id": "W6-017",
+ "task": "T02",
+ "arm": "A",
+ "repeat": 1,
+ "stage": 1,
+ "probe": false,
+ "start_utc": "2026-11-05T16:33:59+00:00",
+ "workspace": "/home/claude/wp6_runs/W6-017",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "max_turns": 150,
+ "wall_limit_s": 2700,
+ "permission_mode": "auto",
+ "tools": "Bash,Read,Write,Edit,Glob,Grep",
+ "settings": {
+  "hooks": {
+   "PreToolUse": [
+    {
+     "matcher": "Bash|Read|Write|Edit|Glob|Grep",
+     "hooks": [
+      {
+       "type": "command",
+       "command": "python3 /opt/wp6/guard.py"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "guard_sha256": "d448ae760840d4023f3f6a8f505f169921394d69ed5cc5c61b211ec511b06e94",
+ "system_prompt_sha256": "d22ae8ed84bf7b132b4c596ebbe3764bc7801eee14c3943d12199cd853f62316",
+ "task_prompt_sha256": "979425cf30d66233a01194430cb0040bd182504e4fe3799aab9ac4f8174c0090",
+ "workspace_manifest": {
+  "py": "53fced9b6c2b83818b6eae2c12dc09809b6ea6938c8a9b32a8f793dfd05a2de2",
+  "mesh.json": "1a137b0b60ddc7a35152dd518df8af075496f375eed61869ee9c19674a4b61d4",
+  "TASK.md": "c5e34dd7df45530c4c118d3f2af5c04ad5c9fe1f42d752c81dc3967d8caf1969",
+  "device.json": "789d29305f645df8b004fc75a1f712b7f1af48d2c3bc35b5d098ff49d4662926",
+  "zero_bias_state.npz": "c358fdadd2129c412580abe1c3a2e8ee332245f7695892207b3776aff6cc3454",
+  "mosfet_deck.py": "2c2ce9335ec00976dea53d8a5df1151ad0e4cadf1b75a2b0c580a68ac83beef3",
+  "docs/devsim.pdf": "6ce26d154741b4c4119765959d6a653563dc6354c74f15b7c2a8a3762e1f2b24",
+  "docs/README.txt": "cb9a1b666f1362a2e487f6ede11c27b3ba36941ecf6fca1672f4e72152bb2824",
+  "docs/DEVSIM_LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "docs/DEVSIM_NOTICE": "e4907c9349c1a0040647a9fe140fac46c00a2d0d7bbb232a4e26efe06147bf82",
+  "docs/examples/bioapp1/bioapp1_2d.py": "33c8f2ad8d57ee644b7af184a2b77d10852cf6dcbb1a5cdabfeb1dbd389a3f41",
+  "docs/examples/bioapp1/disk_3d.geo": "5cc57a04507915b327c56941eb3b1e5b767b2c170ad55711be27618dd41122ed",
+  "docs/examples/bioapp1/disk_2d.geo": "74cc1c5720e61a8623444f20b2e2f6c23dfc2d00040e4d268232f724c87de6ef",
+  "docs/examples/bioapp1/bioapp1_common.py": "7ad9c3fd6df7dee86afea9bc1c3aca063edfb9adab3e5f304986152a56a5e486",
+  "docs/examples/bioapp1/bioapp1_3d.py": "b147467f22d3e156574ea767e72fb58f04b7c82a88c317845966a303179bf9cc",
+  "docs/examples/diode/gmsh_diode3d.py": "71882072930892defc554ec632a97cf8d28269751ed1ab3eb8cae8f193e4ffa3",
+  "docs/examples/diode/diode_common.py": "5fb7a95c08165627bffd33ca97755ef206de49ee7f550c91023294de3486e772",
+  "docs/examples/diode/gmsh_diode2d.py": "400b3be6ca97bf69fccfda9220cb65eb1ef363a6a57503c5095b1cd61a4e6a6a",
+  "docs/examples/diode/tran_diode.py": "cd3f57c58a2337e40e96f1216a267af326cb226ac179b3d28cf021628ee794fb",
+  "docs/examples/diode/3dblock.geo": "33aa0667f83049914cb11105bc6ac7b2e6e187fa1e15f111f6563cae8b5c994d",
+  "docs/examples/diode/pythonmesh3d.py": "f37fd13af7eb43842b7b7d41c45829e797ae72943073a8916a384f91e140fafb",
+  "docs/examples/diode/laux2d.py": "a45a102214b08d63d0ba6a0b5faf9ceb758b69725e81a35513f14373b13cd9eb",
+  "docs/examples/diode/laux3d.py": "fdbdc27436439162bd6dbc8fc2ca5c3aee416c27a2151d1d9c82e1400052ce7c",
+  "docs/examples/diode/laux_common.py": "31cadb163dae6d77b7963e7b250f7c8128367ee427104cf70c2f8df3a655baef",
+  "docs/examples/diode/diode_1d_custom.py": "8a72012f7beb02df868829cedf73b449b5be6df3659480796c87e948fbecd3d6",
+  "docs/examples/diode/gmsh_diode3d_float128.py": "677f8136ab23bfcca86b0c2e520dec7d74afefae43f28891770197eb9e58d9c2",
+  "docs/examples/diode/diode_1d.py": "66a60784e9a54644b6186828343a6101228d13a4e4a0ab007e17aee0992f9cd8",
+  "docs/examples/diode/gmsh_diode3d_equil.py": "7a32fa75ff856109a263d81456bfe5185005ad23bd0d2d23046dcb65f2149075",
+  "docs/examples/diode/diode_2d.py": "7457782c0ba0b67bb846895cfbab439cc7a7a470c5418d1f8cf5954bd1c1845e",
+  "docs/examples/diode/ssac_diode.py": "ebed7baefd77eb7f87a94eaa6299f40d3f06408a37f312748fbb1355abdd9656",
+  "docs/examples/mobility/gmsh_mos2d_kla.py": "3aae3438ead43118cefd6730e90bf2cef459dcf1f9a231cfa2ccc1e362b55757",
+  "docs/examples/mobility/gmsh_mos2d_create.py": "65dedceec7657dbc9e93f99249b8164c940619dc0cd66afa6c4d07d31cc73852",
+  "docs/examples/mobility/gmsh_mos2d.geo": "a014763bd03fa72b0b322f0bef258ed8fce70612aad577cd0ac2d0e1a4e2ebde",
+  "docs/examples/mobility/pythonmesh2d.py": "529b6de3aceb8fa4996ae8916ecee4cbca07a4ed3aa3f4689b4fd6666d8fab5c",
+  "docs/examples/mobility/gmsh_mos2d.py": "4447ba69d9a7506130242500a237a07341a76ac403803303e32a86eacc7fab45",
+  "docs/examples/capacitance/cap1d.py": "cad9ba54c7097ca2f21e48a1e2379deed61c0e2eeff7fd634af72a6e536e7c27",
+  "docs/examples/capacitance/cap2d.py": "e79690d7d5987e032523cb86dbb4f7b3fd7775ec986428ebd7a68560b2a3928f",
+  "docs/examples/vectorpotential/twowire.py": "ca239a2bfea924d9fc820faf771a6a4fa511ea2b1e18b091a04ee8e1b43861e3",
+  "docs/examples/vectorpotential/twowire.geo": "80e9d2e67ec538d23c1adb6f2dca61bed9474e0fcd5a216147d5f02dd090febb"
+ },
+ "claude_version": "2.1.318 (Claude Code)",
+ "end_utc": "2026-11-05T16:36:37+00:00",
+ "wall_s": 158.4,
+ "exit": 0,
+ "timed_out": false,
+ "stray_processes_killed": [],
+ "created_files": [
+  {
+   "path": "solve_net.py",
+   "size": 1365,
+   "sha256": "b83431bbe99dc9be347c11d82bb7ce8b57461f088777b9bbe16f42dc62a880b3"
+  },
+  {
+   "path": "run_fd.py",
+   "size": 896,
+   "sha256": "2ff118b4798692879d450bdaacd19faa18addc0fdc0286038bf23bb21c8b5959"
+  },
+  {
+   "path": "network.npz",
+   "size": 5243376,
+   "sha256": "0d83291977e8f38d0233a4c80ca13808358db75d3f988d977d9c9f32d8315aae"
+  },
+  {
+   "path": "net.py",
+   "size": 1742,
+   "sha256": "bba1e854532409aad8a13bc1e288b5c528e098c9d0e17b6677b71c8f61e5dae6"
+  },
+  {
+   "path": "__pycache__/mosfet_deck.cpython-312.pyc",
+   "size": 24705,
+   "sha256": "000bc235b192027089adc6b8342981ca49651170879315603157035c735a6973"
+  }
+ ],
+ "transcript": "benchmark/wp6/results/runs/W6-017/transcript.jsonl.gz",
+ "transcript_sha256": "f710b8f296bca5136f12ac4215f028aa9a9de50ef8724feec1e37cb7cf5c3290"
+}

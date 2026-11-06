@@ -1,0 +1,5 @@
+#!/bin/sh
+# Python 3.12 with DEVSIM 2.11.2, NumPy 2.3 and SciPy 1.17 (usage: ./py script.py [args])
+export DEVSIM_MATH_LIBS=/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MALLOC_MMAP_THRESHOLD_=131072
+exec /home/claude/venv-wp1/bin/python "$@"

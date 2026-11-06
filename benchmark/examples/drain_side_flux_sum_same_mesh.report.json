@@ -1,0 +1,1373 @@
+{
+ "results": [
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.488174_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.569870665959422e-12,
+     "passed": false,
+     "upper": 3.5875278252472427e-12,
+     "value": 4.297410101310878e-10
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": 119.13083350401871,
+     "tol": 7.8290894193229e-05
+    }
+   ],
+   "reason": "failed: same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.648406237200172e-10,
+     "passed": false,
+     "upper": 1.649157432763987e-10,
+     "value": 4.042751584742201e-10
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": 1.4515885210040724,
+     "tol": 0.0003115569713016242
+    }
+   ],
+   "reason": "failed: same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  },
+  {
+   "case": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.154907644613726e-08,
+     "passed": false,
+     "upper": 2.1555591285464575e-08,
+     "value": 2.1584587773354695e-08
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": false,
+     "rel_error": 0.0013511860115913432,
+     "tol": 0.0003112893178699029
+    }
+   ],
+   "reason": "failed: same_mesh_bracket, tolerance_G0",
+   "status": "fail",
+   "tier": "A-W"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.488174_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.5178727317567487e-12,
+     "passed": false,
+     "upper": 3.5352121069300172e-12,
+     "value": 2.0309016690589488e-09
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -7.175458449637517e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.5068946561338767e-12,
+     "passed": false,
+     "upper": 3.524405995168383e-12,
+     "value": -7.175458449637517e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.488174_B0_lev2",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.1935298971366137e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.501982017480346e-12,
+     "passed": false,
+     "upper": 3.5194199941068466e-12,
+     "value": -1.1935298971366137e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.588534_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -6.624304660363123e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 6.173052014996228e-11,
+     "passed": false,
+     "upper": 6.176878157049165e-11,
+     "value": -6.624304660363123e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.621433_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6247313216824743e-10,
+     "passed": false,
+     "upper": 1.6254528230912505e-10,
+     "value": 2.6097950467374176e-09
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.621433_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -6.6024767875205725e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6183768720411873e-10,
+     "passed": false,
+     "upper": 1.6190945419091886e-10,
+     "value": -6.6024767875205725e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.621433_B0_lev2",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.0530129657126963e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6154418054953054e-10,
+     "passed": false,
+     "upper": 1.6161561518963466e-10,
+     "value": -1.0530129657126963e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.686557_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -6.9317138695623726e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.1207465763496376e-09,
+     "passed": false,
+     "upper": 1.1211199634453032e-09,
+     "value": -6.9317138695623726e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.7835_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1245819435639023e-08,
+     "passed": false,
+     "upper": 2.1252052730263418e-08,
+     "value": 2.3335815058089793e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.7835_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1140719334660577e-08,
+     "passed": false,
+     "upper": 2.1146867926555734e-08,
+     "value": 1.3675162335857749e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L1_NA1e18_tox2_VG0.7835_B0_lev2",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1092033525241936e-08,
+     "passed": false,
+     "upper": 2.1098142222160894e-08,
+     "value": 1.0537860362092033e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.488174_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.5397569406674007e-09,
+     "passed": false,
+     "upper": 2.5477458010094775e-09,
+     "value": 8.440110832452774e-10
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -1.1555130186025053e-08 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.5391602645159736e-09,
+     "passed": false,
+     "upper": 2.5471548602573723e-09,
+     "value": -1.1555130186025053e-08
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.488174_B0_lev2",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.5388556471006574e-09,
+     "passed": false,
+     "upper": 2.5468576090499425e-09,
+     "value": 5.732545105274767e-09
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.588534_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 4.558460318612327e-08,
+     "passed": false,
+     "upper": 4.5693484588446275e-08,
+     "value": 3.4160620998591185e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.621433_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.2011283434451473e-07,
+     "passed": false,
+     "upper": 1.2038692467787654e-07,
+     "value": 1.2177861208328977e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.621433_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.2008437314728572e-07,
+     "passed": false,
+     "upper": 1.2035861579049038e-07,
+     "value": 1.1417068890295923e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.621433_B0_lev2",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.2006996344025735e-07,
+     "passed": true,
+     "upper": 1.203442878182248e-07,
+     "value": 1.2010877981083468e-07
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.686557_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 8.383816990776949e-07,
+     "passed": false,
+     "upper": 8.401679561033495e-07,
+     "value": 8.344877642230131e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.7835_B0_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.5948239776993257e-05,
+     "passed": true,
+     "upper": 1.598013854090798e-05,
+     "value": 1.597073696757434e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.7835_B0_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.594452289751029e-05,
+     "passed": true,
+     "upper": 1.5976431042270634e-05,
+     "value": 1.5961438293743413e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e16_tox20_VG0.7835_B0_lev2",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.5942631103317915e-05,
+     "passed": true,
+     "upper": 1.5974544143888947e-05,
+     "value": 1.5973284462234005e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-R"
+  },
+  {
+   "case": "BR__R_L2_NA1e18_tox2_VG0.488174_B0_lev1",
+   "checks": [
+    {
+     "check": "sign",
+     "detail": "G0 = -7.1158865466713905e-09 is not positive",
+     "passed": false
+    },
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6878459246336949e-12,
+     "passed": false,
+     "upper": 1.6959480443686595e-12,
+     "value": -7.1158865466713905e-09
+    }
+   ],
+   "reason": "failed: sign, same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-R"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox1_hw0.5_dpsi0_VG0.663457_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1321511583780573e-08,
+     "passed": false,
+     "upper": 2.1343664162811764e-08,
+     "value": 2.142451670586532e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox1_hw0.5_dpsi0_VG0.934281_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.00023051232068054724,
+     "passed": true,
+     "upper": 0.00023071247132916314,
+     "value": 0.0002307086510929708
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.04727_dpsi-0.119053_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6394219657022802e-10,
+     "passed": false,
+     "upper": 1.6402573002286408e-10,
+     "value": 1.6492777931130307e-10
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.04727_dpsi-0.119053_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.141955170023397e-08,
+     "passed": true,
+     "upper": 2.142587940720011e-08,
+     "value": 2.1424886194650072e-08
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.04727_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1511735759249555e-08,
+     "passed": false,
+     "upper": 2.1518083665242542e-08,
+     "value": 2.144938694256846e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi-0.119053_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1451924146854114e-08,
+     "passed": false,
+     "upper": 2.1458401261759665e-08,
+     "value": 2.1445451508264604e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.488174_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.569870665959422e-12,
+     "passed": false,
+     "upper": 3.5875278252472427e-12,
+     "value": 4.297410101310878e-10
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.588534_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 6.286634260684476e-11,
+     "passed": false,
+     "upper": 6.290598627105999e-11,
+     "value": 2.1510026050713526e-10
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.648406237200172e-10,
+     "passed": false,
+     "upper": 1.649157432763987e-10,
+     "value": 4.042751584742201e-10
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.686557_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.1418859002813417e-09,
+     "passed": false,
+     "upper": 1.1422803743710177e-09,
+     "value": 1.4993067794056618e-09
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.154907644613726e-08,
+     "passed": false,
+     "upper": 2.1555591285464575e-08,
+     "value": 2.1584587773354695e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1441391083213243e-08,
+     "passed": false,
+     "upper": 2.1447821007642292e-08,
+     "value": 2.271318582317935e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.877763_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.954480027448707e-07,
+     "passed": true,
+     "upper": 3.955588381600119e-07,
+     "value": 3.95448755841745e-07
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.971587_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 7.472720363952124e-06,
+     "passed": false,
+     "upper": 7.474699109440712e-06,
+     "value": 7.475144689340184e-06
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG1.08_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.0002330978413326901,
+     "passed": true,
+     "upper": 0.00023315778099173174,
+     "value": 0.00023315727276461762
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG1.1475_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.0020218877987431723,
+     "passed": true,
+     "upper": 0.0020224409388728145,
+     "value": 0.0020224313780138232
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG1.2218_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.02160811853260341,
+     "passed": true,
+     "upper": 0.021616851600196392,
+     "value": 0.021616370097495053
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox6_hw0.5_dpsi0_VG1.26363_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.1849066015894256e-08,
+     "passed": false,
+     "upper": 2.1849801496248284e-08,
+     "value": 2.2730551097544297e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L1_NA1e18_tox6_hw0.5_dpsi0_VG1.66288_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.00023569141973458664,
+     "passed": true,
+     "upper": 0.00023569899021167487,
+     "value": 0.00023569867744776046
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.46905_dpsi0_VG0.621433_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.2409295954507646e-07,
+     "passed": false,
+     "upper": 1.2438173146356857e-07,
+     "value": 1.2512353488730588e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.46905_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.647334006027769e-05,
+     "passed": true,
+     "upper": 1.650687059683939e-05,
+     "value": 1.6506712549442526e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.488174_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.627695282897231e-09,
+     "passed": false,
+     "upper": 2.636156066583814e-09,
+     "value": 3.0976237790081296e-09
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.588534_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 4.7201249089828106e-08,
+     "passed": false,
+     "upper": 4.731695585764509e-08,
+     "value": 4.8388632895718375e-08
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.686557_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 8.684594739600523e-07,
+     "passed": false,
+     "upper": 8.703580018762189e-07,
+     "value": 8.713173107952055e-07
+    }
+   ],
+   "reason": "failed: same_mesh_bracket",
+   "status": "fail",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.7835_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6519687284447723e-05,
+     "passed": true,
+     "upper": 1.655357803345153e-05,
+     "value": 1.6553143887668154e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.7835_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.6515932745630052e-05,
+     "passed": true,
+     "upper": 1.6549843043437326e-05,
+     "value": 1.6548737030969152e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.8532_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.000141231379702282,
+     "passed": true,
+     "upper": 0.00014152927201807397,
+     "value": 0.00014152093294977214
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "BW__W_L2_NA1e16_tox20_hw0.5_dpsi0_VG0.9294_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.0014621594915102216,
+     "passed": true,
+     "upper": 0.0014663418951913853,
+     "value": 0.001466099396677998
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "B-W"
+  },
+  {
+   "case": "C__R_L1_NA1e18_tox2_hw0.5_ov0_sg0_VG1.2914_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.16745050095112585,
+     "passed": true,
+     "upper": 0.16844114819698444,
+     "value": 0.16841387662553672
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L1_NA1e18_tox2_hw0.5_ov0_sg15_VG1.32_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.3255207761369648,
+     "passed": true,
+     "upper": 0.3338849283004132,
+     "value": 0.3333986389194346
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L1_NA1e18_tox2_hw0.5_ov0_sg15_VG1.6_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 3.5503338272596006,
+     "passed": true,
+     "upper": 4.832245174033935,
+     "value": 4.744941320667396
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L1_NA1e18_tox2_hw0.5_ov0_sg15_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 6.560918888799454,
+     "passed": true,
+     "upper": 13.001695861057193,
+     "value": 12.430903921078981
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L1_NA1e18_tox2_hw0.5_ov0_sg5_VG1.2914_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.1657634092938546,
+     "passed": true,
+     "upper": 0.16691944483834023,
+     "value": 0.1668662748639784
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.2018913812067671,
+     "passed": true,
+     "upper": 0.20641265405598358,
+     "value": 0.20525409205657752
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg0_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010662509196749458,
+     "passed": true,
+     "upper": 0.010726617875592637,
+     "value": 0.010719213556512841
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg0_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.005415448261176,
+     "passed": true,
+     "upper": 1.0340303418941457,
+     "value": 1.0233300754387074
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg10_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.19755833664246827,
+     "passed": true,
+     "upper": 0.20238907425039673,
+     "value": 0.20114554888112934
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg10_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010387866346605459,
+     "passed": true,
+     "upper": 0.01045035416660061,
+     "value": 0.010443017127556686
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg10_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.9775040707291783,
+     "passed": true,
+     "upper": 1.0153679592685367,
+     "value": 1.0017461688788671
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg30_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.1910971506758254,
+     "passed": true,
+     "upper": 0.19852600556475894,
+     "value": 0.1967486172247277
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg30_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010131133852631874,
+     "passed": true,
+     "upper": 0.010199258608331914,
+     "value": 0.010190737061066102
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov0_sg30_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.8931832505790964,
+     "passed": true,
+     "upper": 0.9940032480206964,
+     "value": 0.967597420385971
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov10_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.2019202318301556,
+     "passed": true,
+     "upper": 0.2064154742385962,
+     "value": 0.20526475310498427
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov10_sg0_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010662561830735898,
+     "passed": true,
+     "upper": 0.010726628428612026,
+     "value": 0.010719208727721252
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov10_sg0_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.0060506015000164,
+     "passed": true,
+     "upper": 1.0340833080793213,
+     "value": 1.0236181510381357
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.20192809192084873,
+     "passed": true,
+     "upper": 0.20641621118006906,
+     "value": 0.20526764513635953
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg0_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010662573317607265,
+     "passed": true,
+     "upper": 0.010726630646532275,
+     "value": 0.010719235648707581
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg0_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 1.0062464446878798,
+     "passed": true,
+     "upper": 1.0340974357254484,
+     "value": 1.023698507840038
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg30_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.1935645209750817,
+     "passed": true,
+     "upper": 0.19878322130746875,
+     "value": 0.197464398891384
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg30_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010139418596505868,
+     "passed": true,
+     "upper": 0.010201010707076196,
+     "value": 0.010193683291447542
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": true,
+     "rel_error": 1.3426818257222806e-07,
+     "tol": 8.541421888714817e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg30_VG1_lev1",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.010138272176406777,
+     "passed": true,
+     "upper": 0.010199897944199782,
+     "value": 0.01019255390554008
+    },
+    {
+     "check": "tolerance_G0",
+     "passed": true,
+     "rel_error": -7.196702779266317e-07,
+     "tol": 8.541057124853422e-05
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e16_tox20_hw0.5_ov30_sg30_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.9494896705198717,
+     "passed": true,
+     "upper": 0.9983688465021404,
+     "value": 0.9827420684309232
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e18_tox2_hw0.5_ov0_sg15_VG1.32_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.15917376127443048,
+     "passed": true,
+     "upper": 0.1611629999742591,
+     "value": 0.16104961259098702
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e18_tox2_hw0.5_ov0_sg15_VG1.6_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 2.0181250832337736,
+     "passed": true,
+     "upper": 2.4056022430132784,
+     "value": 2.3837678307614723
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L2_NA1e18_tox2_hw0.5_ov0_sg15_VG2_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 4.193500115038954,
+     "passed": true,
+     "upper": 6.568479243127815,
+     "value": 6.41956187373272
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__R_L4_NA1e16_tox20_hw0.5_ov30_sg30_VG1_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.004051927690697666,
+     "passed": true,
+     "upper": 0.004062361077080506,
+     "value": 0.00406119004469474
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__Rwd_L2_NA1e16_tox20_hw0.1_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.19104644484574695,
+     "passed": true,
+     "upper": 0.19315917909133826,
+     "value": 0.19279023974377196
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__Rwd_L2_NA1e16_tox20_hw0.25_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.19849450351243317,
+     "passed": true,
+     "upper": 0.20222735665275765,
+     "value": 0.20140126002752368
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__Rwd_L2_NA1e16_tox20_hw0.5_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.2018750876893421,
+     "passed": true,
+     "upper": 0.20639156070102316,
+     "value": 0.20523584709007991
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  },
+  {
+   "case": "C__Rwd_L2_NA1e16_tox20_hw1_sg0_VG1.25_lev0",
+   "checks": [
+    {
+     "check": "same_mesh_bracket",
+     "lower": 0.20237383967886577,
+     "passed": true,
+     "upper": 0.20718300505843765,
+     "value": 0.2057923875644292
+    }
+   ],
+   "reason": "all applicable checks passed",
+   "status": "pass",
+   "tier": "C"
+  }
+ ],
+ "submission": {
+  "current_evaluation": "direct sum of edge currents at the drain contact",
+  "name": "drain-side flux sum"
+ },
+ "summary": {
+  "fail": 38,
+  "pass": 48
+ },
+ "validation": "ok"
+}

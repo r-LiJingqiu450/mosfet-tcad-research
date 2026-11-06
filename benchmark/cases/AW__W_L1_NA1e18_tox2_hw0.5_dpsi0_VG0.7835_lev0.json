@@ -1,0 +1,222 @@
+{
+ "cross_paths": [
+  {
+   "G0_S_per_cm": 2.1555462334559924e-08,
+   "dL_nm": 47.32393321390227,
+   "independent": false,
+   "name": "edge_energy",
+   "note": "phi^T L phi of the same network; algebraically equal to the source current",
+   "same_mesh": true
+  },
+  {
+   "dL_nm": 47.3943898097746,
+   "fv_dL_rows_quadrature_nm": 47.137449800313526,
+   "fv_dL_slice_quadrature_nm": 47.274277161833815,
+   "independent": true,
+   "mesh": {
+    "nx": 97,
+    "ny": 207
+   },
+   "name": "independent_finite_volume",
+   "note": "phase3/c11/fd2d_indep.py: separate Poisson solve, mesh and network; half device by symmetry. Its own dL_slice/dL_rows are trapezoid integrals, not exact bounds of its network, and are not exported as a bracket.",
+   "same_mesh": false
+  },
+  {
+   "G0_S_per_cm": 2.155546233417537e-08,
+   "dL_nm": 47.32393320582645,
+   "independent": false,
+   "name": "c10_original_run",
+   "note": "same arguments, earlier run (C10); identical mesh",
+   "same_mesh": true
+  },
+  {
+   "G0_S_per_cm": 2.1447693321666475e-08,
+   "dL_nm": 47.29172545226595,
+   "independent": false,
+   "mesh": {
+    "nx": 210,
+    "ny": 119
+   },
+   "name": "level_1_refinement",
+   "same_mesh": false
+  }
+ ],
+ "deck": "W",
+ "device": {
+  "bias": {
+   "V_D_V": 0.0,
+   "V_G_V": 0.7835,
+   "V_S_V": 0.0,
+   "psi_bi_shift_V": 0.0
+  },
+  "contacts": {
+   "body": "Si bottom y = 1.2 um: psi = psi_b0; zero normal electron flux (no electron contact equation)",
+   "drain": "junction face x = L, 0 <= y <= h_w: psi = psi_bi + psi_shift; phi_n = V_D (zero-bias network: unit perturbation, see observables)",
+   "faces_below_well": "x = 0 and x = L for y > h_w: homogeneous Neumann for psi and zero normal electron flux",
+   "gate": "oxide top y = -t_ox: psi = V_G + psi_b0",
+   "oxide_sides": "homogeneous Neumann, except the two Si/SiO2 triple points at the source/drain faces, whose potential is tied to the adjacent silicon Dirichlet value",
+   "source": "junction face x = 0, 0 <= y <= h_w: psi = psi_bi + psi_shift with psi_bi = V_T ln(N_D/n_i), N_D = 1e20; phi_n = 0"
+  },
+  "doping": {
+   "N_A_cm3": 1e+18,
+   "N_D_well_cm3_for_psi_bi": 1e+20,
+   "profile": "uniform acceptor N_A; no donors inside the domain (wells represented by boundary data)"
+  },
+  "geometry": {
+   "L_um": 1.0,
+   "coordinates": "x along the channel (source side first), y depth into Si (y = 0 at Si/SiO2 interface, oxide at -t_ox <= y <= 0)",
+   "h_w_um_realized": 0.5033626815989592,
+   "h_w_um_requested": 0.5,
+   "note": "Ward-truncated deck: silicon only between the metallurgical junction faces x = 0 and x = L",
+   "si_depth_um": 1.2,
+   "si_x_range_um": [
+    0.0,
+    1.0
+   ],
+   "t_ox_nm": 2.0
+  },
+  "physics": {
+   "T_K": 300.0,
+   "V_T_V": 0.025851999786435535,
+   "eps_ox_rel": 3.9,
+   "eps_si_rel": 11.7,
+   "gate_convention": "gate contact psi_gate = V_G + psi_b0 (V_FB = 0; no work-function difference, no oxide charge)",
+   "generation_recombination": "none",
+   "holes": "not solved; equilibrium p = n_i exp(-psi/V_T) everywhere (hole quasi-Fermi level 0 V)",
+   "mobility": "constant mu_n (field-independent); zero-bias network edge conductance c_e = q mu_n EdgeCouple EIL n0 B(Delta)",
+   "mu_n_cm2_per_Vs": 1350.0,
+   "n_i_cm3": 10000000000.0,
+   "oxide": "SiO2, no fixed or trapped charge, no carriers",
+   "psi_b0_V": -0.4762114346586538,
+   "psi_reference": "intrinsic Fermi level (psi = 0 at n = p = n_i)",
+   "statistics": "Boltzmann (n = n_i exp((psi - phi_n)/V_T))",
+   "units": "2-D simulation; currents in A/cm and conductances in S/cm per unit device width"
+  }
+ },
+ "family": "zero_bias_network",
+ "id": "AW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0",
+ "known_bad_outputs": [
+  {
+   "E_dwr": 0.10118491354757812,
+   "E_round": 0.10273806026276802,
+   "G0_S_per_cm": 2.05667591082238e-08,
+   "evidence": "DEVSIM full coupled Jacobian, row/column-equilibrated SuperLU solve; backward residual ~1e-16 yet forward error large (equivalence audit 2026-11-01)",
+   "kappa_G": 2402294205403723.0,
+   "name": "coupled_small_signal_G_E",
+   "rel_vs_reference": -0.0458678737956838,
+   "same_mesh": true
+  },
+  {
+   "G0_S_per_cm": 2.299673951887582e-08,
+   "evidence": "same Newton linear system solved with UMFPACK (equivalence audit 2026-11-01)",
+   "name": "coupled_small_signal_G_M",
+   "rel_vs_reference": 0.06686366371345964,
+   "same_mesh": true
+  },
+  {
+   "G0_S_per_cm": 2.1584587773354695e-08,
+   "dL_nm": 47.934757437903045,
+   "evidence": "drain-side current violates the same-mesh Rayleigh bracket (classical flux-cancellation failure)",
+   "inside_bracket": false,
+   "name": "drain_side_flux_sum",
+   "same_mesh": true
+  }
+ ],
+ "mesh": {
+  "dx_max_nm": 19.707675304123647,
+  "dx_min_nm": 0.49999999999987665,
+  "generator": "phase3/c7/endprobe.py (tensor-product node lines, each rectangle split into two triangles; refinement factor sqrt(2) per level)",
+  "level": 0,
+  "max_adjacent_ratio": 1.058153562369261,
+  "n_depth_si": 79,
+  "n_lateral": 149,
+  "n_ox": 6,
+  "nx": 149,
+  "ny": 84
+ },
+ "notes": [
+  "Zero-bias linear-response conductance: at equilibrium grad(phi_n) = 0, so the O(V_D) current is that of the medium sigma0 = q mu_n n0(x, y) and does not depend on the electrostatic response (phase3/reports/C6_Theory_ZeroBias_EndCorrection_2026-10-31.md, P4). Any drift-diffusion code can therefore be scored on G0 = lim I_D/V_D (V_D -> 0).",
+  "Ward-truncated deck W: standard TCAD cannot set up these boundary data; internal reference tier.",
+  "Realized well depth h_w = 0.503363 um (mesh line nearest to the requested 0.5 um)."
+ ],
+ "observables": {
+  "G0_S_per_cm": {
+   "path": "source-side terminal current of the zero-bias network (phi_n = 0 source, 1 drain); cancellation-free side, equal to the edge-energy / characteristic-potential form",
+   "value": 2.155546233417537e-08
+  },
+  "G_GCA_S_per_cm": {
+   "definition": "long-channel (1-column) sheet conductance / L used as the dL reference",
+   "value": 1.9515283814728924e-08
+  },
+  "bracket": {
+   "G_rows_S_per_cm": 2.154907644615881e-08,
+   "G_slice_S_per_cm": 2.155559128544302e-08,
+   "dL_rows_nm": 47.189786451205805,
+   "dL_slice_nm": 47.326641234192444,
+   "rule": "G_rows (1 - 1e-12) <= G <= G_slice (1 + 1e-12)",
+   "scope": "Rayleigh bounds of THIS discrete network on THIS mesh; valid only for same-mesh submissions, not a bound on the continuum value"
+  },
+  "dL_nm": {
+   "definition": "per-end correction dL = (L/2)(1 - G_GCA/G0)",
+   "value": 47.32393320582645
+  },
+  "network_relative_residual": 4.854594948537198e-16
+ },
+ "provenance": {
+  "base_commit": "c05139b4ae037ece34257ff0382e84a91b059773",
+  "command": "python phase3/c7/endprobe.py --deck W --L 1 --level 0 --vg 0.7835 --tox 2 --na 1e+18 --hw 0.5 --psibi-shift 0 --devsim --out <dir>   (reconstructed from the recorded args)",
+  "exporter": "benchmark/tools/export_cases.py",
+  "producing_script": "phase3/c7/endprobe.py",
+  "sources": [
+   {
+    "path": "results/phase3/exploration/equivalence_energy_final/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json",
+    "role": "endprobe re-run with --devsim and edge-energy identity (reference state)",
+    "sha256": "10ca17ce1882cd77cd4ba43fc7a373b9787c2ed1476a94360bfa86abd0b5e8bf"
+   },
+   {
+    "path": "results/phase3/exploration/equivalence_audit/equivalence_summary.json",
+    "role": "equivalence audit rows (source, edge-energy, drain, G_E, G_M, independent FV)",
+    "sha256": "f1424bb486903a78305652cc839e0641c77fdeb7499058b3d60ba7468cd77971"
+   },
+   {
+    "path": "results/phase3/C11/indep/fd2d_VG0.783500.json",
+    "role": "independent finite-volume solver result",
+    "sha256": "013f2abf135561ae16745596572a0ac80909c49a867e026e03b02a1712b8030b"
+   },
+   {
+    "path": "results/phase3/C10/runs/e7_W_L1_lev0_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json",
+    "role": "C10 original level-0 run (same arguments)",
+    "sha256": "16e87ae9103074cccea4b8a3f8d327a1d8683f0ca358169c331af7805bb9fcb8"
+   },
+   {
+    "path": "results/phase3/C10/runs/e7_W_L1_lev1_VG0.7835_tox2_NA1e+18_hw0.5_ov0_sg0_dpsi0.json",
+    "role": "C10 level-1 run (refinement pair)",
+    "sha256": "c7c21be9b7e7dfdd6a9a232cf95f8a3ba1e13307a5593d1ceb75c598c678940a"
+   }
+  ]
+ },
+ "related_cases": [
+  "BW__W_L1_NA1e18_tox2_hw0.5_dpsi0_VG0.7835_lev0"
+ ],
+ "schema_version": "1.0.0",
+ "tier": "A-W",
+ "uncertainty": {
+  "basis": "discretization: |dL_independent_FV - dL_ref| (independent mesh, Newton and network assembly; C11 solver); discretization: |dL(level 1) - dL(level 0)| from C10; round-off: |dL(edge energy) - dL(source)|; solver: network relative residual mapped to dL; combined linearly (conservative), tolerance = k * combined with k = 2 (convention, not a statistical coverage). The cross-path spread is itself part of the estimate, so passing it is a consistency check, not independent validation.",
+  "components": {
+   "combined_dL_nm": 0.07045661202419444,
+   "discretization_dL_nm": 0.07045660394815201,
+   "discretization_inputs": {
+    "cross_path_dL_nm": 0.07045660394815201,
+    "level_0_to_1_dL_nm": 0.032207753560498986
+   },
+   "roundoff_dL_nm": 8.075822677255928e-09,
+   "solver_dL_nm": 2.1975589471826824e-13
+  },
+  "coverage_factor": 2.0,
+  "status": "established",
+  "tolerance": {
+   "G0_rel": 0.0003112893178699029,
+   "dL_nm": 0.14091322404838888
+  }
+ }
+}

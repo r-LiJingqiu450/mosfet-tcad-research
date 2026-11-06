@@ -1,0 +1,146 @@
+{
+ "version": "wp4-ac-probe-2026-11-04",
+ "start_utc": "2026-11-05T10:29:56.825+00:00",
+ "args": {
+  "id": "AR-6",
+  "na": 1e+16,
+  "tox": 20.0,
+  "L": 2.0,
+  "vg": 0.7835,
+  "level": 1,
+  "body": "B1",
+  "extended": true,
+  "out": "/home/claude/mosfet-tcad-research/benchmark/wp4/results/production"
+ },
+ "argv": [
+  "benchmark/wp4/ac_probe.py",
+  "--id",
+  "AR-6",
+  "--na",
+  "1e16",
+  "--tox",
+  "20",
+  "--L",
+  "2",
+  "--vg",
+  "0.7835",
+  "--level",
+  "1",
+  "--body",
+  "B1",
+  "--out",
+  "/home/claude/mosfet-tcad-research/benchmark/wp4/results/production",
+  "--extended"
+ ],
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39",
+  "packages": {
+   "numpy": "2.3.5",
+   "scipy": "1.17.0",
+   "devsim": "2.11.2"
+  },
+  "DEVSIM_MATH_LIBS": "/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+ },
+ "precision": "extended",
+ "devsim_info": {
+  "blas_symbol_prefix": "",
+  "blas_symbol_suffix": "_",
+  "copyright": "Copyright \u00a9 2009-2026 DEVSIM LLC",
+  "direct_solver": "custom",
+  "extended_precision": true,
+  "license": "Apache License, Version 2.0",
+  "math_libraries": [
+   "/usr/lib/x86_64-linux-gnu/libblas.so.3",
+   "/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+  ],
+  "version": "2.11.2",
+  "website": "https://devsim.org",
+  "custom_solver": "UMFPACK 5.1"
+ },
+ "frequency_Hz": 1e-06,
+ "bulk": {
+  "N_A": 1e+16,
+  "P0": 1.000000000001e+16,
+  "psi_b0": -0.3571585759940161
+ },
+ "geometry": {
+  "deck": "R",
+  "L_um": 2.0,
+  "level": 1,
+  "t_ox_nm": 20.0,
+  "N_A": 1e+16,
+  "ov_cm": 0.0,
+  "sigma_cm": 1.5e-06,
+  "l_w_cm": 3e-05,
+  "h_w_cm": 5.032779911853189e-05,
+  "n_lateral": 438,
+  "n_depth_si": 308,
+  "n_ox": 8,
+  "dx_min_nm": 0.35095856998427477,
+  "dx_max_nm": 14.246366665185828,
+  "max_adjacent_ratio": 1.0486272315532554,
+  "contact_extent_cm": 5.032779911853189e-05,
+  "h_w_doping_cm": 5e-05
+ },
+ "mesh": {
+  "nx": 438,
+  "ny": 315,
+  "kif": 7,
+  "jw": 255,
+  "gate_cols": [
+   79,
+   358
+  ]
+ },
+ "equilibrium": {
+  "n_donor_nodes": 39936,
+  "psi_contact_V": 0.5952617079940699,
+  "tau_V": 1e-12,
+  "converged": true,
+  "iterations": 16,
+  "last": [
+   {
+    "dpsi": 8.093590686876199e-24,
+    "dphin": 1.2642137359734402e-21,
+    "dcirc": 3.807743190854758e-24
+   },
+   {
+    "dpsi": 5.981013839835835e-35,
+    "dphin": 5.572355180664468e-35,
+    "dcirc": 3.3627153594127346e-36,
+    "extra": true
+   },
+   {
+    "dpsi": 5.057333263352309e-35,
+    "dphin": 3.0259209349057596e-35,
+    "dcirc": 9.943270147437246e-42,
+    "extra": true
+   }
+  ]
+ },
+ "onecol": {
+  "psi_s_V": 0.18626049773721595,
+  "psi_hat": 21.020388295700144,
+  "converged": true,
+  "last_update_V": 7.359365034606682e-13
+ },
+ "network_same_run": {
+  "G_DD": 1.5975666886328087e-05,
+  "residual": 2.7487360605123657e-13
+ },
+ "ac": {
+  "I_real": -1.604392071753731e-05,
+  "I_imag": -2.807762938028692e-17,
+  "G_AC": 1.604392071753731e-05,
+  "rel_vs_network": 0.004272361942375902,
+  "t_ac_s": 106.79096364974976
+ },
+ "parameters_after_run": {
+  "extended_solver": true,
+  "extended_model": true,
+  "extended_equation": true
+ },
+ "wall_s": 1954.7805135250092,
+ "end_utc": "2026-11-05T11:02:31.612+00:00"
+}

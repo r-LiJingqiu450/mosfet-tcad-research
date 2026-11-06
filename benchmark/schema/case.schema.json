@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mosfet-lowcurrent-benchmark/case.schema.json",
+  "title": "Low-current MOSFET drift-diffusion benchmark case",
+  "type": "object",
+  "required": ["schema_version", "id", "tier", "deck", "family", "device", "mesh", "observables", "uncertainty", "known_bad_outputs", "cross_paths", "provenance", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"enum": ["1.0.0", "1.1.0"]},
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9_.+\\-]+$"},
+    "tier": {"enum": ["A-R", "A-W", "B-R", "B-W", "C", "HO"]},
+    "deck": {"enum": ["W", "R"]},
+    "family": {"enum": ["zero_bias_network", "finite_bias_dd", "well_depth", "zero_bias_3terminal"]},
+    "related_cases": {"type": "array", "items": {"type": "string"}},
+    "device": {
+      "type": "object",
+      "required": ["geometry", "doping", "contacts", "physics", "bias"],
+      "properties": {
+        "geometry": {"type": "object"},
+        "doping": {"type": "object"},
+        "contacts": {"type": "object"},
+        "physics": {
+          "type": "object",
+          "required": ["T_K", "V_T_V", "n_i_cm3", "eps_si_rel", "eps_ox_rel", "mu_n_cm2_per_Vs", "statistics", "holes", "generation_recombination", "psi_reference", "gate_convention", "psi_b0_V"]
+        },
+        "bias": {"type": "object"}
+      }
+    },
+    "mesh": {"type": "object", "required": ["level", "generator"]},
+    "observables": {"type": "object"},
+    "uncertainty": {
+      "type": "object",
+      "required": ["status", "components", "coverage_factor", "tolerance", "basis"],
+      "properties": {
+        "status": {"enum": ["established", "not_established"]},
+        "coverage_factor": {"type": "number"},
+        "components": {"type": "object"},
+        "tolerance": {
+          "oneOf": [
+            {"const": "not_established"},
+            {"type": "object", "required": ["dL_nm", "G0_rel"], "properties": {"dL_nm": {"type": "number", "exclusiveMinimum": 0}, "G0_rel": {"type": "number", "exclusiveMinimum": 0}}},
+            {"type": "object", "required": ["dL_nm", "G_DD_rel", "G_SD_rel"], "properties": {"dL_nm": {"type": "number", "exclusiveMinimum": 0}, "G_DD_rel": {"type": "number", "exclusiveMinimum": 0}, "G_SD_rel": {"type": "number", "exclusiveMinimum": 0}, "G_DB_rel": {"type": "number", "exclusiveMinimum": 0}}}
+          ]
+        },
+        "basis": {"type": "string"},
+        "tau_num_rel": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "known_bad_outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "same_mesh", "evidence"],
+        "properties": {"name": {"type": "string"}, "same_mesh": {"type": "boolean"}, "evidence": {"type": "string"}}
+      }
+    },
+    "cross_paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "same_mesh", "independent"],
+        "properties": {"name": {"type": "string"}, "same_mesh": {"type": "boolean"}, "independent": {"type": "boolean"}}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["base_commit", "sources", "producing_script", "command", "exporter"],
+      "properties": {
+        "base_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "sources": {
+          "type": "array", "minItems": 1,
+          "items": {"type": "object", "required": ["path", "sha256", "role"],
+                    "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "role": {"type": "string"}}}
+        },
+        "producing_script": {"type": "string"},
+        "command": {"type": "string"},
+        "exporter": {"type": "string"}
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

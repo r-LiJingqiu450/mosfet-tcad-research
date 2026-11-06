@@ -1,0 +1,455 @@
+{
+ "note": "post hoc, not pre-registered; see the docstring of benchmark/wp4/posthoc_wp4.py",
+ "V_T": 0.025851999786435317,
+ "rows": [
+  {
+   "state": "AR-1",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.488174_B1",
+   "mesh_id": "dev1_L1_lev1",
+   "D2": {
+    "G_DD_ref": 3.5326066983062963e-12,
+    "G_SD_ref": 3.5091443572902948e-12,
+    "rel_forms_G_DD": -4.5940629078700113e-10,
+    "rel_forms_G_SD": -6.5503158452884236e-15,
+    "P2X_G_DD_shift": -7.743483632083326e-11,
+    "P2X_G_SD_shift": 9.976686143886582e-12,
+    "ACx_G_DD_shift": -7.743483632083326e-11,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.16642695447218003,
+     "richardson_rel": -6.157153675800942e-10,
+     "minus_sinh_truncation": -4.291452095895455e-10
+    },
+    "G_SD": {
+     "a": 0.16645351225188462,
+     "richardson_rel": -2.440136981363139e-10,
+     "minus_sinh_truncation": -5.744354014576529e-11
+    },
+    "circuit_richardson_rel": -6.157138132678597e-10,
+    "weighted_richardson_rel": -6.157138132678597e-10
+   },
+   "D3": {
+    "e_D": 6.310887241768095e-30,
+    "e_S": 1.9937226784296666e-30,
+    "ulp_max_current": 7.888609052210118e-31,
+    "e_S_over_ulp": 2.52734375
+   },
+   "D5": {
+    "extended": -2.440136981363139e-10,
+    "double": -1.0
+   },
+   "D4": {
+    "G_AC_double": 6.145795357338051e-09,
+    "G_M_WP2": 6.145795357338051e-09,
+    "bitwise_equal": true,
+    "rel_diff": 0.0,
+    "rel_G_E_WP2": -6276.718558932024,
+    "kappa_G": 6.72128618209986e+16,
+    "E_round_estimate": 0.23556000430511367
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 55.1,
+     "maxrss_MB": 529,
+     "newton_iterations": 43
+    },
+    "P2_extended": {
+     "wall_s": 598.1,
+     "maxrss_MB": 484,
+     "newton_iterations": 43
+    },
+    "AC_double": {
+     "wall_s": 20.0,
+     "maxrss_MB": 541,
+     "t_ac_solve_s": 1.5695950984954834
+    },
+    "AC_extended": {
+     "wall_s": 190.0,
+     "maxrss_MB": 578,
+     "t_ac_solve_s": 10.872301578521729
+    }
+   }
+  },
+  {
+   "state": "AR-2",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.621433_B1",
+   "mesh_id": "dev1_L1_lev1",
+   "D2": {
+    "G_DD_ref": 1.6191577289182132e-10,
+    "G_SD_ref": 1.6189230790998784e-10,
+    "rel_forms_G_DD": -1.3693746137022345e-10,
+    "rel_forms_G_SD": 6.661338147750939e-16,
+    "P2X_G_DD_shift": -1.0513812043200232e-12,
+    "P2X_G_SD_shift": 3.3909097751916306e-11,
+    "ACx_G_DD_shift": -1.0513812043200232e-12,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.16643878763748907,
+     "richardson_rel": -1.9280699259383027e-10,
+     "minus_sinh_truncation": -6.236834603281656e-12
+    },
+    "G_SD": {
+     "a": 0.166445639239843,
+     "richardson_rel": -9.081291274526393e-11,
+     "minus_sinh_truncation": 9.575724524528469e-11
+    },
+    "circuit_richardson_rel": -1.9280743668304012e-10,
+    "weighted_richardson_rel": -1.9280743668304012e-10
+   },
+   "D3": {
+    "e_D": 2.524354896707238e-29,
+    "e_S": 2.296941088873993e-29,
+    "ulp_max_current": 2.524354896707238e-29,
+    "e_S_over_ulp": 0.909912109375
+   },
+   "D5": {
+    "extended": -9.081291274526393e-11,
+    "double": -1.0
+   },
+   "D4": {
+    "G_AC_double": 6.910469805781212e-09,
+    "G_M_WP2": 6.910469805781212e-09,
+    "bitwise_equal": true,
+    "rel_diff": 0.0,
+    "rel_G_E_WP2": -136.64797600559768,
+    "kappa_G": 6.785375628570784e+16,
+    "E_round_estimate": 0.23777066314418852
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 54.8,
+     "maxrss_MB": 531,
+     "newton_iterations": 43
+    },
+    "P2_extended": {
+     "wall_s": 598.1,
+     "maxrss_MB": 483,
+     "newton_iterations": 43
+    },
+    "AC_double": {
+     "wall_s": 20.0,
+     "maxrss_MB": 524,
+     "t_ac_solve_s": 1.6061522960662842
+    },
+    "AC_extended": {
+     "wall_s": 190.0,
+     "maxrss_MB": 578,
+     "t_ac_solve_s": 10.82680344581604
+    }
+   }
+  },
+  {
+   "state": "AR-3",
+   "case": "AR__R_L1_NA1e18_tox2_VG0.7835_B1",
+   "mesh_id": "dev1_L1_lev1",
+   "D2": {
+    "G_DD_ref": 2.1146769273304958e-08,
+    "G_SD_ref": 2.1146745803501898e-08,
+    "rel_forms_G_DD": -1.1152601064878809e-10,
+    "rel_forms_G_SD": -2.6867397195928788e-14,
+    "P2X_G_DD_shift": 2.220446049250313e-16,
+    "P2X_G_SD_shift": 1.2143175354140112e-11,
+    "ACx_G_DD_shift": 2.220446049250313e-16,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.16641327403174966,
+     "richardson_rel": -1.861679699288743e-10,
+     "minus_sinh_truncation": 4.0218806167431786e-13
+    },
+    "G_SD": {
+     "a": 0.16641991630366074,
+     "richardson_rel": -8.678480156731894e-11,
+     "minus_sinh_truncation": 9.978535642322968e-11
+    },
+    "circuit_richardson_rel": -1.861679699288743e-10,
+    "weighted_richardson_rel": -1.861679699288743e-10
+   },
+   "D3": {
+    "e_D": 0.0,
+    "e_S": 1.1756400233484561e-27,
+    "ulp_max_current": 3.2311742677852644e-27,
+    "e_S_over_ulp": 0.3638429641723633
+   },
+   "D5": {
+    "extended": -8.678480156731894e-11,
+    "double": -1.0100692168360812
+   },
+   "D4": {
+    "G_AC_double": 2.776593301149813e-08,
+    "G_M_WP2": 2.776593301149813e-08,
+    "bitwise_equal": true,
+    "rel_diff": 0.0,
+    "rel_G_E_WP2": -1.0595841153522045,
+    "kappa_G": 1.1830178808679278e+18,
+    "E_round_estimate": 4.144639426102691
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 55.4,
+     "maxrss_MB": 505,
+     "newton_iterations": 43
+    },
+    "P2_extended": {
+     "wall_s": 597.1,
+     "maxrss_MB": 485,
+     "newton_iterations": 43
+    },
+    "AC_double": {
+     "wall_s": 20.0,
+     "maxrss_MB": 521,
+     "t_ac_solve_s": 1.6156551837921143
+    },
+    "AC_extended": {
+     "wall_s": 190.0,
+     "maxrss_MB": 578,
+     "t_ac_solve_s": 10.886403322219849
+    }
+   }
+  },
+  {
+   "state": "AR-4",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.488174_B1",
+   "mesh_id": "dev2_L2_lev1",
+   "D2": {
+    "G_DD_ref": 2.550492913977163e-09,
+    "G_SD_ref": 2.54541174667412e-09,
+    "rel_forms_G_DD": 3.622169231221051e-11,
+    "rel_forms_G_SD": 7.971401316808624e-14,
+    "P2X_G_DD_shift": 7.083222897108499e-13,
+    "P2X_G_SD_shift": -2.5164759165363648e-11,
+    "ACx_G_DD_shift": 7.083222897108499e-13,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.16448372622914278,
+     "richardson_rel": -1.85164772403823e-10,
+     "minus_sinh_truncation": 1.4053855867256093e-12
+    },
+    "G_SD": {
+     "a": 0.1644892164861466,
+     "richardson_rel": -1.9559365238563942e-10,
+     "minus_sinh_truncation": -9.023494395090799e-12
+    },
+    "circuit_richardson_rel": -1.85164772403823e-10,
+    "weighted_richardson_rel": -1.85164772403823e-10
+   },
+   "D3": {
+    "e_D": 0.0,
+    "e_S": 1.3173977117190897e-28,
+    "ulp_max_current": 4.0389678347315804e-28,
+    "e_S_over_ulp": 0.326171875
+   },
+   "D5": {
+    "extended": -1.9559365238563942e-10,
+    "double": -1.0000844823025397
+   },
+   "D4": {
+    "G_AC_double": 6.652068865265836e-08,
+    "G_M_WP2": 6.652068865265836e-08,
+    "bitwise_equal": true,
+    "rel_diff": 0.0,
+    "rel_G_E_WP2": -22.588161394208218,
+    "kappa_G": 1.403381148817669e+17,
+    "E_round_estimate": 0.25545577037239703
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 379.4,
+     "maxrss_MB": 1221,
+     "newton_iterations": 44
+    },
+    "P2_extended": {
+     "wall_s": 5961.2,
+     "maxrss_MB": 1428,
+     "newton_iterations": 44
+    },
+    "AC_double": {
+     "wall_s": 133.0,
+     "maxrss_MB": 1600,
+     "t_ac_solve_s": 11.304333686828613
+    },
+    "AC_extended": {
+     "wall_s": 1959.4,
+     "maxrss_MB": 1808,
+     "t_ac_solve_s": 106.41364645957947
+    }
+   }
+  },
+  {
+   "state": "AR-5",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.621433_B1",
+   "mesh_id": "dev2_L2_lev1",
+   "D2": {
+    "G_DD_ref": 1.2035178051938344e-07,
+    "G_SD_ref": 1.2034667776554558e-07,
+    "rel_forms_G_DD": 1.7148282793755243e-11,
+    "rel_forms_G_SD": -1.3655743202889425e-14,
+    "P2X_G_DD_shift": -7.438494264988549e-15,
+    "P2X_G_SD_shift": 4.595523961370418e-11,
+    "ACx_G_DD_shift": -7.438494264988549e-15,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.16416556881263833,
+     "richardson_rel": -1.8178192284779016e-10,
+     "minus_sinh_truncation": 4.788235142758461e-12
+    },
+    "G_SD": {
+     "a": 0.1641614698180535,
+     "richardson_rel": -2.4489388295023673e-10,
+     "minus_sinh_truncation": -5.832372495968811e-11
+    },
+    "circuit_richardson_rel": -1.8178192284779016e-10,
+    "weighted_richardson_rel": -1.8178192284779016e-10
+   },
+   "D3": {
+    "e_D": 0.0,
+    "e_S": 9.065589522799868e-27,
+    "ulp_max_current": 2.5849394142282115e-26,
+    "e_S_over_ulp": 0.3507080078125
+   },
+   "D5": {
+    "extended": -2.4489388295023673e-10,
+    "double": -0.9397140489108602
+   },
+   "D4": {
+    "G_AC_double": 1.8689631024314387e-07,
+    "G_M_WP2": 1.8692796614775518e-07,
+    "bitwise_equal": false,
+    "rel_diff": -0.00016934814658120523,
+    "rel_G_E_WP2": -0.4607931027597457,
+    "kappa_G": 1.1908193887055062e+17,
+    "E_round_estimate": 0.21674456102877507
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 382.0,
+     "maxrss_MB": 1221,
+     "newton_iterations": 44
+    },
+    "P2_extended": {
+     "wall_s": 5966.1,
+     "maxrss_MB": 1428,
+     "newton_iterations": 44
+    },
+    "AC_double": {
+     "wall_s": 132.0,
+     "maxrss_MB": 1600,
+     "t_ac_solve_s": 11.139989852905273
+    },
+    "AC_extended": {
+     "wall_s": 1957.4,
+     "maxrss_MB": 1808,
+     "t_ac_solve_s": 106.65382981300354
+    }
+   }
+  },
+  {
+   "state": "AR-6",
+   "case": "AR__R_L2_NA1e16_tox20_VG0.7835_B1",
+   "mesh_id": "dev2_L2_lev1",
+   "D2": {
+    "G_DD_ref": 1.5975666886328094e-05,
+    "G_SD_ref": 1.59756617563823e-05,
+    "rel_forms_G_DD": 2.036371071767462e-12,
+    "rel_forms_G_SD": 1.0969003483296547e-13,
+    "P2X_G_DD_shift": -4.440892098500626e-16,
+    "P2X_G_SD_shift": 2.2531976284767552e-11,
+    "ACx_G_DD_shift": -4.440892098500626e-16,
+    "double_runs_G_DD_shift": [
+     0.0,
+     0.0
+    ]
+   },
+   "D1": {
+    "G_DD": {
+     "a": 0.1633391630909172,
+     "richardson_rel": -1.7918344585865498e-10,
+     "minus_sinh_truncation": 7.38671213189364e-12
+    },
+    "G_SD": {
+     "a": 0.16333752176276073,
+     "richardson_rel": -2.0375223730439984e-10,
+     "minus_sinh_truncation": -1.7182079313851224e-11
+    },
+    "circuit_richardson_rel": -1.7918344585865498e-10,
+    "weighted_richardson_rel": -1.7918344585865498e-10
+   },
+   "D3": {
+    "e_D": 0.0,
+    "e_S": 5.320724810752785e-25,
+    "ulp_max_current": 3.308722450212111e-24,
+    "e_S_over_ulp": 0.16080904006958008
+   },
+   "D5": {
+    "extended": -2.0375223730439984e-10,
+    "double": 0.0006360996132543928
+   },
+   "D4": {
+    "G_AC_double": 1.6048845838600966e-05,
+    "G_M_WP2": 1.6048845838600966e-05,
+    "bitwise_equal": true,
+    "rel_diff": 0.0,
+    "rel_G_E_WP2": -0.0035841662210074343,
+    "kappa_G": 485525031860954.44,
+    "E_round_estimate": 0.0008836032621160537
+   },
+   "D6": {
+    "P2_double": {
+     "wall_s": 383.0,
+     "maxrss_MB": 1221,
+     "newton_iterations": 44
+    },
+    "P2_extended": {
+     "wall_s": 5956.2,
+     "maxrss_MB": 1428,
+     "newton_iterations": 44
+    },
+    "AC_double": {
+     "wall_s": 132.0,
+     "maxrss_MB": 1601,
+     "t_ac_solve_s": 11.251259565353394
+    },
+    "AC_extended": {
+     "wall_s": 1955.4,
+     "maxrss_MB": 1807,
+     "t_ac_solve_s": 106.79096364974976
+    }
+   }
+  }
+ ],
+ "D7": {
+  "lines_attempt1": 582,
+  "lines_rerun": 585,
+  "identical_prefix": 582,
+  "attempt1_is_prefix_of_rerun": true,
+  "rerun_extra_lines": [
+   "AR-4 B1 lev1 G_net=2.550493e-09 | 1mV: default +2.461e-04 circuit +2.461e-04 weighted +2.461e-04 | 0.1mV: default +2.461e-06 weighted +2.461e-06 | indicator check 0.0e+00 | wall 5960s",
+   "wrote /home/claude/mosfet-tcad-research/benchmark/wp4/results/production/P2X_AR-4_B1_lev1.json",
+   "exit=0"
+  ]
+ }
+}

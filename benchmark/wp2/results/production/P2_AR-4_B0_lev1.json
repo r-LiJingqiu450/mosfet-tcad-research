@@ -1,0 +1,336 @@
+{
+ "version": "wp2-rdeck-dd-2026-11-04",
+ "path": "P2",
+ "start_utc": "2026-11-05T04:20:51.492+00:00",
+ "args": {
+  "id": "AR-4",
+  "na": 1e+16,
+  "tox": 20.0,
+  "L": 2.0,
+  "vg": 0.488174,
+  "level": 1,
+  "body": "B0",
+  "out": "/home/claude/mosfet-tcad-research/benchmark/wp2/results/production"
+ },
+ "argv": [
+  "benchmark/wp2/rdeck_dd.py",
+  "--id",
+  "AR-4",
+  "--na",
+  "1e16",
+  "--tox",
+  "20",
+  "--L",
+  "2",
+  "--vg",
+  "0.488174",
+  "--level",
+  "1",
+  "--body",
+  "B0",
+  "--out",
+  "/home/claude/mosfet-tcad-research/benchmark/wp2/results/production"
+ ],
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux-6.18.44-fc-v236-x86_64-with-glibc2.39",
+  "packages": {
+   "numpy": "2.3.5",
+   "scipy": "1.17.0",
+   "devsim": "2.11.2"
+  },
+  "DEVSIM_MATH_LIBS": "/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3"
+ },
+ "tau_V": 1e-12,
+ "bulk": {
+  "N_A": 1e+16,
+  "P0": 1.000000000001e+16,
+  "psi_b0": -0.3571585759940161
+ },
+ "geometry": {
+  "deck": "R",
+  "L_um": 2.0,
+  "level": 1,
+  "t_ox_nm": 20.0,
+  "N_A": 1e+16,
+  "ov_cm": 0.0,
+  "sigma_cm": 1.5e-06,
+  "l_w_cm": 3e-05,
+  "h_w_cm": 5.032779911853189e-05,
+  "n_lateral": 438,
+  "n_depth_si": 308,
+  "n_ox": 8,
+  "dx_min_nm": 0.35095856998427477,
+  "dx_max_nm": 14.246366665185828,
+  "max_adjacent_ratio": 1.0486272315532554,
+  "contact_extent_cm": 5.032779911853189e-05,
+  "h_w_doping_cm": 5e-05
+ },
+ "mesh": {
+  "nx": 438,
+  "ny": 315,
+  "kif": 7,
+  "jw": 255,
+  "gate_cols": [
+   79,
+   358
+  ]
+ },
+ "equilibrium": {
+  "n_donor_nodes": 39936,
+  "psi_contact_V": 0.5952617079940699,
+  "tau_V": 1e-12,
+  "converged": true,
+  "iterations": 16,
+  "last": [
+   {
+    "dpsi": 6.629191938715804e-17,
+    "dphin": 4.6182809759916296e-17,
+    "dcirc": 4.476641808083685e-24
+   },
+   {
+    "dpsi": 5.917629679984651e-17,
+    "dphin": 3.1304000074719986e-17,
+    "dcirc": 1.847518131573934e-25,
+    "extra": true
+   },
+   {
+    "dpsi": 5.861847610818102e-17,
+    "dphin": 3.9909028242623506e-17,
+    "dcirc": 3.5130527569566296e-26,
+    "extra": true
+   }
+  ]
+ },
+ "onecol": {
+  "psi_s_V": -0.046936351551937,
+  "psi_hat": 11.999931417485612,
+  "converged": true,
+  "last_update_V": 2.9613194657160724e-17
+ },
+ "network_same_run": {
+  "G_DD": 2.546418332633354e-09,
+  "G_SD": 2.5464183326969394e-09,
+  "residual": 1.1723218887889847e-13
+ },
+ "sign_weighted": 1.0,
+ "states": [
+  {
+   "V_D": 0.0001,
+   "continuation": [
+    {
+     "target_V": 0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 6.521824889122744e-17,
+       "dphin": 7.551219041757443e-15,
+       "dcirc": 1.1352546471214456e-20
+      },
+      {
+       "dpsi": 5.966100673705103e-17,
+       "dphin": 4.5129533723841936e-17,
+       "dcirc": 2.8939118517040606e-25,
+       "extra": true
+      },
+      {
+       "dpsi": 5.90849352911112e-17,
+       "dphin": 4.1889332352597856e-17,
+       "dcirc": 1.2844869959912164e-25,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 3.756556963404163e-12,
+   "I_source": 3.9678986393045835e-12,
+   "I_body": null,
+   "I_circuit": 2.5415414612926336e-13,
+   "I_weighted": 2.541541461297583e-13,
+   "I_indicator": 3.756556963404164e-12,
+   "drain_edge_abs_sum": 9.521605790528465e-12,
+   "indicator_vs_devsim_abs": 1.6155871338926322e-27,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": -0.0001,
+   "continuation": [
+    {
+     "target_V": -0.0001,
+     "step_V": 0.0001,
+     "converged": true,
+     "iterations": 3,
+     "last": [
+      {
+       "dpsi": 6.538718738230156e-17,
+       "dphin": 7.51516900393746e-15,
+       "dcirc": 1.4369616402959876e-20
+      },
+      {
+       "dpsi": 5.692297097490143e-17,
+       "dphin": 3.650546303122185e-17,
+       "dcirc": 9.623263095993092e-26,
+       "extra": true
+      },
+      {
+       "dpsi": 5.824994858774339e-17,
+       "dphin": 3.734034622440499e-17,
+       "dcirc": 1.2049185490481176e-25,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 4.001047124330226e-12,
+   "I_source": 3.9678986393045835e-12,
+   "I_body": null,
+   "I_circuit": -2.5513077386471393e-13,
+   "I_weighted": -2.5513077386542994e-13,
+   "I_indicator": 4.001047124330226e-12,
+   "drain_edge_abs_sum": 9.521138321464614e-12,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 3
+   }
+  },
+  {
+   "V_D": 0.001,
+   "continuation": [
+    {
+     "target_V": 0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 5.924020745438193e-17,
+       "dphin": 6.074273048233723e-17,
+       "dcirc": 8.712201518263429e-26
+      },
+      {
+       "dpsi": 5.821144027198505e-17,
+       "dphin": 3.680584632354791e-17,
+       "dcirc": 2.0550482002236043e-25,
+       "extra": true
+      },
+      {
+       "dpsi": 5.762377260917373e-17,
+       "dphin": 3.5290392944172755e-17,
+       "dcirc": 1.8815277793866245e-26,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 4.028574163572635e-12,
+   "I_source": 3.925320274741026e-12,
+   "I_body": null,
+   "I_circuit": 2.4982077540064816e-12,
+   "I_weighted": 2.4982077540067587e-12,
+   "I_indicator": 4.028574163572637e-12,
+   "drain_edge_abs_sum": 9.579933252093526e-12,
+   "indicator_vs_devsim_abs": 1.6155871338926322e-27,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  },
+  {
+   "V_D": -0.001,
+   "continuation": [
+    {
+     "target_V": -0.001,
+     "step_V": 0.001,
+     "converged": true,
+     "iterations": 4,
+     "last": [
+      {
+       "dpsi": 6.131890342496666e-17,
+       "dphin": 4.0906946269489644e-17,
+       "dcirc": 2.1863990602899064e-25
+      },
+      {
+       "dpsi": 5.905630141523064e-17,
+       "dphin": 4.833996194896697e-17,
+       "dcirc": 1.297669273932759e-25,
+       "extra": true
+      },
+      {
+       "dpsi": 5.787256066338919e-17,
+       "dphin": 5.08182657615099e-17,
+       "dcirc": 7.828711465883088e-26,
+       "extra": true
+      }
+     ]
+    }
+   ],
+   "I_drain": 4.517610273780357e-12,
+   "I_source": 3.9678986393045835e-12,
+   "I_body": null,
+   "I_circuit": -2.595882472806046e-12,
+   "I_weighted": -2.5958824728064772e-12,
+   "I_indicator": 4.517610273780357e-12,
+   "drain_edge_abs_sum": 9.36333750958021e-12,
+   "indicator_vs_devsim_abs": 0.0,
+   "return_to_zero": {
+    "converged": true,
+    "iterations": 4
+   }
+  }
+ ],
+ "symmetric": {
+  "0.1mV": {
+   "I_drain": {
+    "G": -1.2224508046303175e-09,
+    "rel_vs_network": -1.4800667623870472,
+    "one_sided_plus": 3.756556963404163e-08,
+    "one_sided_rel": 13.75231667657433
+   },
+   "I_circuit": {
+    "G": 2.5464245999698863e-09,
+    "rel_vs_network": 2.4612360238762676e-06,
+    "one_sided_plus": 2.5415414612926337e-09,
+    "one_sided_rel": -0.0019151885918434752
+   },
+   "I_weighted": {
+    "G": 2.546424599975941e-09,
+    "rel_vs_network": 2.461238401529897e-06,
+    "one_sided_plus": 2.5415414612975827e-09,
+    "one_sided_rel": -0.0019151885898999188
+   },
+   "I_source_minus": -0.0,
+   "G_times_V_A_per_cm": 2.546418332633354e-13
+  },
+  "1mV": {
+   "I_drain": {
+    "G": -2.44518055103861e-10,
+    "rel_vs_network": -1.0960243067567752,
+    "one_sided_plus": 4.028574163572635e-09,
+    "one_sided_rel": 0.5820551210870855
+   },
+   "I_circuit": {
+    "G": 2.5470451134062637e-09,
+    "rel_vs_network": 0.0002461421066903835,
+    "one_sided_plus": 2.4982077540064815e-09,
+    "one_sided_rel": -0.018932701673183505
+   },
+   "I_weighted": {
+    "G": 2.5470451134066178e-09,
+    "rel_vs_network": 0.00024614210682960547,
+    "one_sided_plus": 2.4982077540067586e-09,
+    "one_sided_rel": -0.018932701673074703
+   },
+   "I_source_minus": 2.1289182281778906e-11,
+   "G_times_V_A_per_cm": 2.546418332633354e-12
+  }
+ },
+ "indicator_check_max_rel": 1.6967591070612517e-16,
+ "wall_s": 373.6166641712189,
+ "end_utc": "2026-11-05T04:27:05.115+00:00"
+}

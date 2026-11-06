@@ -1,0 +1,40 @@
+{
+ "results": {
+  "AR__R_L1_NA1e18_tox2_VG0.488174_B1": {
+   "G_DD_S_per_cm": 6.145795357338051e-09,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L1_NA1e18_tox2_VG0.621433_B1": {
+   "G_DD_S_per_cm": 6.910469805781212e-09,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L1_NA1e18_tox2_VG0.7835_B1": {
+   "G_DD_S_per_cm": 2.776593301149813e-08,
+   "mesh_id": "dev1_L1_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.488174_B1": {
+   "G_DD_S_per_cm": 6.652068865265836e-08,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.621433_B1": {
+   "G_DD_S_per_cm": 1.8689631024314387e-07,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  },
+  "AR__R_L2_NA1e16_tox20_VG0.7835_B1": {
+   "G_DD_S_per_cm": 1.6048845838600966e-05,
+   "mesh_id": "dev2_L2_lev1",
+   "same_mesh": true
+  }
+ },
+ "submission": {
+  "code": "DEVSIM 2.11.2",
+  "current_evaluation": "devsim.solve(type='ac', frequency=1e-6 Hz) with acreal = 1 V on the drain source; G_DD = -Re(V1.I); double precision",
+  "name": "DEVSIM 2.11.2 built-in AC analysis, double precision (level-1 mesh)",
+  "notes": "values from benchmark/wp4/results/production/AC_<state>_B1_lev1_double.json (WP4 pre-registration benchmark/specs/WP4_Preregistration_External_Paths_2026-11-04.md; evaluation benchmark/wp4/results/evaluation_wp4.json)"
+ }
+}

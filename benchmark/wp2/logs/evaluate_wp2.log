@@ -1,0 +1,74 @@
+== H1 (A-R reference quality) ==
+  AR-1 psi_hat=12.00 PASS=True | G_DD cross -1.42e-03 refine -1.42e-03 | G_SD cross -1.42e-03 refine -1.42e-03 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 2.85e-03
+  AR-2 psi_hat=16.00 PASS=True | G_DD cross -1.83e-03 refine -1.81e-03 | G_SD cross -1.83e-03 refine -1.82e-03 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 3.65e-03
+  AR-3 psi_hat=21.02 PASS=True | G_DD cross -2.33e-03 refine -2.30e-03 | G_SD cross -2.33e-03 refine -2.30e-03 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 4.66e-03
+  AR-4 psi_hat=12.00 PASS=True | G_DD cross -1.30e-04 refine -1.17e-04 | G_SD cross -1.30e-04 refine -1.17e-04 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 2.61e-04
+  AR-5 psi_hat=16.00 PASS=True | G_DD cross -1.25e-04 refine -1.19e-04 | G_SD cross -1.25e-04 refine -1.19e-04 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 2.50e-04
+  AR-6 psi_hat=21.02 PASS=True | G_DD cross -9.99e-05 refine -1.18e-04 | G_SD cross -9.99e-05 refine -1.18e-04 | forms/KCL/bracket ok per level [True, True, True] | tol(G_SD) 2.36e-04
+  summary {'passed': ['AR-1', 'AR-2', 'AR-3', 'AR-4', 'AR-5', 'AR-6'], 'n_pass': 6, 'kill': False}
+== H-B (body effect, level 2) ==
+  AR-1 Delta_DD=+4.191e-03 in (0.0012, 0.012) -> True | Delta_SD=-2.480e-03 in (-0.0072, -0.00078) -> True
+  AR-2 Delta_DD=+9.110e-05 in (2.6e-05, 0.00026) -> True | Delta_SD=-5.391e-05 in (-0.00016, -1.7e-05) -> True
+  AR-3 Delta_DD=+6.978e-07 in (2e-07, 2e-06) -> True | Delta_SD=-4.131e-07 in (-1.2e-06, -1.3e-07) -> True
+  AR-4 Delta_DD=+1.600e-03 in (0.00024, 0.0061) -> True | Delta_SD=-3.954e-04 in (-0.0011, -0.0001) -> True
+  AR-5 Delta_DD=+3.398e-05 in (5e-06, 0.00013) -> True | Delta_SD=-8.416e-06 in (-2.3e-05, -2.2e-06) -> True
+  AR-6 Delta_DD=+2.571e-07 in (3.8e-08, 9.7e-07) -> True | Delta_SD=-6.389e-08 in (-1.7e-07, -1.7e-08) -> True
+  summary {'in_band_DD': 6, 'in_band_SD': 6, 'n': 6, 'supported': True}
+== H2 (held-out robustness) ==
+  HO-1 psi_hat=14.99 forms=6.0e-11 kcl=6.0e-11 B0bracket=True PASS=True
+  HO-2 psi_hat=17.99 forms=2.7e-10 kcl=2.7e-10 B0bracket=True PASS=True
+  HO-3 psi_hat=15.00 forms=2.5e-11 kcl=2.5e-11 B0bracket=True PASS=True
+  HO-4 psi_hat=18.00 forms=5.8e-11 kcl=5.8e-11 B0bracket=True PASS=True
+  HO-5 psi_hat=11.99 forms=4.3e-10 kcl=4.3e-10 B0bracket=True PASS=True
+  summary {'n': 5, 'n_pass': 5, 'kill': False, 'complete': True}
+== P-DD / E-CIRC (P2 runs) ==
+  AR-1 B1 lev1 GV1mV=3.5e-15 pred=fail  default1mV=-3.457e+01 ok=True | circuit R=-7.2e-10 weighted R=-6.7e-10 | same-run vs P1 +0.0e+00
+  AR-1 B1 lev2 GV1mV=3.5e-15 pred=fail  default1mV=-5.698e+01 ok=True | circuit R=-1.1e-09 weighted R=-1.2e-09 | same-run vs P1 +0.0e+00
+  AR-1 B0 lev1 GV1mV=3.5e-15 pred=fail  default1mV=-3.471e+01 ok=True | circuit R=-7.2e-10 weighted R=-7.2e-10 | same-run vs P1 +0.0e+00
+  AR-2 B1 lev1 GV1mV=1.6e-13 pred=fail  default1mV=-1.732e+00 ok=True | circuit R=-2.0e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-2 B1 lev2 GV1mV=1.6e-13 pred=fail  default1mV=-2.222e+00 ok=True | circuit R=-2.1e-10 weighted R=-2.1e-10 | same-run vs P1 +0.0e+00
+  AR-2 B0 lev1 GV1mV=1.6e-13 pred=fail  default1mV=-1.732e+00 ok=True | circuit R=-2.0e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-3 B1 lev1 GV1mV=2.1e-11 pred=fail  default1mV=+1.007e-01 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-3 B1 lev2 GV1mV=2.1e-11 pred=fail  default1mV=+1.489e-02 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-3 B0 lev1 GV1mV=2.1e-11 pred=fail  default1mV=+1.007e-01 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-4 B1 lev1 GV1mV=2.6e-12 pred=fail  default1mV=-1.096e+00 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-4 B1 lev2 GV1mV=2.6e-12 pred=fail  default1mV=-7.203e-01 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  AR-4 B0 lev1 GV1mV=2.5e-12 pred=fail  default1mV=-1.096e+00 ok=True | circuit R=-1.9e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-5 B1 lev1 GV1mV=1.2e-10 pred=none  default1mV=+3.572e-02 ok=None | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-5 B1 lev2 GV1mV=1.2e-10 pred=none  default1mV=+3.851e-02 ok=None | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-5 B0 lev1 GV1mV=1.2e-10 pred=none  default1mV=+3.575e-02 ok=None | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-6 B1 lev1 GV1mV=1.6e-08 pred=pass  default1mV=+2.534e-04 ok=True | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-6 B1 lev2 GV1mV=1.6e-08 pred=pass  default1mV=+3.784e-04 ok=True | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  AR-6 B0 lev1 GV1mV=1.6e-08 pred=pass  default1mV=+2.537e-04 ok=True | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  HO-1 B1 lev1 GV1mV=6.2e-14 pred=fail  default1mV=-2.919e+00 ok=True | circuit R=-2.0e-10 weighted R=-2.1e-10 | same-run vs P1 +0.0e+00
+  HO-2 B1 lev1 GV1mV=1.1e-12 pred=fail  default1mV=-1.106e+00 ok=True | circuit R=-1.9e-10 weighted R=-1.9e-10 | same-run vs P1 +0.0e+00
+  HO-3 B1 lev1 GV1mV=4.6e-11 pred=fail  default1mV=-6.380e-02 ok=True | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  HO-4 B1 lev1 GV1mV=8.4e-10 pred=none  default1mV=+2.795e-03 ok=None | circuit R=-1.8e-10 weighted R=-1.8e-10 | same-run vs P1 +0.0e+00
+  HO-5 B1 lev1 GV1mV=1.7e-15 pred=fail  default1mV=-7.006e+01 ok=True | circuit R=-1.2e-09 weighted R=-8.2e-10 | same-run vs P1 +0.0e+00
+  by state {'AR-1': 'confirmed', 'AR-2': 'confirmed', 'AR-3': 'confirmed', 'AR-4': 'confirmed', 'AR-5': 'no prediction', 'AR-6': 'confirmed', 'HO-1': 'confirmed', 'HO-2': 'confirmed', 'HO-3': 'confirmed', 'HO-4': 'no prediction', 'HO-5': 'confirmed'} | E-CIRC {'ecirc_all': True, 'ecirc_worst': 1.1605425509486622e-09}
+== P-SS (coupled small-signal, level 1) ==
+  AR-1 B1 G_E -6.277e+03 G_M +1.739e+03 kappa 6.7e+16 predicted=True ok=True
+  AR-1 B0 G_E -6.511e+03 G_M +1.637e+03 kappa 6.5e+16 predicted=False ok=None
+  AR-2 B1 G_E -1.366e+02 G_M +4.168e+01 kappa 6.8e+16 predicted=True ok=True
+  AR-2 B0 G_E -1.333e+02 G_M +4.250e+01 kappa 7.0e+16 predicted=False ok=None
+  AR-3 B1 G_E -1.060e+00 G_M +3.130e-01 kappa 1.2e+18 predicted=True ok=True
+  AR-3 B0 G_E -1.052e+00 G_M +3.117e-01 kappa 1.4e+18 predicted=False ok=None
+  AR-4 B1 G_E -2.259e+01 G_M +2.508e+01 kappa 1.4e+17 predicted=False ok=None
+  AR-4 B0 G_E -2.294e+01 G_M +2.519e+01 kappa 1.4e+17 predicted=False ok=None
+  AR-5 B1 G_E -4.608e-01 G_M +5.532e-01 kappa 1.2e+17 predicted=False ok=None
+  AR-5 B0 G_E -4.538e-01 G_M +5.504e-01 kappa 1.2e+17 predicted=False ok=None
+  AR-6 B1 G_E -3.584e-03 G_M +4.581e-03 kappa 4.9e+14 predicted=False ok=None
+  AR-6 B0 G_E -3.567e-03 G_M +4.748e-03 kappa 4.9e+14 predicted=False ok=None
+  HO-1 B1 G_E -3.632e+02 G_M +1.120e+02 kappa 6.7e+16 predicted=True ok=True
+  HO-1 B0 G_E -3.709e+02 G_M +1.049e+02 kappa 6.5e+16 predicted=False ok=None
+  HO-2 B1 G_E -1.954e+01 G_M +6.182e+00 kappa 7.2e+16 predicted=True ok=True
+  HO-2 B0 G_E -1.987e+01 G_M +6.276e+00 kappa 7.0e+16 predicted=False ok=None
+  HO-3 B1 G_E -1.404e+00 G_M +1.592e+00 kappa 4.2e+17 predicted=False ok=None
+  HO-3 B0 G_E -1.419e+00 G_M +1.626e+00 kappa 4.0e+17 predicted=False ok=None
+  HO-4 B1 G_E -7.534e-02 G_M +8.094e-02 kappa 9.9e+15 predicted=False ok=None
+  HO-4 B0 G_E -7.435e-02 G_M +8.162e-02 kappa 9.9e+15 predicted=False ok=None
+  HO-5 B1 G_E -6.995e+03 G_M +7.788e+03 kappa 1.2e+17 predicted=True ok=True
+  HO-5 B0 G_E -7.134e+03 G_M +7.068e+03 kappa 1.2e+17 predicted=False ok=None
+  summary {'n_predicted': 6, 'n_confirmed': 6}
+psi_hat {'AR-1': 11.994, 'AR-2': 15.993, 'AR-3': 21.013, 'AR-4': 12.0, 'AR-5': 16.0, 'AR-6': 21.02, 'HO-1': 14.993, 'HO-2': 17.993, 'HO-3': 15.0, 'HO-4': 18.0, 'HO-5': 11.994}
+ledger {'runs': 84, 'failures': ['P2_AR-4_B1_lev2', 'P2_AR-4_B1_lev1', 'P2_AR-4_B0_lev1'], 'total_wall_h': 4.118138888888889, 'max_rss_MB': 5957}
