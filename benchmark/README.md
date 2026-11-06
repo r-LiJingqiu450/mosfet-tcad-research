@@ -26,6 +26,11 @@ A code-agnostic reference set for the **zero-bias (linear-response) terminal con
   - `paper/`: a LaTeX manuscript whose every figure, table and quoted result is generated from the released files.
   - `benchmark/tools/build_release.py`: builds a benchmark-only release snapshot (MIT for code, CC BY 4.0 for data and text).
   - Report: `reports/WP7_Report_Release_and_Manuscript_2026-11-05.md`.
+- **WP8 (2026-11-06)** is a pre-registered follow-up on the atlas and the references, not a benchmark change; no case file changes.
+  - **Why the coupled small-signal output fails.** The double-precision system of each of the 11 A-R and HO states was rebuilt bit for bit and solved exactly, by iterative refinement with double-double residuals. The exact solution is still wrong, by 4.2e-4 to 1.6e3 relative. Rounding every Jacobian entry by one ulp moves G by 20–93% of the double-precision error. Both registered predictions, which blamed the solver, failed: the double-precision data do not determine G.
+  - **Where (exploratory).** The sensitivity lies in the electron-continuity rows of the neutral drain. Their potential entries cancel in exact arithmetic; once rounded, they leave an error floor u‖c‖₂ that does not depend on the gate bias: 3.2e-9 S/cm on dev1, 8.6e-9 S/cm on dev2.
+  - **Grid convergence of the A-R references.** The convergence is second order (p = 1.98–2.22, 12 of 12 pairs monotone). Every registered tolerance contains the Richardson-extrapolated value, with a margin of 2.0–2.3.
+  - Pre-registered in `specs/WP8_Preregistration_SmallSignal_Mechanism_and_Grid_Convergence_2026-11-06.md`; amendments 1 and 2 add the exploratory analyses. Results: `reports/WP8_Report_SmallSignal_Mechanism_and_Grid_Convergence_2026-11-06.md`.
 
 | Tier | Cases | Content | Scored by |
 |---|---:|---|---|
@@ -145,7 +150,14 @@ python benchmark/tools/score.py my_submission.json --out my_report.json
   - the current then equals the circuit-node current to float64 resolution;
   - its Richardson value matches the reference to ≤ 6.2e-10 in all 6 A-R states on the level-1 mesh;
   - the cost is ×11–16 wall time, with the same Newton iteration count.
-- **Coupled small-signal output** (DEVSIM full Jacobian). The backward residual is near machine precision, yet the error is up to −7e3 relative at ψ̂ = 12, with κ_G ≈ 1e17. A residual check alone accepts it.
+- **Coupled small-signal output** (DEVSIM full Jacobian). The backward residual is near machine precision, yet the error is up to −7e3 relative at ψ̂ = 12. A residual check alone accepts it.
+
+  **An exact solve does not repair it** (WP8). The exact solution of the same double-precision system is wrong by 4.2e-4 to 1.6e3 relative, and one-ulp rounding of the Jacobian entries moves G by 20–93% of the error.
+  - The condition number of G with respect to the entries is 4.8e14 to 8.7e20 (exploratory, with exact solutions; WP2 normalized its κ_G by the wrong G_E).
+  - The sensitivity lies in the neutral drain, where the potential derivatives of the edge fluxes (up to 3.4e6 S/cm) cancel.
+  - Their rounding leaves an absolute floor u‖c‖₂ that does not depend on the gate bias (3.2e-9 S/cm on dev1, 8.6e-9 S/cm on dev2).
+  - One adjoint solve with the same factorization estimates this floor.
+  - **Do not trust a small-signal conductance that is not well above it.**
 
   **DEVSIM's built-in AC analysis is this same solve** (WP4). At 1e-6 Hz, `solve(type='ac')` reproduces `G_M` bit for bit in 5 of 6 A-R states. Its error reaches 1.7e3 relative, and 3.3e3 in extended precision. Extended precision cannot help here: the AC system is factored and solved once, in double precision.
 
@@ -160,6 +172,10 @@ python -m pytest -q benchmark/tests
 python benchmark/wp4/run_queue_wp4.py --list        # the 18 registered WP4 jobs (ledger: wp4/results/ledger.jsonl)
 python benchmark/wp4/evaluate_wp4.py                # registered WP4 evaluation -> wp4/results/evaluation_wp4.json
 python benchmark/wp4/posthoc_wp4.py                 # WP4 post-hoc diagnostics -> wp4/results/posthoc_wp4.json
+python benchmark/wp8/run_wp8.py                     # the 11 registered WP8 runs (ledger: wp8/results/ledger.jsonl)
+python benchmark/wp8/evaluate_wp8.py                # registered WP8 evaluation (incl. grid convergence) -> wp8/results/evaluation_wp8.json
+python benchmark/wp8/run_xsens.py                   # WP8 exploratory sensitivity analysis X -> wp8/results/exploratory/
+python benchmark/wp8/xsens_summary.py               # -> wp8/results/exploratory/summary_xsens.json
 ```
 
 Source files are checked before export:
@@ -175,4 +191,4 @@ Each case lists its sources with their SHA-256. The WP2 and WP4 runs use DEVSIM 
 - G_DB and the HO and B-R cases have no established tolerance.
 - WP6 tested one agent (Claude Opus 5.5, custom system prompt, a stated 1% requirement, a ready deck). Its null result does not transfer to other agents, prompts or tasks.
 - The physics envelope is narrow: constant mobility, Boltzmann statistics, no holes or generation/recombination, and zero or small V_D.
-- The licence for public release is not yet decided.
+- Public release (WP7): code under the MIT License, data and text under CC BY 4.0 (`release/`).
