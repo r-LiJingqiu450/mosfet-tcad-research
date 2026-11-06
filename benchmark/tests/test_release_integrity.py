@@ -57,6 +57,7 @@ def test_release_checksums_when_in_a_snapshot():
     for h, path in lines:
         assert sha(os.path.join(ROOT, path)) == h, path
     present = {os.path.relpath(os.path.join(dp, f), ROOT) for dp, _, fs in os.walk(ROOT) for f in fs}
-    present = {p for p in present if not p.startswith(('.git/', '.pytest_cache/')) and '__pycache__' not in p
-               and p != 'SHA256SUMS'}
+    # files made by running the code here (bytecode caches, git metadata) are not release content unless listed
+    present = {p for p in present if p != 'SHA256SUMS' and (p in listed or not (
+        p.startswith(('.git/', '.pytest_cache/')) or '__pycache__' in p))}
     assert present == listed, (sorted(present - listed)[:10], sorted(listed - present)[:10])
