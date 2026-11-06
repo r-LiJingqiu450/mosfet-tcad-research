@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it as below."
+title: "Low-current MOSFET drift-diffusion verification benchmark"
+version: 1.0.0
+date-released: "2026-11-05"
+abstract: >-
+  An open, code-agnostic reference set for the zero-bias (linear-response) terminal conductances of two-dimensional
+  n-channel MOSFETs at low current, with published meshes, a scorer, a failure-mode atlas of terminal-current
+  evaluation (including DEVSIM 2.11.2's default contact current and AC analysis), and a pre-registered AI-agent study.
+authors:
+  - name: "[Author name(s) to be added]"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - TCAD
+  - drift-diffusion
+  - MOSFET
+  - subthreshold
+  - verification
+  - benchmark
+  - terminal current
+  - Scharfetter-Gummel
+  - DEVSIM
+  - AI agents
+# repository-code and doi are added when the public repository and the archive exist
