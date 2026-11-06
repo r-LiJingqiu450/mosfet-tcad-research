@@ -520,8 +520,22 @@ def dump(obj):
     return json.dumps(obj, sort_keys=True, indent=1, ensure_ascii=False, allow_nan=False) + '\n'
 
 
+def history_available(commits):
+    """True if every commit is in this repository's history (the exporter verifies each source against it)."""
+    try:
+        return all(subprocess.run(['git', '-C', ROOT, 'cat-file', '-e', f'{c}^{{commit}}'], capture_output=True).returncode == 0
+                   for c in commits)
+    except FileNotFoundError:
+        return False
+
+
 def main():
     import export_wp2   # WP2 tiers (schema 1.1.0); WP1 cases above are exported unchanged (schema 1.0.0)
+    if not history_available((BASE_COMMIT, export_wp2.WP2_COMMIT)):
+        # checked before anything is removed, so that a run outside the research repository changes nothing
+        raise SystemExit(f'export_cases.py verifies every source against the research repository history (commits '
+                         f'{BASE_COMMIT[:7]} and {export_wp2.WP2_COMMIT[:7]}), which is not available here, for example '
+                         f'in the release snapshot. Nothing was changed.')
     os.makedirs(CASES, exist_ok=True)
     for p in glob.glob(os.path.join(CASES, '*.json')):
         os.remove(p)

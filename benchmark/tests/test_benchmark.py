@@ -59,6 +59,19 @@ def test_manifest_hashes_match():
         assert sha(os.path.join(ROOT, p)) == h, p
 
 
+def _history_available():
+    try:
+        return subprocess.run(['git', '-C', ROOT, 'cat-file', '-e', 'c05139b4ae037ece34257ff0382e84a91b059773^{commit}'],
+                              capture_output=True).returncode == 0
+    except FileNotFoundError:
+        return False
+
+
+needs_history = pytest.mark.skipif(not _history_available(),
+                                   reason='needs the research repository history (not part of the release snapshot)')
+
+
+@needs_history
 def test_sources_trace_to_base_commit_and_hash():
     for c in CASES.values():
         base = c['provenance']['base_commit']
@@ -69,6 +82,7 @@ def test_sources_trace_to_base_commit_and_hash():
             assert at_base == here, s['path']
 
 
+@needs_history
 def test_export_is_deterministic():
     files = sorted(glob.glob(os.path.join(BENCH, 'cases', '*.json'))) + [os.path.join(BENCH, 'INDEX.json'), os.path.join(BENCH, 'MANIFEST.sha256')]
     before = {p: sha(p) for p in files}
