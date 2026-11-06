@@ -22,6 +22,10 @@ A code-agnostic reference set for the **zero-bias (linear-response) terminal con
   - Every run called DEVSIM's default contact current and 30 ran its AC analysis. All set them aside in favour of bias-step differences of the circuit current or the conductance network, each with an independent check.
   - The registered stop rule therefore applied, and arm B (with the scorer as checker) was not run.
   - Pre-registered in `specs/WP6_Preregistration_Agent_Study_2026-11-05.md` (amendments W6-A1, W6-A2). Results, sensitivity and limits: `reports/WP6_Report_Agent_Study_2026-11-05.md`.
+- **WP7 (2026-11-05)** prepares the public release and the manuscript. No case file changes.
+  - `paper/`: a LaTeX manuscript whose every figure, table and quoted result is generated from the released files.
+  - `benchmark/tools/build_release.py`: builds a benchmark-only release snapshot (MIT for code, CC BY 4.0 for data and text).
+  - Report: `reports/WP7_Report_Release_and_Manuscript_2026-11-05.md`.
 
 | Tier | Cases | Content | Scored by |
 |---|---:|---|---|
