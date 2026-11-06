@@ -115,3 +115,30 @@ def test_refinement_reports_non_convergence_when_the_factorization_is_too_poor()
     bad = lambda r: 1e3 * r                                  # noqa: E731  (a useless inner solver)
     out = DD.refine(sp.csr_matrix(A), b, bad, np.zeros(n), out_index=0, sign=1.0, max_it=8)
     assert not out['converged']
+
+
+def test_vector_refinement_and_adjoint_reach_the_exact_solutions():
+    """xsens.refine_to (all components, stopped on the componentwise backward error) and its transposed use give the
+    exact solutions of A x = b and A^T y = e of the same double-precision system, and y[k] = x[k] when b = e = e_k."""
+    os.environ.setdefault('DEVSIM_MATH_LIBS', '/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3')
+    try:
+        import xsens as XS                                  # imports DEVSIM (the deck modules) as well
+    except (ImportError, RuntimeError) as exc:              # pragma: no cover - environment without DEVSIM
+        pytest.skip(f'xsens needs DEVSIM: {exc}')
+    rng = np.random.default_rng(5)
+    n = 20
+    Q1, _ = np.linalg.qr(rng.standard_normal((n, n)))
+    Q2, _ = np.linalg.qr(rng.standard_normal((n, n)))
+    A = Q1 @ np.diag(np.logspace(0, -8, n)) @ Q2
+    k = 3
+    e = np.zeros(n)
+    e[k] = 1.0
+    lu = spla.splu(sp.csc_matrix(A))
+    xh, xl, hx = XS.refine_to(DD.DDResidual(sp.csr_matrix(A)), e, lu.solve, lu.solve(e))
+    yh, yl, hy = XS.refine_to(DD.DDResidual(sp.csr_matrix(A.T)), e, lambda r: lu.solve(r, trans='T'), lu.solve(e, trans='T'))
+    assert hx[-1] <= XS.OMEGA_TOL and hy[-1] <= XS.OMEGA_TOL
+    x_ex, y_ex = _exact_solve(A, e), _exact_solve(A.T, e)
+    for v_h, v_l, ex in ((xh, xl, x_ex), (yh, yl, y_ex)):
+        err = max(abs(float(F(v_h[i]) + F(v_l[i]) - ex[i])) / max(abs(float(ex[i])), 1e-300) for i in range(n))
+        assert err < 1e-12
+    assert abs((xh[k] + xl[k]) / (yh[k] + yl[k]) - 1) < 1e-14

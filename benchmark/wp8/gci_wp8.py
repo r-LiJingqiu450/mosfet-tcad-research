@@ -71,9 +71,8 @@ def mesh_nodes(mesh_id):
 
 
 def tolerance(case, q):
-    t = case['uncertainty'].get('tolerance') or {}
-    v = t.get(q)
-    return v['relative'] if isinstance(v, dict) else v
+    """The registered relative tolerance of the case for q (uncertainty.tolerance.<q>_rel)."""
+    return case['uncertainty']['tolerance'][f'{q}_rel']
 
 
 def analyse():
