@@ -20,7 +20,10 @@
 
 \title{A low-current verification benchmark for two-dimensional MOSFET drift--diffusion simulation:
 reference conductances, failure signatures of terminal-current evaluation, and an AI-agent study}
-\author{[Author name(s) and affiliation(s) to be added by the author]}
+\author{Xiaocong Hu\\[3pt]
+\small School of Physics, Guizhou University, Guiyang, Guizhou, China\\
+\small ORCID: \href{https://orcid.org/0009-0001-5813-7638}{0009-0001-5813-7638}\\
+\small E-mail: \href{mailto:phy.xchu24@gzu.edu.cn}{phy.xchu24@gzu.edu.cn}}
 \date{Preprint, November 7, 2026}
 
 \begin{document}
@@ -258,7 +261,9 @@ part of the tolerance, P4 passes by construction: that is a consistency check, n
 the refinement ratio taken from the node counts (about 1.41 per level), supports these tolerances (\cref{tab:gci}). It
 was pre-registered with three predictions, all of which hold. Convergence is monotone in all \gciMonotone{} of
 \gciPairs{} cases (six states, $\G{DD}$ and $\G{SD}$), with observed orders \gciPmin{}--\gciPmax{}, as expected of a
-second-order scheme, and the asymptotic-range ratio is \gciAsymMin{}--\gciAsymMax{} (1 in the asymptotic range). The
+second-order scheme. Farrell and Peschka found second-order convergence of the Scharfetter--Gummel finite-volume current
+for smooth doping, and only first-order convergence of their finite-volume potential for near-discontinuous
+doping~\cite{FarrellPeschka2019}; our wells have smooth erfc profiles. The asymptotic-range ratio is \gciAsymMin{}--\gciAsymMax{} (1 in the asymptotic range). The
 level-2 references lie \gciRelMin{} to \gciRelMax{} from the Richardson-extrapolated values; the registered tolerances
 contain these differences by a factor of \gciTolRatioMin{} to \gciTolRatioMax{}, and contain the grid convergence index
 of the finest mesh (\gciFineMin{} to \gciFineMax{}) in \gciFineWithin{} of \gciPairs{} cases. In \gciPfourCloser{} of \gciStates{} states the independent
@@ -345,12 +350,15 @@ the circuit-node current to double-precision resolution and its Richardson value
 \subsection{The coupled small-signal solve and DEVSIM's AC analysis}\label{sec:ss}
 The linear-response problem can also be posed on the full coupled Jacobian of \cref{eq:dd} at equilibrium, as
 small-signal analysis does: solve $J\,\delta x = \delta b$, where $\delta b$ is the change of the residual for a drain-bias
-step, and read the conductance from the circuit unknown of the drain voltage source. We solved this system with two sparse direct
+step, and read the conductance from the circuit unknown of the drain voltage source. This is the zero-frequency limit of
+sinusoidal steady-state analysis, $(J + \mathrm{j}\omega D)\,\delta x = \delta b$, which Laux showed to be the superior
+method for the small-signal behaviour of a simulated device, giving accurate and rigorously correct results~\cite{Laux1985}. We solved this system with two sparse direct
 solvers, SuperLU after row and column equilibration ($G_E$) and UMFPACK through DEVSIM's interface ($G_M$). The solves
 reach a normwise backward error of at most \etaMax{}, yet $G_E$ and $G_M$ were wrong by up to \pssMaxGE{} and \pssMaxGM{}
 relative. The componentwise condition number of the output with respect to the entries of $J$,
 $\kappa_J = \sum_{ij}|\lambda_i J_{ij}\,\delta x_j|/|G|$ with $\lambda = J^{-\mathsf{T}}e$ the adjoint solution for the
-circuit unknown and $G$ the reference, was \xsKappaMin{} to \xsKappaMax{}. The pre-registered prediction that
+circuit unknown (the device form of the adjoint method of network sensitivity analysis~\cite{GhioneFilicori1993}) and
+$G$ the reference, was \xsKappaMin{} to \xsKappaMax{}. The pre-registered prediction that
 $G_E$ misses by more than 1\% in the \pssPredicted{} dev1 states was confirmed in \pssConfirmed{}. A small backward error does
 not imply a small forward error when the output is this ill-conditioned~\cite{Higham2002}; the practical point is that a
 residual check alone accepts this output.
@@ -364,7 +372,7 @@ is extended (source code inspection, recorded with the release).
 \textbf{The data, not the solver.} A pre-registered follow-up asked whether the error comes from the rounding of the
 factorization or from the double-precision system itself. The system of each of the \ssStates{} states was rebuilt (bit
 for bit, in all \ssRepro{}) and solved exactly: iterative refinement with residuals accumulated in double-double
-arithmetic~\cite{Higham2002} converged in at most \ssIterMax{} steps to a componentwise backward error of at most
+arithmetic and the solution held in double-double~\cite{Higham2002,Demmel2006} converged in at most \ssIterMax{} steps to a componentwise backward error of at most
 \ssOmegaMax{}, and two inner solvers gave the same solution to \ssMbMax{}. The exact solution of the double-precision
 system was still wrong in every state, by \ssExactMin{} (AR-6, the largest current) to \ssExactMax{} relative
 (\cref{fig:atlas}b, diamonds). The exact solve left \ssShareOneMin--\ssShareOneMax\% of the
@@ -373,14 +381,18 @@ entry of $J$ by $1 + 2^{-52}u$, with $u$ uniform on $[-1, 1]$ and three seeds, m
 the double-precision error. Both registered predictions therefore failed: that the exact solve removes 99\% of the error (true in
 \ssPMoneOk{} of \ssGate{} states with an error above 1\%) and that one-ulp rounding of the entries moves $G$ by less than
 1\% of it (\ssPMtwoOk{} of \ssGate{}). As fixed in advance, this means that the double-precision Jacobian does not
-determine the conductance at these currents: no double-precision solver can repair the output.
+determine the conductance at these currents: no double-precision solver can repair the output. Refinement returns
+the solution of the stored system and takes its entries as exact~\cite{Demmel2006}; it cannot recover what their
+rounding has lost.
 
 \textbf{Where the sensitivity lies (exploratory).} This analysis was specified after the first records were seen and
 before it was run, without predictions. To first order, relative changes $\rho_{ij}$ of the entries change the output by
 $\sum_{ij} c_{ij}\rho_{ij}$, with $c_{ij} = \lambda_i J_{ij}\,\delta x_j$ computed from the exact $\lambda$ and $\delta x$.
 This linear response reproduced the measured one-ulp shifts to \xsLinearMax{}, with second-order terms below
 \xsSecondMax{} of them. In every state at least \xsDrainMin\% of $\sum|c_{ij}|$ lies in the electron-continuity rows of
-the drain-side n-type region, and at least \xsColsPotMin\% in the potential columns. In the neutral drain the potential
+the drain-side n-type region, and at least \xsColsPotMin\% in the potential columns. (DEVSIM's unknowns are the
+potential and the electron density, the variables Selberherr recommends for computation~\cite[Sec.~5.2]{Selberherr1984}.)
+In the neutral drain the potential
 follows the drain voltage ($\delta\psi_j = 1$), every current injected there leaves through the drain ($\lambda_i = 1$ to
 within \xfLamDev{} on AR-1 and AR-4), and the Jacobian entries of these rows reach \xsEntryMax{}~S/cm on the thin cells
 at the surface. The Scharfetter--Gummel flux depends on the potential only through differences, so the potential entries
@@ -392,14 +404,19 @@ device): \xsFloorOne{}~S/cm on dev1,
 exact solves were \xsActMin{} to \xsActMax{} times this floor. Computed from the unrefined double-precision solutions,
 the floor agreed with the exact one to \xsUnrefMax{}, so one adjoint solve with the same factorization estimates it
 without a reference. A conductance that is not well above this floor cannot be obtained from the double-precision
-Jacobian. It needs a formulation that applies the flux derivatives to potential differences, as the network form of the
-reference does, or an assembly and solve in higher precision. The nonlinear residual itself evaluates each flux from the
-potential difference, which may be why bias-step differences of the circuit current were accurate (\cref{sec:post}); we
-did not test this.
+Jacobian. Because the floor is proportional to the rounding of the entries, an assembly and solve in higher precision
+would lower it in proportion (first-order theory, not tested here). The reference does not have this sensitivity: it
+evaluates $G$ from the edge conductances in the energy form, which is stationary with respect to errors in the
+potentials and, by Rayleigh's monotonicity law, changes by at most the relative rounding of the
+conductances~\cite{DoyleSnell1984}. An assembly that applies each flux derivative to a potential difference may also
+avoid the floor, and the nonlinear residual evaluates each flux from the potential difference, which may be why
+bias-step differences of the circuit current were accurate (\cref{sec:post}); we did not test either.
 
 This failure of the coupled small-signal output, with a backward error near machine precision, was not found in the
-literature we reviewed; adjoint and Green's-function formulations of small-signal and noise analysis are
-established~\cite{GhioneFilicori1993}, and we have not read all small-signal literature.
+literature we reviewed. Laux's comparison of small-signal methods attributes the accuracy of sinusoidal steady-state
+analysis to the formal linearization of the device and does not discuss round-off at low current~\cite{Laux1985}; adjoint and
+Green's-function formulations of small-signal and noise analysis are established~\cite{GhioneFilicori1993,Bonani2003};
+our search of this large literature was not exhaustive.
 
 
 \subsection{Recommendations for users}
@@ -515,8 +532,13 @@ in device (MOSFET), regime (subthreshold, linear response) and output (terminal 
 view of the current. The flux-integration failure it quantifies is classical~\cite{PalmVandeWiele1985}; the benchmark
 contributes a modern, scored quantification in an open tool and a remedy check, not a new mechanism. The cancellation
 traced in \cref{sec:ss} is its linear-response counterpart: in both, a small current is formed from large terms in the
-heavily doped region, once in the flux at the contact and once in the Jacobian rows of the neutral drain. We did not find
-the second described for small-signal analysis in the literature we reviewed.
+heavily doped region, once in the flux at the contact and once in the Jacobian rows of the neutral drain. Polak et al.\
+noted the first kind of cancellation inside the discrete current density, where neighbouring densities are large and
+nearly equal, and rewrote the expression to avoid it~\cite{Polak1987}. We did not find the second described in the
+literature we reviewed, which includes Laux's comparison of small-signal methods~\cite{Laux1985}, reviews of the
+numerical methods of device simulation~\cite{BankRoseFichtner1983,Polak1987,Selberherr1984}, the adjoint and
+Green's-function approach to small-signal and noise analysis~\cite{GhioneFilicori1993,Bonani2003} and extra-precise
+iterative refinement~\cite{Demmel2006}.
 
 % ---------------------------------------------------------------------------------------------------------------
 \section{Conclusions}
@@ -535,20 +557,38 @@ agents and users who do not check their low currents independently remains to be
 \section*{Data and code availability}
 The benchmark (case files, meshes, schema, scorer, worked examples), the production records and evaluation scripts of
 every work package, the agent-study transcripts and audits, and the sources of this manuscript are released with this
-paper: code under the MIT License and data, text and figures under CC BY 4.0
-([repository URL and Zenodo DOI to be added on release]). Every result quoted in this manuscript (numbers, tables and figures) is
+paper as version~1.0.0 of the benchmark, at \url{https://github.com/r-LiJingqiu450/mosfet-tcad-research/releases/tag/v1.0.0}
+and archived on Zenodo: code under the MIT License and data, text and figures under CC BY 4.0. Every result quoted in this manuscript (numbers, tables and figures) is
 generated from the released files by \texttt{paper/scripts/make\_assets.py}; their SHA-256 are listed in \texttt{paper/generated/inputs.sha256}.
 Design parameters (states, thresholds, limits) are those of the pre-registrations released with the data.
 
-\section*{Use of AI}
-This study was planned, implemented, run and analysed, and this manuscript was drafted, by Claude (Anthropic, model
-\texttt{claude-opus-5-5}) working as an AI research assistant under the direction of the author, who set the research
-direction and made the decisions recorded in the pre-registrations. [To be confirmed by the author: the author has reviewed the manuscript and
-takes responsibility for its content.] The agent under test in \cref{sec:agents} is the same model, run separately with a fixed
-configuration; that the model under test also designed the study is a potential source of bias.
+\section*{Use of generative AI}
+AI tools were used throughout this project: OpenAI Codex (the model version used in October 2026 was not recorded) and
+Claude Opus~5.5 (Anthropic; model identifier \texttt{claude-opus-5-5}), each working as an agent that writes and runs code.
 
-\section*{Acknowledgments}
-[To be added by the author.]
+In the earlier project phases, whose code and results the benchmark cites as sources, Codex was used for repository
+auditing, numerical-method development, test execution, reproducibility workflows, the MOS-capacitor model-discrimination
+experiments, report preparation and archival verification. Claude contributed to the earlier numerical reference studies,
+the DEVSIM feasibility work and the literature analysis.
+
+For the work reported in this article, Claude:
+\begin{itemize}
+\item designed the studies and wrote their pre-registrations;
+\item wrote the benchmark, simulation and analysis code and ran the simulations;
+\item produced every figure, table and quoted number with scripts it wrote;
+\item searched for and checked the references, for several of which the author supplied the full texts;
+\item drafted the text of all sections.
+\end{itemize}
+
+The AI-agent study (\cref{sec:agents}) evaluates the same model, which is a potential source of bias; its
+pre-registration, run records and transcripts are released.
+
+All numerical results reported here were generated by executable code whose outputs and run logs are released, and every
+reference was checked against its source.
+
+The AI systems are tools and are not listed as authors. The author set the research goals, made the decisions at each
+stage, and is responsible for the scientific interpretation, the citations, the authorship and the submission of this
+article, and for its content as a whole.
 
 \bibliographystyle{unsrtnat}
 \bibliography{references}

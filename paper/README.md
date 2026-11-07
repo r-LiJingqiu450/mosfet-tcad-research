@@ -12,5 +12,6 @@ cd paper && latexmk -pdf main.tex        # pdflatex + bibtex; needs siunitx, boo
 `paper/generated/inputs.sha256` lists the SHA-256 of every input file the script read. The references in
 `references.bib` record, in a non-printing `checked` field, where each entry was verified.
 
-Before submission, the author fills in: the author line, the "Use of AI" confirmation, the acknowledgments, and the
-repository URL and DOI in "Data and code availability".
+The AI-use disclosure approved by the author (2026-11-07) is the section "Use of generative AI"; a journal version
+places it where the journal asks (the Methods section for the Journal of Computational Electronics, the Acknowledgment
+for IEEE journals). "Data and code availability" points to release v1.0.0 and its Zenodo archive.

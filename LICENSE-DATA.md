@@ -1,6 +1,6 @@
 # Licence for data, documentation and text
 
-Copyright (c) 2026 [Author name(s) to be added]
+Copyright (c) 2026 Xiaocong Hu
 
 Everything in this release that is not code is licensed under the **Creative Commons Attribution 4.0 International
 License (CC BY 4.0)**:
