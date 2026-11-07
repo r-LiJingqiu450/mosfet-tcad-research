@@ -8,7 +8,8 @@ License (CC BY 4.0)**:
 - case files, meshes, schemas, worked examples and score reports (`benchmark/cases/`, `benchmark/meshes/`,
   `benchmark/schema/`, `benchmark/examples/`, `benchmark/INDEX.json`, `benchmark/MANIFEST.sha256`);
 - run records, ledgers, logs, evaluations and tables of every work package (`benchmark/wp2/results/`,
-  `benchmark/wp4/results/`, `benchmark/wp6/results/`, `benchmark/wp6/logs/`), including the agent-study transcripts;
+  `benchmark/wp4/results/`, `benchmark/wp6/results/`, `benchmark/wp6/logs/`, `benchmark/wp8/results/`), including the
+  agent-study transcripts;
 - the task kit data of the agent study (`benchmark/wp6/tasks/`, except code);
 - reports, pre-registrations and READMEs (`benchmark/reports/`, `benchmark/specs/`, `*.md`);
 - the earlier project results cited by case files (`results/phase3/`);
