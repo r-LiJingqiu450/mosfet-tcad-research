@@ -12,5 +12,6 @@ cd paper && latexmk -pdf main.tex        # pdflatex + bibtex; needs siunitx, boo
 `paper/generated/inputs.sha256` lists the SHA-256 of every input file the script read. The references in
 `references.bib` record, in a non-printing `checked` field, where each entry was verified.
 
-Before submission, the author fills in: the author line, the "Use of AI" confirmation, the acknowledgments, and the
-repository URL and DOI in "Data and code availability".
+Before submission, the author fills in: the corresponding e-mail in the author block, the approved AI-use disclosure
+(for an IEEE journal it belongs in the Acknowledgment section), the acknowledgments, and the repository URL and DOI in
+"Data and code availability".
