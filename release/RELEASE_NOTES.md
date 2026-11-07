@@ -34,8 +34,7 @@ every registered tolerance contains the Richardson-extrapolated value. The WP8 c
 - The registered stop rule applied, so arm B was not run.
 
 **Manuscript** (`paper/`): LaTeX source, the asset script and the built PDF, updated with the WP8 results. The
-author's approved AI-use disclosure, the corresponding e-mail, the acknowledgments, the repository URL and the DOI are
-to be added.
+author's approval of the AI-use disclosure, the repository URL and the DOI are still to be added.
 
 **Known limits.** Agreement between computational paths only (no experimental validation); narrow physics envelope;
 DEVSIM is the only external code scored (the NiTCAD evaluation is on hold); one agent configuration tested.
