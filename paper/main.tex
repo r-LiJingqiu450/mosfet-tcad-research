@@ -350,7 +350,9 @@ the circuit-node current to double-precision resolution and its Richardson value
 \subsection{The coupled small-signal solve and DEVSIM's AC analysis}\label{sec:ss}
 The linear-response problem can also be posed on the full coupled Jacobian of \cref{eq:dd} at equilibrium, as
 small-signal analysis does: solve $J\,\delta x = \delta b$, where $\delta b$ is the change of the residual for a drain-bias
-step, and read the conductance from the circuit unknown of the drain voltage source. We solved this system with two sparse direct
+step, and read the conductance from the circuit unknown of the drain voltage source. This is the zero-frequency limit of
+sinusoidal steady-state analysis, $(J + \mathrm{j}\omega D)\,\delta x = \delta b$, which Laux showed to be the superior
+method for the small-signal behaviour of a simulated device, giving accurate and rigorously correct results~\cite{Laux1985}. We solved this system with two sparse direct
 solvers, SuperLU after row and column equilibration ($G_E$) and UMFPACK through DEVSIM's interface ($G_M$). The solves
 reach a normwise backward error of at most \etaMax{}, yet $G_E$ and $G_M$ were wrong by up to \pssMaxGE{} and \pssMaxGM{}
 relative. The componentwise condition number of the output with respect to the entries of $J$,
@@ -411,8 +413,10 @@ avoid the floor, and the nonlinear residual evaluates each flux from the potenti
 bias-step differences of the circuit current were accurate (\cref{sec:post}); we did not test either.
 
 This failure of the coupled small-signal output, with a backward error near machine precision, was not found in the
-literature we reviewed; adjoint and Green's-function formulations of small-signal and noise analysis are
-established~\cite{GhioneFilicori1993}, and we have not read all small-signal literature.
+literature we reviewed. Laux's comparison of small-signal methods attributes the accuracy of sinusoidal steady-state
+analysis to the formal linearization of the device and does not discuss round-off at low current~\cite{Laux1985}; adjoint and
+Green's-function formulations of small-signal and noise analysis are established~\cite{GhioneFilicori1993,Bonani2003};
+our search of this large literature was not exhaustive.
 
 
 \subsection{Recommendations for users}
@@ -528,10 +532,13 @@ in device (MOSFET), regime (subthreshold, linear response) and output (terminal 
 view of the current. The flux-integration failure it quantifies is classical~\cite{PalmVandeWiele1985}; the benchmark
 contributes a modern, scored quantification in an open tool and a remedy check, not a new mechanism. The cancellation
 traced in \cref{sec:ss} is its linear-response counterpart: in both, a small current is formed from large terms in the
-heavily doped region, once in the flux at the contact and once in the Jacobian rows of the neutral drain. We did not find
-the second described in the literature we reviewed, which includes the standard monograph on device
-simulation~\cite{Selberherr1984}, the adjoint approach to small-signal sensitivity and noise~\cite{GhioneFilicori1993}
-and extra-precise iterative refinement~\cite{Demmel2006}.
+heavily doped region, once in the flux at the contact and once in the Jacobian rows of the neutral drain. Polak et al.\
+noted the first kind of cancellation inside the discrete current density, where neighbouring densities are large and
+nearly equal, and rewrote the expression to avoid it~\cite{Polak1987}. We did not find the second described in the
+literature we reviewed, which includes Laux's comparison of small-signal methods~\cite{Laux1985}, reviews of the
+numerical methods of device simulation~\cite{BankRoseFichtner1983,Polak1987,Selberherr1984}, the adjoint and
+Green's-function approach to small-signal and noise analysis~\cite{GhioneFilicori1993,Bonani2003} and extra-precise
+iterative refinement~\cite{Demmel2006}.
 
 % ---------------------------------------------------------------------------------------------------------------
 \section{Conclusions}
