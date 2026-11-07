@@ -77,8 +77,8 @@ Matplotlib 3.10.8. The job lists and commands are in `benchmark/README.md` and t
 
 ## Citing
 
-See `CITATION.cff`. Zenodo assigns the DOI of this version when it archives the release; the DOI is given on the
-release page.
+See `CITATION.cff`. Version 1.0.0 is archived on Zenodo as https://doi.org/10.5281/zenodo.24040430; the DOI
+https://doi.org/10.5281/zenodo.24040429 always resolves to the latest version.
 
 ## Limits
 

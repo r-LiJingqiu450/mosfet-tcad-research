@@ -3,8 +3,9 @@
 ## 1.0.0 (2026-11-07)
 
 First public release: the GitHub release `v1.0.0` of https://github.com/r-LiJingqiu450/mosfet-tcad-research,
-archived on Zenodo. The snapshot was built by `benchmark/tools/build_release.py` from the research repository; the
-commit message of the release commit records the source commit and the SHA-256 of the tarball.
+archived on Zenodo as https://doi.org/10.5281/zenodo.24040430 (all versions: https://doi.org/10.5281/zenodo.24040429).
+The snapshot was built by `benchmark/tools/build_release.py` from the research repository; the commit message of the
+release commit records the source commit and the SHA-256 of the tarball.
 
 **Benchmark (schema 1.0.0 and 1.1.0, 106 case files).**
 - **A-R** (6 three-terminal states, two devices, ψ̂ ≈ 12, 16, 21): reference `G_DD`, `G_SD` with a tolerance usable on any

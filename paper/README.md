@@ -14,4 +14,4 @@ cd paper && latexmk -pdf main.tex        # pdflatex + bibtex; needs siunitx, boo
 
 The AI-use disclosure approved by the author (2026-11-07) is the section "Use of generative AI"; a journal version
 places it where the journal asks (the Methods section for the Journal of Computational Electronics, the Acknowledgment
-for IEEE journals). "Data and code availability" points to release v1.0.0 and its Zenodo archive.
+for IEEE journals). "Data and code availability" points to release v1.0.0 and its Zenodo archive, doi:10.5281/zenodo.24040430.
