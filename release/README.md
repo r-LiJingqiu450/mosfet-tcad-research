@@ -7,7 +7,9 @@ small-signal solve fails and of the grid convergence of the references, and a pr
 
 The accompanying manuscript is in `paper/` (`paper/main.pdf`).
 
-**Version 1.0.0.** Release notes: `RELEASE_NOTES.md`.
+**Version 1.0.0.** Release notes: `RELEASE_NOTES.md`. This release is the tag `v1.0.0` of
+https://github.com/r-LiJingqiu450/mosfet-tcad-research (release page:
+https://github.com/r-LiJingqiu450/mosfet-tcad-research/releases/tag/v1.0.0) and is archived on Zenodo.
 
 ## What is in it
 
@@ -30,8 +32,8 @@ The accompanying manuscript is in `paper/` (`paper/main.pdf`).
 | `SHA256SUMS` | SHA-256 of every file in this release |
 
 Every file sits at the path it had in the research repository, so every SHA-256 recorded in a case file and every
-import in the benchmark code resolve inside this release. The research repository's full history is not part of the
-release; the release snapshot records the commit it was built from (see `RELEASE_NOTES.md`).
+import in the benchmark code resolve inside this release. The research history is not part of the release; it is in the
+other branches of the same repository, and the release commit records the research commit it was built from.
 
 ## Quick start: score your code
 
@@ -75,7 +77,8 @@ Matplotlib 3.10.8. The job lists and commands are in `benchmark/README.md` and t
 
 ## Citing
 
-See `CITATION.cff`. A DOI will be added when the release is archived.
+See `CITATION.cff`. Zenodo assigns the DOI of this version when it archives the release; the DOI is given on the
+release page.
 
 ## Limits
 
@@ -83,3 +86,19 @@ Everything here is agreement between computational paths; nothing is experimenta
 narrow. The only external code scored is DEVSIM. The analysis of where the small-signal sensitivity lies is
 exploratory. The agent study tested one model in one configuration. See
 `benchmark/README.md` (*Limits*) and the manuscript (*Discussion*).
+
+## How this release was made
+
+This release was produced with AI tools under the author's direction.
+
+- **Codex (OpenAI):** used in the earlier project phases (auditing, numerical-method development, tests, reproducibility
+  workflows, MOS-capacitor experiments, reports), whose code and results the case files cite.
+- **Claude Opus 5.5 (Anthropic):**
+  - designed the benchmark studies and their pre-registrations;
+  - wrote the benchmark and analysis code;
+  - ran the simulations;
+  - produced the figures;
+  - drafted the manuscript.
+
+The pre-registrations, ledgers, run records and transcripts are included so that every step can be checked. The
+manuscript's section *Use of generative AI* gives the full disclosure.

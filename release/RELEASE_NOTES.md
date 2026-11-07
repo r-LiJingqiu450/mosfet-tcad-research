@@ -2,9 +2,9 @@
 
 ## 1.0.0 (2026-11-07)
 
-First public release. Release candidate rebuilt on 2026-11-07 with the WP8 results; the date is set to the publication
-date when the release is published. The snapshot was built by `benchmark/tools/build_release.py` from the research
-repository; the commit message of the release commit records the source commit and the SHA-256 of the tarball.
+First public release: the GitHub release `v1.0.0` of https://github.com/r-LiJingqiu450/mosfet-tcad-research,
+archived on Zenodo. The snapshot was built by `benchmark/tools/build_release.py` from the research repository; the
+commit message of the release commit records the source commit and the SHA-256 of the tarball.
 
 **Benchmark (schema 1.0.0 and 1.1.0, 106 case files).**
 - **A-R** (6 three-terminal states, two devices, ψ̂ ≈ 12, 16, 21): reference `G_DD`, `G_SD` with a tolerance usable on any
@@ -33,8 +33,9 @@ every registered tolerance contains the Richardson-extrapolated value. The WP8 c
 - 33 runs: 0 silent errors (95% upper bound 0.106), 32 correct and claimed, 1 without a report (time limit).
 - The registered stop rule applied, so arm B was not run.
 
-**Manuscript** (`paper/`): LaTeX source, the asset script and the built PDF, updated with the WP8 results. The
-author's approval of the AI-use disclosure, the repository URL and the DOI are still to be added.
+**Manuscript** (`paper/`): LaTeX source, the asset script and the built PDF, updated with the WP8 results and the
+literature checks B1 and B2 (`benchmark/reports/`). It carries the AI-use disclosure approved by the author on
+2026-11-07 (section *Use of generative AI*), and its data-availability statement points to this release.
 
 **Known limits.** Agreement between computational paths only (no experimental validation); narrow physics envelope;
 DEVSIM is the only external code scored (the NiTCAD evaluation is on hold); one agent configuration tested.
