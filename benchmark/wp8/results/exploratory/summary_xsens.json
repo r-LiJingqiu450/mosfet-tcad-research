@@ -1,0 +1,2004 @@
+[
+ {
+  "state": "AR-1",
+  "device": "L=1 um, N_A=1e+18, t_ox=2 nm",
+  "n": 85378,
+  "G_net": 3.5326066983062963e-12,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 9.181279945621894e-28,
+  "omega_lambda": 3.516153877032824e-26,
+  "kappa_A": 4.2180900432873154e+20,
+  "abs_rms_u": 3.222479978754481e-09,
+  "abs_sum_u": 1.654327024366949e-07,
+  "rel_rms_u": 912.2102328287763,
+  "unrefined_abs_rms_u": 3.2224799787563705e-09,
+  "unrefined_kappa_vs_G_net": 4.218090043289747e+20,
+  "kappa_G_wp2": 6.72128618209986e+16,
+  "abs_err_IR": -5.50085908737295e-09,
+  "e_IR": 1557.1671451595023,
+  "S": 1615.976350490084,
+  "shifts": [
+   -2.238399238116174e-09,
+   -5.708608880045835e-09,
+   -5.069273117229703e-09
+  ],
+  "dG1": [
+   -2.238399238114334e-09,
+   -5.708608880044307e-09,
+   -5.069273117228324e-09
+  ],
+  "dG2": [
+   -1.8398945390657098e-21,
+   -1.5278283305653734e-21,
+   -1.3797538823556545e-21
+  ],
+  "rel_dG1": [
+   -8.220091274324659e-13,
+   -2.6767477123712524e-13,
+   -2.7200464103316335e-13
+  ],
+  "rel_dG12": [
+   0.0,
+   0.0,
+   2.220446049250313e-16
+  ],
+  "rho_rms": [
+   1.5678846165207263e-16,
+   1.567720811277123e-16,
+   1.568034377369577e-16
+  ],
+  "ulp_mean": [
+   0.008663721211629893,
+   0.010063638042308264,
+   0.009400084970823182
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0010060133447036153,
+   "contact_body": 0.0,
+   "contact_drain": 7.380125251473125e-18,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989939682234537,
+   "n_source_side": 3.726080587941277e-30,
+   "oxide": 4.12790623940242e-17,
+   "p_type": 1.8431842431278487e-08
+  },
+  "by_row_block": {
+   "si_potential": 1.024324105017606e-16,
+   "si_electrons": 0.998993986655296,
+   "ox_potential": 4.12790623940242e-17,
+   "circuit": 0.0010060133447036153
+  },
+  "by_column_block": {
+   "si_potential": 0.9998076454976829,
+   "si_electrons": 0.00019235450231692712,
+   "ox_potential": 2.9994353211937557e-17,
+   "circuit": 1.1068626064805325e-17
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.7660855804682875e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 9.963375053184178e-17
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 2.983619100509417e-47
+   },
+   "si_potential|p_type": {
+    "rows": 30854,
+    "share": 2.79689388433835e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 7.378359165892656e-18
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989939682234537
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 3.726080587941277e-30
+   },
+   "si_electrons|p_type": {
+    "rows": 30854,
+    "share": 1.843184242848159e-08
+   },
+   "ox_potential|oxide": {
+    "rows": 2944,
+    "share": 4.12790623940242e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0010060133447036153
+   }
+  },
+  "top": [
+   {
+    "row": 44894,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004431003006880605,
+    "lambda_i": 1.000000000000012,
+    "x_i": -354279.7042471417,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374396,
+    "x_um": 1.2857536333348143,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44893,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004225598537647102,
+    "lambda_i": 1.0000000000000322,
+    "x_i": -371416.65293134004,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 1.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44892,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004029722604695038,
+    "lambda_i": 1.0000000000000546,
+    "x_i": -1178925.791355257,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712486,
+    "x_um": 1.2592121741356987,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 24.461650848388672
+ },
+ {
+  "state": "AR-2",
+  "device": "L=1 um, N_A=1e+18, t_ox=2 nm",
+  "n": 85378,
+  "G_net": 1.6191577289182132e-10,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 9.488068385724753e-31,
+  "omega_lambda": 1.5345035044584575e-25,
+  "kappa_A": 9.204224704527806e+18,
+  "abs_rms_u": 3.222483125232887e-09,
+  "abs_sum_u": 1.654575539804099e-07,
+  "rel_rms_u": 19.902218713342293,
+  "unrefined_abs_rms_u": 3.2224831252348647e-09,
+  "unrefined_kappa_vs_G_net": 9.204224704533372e+18,
+  "kappa_G_wp2": 6.785375628570784e+16,
+  "abs_err_IR": -4.4025543732658585e-09,
+  "e_IR": 27.19039840675238,
+  "S": 35.24676349246613,
+  "shifts": [
+   -2.2349793013310724e-09,
+   -5.707006952817885e-09,
+   -5.068720238802002e-09
+  ],
+  "dG1": [
+   -2.2349793013292336e-09,
+   -5.707006952816358e-09,
+   -5.068720238800623e-09
+  ],
+  "dG2": [
+   -1.838655928004996e-21,
+   -1.5273067355056193e-21,
+   -1.3797004793862335e-21
+  ],
+  "rel_dG1": [
+   -8.227862835497035e-13,
+   -2.6756374893466273e-13,
+   -2.7200464103316335e-13
+  ],
+  "rel_dG12": [
+   0.0,
+   0.0,
+   2.220446049250313e-16
+  ],
+  "rho_rms": [
+   1.567784004831219e-16,
+   1.5676329094651947e-16,
+   1.567727862611175e-16
+  ],
+  "ulp_mean": [
+   0.008669726216801704,
+   0.010071144298773028,
+   0.009557716356583212
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0010058622425991013,
+   "contact_body": 0.0,
+   "contact_drain": 5.6925373192001816e-18,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989941053301581,
+   "n_source_side": 2.1134266971450656e-27,
+   "oxide": 4.285295883177745e-17,
+   "p_type": 3.242724272928587e-08
+  },
+  "by_row_block": {
+   "si_potential": 1.0532422347493147e-16,
+   "si_electrons": 0.9989941377574009,
+   "ox_potential": 4.285295883177745e-17,
+   "circuit": 0.0010058622425991013
+  },
+  "by_column_block": {
+   "si_potential": 0.9998053584366529,
+   "si_electrons": 0.00019464156334720234,
+   "ox_potential": 3.107511738723931e-17,
+   "circuit": 8.537244400978466e-18
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.765821035797083e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 1.0233968475376227e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 6.624974783358273e-44
+   },
+   "si_potential|p_type": {
+    "rows": 30854,
+    "share": 2.982772900133382e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 5.690771498164385e-18
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989941053301583
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 2.1134266971450656e-27
+   },
+   "si_electrons|p_type": {
+    "rows": 30854,
+    "share": 3.24272427263031e-08
+   },
+   "ox_potential|oxide": {
+    "rows": 2944,
+    "share": 4.285295883177745e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0010058622425991013
+   }
+  },
+  "top": [
+   {
+    "row": 44894,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.00443033747507331,
+    "lambda_i": 1.0000000000000089,
+    "x_i": -354487.6118256248,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374396,
+    "x_um": 1.2857536333348143,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44893,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004224963857366495,
+    "lambda_i": 1.000000000000026,
+    "x_i": -371560.7222428984,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 1.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44892,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.00402911734476539,
+    "lambda_i": 1.0000000000000455,
+    "x_i": -1179140.6427072557,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712486,
+    "x_um": 1.2592121741356987,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 24.439924478530884
+ },
+ {
+  "state": "AR-3",
+  "device": "L=1 um, N_A=1e+18, t_ox=2 nm",
+  "n": 85378,
+  "G_net": 2.1146769273304958e-08,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 7.950531455638336e-26,
+  "omega_lambda": 1.75013348592589e-27,
+  "kappa_A": 7.048907387731429e+16,
+  "abs_rms_u": 3.2224868953044298e-09,
+  "abs_sum_u": 1.6549164056606368e-07,
+  "rel_rms_u": 0.1523867241211356,
+  "unrefined_abs_rms_u": 3.222486895306348e-09,
+  "unrefined_kappa_vs_G_net": 7.048907387735517e+16,
+  "kappa_G_wp2": 1.1830178808679278e+18,
+  "abs_err_IR": -4.9986670285058586e-09,
+  "e_IR": 0.23637970244542383,
+  "S": 0.27003315853156007,
+  "shifts": [
+   -2.2344785594904598e-09,
+   -5.710328899608681e-09,
+   -5.065366928474178e-09
+  ],
+  "dG1": [
+   -2.23447855948862e-09,
+   -5.710328899607151e-09,
+   -5.065366928472797e-09
+  ],
+  "dG2": [
+   -1.8385442341670798e-21,
+   -1.528348688220979e-21,
+   -1.3793975245254225e-21
+  ],
+  "rel_dG1": [
+   -8.233413950620161e-13,
+   -2.6778579353958776e-13,
+   -2.7255975254547593e-13
+  ],
+  "rel_dG12": [
+   -5.551115123125783e-16,
+   -1.1102230246251565e-16,
+   -1.1102230246251565e-16
+  ],
+  "rho_rms": [
+   1.5677609091505384e-16,
+   1.5676479004419917e-16,
+   1.567730230965849e-16
+  ],
+  "ulp_mean": [
+   0.008680234975852373,
+   0.010207758166431722,
+   0.009431611247975187
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0010056550634970592,
+   "contact_body": 0.0,
+   "contact_drain": 2.1668290493144758e-17,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989940819268829,
+   "n_source_side": 8.640399857942891e-24,
+   "oxide": 4.034590295394264e-17,
+   "p_type": 2.630096200567033e-07
+  },
+  "by_row_block": {
+   "si_potential": 1.0545798565219398e-16,
+   "si_electrons": 0.9989943449365027,
+   "ox_potential": 4.034590295394264e-17,
+   "circuit": 0.0010056550634970592
+  },
+  "by_column_block": {
+   "si_potential": 0.9998006387028314,
+   "si_electrons": 0.00019936129716849576,
+   "ox_potential": 2.931854821101543e-17,
+   "circuit": 3.250051446166571e-17
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.7654573436893108e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 1.0149041721119637e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 2.113200480845156e-39
+   },
+   "si_potential|p_type": {
+    "rows": 30854,
+    "share": 3.965802983653914e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 2.1666525035801068e-17
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989940819268827
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 8.64039985794289e-24
+   },
+   "si_electrons|p_type": {
+    "rows": 30854,
+    "share": 2.630096200527375e-07
+   },
+   "ox_potential|oxide": {
+    "rows": 2944,
+    "share": 4.034590295394264e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0010056550634970592
+   }
+  },
+  "top": [
+   {
+    "row": 44894,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004429424951169518,
+    "lambda_i": 0.9999999999999578,
+    "x_i": -357832.4892965117,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374396,
+    "x_um": 1.2857536333348143,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44893,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004224093634604452,
+    "lambda_i": 0.9999999999999258,
+    "x_i": -373854.73420320294,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 1.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44892,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004028287460831626,
+    "lambda_i": 0.9999999999998981,
+    "x_i": -1182552.8058989597,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712486,
+    "x_um": 1.2592121741356987,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 24.394822597503662
+ },
+ {
+  "state": "AR-4",
+  "device": "L=2 um, N_A=1e+16, t_ox=20 nm",
+  "n": 273314,
+  "G_net": 2.550492913977163e-09,
+  "x_vs_lambda": -3.3306690738754696e-16,
+  "x_vs_M1": -3.3306690738754696e-16,
+  "omega_x": 2.8718027769573706e-25,
+  "omega_lambda": 2.173531095334785e-25,
+  "kappa_A": 3.0296418738202455e+18,
+  "abs_rms_u": 8.613607517576906e-09,
+  "abs_sum_u": 8.578782274634189e-07,
+  "rel_rms_u": 3.377232483326175,
+  "unrefined_abs_rms_u": 8.61360751759399e-09,
+  "unrefined_kappa_vs_G_net": 3.0296418738265236e+18,
+  "kappa_G_wp2": 1.403381148817669e+17,
+  "abs_err_IR": 3.3373374902705825e-09,
+  "e_IR": 1.3085068662537225,
+  "S": 6.636425076387045,
+  "shifts": [
+   -2.6019931008492736e-09,
+   -1.692615513146551e-08,
+   -1.4647646291467458e-08
+  ],
+  "dG1": [
+   -2.6019931008424286e-09,
+   -1.6926155131454542e-08,
+   -1.464764629145854e-08
+  ],
+  "dG2": [
+   -6.844261866967166e-21,
+   -1.0967785571771561e-20,
+   -8.920434690993206e-21
+  ],
+  "rel_dG1": [
+   -2.6306734568493084e-12,
+   -6.480371794737039e-13,
+   -6.088463067044358e-13
+  ],
+  "rel_dG12": [
+   -3.3306690738754696e-16,
+   0.0,
+   2.220446049250313e-16
+  ],
+  "rho_rms": [
+   1.5653143368235152e-16,
+   1.5653877711386373e-16,
+   1.5651602306507628e-16
+  ],
+  "ulp_mean": [
+   0.008879482336513632,
+   0.008761579345245388,
+   0.009137713005624666
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.00019680110164021323,
+   "contact_body": 0.0,
+   "contact_drain": 1.5259172273847828e-18,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9997767120964199,
+   "n_source_side": 1.167148103778006e-25,
+   "oxide": 3.0382616046103814e-18,
+   "p_type": 2.6486801939878266e-05
+  },
+  "by_row_block": {
+   "si_potential": 1.127281238555446e-16,
+   "si_electrons": 0.9998031988983597,
+   "ox_potential": 3.0382616046103814e-18,
+   "circuit": 0.00019680110164021323
+  },
+  "by_column_block": {
+   "si_potential": 0.9999791809072616,
+   "si_electrons": 2.0819092738473268e-05,
+   "ox_potential": 5.132132235754835e-19,
+   "circuit": 2.2870573456929093e-18
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 249,
+    "share": 2.0325348294982925e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 19719,
+    "share": 1.1216271732759986e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 19719,
+    "share": 7.980410482479908e-40
+   },
+   "si_potential|p_type": {
+    "rows": 94530,
+    "share": 5.633739931152843e-19
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 249,
+    "share": 1.5238846925552846e-18
+   },
+   "si_electrons|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 19719,
+    "share": 0.9997767120964197
+   },
+   "si_electrons|n_source_side": {
+    "rows": 19719,
+    "share": 1.1671481037779984e-25
+   },
+   "si_electrons|p_type": {
+    "rows": 94530,
+    "share": 2.64868019398777e-05
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 3.0382616046103814e-18
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.00019680110164021323
+   }
+  },
+  "top": [
+   {
+    "row": 139282,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008785633030339865,
+    "lambda_i": 0.9999999999999335,
+    "x_i": -9093320443.220589,
+    "n_entries": 10,
+    "max_abs_entry": 3394364.521379722,
+    "x_um": 2.285753633334814,
+    "y_um": 0.000176008044591035,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 139720,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008651613360805752,
+    "lambda_i": 0.9999999999999335,
+    "x_i": -5891272214.663675,
+    "n_entries": 10,
+    "max_abs_entry": 3342585.4850982544,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0003547434866899114,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 140158,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.00085196394324815,
+    "lambda_i": 0.9999999999999335,
+    "x_i": -3791340843.896606,
+    "n_entries": 10,
+    "max_abs_entry": 3291596.829129588,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0005362485896896634,
+    "netdop_cm3": 9.999e+19
+   }
+  ],
+  "wall_s": 175.20971155166626
+ },
+ {
+  "state": "AR-5",
+  "device": "L=2 um, N_A=1e+16, t_ox=20 nm",
+  "n": 273314,
+  "G_net": 1.2035178051938344e-07,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 1.6086436928863447e-26,
+  "omega_lambda": 2.310138499571074e-27,
+  "kappa_A": 6.420980277560494e+16,
+  "abs_rms_u": 8.613621261758463e-09,
+  "abs_sum_u": 8.579541622524837e-07,
+  "rel_rms_u": 0.07157036833677075,
+  "unrefined_abs_rms_u": 8.613621261775956e-09,
+  "unrefined_kappa_vs_G_net": 6.4209802775743336e+16,
+  "kappa_G_wp2": 1.1908193887055062e+17,
+  "abs_err_IR": 7.51107519067887e-09,
+  "e_IR": 0.06240934000531184,
+  "S": 0.14060006358308055,
+  "shifts": [
+   -2.5926033818973952e-09,
+   -1.6921467993362266e-08,
+   -1.4644150472595306e-08
+  ],
+  "dG1": [
+   -2.5926033818905292e-09,
+   -1.6921467993351288e-08,
+   -1.464415047258638e-08
+  ],
+  "dG2": [
+   -6.84918198673711e-21,
+   -1.0964490959733286e-20,
+   -8.921089683792622e-21
+  ],
+  "rel_dG1": [
+   -2.6483260029408484e-12,
+   -6.488143355909415e-13,
+   -6.096234628216735e-13
+  ],
+  "rel_dG12": [
+   -6.5503158452884236e-15,
+   -7.771561172376096e-16,
+   -4.440892098500626e-16
+  ],
+  "rho_rms": [
+   1.5646436221549991e-16,
+   1.5648675559596047e-16,
+   1.5643734743552558e-16
+  ],
+  "ulp_mean": [
+   0.008972880000184947,
+   0.009081073333348745,
+   0.009290293347265922
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.00019678368340191247,
+   "contact_body": 0.0,
+   "contact_drain": 3.3093925070462314e-17,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9997654104777776,
+   "n_source_side": 2.194403370639782e-22,
+   "oxide": 2.7512488378276726e-18,
+   "p_type": 3.7805838820662264e-05
+  },
+  "by_row_block": {
+   "si_potential": 1.2220873635939943e-16,
+   "si_electrons": 0.9998032163165982,
+   "ox_potential": 2.7512488378276726e-18,
+   "circuit": 0.00019678368340191247
+  },
+  "by_column_block": {
+   "si_potential": 0.9999771298080865,
+   "si_electrons": 2.2870191913686646e-05,
+   "ox_potential": 4.702043586372221e-19,
+   "circuit": 4.963883385870704e-17
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 249,
+    "share": 2.003924538726251e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 19719,
+    "share": 1.2070263738602029e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 19719,
+    "share": 1.1628410495312768e-35
+   },
+   "si_potential|p_type": {
+    "rows": 94530,
+    "share": 1.504095048840418e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 249,
+    "share": 3.309192114592358e-17
+   },
+   "si_electrons|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 19719,
+    "share": 0.9997654104777776
+   },
+   "si_electrons|n_source_side": {
+    "rows": 19719,
+    "share": 2.194403370639666e-22
+   },
+   "si_electrons|p_type": {
+    "rows": 94530,
+    "share": 3.780583882066075e-05
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 2.7512488378276726e-18
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.00019678368340191247
+   }
+  },
+  "top": [
+   {
+    "row": 139282,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008784855442057576,
+    "lambda_i": 0.9999999999996165,
+    "x_i": -8605613465.99748,
+    "n_entries": 10,
+    "max_abs_entry": 3394364.521421347,
+    "x_um": 2.285753633334814,
+    "y_um": 0.000176008044591035,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 139720,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008650847634138555,
+    "lambda_i": 0.9999999999996166,
+    "x_i": -5575517222.397707,
+    "n_entries": 10,
+    "max_abs_entry": 3342585.4851248497,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0003547434866899114,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 140158,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008518885386381115,
+    "lambda_i": 0.9999999999996169,
+    "x_i": -3588543267.0812697,
+    "n_entries": 10,
+    "max_abs_entry": 3291596.829146469,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0005362485896896634,
+    "netdop_cm3": 9.999e+19
+   }
+  ],
+  "wall_s": 181.1114284992218
+ },
+ {
+  "state": "AR-6",
+  "device": "L=2 um, N_A=1e+16, t_ox=20 nm",
+  "n": 273314,
+  "G_net": 1.5975666886328094e-05,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 9.498096414672779e-29,
+  "omega_lambda": 1.5670400327805803e-25,
+  "kappa_A": 483784829441134.6,
+  "abs_rms_u": 8.613636871825327e-09,
+  "abs_sum_u": 8.580675370029733e-07,
+  "rel_rms_u": 0.000539172288275292,
+  "unrefined_abs_rms_u": 8.613636871845174e-09,
+  "unrefined_kappa_vs_G_net": 483784829442304.94,
+  "kappa_G_wp2": 485525031860954.44,
+  "abs_err_IR": 6.742613080847358e-09,
+  "e_IR": 0.0004220551873561629,
+  "S": 0.0010588052299366746,
+  "shifts": [
+   -2.588087060552977e-09,
+   -1.6915119650970335e-08,
+   -1.4642985992483122e-08
+  ],
+  "dG1": [
+   -2.5880870605474935e-09,
+   -1.691511965095912e-08,
+   -1.4642985992474987e-08
+  ],
+  "dG2": [
+   -6.851433856264524e-21,
+   -1.0960891720360351e-20,
+   -8.921578568045044e-21
+  ],
+  "rel_dG1": [
+   -2.1187496201946487e-12,
+   -6.62914168003681e-13,
+   -5.555556015224283e-13
+  ],
+  "rel_dG12": [
+   5.286882043264995e-13,
+   -1.4876988529977098e-14,
+   5.3734794391857577e-14
+  ],
+  "rho_rms": [
+   1.5648820872437393e-16,
+   1.564878431994644e-16,
+   1.5645242403222028e-16
+  ],
+  "ulp_mean": [
+   0.009303470740407667,
+   0.009301621281721106,
+   0.009532572435205371
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.00019675768276889374,
+   "contact_body": 0.0,
+   "contact_drain": 4.135816127611017e-15,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9997261854413796,
+   "n_source_side": 4.5037429891163765e-18,
+   "oxide": 2.2675041123498167e-18,
+   "p_type": 7.705687584740724e-05
+  },
+  "by_row_block": {
+   "si_potential": 1.1281486104908794e-16,
+   "si_electrons": 0.9998032423172312,
+   "ox_potential": 2.2675041123498167e-18,
+   "circuit": 0.00019675768276889374
+  },
+  "by_column_block": {
+   "si_potential": 0.9999698013576254,
+   "si_electrons": 3.0198642368733263e-05,
+   "ox_potential": 4.3294683893759216e-19,
+   "circuit": 6.203722249392691e-15
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 249,
+    "share": 2.0915606524500726e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 19719,
+    "share": 1.118380613306531e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 19719,
+    "share": 5.395445988260863e-32
+   },
+   "si_potential|p_type": {
+    "rows": 94530,
+    "share": 9.747081577823211e-19
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 249,
+    "share": 4.135814036050365e-15
+   },
+   "si_electrons|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 19719,
+    "share": 0.9997261854413795
+   },
+   "si_electrons|n_source_side": {
+    "rows": 19719,
+    "share": 4.5037429891163226e-18
+   },
+   "si_electrons|p_type": {
+    "rows": 94530,
+    "share": 7.705687584740625e-05
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 2.2675041123498167e-18
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.00019675768276889374
+   }
+  },
+  "top": [
+   {
+    "row": 139282,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.00087836947160461,
+    "lambda_i": 0.9999999999584247,
+    "x_i": -8269017630.50398,
+    "n_entries": 10,
+    "max_abs_entry": 3394364.521468615,
+    "x_um": 2.285753633334814,
+    "y_um": 0.000176008044591035,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 139720,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.000864970461427806,
+    "lambda_i": 0.9999999999584249,
+    "x_i": -5357089332.43763,
+    "n_entries": 10,
+    "max_abs_entry": 3342585.4851550506,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0003547434866899114,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 140158,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008517759802411273,
+    "lambda_i": 0.9999999999584251,
+    "x_i": -3447121152.85811,
+    "n_entries": 10,
+    "max_abs_entry": 3291596.8291656394,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0005362485896896634,
+    "netdop_cm3": 9.999e+19
+   }
+  ],
+  "wall_s": 172.55672359466553
+ },
+ {
+  "state": "HO-1",
+  "device": "L=1 um, N_A=1e+18, t_ox=2 nm",
+  "n": 85378,
+  "G_net": 6.177612976636322e-11,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 1.3932950960014534e-29,
+  "omega_lambda": 1.7659285427938779e-25,
+  "kappa_A": 2.4123425626812637e+19,
+  "abs_rms_u": 3.222482351114273e-09,
+  "abs_sum_u": 1.6545119407087467e-07,
+  "rel_rms_u": 52.16387564746566,
+  "unrefined_abs_rms_u": 3.2224823511162535e-09,
+  "unrefined_kappa_vs_G_net": 2.4123425626827227e+19,
+  "kappa_G_wp2": 6.660122115317564e+16,
+  "abs_err_IR": -4.573715404359506e-09,
+  "e_IR": 74.03693662353498,
+  "S": 92.39061001021615,
+  "shifts": [
+   -2.233852659083275e-09,
+   -5.707534313184569e-09,
+   -5.070231238555264e-09
+  ],
+  "dG1": [
+   -2.2338526590814374e-09,
+   -5.707534313183042e-09,
+   -5.070231238553885e-09
+  ],
+  "dG2": [
+   -1.8381670982857768e-21,
+   -1.527469779369492e-21,
+   -1.3798536243803252e-21
+  ],
+  "rel_dG1": [
+   -8.225642389447785e-13,
+   -2.6756374893466273e-13,
+   -2.7200464103316335e-13
+  ],
+  "rel_dG12": [
+   2.220446049250313e-16,
+   2.220446049250313e-16,
+   2.220446049250313e-16
+  ],
+  "rho_rms": [
+   1.5678411672872017e-16,
+   1.5674793891827597e-16,
+   1.5678778663101882e-16
+  ],
+  "ulp_mean": [
+   0.008530109846557105,
+   0.010204755663845816,
+   0.009467641279006051
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0010059009077347857,
+   "contact_body": 0.0,
+   "contact_drain": 6.056856569863538e-18,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989940729402091,
+   "n_source_side": 4.254532921386471e-28,
+   "oxide": 4.043105562449863e-17,
+   "p_type": 2.6152056004398258e-08
+  },
+  "by_row_block": {
+   "si_potential": 1.0274972093339991e-16,
+   "si_electrons": 0.9989940990922651,
+   "ox_potential": 4.043105562449863e-17,
+   "circuit": 0.0010059009077347857
+  },
+  "by_column_block": {
+   "si_potential": 0.9998060108635602,
+   "si_electrons": 0.0001939891364398612,
+   "ox_potential": 2.938626500167405e-17,
+   "circuit": 9.083723216946736e-18
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.7658881941112712e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 9.986726659215057e-17
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 1.131410450237689e-44
+   },
+   "si_potential|p_type": {
+    "rows": 30854,
+    "share": 2.880688453055236e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 6.055090681669427e-18
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989940729402091
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 4.254532921386469e-28
+   },
+   "si_electrons|p_type": {
+    "rows": 30854,
+    "share": 2.6152056001517568e-08
+   },
+   "ox_potential|oxide": {
+    "rows": 2944,
+    "share": 4.043105562449863e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0010059009077347857
+   }
+  },
+  "top": [
+   {
+    "row": 44894,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.00443050777632566,
+    "lambda_i": 1.0000000000000098,
+    "x_i": -354427.0953034556,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374396,
+    "x_um": 1.2857536333348143,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44893,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004225126264099643,
+    "lambda_i": 1.0000000000000278,
+    "x_i": -371510.85396794055,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 1.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44892,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004029272223199279,
+    "lambda_i": 1.000000000000048,
+    "x_i": -1179066.0402432482,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712486,
+    "x_um": 1.2592121741356987,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 25.4974308013916
+ },
+ {
+  "state": "HO-2",
+  "device": "L=1 um, N_A=1e+18, t_ox=2 nm",
+  "n": 85378,
+  "G_net": 1.1211190535871126e-09,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 2.220446049250313e-16,
+  "omega_x": 1.6863957444047078e-25,
+  "omega_lambda": 1.6252484195532365e-26,
+  "kappa_A": 1.3294101734789112e+18,
+  "abs_rms_u": 3.2224846500146817e-09,
+  "abs_sum_u": 1.6547064557667705e-07,
+  "rel_rms_u": 2.8743465198491425,
+  "unrefined_abs_rms_u": 3.222484650016655e-09,
+  "unrefined_kappa_vs_G_net": 1.3294101734797138e+18,
+  "kappa_G_wp2": 7.171319307681034e+16,
+  "abs_err_IR": -4.653596994977945e-09,
+  "e_IR": 4.150849974486098,
+  "S": 5.090785816903662,
+  "shifts": [
+   -2.234904546521986e-09,
+   -5.7073769770617295e-09,
+   -5.067080474189413e-09
+  ],
+  "dG1": [
+   -2.2349045465201463e-09,
+   -5.707376977060202e-09,
+   -5.0670804741880325e-09
+  ],
+  "dG2": [
+   -1.838693840639607e-21,
+   -1.5274156222484949e-21,
+   -1.3795436403970865e-21
+  ],
+  "rel_dG1": [
+   -8.231193504570911e-13,
+   -2.6767477123712524e-13,
+   -2.724487302430134e-13
+  ],
+  "rel_dG12": [
+   -3.3306690738754696e-16,
+   0.0,
+   -1.1102230246251565e-16
+  ],
+  "rho_rms": [
+   1.5675073273524993e-16,
+   1.5675063769735995e-16,
+   1.5676442073854516e-16
+  ],
+  "ulp_mean": [
+   0.0088348638590265,
+   0.010170226884107904,
+   0.009581736377270455
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.001005782661460496,
+   "contact_body": 0.0,
+   "contact_drain": 4.7418080971111305e-18,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989941559070417,
+   "n_source_side": 5.457360931766574e-26,
+   "oxide": 4.0682838692787465e-17,
+   "p_type": 6.143149785944225e-08
+  },
+  "by_row_block": {
+   "si_potential": 1.0211148969859105e-16,
+   "si_electrons": 0.9989942173385394,
+   "ox_potential": 4.0682838692787465e-17,
+   "circuit": 0.001005782661460496
+  },
+  "by_column_block": {
+   "si_potential": 0.9998038292023609,
+   "si_electrons": 0.0001961707976391602,
+   "ox_potential": 2.954124914057818e-17,
+   "circuit": 7.111150691392721e-18
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.765680609331934e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 9.938082353945556e-17
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 6.524971295752978e-42
+   },
+   "si_potential|p_type": {
+    "rows": 30854,
+    "share": 2.728900478526161e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 368,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 4.740042416501798e-18
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989941559070414
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 5.457360931766573e-26
+   },
+   "si_electrons|p_type": {
+    "rows": 30854,
+    "share": 6.143149785671335e-08
+   },
+   "ox_potential|oxide": {
+    "rows": 2944,
+    "share": 4.0682838692787465e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.001005782661460496
+   }
+  },
+  "top": [
+   {
+    "row": 44894,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004429986958585316,
+    "lambda_i": 1.000000000000007,
+    "x_i": -354608.66000125,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374396,
+    "x_um": 1.2857536333348143,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44893,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004224629589491512,
+    "lambda_i": 1.0000000000000224,
+    "x_i": -371646.1600796228,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 1.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 44892,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004028798571744267,
+    "lambda_i": 1.0000000000000402,
+    "x_i": -1179267.5980826651,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712486,
+    "x_um": 1.2592121741356987,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 23.711812496185303
+ },
+ {
+  "state": "HO-3",
+  "device": "L=2 um, N_A=1e+16, t_ox=20 nm",
+  "n": 273314,
+  "G_net": 4.569247289526923e-08,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 3.160611170286314e-26,
+  "omega_lambda": 2.975445244555299e-25,
+  "kappa_A": 1.691216634004161e+17,
+  "abs_rms_u": 8.613617936472298e-09,
+  "abs_sum_u": 8.579345035426964e-07,
+  "rel_rms_u": 0.18851284228401016,
+  "unrefined_abs_rms_u": 8.613617936491863e-09,
+  "unrefined_kappa_vs_G_net": 1.6912166340081904e+17,
+  "kappa_G_wp2": 4.185513601245248e+17,
+  "abs_err_IR": -9.321966646343953e-10,
+  "e_IR": 0.020401536742628568,
+  "S": 0.3703474699240781,
+  "shifts": [
+   -2.592335841819352e-09,
+   -1.6922091731337475e-08,
+   -1.4646302592646157e-08
+  ],
+  "dG1": [
+   -2.5923358418125015e-09,
+   -1.692209173132651e-08,
+   -1.4646302592637239e-08
+  ],
+  "dG2": [
+   -6.849431188500864e-21,
+   -1.0964861585349632e-20,
+   -8.920766587207833e-21
+  ],
+  "rel_dG1": [
+   -2.64266386551526e-12,
+   -6.479261571712414e-13,
+   -6.089573290068984e-13
+  ],
+  "rel_dG12": [
+   -4.440892098500626e-16,
+   0.0,
+   2.220446049250313e-16
+  ],
+  "rho_rms": [
+   1.5646130100823407e-16,
+   1.5646018324486966e-16,
+   1.5642460184949501e-16
+  ],
+  "ulp_mean": [
+   0.00903992287757277,
+   0.008987675669677432,
+   0.009280583689161478
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.00019678819250287206,
+   "contact_body": 0.0,
+   "contact_drain": 1.1586316705294598e-17,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9997690886588482,
+   "n_source_side": 3.154565408433677e-23,
+   "oxide": 2.635878930389067e-18,
+   "p_type": 3.4123148649021916e-05
+  },
+  "by_row_block": {
+   "si_potential": 1.162707684023032e-16,
+   "si_electrons": 0.9998032118074972,
+   "ox_potential": 2.635878930389067e-18,
+   "circuit": 0.00019678819250287206
+  },
+  "by_column_block": {
+   "si_potential": 0.9999777666500546,
+   "si_electrons": 2.2233349945520185e-05,
+   "ox_potential": 4.227069747840895e-19,
+   "circuit": 1.737780664828733e-17
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 249,
+    "share": 1.901161034571413e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 19719,
+    "share": 1.1571703894245117e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 19719,
+    "share": 1.9156596841033364e-37
+   },
+   "si_potential|p_type": {
+    "rows": 94530,
+    "share": 5.518282988174784e-19
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 249,
+    "share": 1.158441554426003e-17
+   },
+   "si_electrons|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 19719,
+    "share": 0.999769088658848
+   },
+   "si_electrons|n_source_side": {
+    "rows": 19719,
+    "share": 3.154565408433658e-23
+   },
+   "si_electrons|p_type": {
+    "rows": 94530,
+    "share": 3.412314864902137e-05
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 2.635878930389067e-18
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.00019678819250287206
+   }
+  },
+  "top": [
+   {
+    "row": 139282,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008785056738199279,
+    "lambda_i": 0.9999999999998884,
+    "x_i": -8733875353.342932,
+    "n_entries": 10,
+    "max_abs_entry": 3394364.5214112783,
+    "x_um": 2.285753633334814,
+    "y_um": 0.000176008044591035,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 139720,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008651045859634907,
+    "lambda_i": 0.9999999999998885,
+    "x_i": -5658652277.760664,
+    "n_entries": 10,
+    "max_abs_entry": 3342585.485118417,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0003547434866899114,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 140158,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008519080588100749,
+    "lambda_i": 0.9999999999998885,
+    "x_i": -3641586952.32765,
+    "n_entries": 10,
+    "max_abs_entry": 3291596.829142386,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0005362485896896634,
+    "netdop_cm3": 9.999e+19
+   }
+  ],
+  "wall_s": 180.00919842720032
+ },
+ {
+  "state": "HO-4",
+  "device": "L=2 um, N_A=1e+16, t_ox=20 nm",
+  "n": 273314,
+  "G_net": 8.401174475410332e-07,
+  "x_vs_lambda": 0.0,
+  "x_vs_M1": 0.0,
+  "omega_x": 1.2591944685431505e-27,
+  "omega_lambda": 2.1884325959704575e-25,
+  "kappa_A": 9198876882836106.0,
+  "abs_rms_u": 8.613627697421821e-09,
+  "abs_sum_u": 8.579955598278494e-07,
+  "rel_rms_u": 0.01025288514437276,
+  "unrefined_abs_rms_u": 8.613627697443316e-09,
+  "unrefined_kappa_vs_G_net": 9198876882860210.0,
+  "kappa_G_wp2": 9948431555366416.0,
+  "abs_err_IR": 4.390794685389914e-09,
+  "e_IR": 0.005226405782002841,
+  "S": 0.02013946178474237,
+  "shifts": [
+   -2.5914476701027796e-09,
+   -1.691951322944794e-08,
+   -1.4646443433013675e-08
+  ],
+  "dG1": [
+   -2.591447670095931e-09,
+   -1.6919513229436988e-08,
+   -1.4646443433004822e-08
+  ],
+  "dG2": [
+   -6.849832492829688e-21,
+   -1.0963258543834196e-20,
+   -8.920798888436498e-21
+  ],
+  "rel_dG1": [
+   -2.6427748878177226e-12,
+   -6.472600233564663e-13,
+   -6.044054146059352e-13
+  ],
+  "rel_dG12": [
+   4.440892098500626e-16,
+   6.661338147750939e-16,
+   4.6629367034256575e-15
+  ],
+  "rho_rms": [
+   1.5646458550572674e-16,
+   1.564705364975935e-16,
+   1.5645018652199562e-16
+  ],
+  "ulp_mean": [
+   0.00920036341863191,
+   0.009192503219214027,
+   0.00933699217910158
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0001967741887522621,
+   "contact_body": 0.0,
+   "contact_drain": 2.1855729679992412e-16,
+   "contact_source": 0.0,
+   "n_drain_side": 0.999755186967938,
+   "n_source_side": 1.1396743047335455e-20,
+   "oxide": 2.2449479744684948e-18,
+   "p_type": 4.803884330950031e-05
+  },
+  "by_row_block": {
+   "si_potential": 1.1055536248682887e-16,
+   "si_electrons": 0.9998032258112476,
+   "ox_potential": 2.2449479744684948e-18,
+   "circuit": 0.0001967741887522621
+  },
+  "by_column_block": {
+   "si_potential": 0.9999753858863095,
+   "si_electrons": 2.4614113689999853e-05,
+   "ox_potential": 3.9966190268983375e-19,
+   "circuit": 3.2783298691939112e-16
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 249,
+    "share": 2.147680398283019e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 19719,
+    "share": 1.099961850957482e-16
+   },
+   "si_potential|n_source_side": {
+    "rows": 19719,
+    "share": 1.1065405400509712e-34
+   },
+   "si_potential|p_type": {
+    "rows": 94530,
+    "share": 5.570297106824113e-19
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 249,
+    "share": 2.1855514911952585e-16
+   },
+   "si_electrons|contact_source": {
+    "rows": 249,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 19719,
+    "share": 0.9997551869679379
+   },
+   "si_electrons|n_source_side": {
+    "rows": 19719,
+    "share": 1.1396743047335346e-20
+   },
+   "si_electrons|p_type": {
+    "rows": 94530,
+    "share": 4.8038843309499756e-05
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 2.2449479744684948e-18
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0001967741887522621
+   }
+  },
+  "top": [
+   {
+    "row": 139282,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008784431580075234,
+    "lambda_i": 0.9999999999978353,
+    "x_i": -8347687641.617315,
+    "n_entries": 10,
+    "max_abs_entry": 3394364.521440828,
+    "x_um": 2.285753633334814,
+    "y_um": 0.000176008044591035,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 139720,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008650430237904262,
+    "lambda_i": 0.9999999999978354,
+    "x_i": -5408920345.971453,
+    "n_entries": 10,
+    "max_abs_entry": 3342585.485137297,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0003547434866899114,
+    "netdop_cm3": 9.999e+19
+   },
+   {
+    "row": 140158,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.0008518474357204716,
+    "lambda_i": 0.9999999999978353,
+    "x_i": -3481709926.635865,
+    "n_entries": 10,
+    "max_abs_entry": 3291596.8291543694,
+    "x_um": 2.285753633334814,
+    "y_um": 0.0005362485896896634,
+    "netdop_cm3": 9.999e+19
+   }
+  ],
+  "wall_s": 179.35897827148438
+ },
+ {
+  "state": "HO-5",
+  "device": "L=2 um, N_A=1e+18, t_ox=2 nm",
+  "n": 101618,
+  "G_net": 1.7170575961604291e-12,
+  "x_vs_lambda": 6.661338147750939e-15,
+  "x_vs_M1": -4.440892098500626e-15,
+  "omega_x": 3.4598602298745513e-26,
+  "omega_lambda": 1.2806246008091918e-26,
+  "kappa_A": 8.678132390138623e+20,
+  "abs_rms_u": 3.2224799787537707e-09,
+  "abs_sum_u": 1.6543270243666732e-07,
+  "rel_rms_u": 1876.7454195827022,
+  "unrefined_abs_rms_u": 3.222479978755292e-09,
+  "unrefined_kappa_vs_G_net": 8.678132390142892e+20,
+  "kappa_G_wp2": 1.2407116809621936e+17,
+  "abs_err_IR": 4.882041974069441e-11,
+  "e_IR": 28.43260461959075,
+  "S": 1407.6987564347571,
+  "shifts": [
+   2.4170998428418894e-09,
+   -1.4477886398206056e-09,
+   -1.479939183960329e-10
+  ],
+  "dG1": [
+   2.417099842843529e-09,
+   -1.4477886398200435e-09,
+   -1.4799391839441892e-10
+  ],
+  "dG2": [
+   -1.6405205001722102e-21,
+   -5.619000764248885e-22,
+   -1.6142241741538347e-21
+  ],
+  "rel_dG1": [
+   6.783462680459706e-13,
+   -3.8824499171141724e-13,
+   -1.0905720770892913e-11
+  ],
+  "rel_dG12": [
+   -5.551115123125783e-16,
+   -1.1102230246251565e-16,
+   1.5543122344752192e-15
+  ],
+  "rho_rms": [
+   1.6006741188570314e-16,
+   1.6002537159041412e-16,
+   1.6001396343998298e-16
+  ],
+  "ulp_mean": [
+   0.012058949258594666,
+   0.013944775737338608,
+   0.012868511678757561
+  ],
+  "same_as_M2": [
+   true,
+   true,
+   true
+  ],
+  "by_class": {
+   "circuit": 0.0010060133447037716,
+   "contact_body": 0.0,
+   "contact_drain": 7.893456487428583e-19,
+   "contact_source": 0.0,
+   "n_drain_side": 0.9989939682234029,
+   "n_source_side": 8.586552877970172e-31,
+   "oxide": 3.71665118933146e-17,
+   "p_type": 1.843189326791413e-08
+  },
+  "by_row_block": {
+   "si_potential": 9.476287395988742e-17,
+   "si_electrons": 0.9989939866552958,
+   "ox_potential": 3.71665118933146e-17,
+   "circuit": 0.0010060133447037716
+  },
+  "by_column_block": {
+   "si_potential": 0.9998076454976322,
+   "si_electrons": 0.00019235450236775446,
+   "ox_potential": 2.693091385208346e-17,
+   "circuit": 4.625369794317019e-19
+  },
+  "by_block_and_class": {
+   "si_potential|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_potential|contact_drain": {
+    "rows": 62,
+    "share": 1.9059255752577324e-21
+   },
+   "si_potential|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_potential|n_drain_side": {
+    "rows": 4935,
+    "share": 9.267127695656752e-17
+   },
+   "si_potential|n_source_side": {
+    "rows": 4935,
+    "share": 2.52642772015371e-48
+   },
+   "si_potential|p_type": {
+    "rows": 38624,
+    "share": 2.089691077744632e-18
+   },
+   "si_electrons|contact_body": {
+    "rows": 438,
+    "share": 0.0
+   },
+   "si_electrons|contact_drain": {
+    "rows": 62,
+    "share": 7.874397231676004e-19
+   },
+   "si_electrons|contact_source": {
+    "rows": 62,
+    "share": 0.0
+   },
+   "si_electrons|n_drain_side": {
+    "rows": 4935,
+    "share": 0.9989939682234028
+   },
+   "si_electrons|n_source_side": {
+    "rows": 4935,
+    "share": 8.586552877970174e-31
+   },
+   "si_electrons|p_type": {
+    "rows": 38624,
+    "share": 1.843189326582444e-08
+   },
+   "ox_potential|oxide": {
+    "rows": 3504,
+    "share": 3.71665118933146e-17
+   },
+   "circuit|circuit": {
+    "rows": 2,
+    "share": 0.0010060133447037716
+   }
+  },
+  "top": [
+   {
+    "row": 53434,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004431003006881089,
+    "lambda_i": 0.999999999999988,
+    "x_i": -1527457.6036421438,
+    "n_entries": 10,
+    "max_abs_entry": 3301286.2536374074,
+    "x_um": 2.285753633334814,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 53433,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004225598537647421,
+    "lambda_i": 0.9999999999999866,
+    "x_i": 559180.3960870922,
+    "n_entries": 10,
+    "max_abs_entry": 3148251.1621098896,
+    "x_um": 2.272167903118662,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   },
+   {
+    "row": 53432,
+    "block": "si_electrons",
+    "cls": "n_drain_side",
+    "share": 0.004029722604695169,
+    "lambda_i": 0.9999999999999818,
+    "x_i": 881474.2208815763,
+    "n_entries": 10,
+    "max_abs_entry": 3002315.2365712808,
+    "x_um": 2.2592121741356985,
+    "y_um": 0.00016898042613843232,
+    "netdop_cm3": 9.9e+19
+   }
+  ],
+  "wall_s": 29.583526611328125
+ }
+]

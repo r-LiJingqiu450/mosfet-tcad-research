@@ -13,11 +13,16 @@ the benchmark code resolve inside it. It holds:
     RELEASE_NOTES.md.
 Only committed content is used (git ls-files and git show HEAD:<path>), so the snapshot is the state of one commit.
 
-Writes dist/<name>-<version>/ with SHA256SUMS, a reproducible <name>-<version>.tar.gz with its .sha256, and, with
---branch, an orphan branch release/<version> whose single commit holds exactly the snapshot (ready to push as the
-main branch of a new public repository). The current checkout and index are not touched.
+Writes dist/<name>-<version>/ with SHA256SUMS and a reproducible <name>-<version>.tar.gz with its .sha256. Optionally
+it commits the snapshot (a tree holding exactly the snapshot files):
+  --branch                 as the single commit of a new orphan branch release/v<version>;
+  --update-branch NAME     as a new commit on top of the existing branch NAME (a fast-forward: the earlier snapshot
+                           commits stay in its history; the ref is moved only if it still points at the commit read).
+The commit message records the source branch and commit and the tarball's SHA-256; --trailer adds trailer lines.
+The current checkout and index are not touched.
 
-Usage (repository root):  python benchmark/tools/build_release.py --version 1.0.0 [--branch]
+Usage (repository root):
+  python benchmark/tools/build_release.py --version 1.0.0 [--branch | --update-branch release/v1.0.0-candidate]
 """
 from __future__ import annotations
 
@@ -94,7 +99,7 @@ def plan():
     return files, srcs
 
 
-def build(version, branch):
+def build(version, branch, update_branch=None, trailers=()):
     files, srcs = plan()
     out = os.path.join(ROOT, 'dist', f'{NAME}-{version}')
     if os.path.exists(out):
@@ -128,24 +133,40 @@ def build(version, branch):
         tsha = sha256(f.read())
     with open(tar_path + '.sha256', 'w') as f:
         f.write(f'{tsha}  {os.path.basename(tar_path)}\n')
-    commit = None
-    if branch:
+    commit, ref, parent, unchanged = None, None, None, False
+    if branch or update_branch:
         env = dict(os.environ, GIT_INDEX_FILE=os.path.join(ROOT, 'dist', '.release-index'), GIT_WORK_TREE=out)
         if os.path.exists(env['GIT_INDEX_FILE']):
             os.remove(env['GIT_INDEX_FILE'])
         subprocess.run(['git', 'add', '-A', '-f', '.'], cwd=out, env=dict(env, GIT_DIR=os.path.join(ROOT, '.git')), check=True)
         tree = subprocess.run(['git', 'write-tree'], cwd=out, env=dict(env, GIT_DIR=os.path.join(ROOT, '.git')),
                               capture_output=True, text=True, check=True).stdout.strip()
-        src_commit = git('rev-parse', 'HEAD').strip()
-        msg = (f'{NAME} v{version}\n\nRelease snapshot built by benchmark/tools/build_release.py from the research repository '
-               f'commit {src_commit}.\nCode: MIT (LICENSE). Data, reports and paper text: CC BY 4.0 (LICENSE-DATA.md).\n')
-        commit = subprocess.run(['git', 'commit-tree', tree, '-m', msg], cwd=ROOT, capture_output=True, text=True,
-                                check=True).stdout.strip()
-        git('update-ref', f'refs/heads/release/v{version}', commit)
         os.remove(env['GIT_INDEX_FILE'])
+        src_commit = git('rev-parse', 'HEAD').strip()
+        src_ref = git('rev-parse', '--abbrev-ref', 'HEAD').strip()
+        msg = (f'{NAME} v{version}\n\nRelease snapshot built by benchmark/tools/build_release.py from the research repository '
+               f'commit {src_commit} (branch {src_ref}).\nTarball {os.path.basename(tar_path)}: SHA-256 {tsha}.\n'
+               f'Code: MIT (LICENSE). Data, reports and paper text: CC BY 4.0 (LICENSE-DATA.md).\n')
+        if update_branch:
+            ref = f'refs/heads/{update_branch}'
+            parent = git('rev-parse', '--verify', f'{ref}^{{commit}}').strip()
+            if git('rev-parse', f'{parent}^{{tree}}').strip() == tree:
+                unchanged = True
+            else:
+                msg += f'\nUpdates the earlier snapshot {parent}.\n'
+        else:
+            ref = f'refs/heads/release/v{version}'
+        if trailers:
+            msg += '\n' + '\n'.join(trailers) + '\n'
+        if not unchanged:
+            cmd = ['git', 'commit-tree', tree] + (['-p', parent] if parent else []) + ['-m', msg]
+            commit = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+            # compare-and-swap: refuse if the branch moved since it was read (new branch: must not exist yet)
+            git('update-ref', ref, commit, parent if parent else '0' * 40)
     print(json.dumps(dict(snapshot=os.path.relpath(out, ROOT), files=len(files) + 1, case_sources_outside_benchmark=len(srcs),
                           code_files=len(CODE), tarball=os.path.relpath(tar_path, ROOT), tarball_sha256=tsha,
-                          branch=f'release/v{version}' if commit else None, branch_commit=commit,
+                          branch=ref[len('refs/heads/'):] if ref else None, branch_commit=commit, parent=parent,
+                          tree_unchanged=unchanged,
                           size_mb=round(sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(out) for f in fs) / 1e6, 1)),
                      indent=1))
     return 0
@@ -154,9 +175,12 @@ def build(version, branch):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--version', required=True)
-    ap.add_argument('--branch', action='store_true', help='also create the orphan branch release/v<version>')
+    g = ap.add_mutually_exclusive_group()
+    g.add_argument('--branch', action='store_true', help='also create the orphan branch release/v<version>')
+    g.add_argument('--update-branch', metavar='NAME', help='also commit the snapshot on top of the existing branch NAME')
+    ap.add_argument('--trailer', action='append', default=[], help='trailer line for the commit message (repeatable)')
     a = ap.parse_args()
-    return build(a.version, a.branch)
+    return build(a.version, a.branch, a.update_branch, a.trailer)
 
 
 if __name__ == '__main__':

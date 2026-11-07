@@ -33,10 +33,12 @@ def test_every_case_source_is_present_with_its_sha256():
     assert n > 0
 
 
-@pytest.mark.parametrize('module', ['benchmark/tools/score.py', 'benchmark/wp2/rdeck_common.py', 'benchmark/wp2/fv_rdeck.py'])
+@pytest.mark.parametrize('module', ['benchmark/tools/score.py', 'benchmark/wp2/rdeck_common.py', 'benchmark/wp2/fv_rdeck.py',
+                                    'benchmark/wp8/ssmech.py', 'benchmark/wp8/xsens.py'])
 def test_benchmark_modules_resolve_their_imports(module):
     """Import (not run) a module in a fresh interpreter, with only the release root on the path."""
-    if 'rdeck_common' in module:
+    if 'rdeck_common' in module or '/wp8/' in module:
+        os.environ.setdefault('DEVSIM_MATH_LIBS', '/usr/lib/x86_64-linux-gnu/libblas.so.3:/usr/lib/x86_64-linux-gnu/liblapack.so.3')
         pytest.importorskip('devsim', reason='DEVSIM not installed')
     code = ('import importlib.util, sys; sys.path[:0] = [sys.argv[1], sys.argv[2]]; '
             'spec = importlib.util.spec_from_file_location("m", sys.argv[3]); m = importlib.util.module_from_spec(spec); '

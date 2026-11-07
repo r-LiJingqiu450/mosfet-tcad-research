@@ -2,7 +2,8 @@
 
 An open, code-agnostic reference set for the **zero-bias (linear-response) terminal conductances of two-dimensional
 n-channel MOSFETs at low current**. It comes with a scorer, published meshes, documented failure signatures of common
-ways of evaluating the terminal current (a failure-mode atlas), and a pre-registered AI-agent study.
+ways of evaluating the terminal current (a failure-mode atlas), a pre-registered analysis of why DEVSIM's coupled
+small-signal solve fails and of the grid convergence of the references, and a pre-registered AI-agent study.
 
 The accompanying manuscript is in `paper/` (`paper/main.pdf`).
 
@@ -22,6 +23,7 @@ The accompanying manuscript is in `paper/` (`paper/main.pdf`).
 | `benchmark/reports/` | the reports of every work package |
 | `benchmark/wp2/`, `benchmark/wp4/` | the production runs of the reference values and of the external paths: code, ledgers, records, evaluations |
 | `benchmark/wp6/` | the AI-agent study: harness, task kit, schedule, every run record and transcript, audits, evaluations |
+| `benchmark/wp8/` | why the coupled small-signal solve fails (exact solves, one-ulp perturbations, exploratory sensitivity analysis) and the grid convergence of the references: code, ledger, records, evaluations |
 | `results/phase3/…` | earlier project results that the internal-tier case files cite as sources (unchanged, at their original paths) |
 | `phase3/…`, `semiconductor_sim/common/…` | the project modules that the benchmark code imports or that case files name as producing scripts (unchanged, at their original paths) |
 | `paper/` | manuscript source, the script that makes every figure, table and quoted number from the files above, and the built PDF |
@@ -52,6 +54,8 @@ python -m pytest -q benchmark/tests                      # scorer, examples, har
 python benchmark/wp2/evaluate_wp2.py                     # registered evaluation of the reference runs
 python benchmark/wp4/evaluate_wp4.py                     # registered evaluation of DEVSIM's output paths
 python benchmark/wp6/harness/evaluate_wp6.py --stage 1   # registered evaluation of the agent study
+python benchmark/wp8/evaluate_wp8.py                     # registered evaluation of WP8 (mechanism, grid convergence)
+python benchmark/wp8/xsens_summary.py                    # summary of the exploratory WP8 sensitivity analysis
 python paper/scripts/make_assets.py                      # every figure, table and number of the manuscript
 cd paper && latexmk -pdf main.tex                        # the manuscript
 ```
@@ -76,5 +80,6 @@ See `CITATION.cff`. A DOI will be added when the release is archived.
 ## Limits
 
 Everything here is agreement between computational paths; nothing is experimental validation. The physics envelope is
-narrow. The only external code scored is DEVSIM. The agent study tested one model in one configuration. See
+narrow. The only external code scored is DEVSIM. The analysis of where the small-signal sensitivity lies is
+exploratory. The agent study tested one model in one configuration. See
 `benchmark/README.md` (*Limits*) and the manuscript (*Discussion*).
